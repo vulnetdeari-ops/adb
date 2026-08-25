@@ -130,6 +130,10 @@ The completion criterion is:
 
 A fresh capable engineering agent should be able to understand and build the product from the ADB Source of Truth without needing the interview history and without inventing important product behavior.
 
+DEFINE is complete when that is true and remaining uncertainty does not block the first vertical slice.
+
+More research still being possible does not keep DEFINE open. Do not keep asking or investigating because more thoroughness is available.
+
 The product understanding may come from:
 
 * the user
@@ -165,6 +169,8 @@ There is no target number of questions.
 Ask as many as necessary and no more.
 
 Never manufacture questions to appear thorough.
+
+Stop a discovery line when the next question would not change important product behavior or a decision the first vertical slice depends on.
 
 ⸻
 
@@ -412,7 +418,7 @@ Never silently convert an assumption into product truth.
 
 ## 15. SOURCE OF TRUTH
 
-ADB maintains:
+The full Source of Truth is:
 
 adb/01-VISION.md
 
@@ -429,6 +435,29 @@ adb/06-DECISIONS.md
 adb/07-STATUS.md
 
 adb/08-OPEN-ISSUES.md
+
+These eight files are the maximum default set, not a checklist that every product must fill.
+
+A small or low-risk product may collapse to:
+
+adb/01-VISION.md
+
+adb/02-PRODUCT-SPEC.md
+
+adb/07-STATUS.md
+
+When collapsed:
+
+* UX, architecture, quality and decisions live in 02-PRODUCT-SPEC.md until a topic needs its own file
+* Open Issues live in 07-STATUS.md until the issue list needs its own file
+
+Split a topic into its numbered file as soon as keeping it merged would hide important truth.
+
+Never create a numbered file merely to complete the set of eight.
+
+Keep the numbered filenames. Do not invent alternate names such as `SPEC.md`.
+
+Points 16–23 define the content of each topic, whether it is a separate file or a section of a collapsed file.
 
 Do not create more permanent documentation without concrete value.
 
@@ -589,7 +618,9 @@ Track:
 
 ## 23. 08-OPEN-ISSUES.md
 
-All meaningful unresolved problems discovered during work must be persisted here.
+All meaningful unresolved problems discovered during work must be persisted here, or in the Open Issues section of STATUS when the Source of Truth is collapsed.
+
+Split to 08-OPEN-ISSUES.md as soon as the issue list would clutter status or hide severity.
 
 Examples:
 
@@ -695,6 +726,14 @@ Before entering BUILD ask:
 
 Could a fresh capable engineering team understand what to build from these files without the interview history and without inventing important product decisions?
 
+And:
+
+Does any remaining UNKNOWN, CONFLICTING or NEEDS USER DECISION block the first vertical slice?
+
+If the first slice is blocked, continue DEFINE only for that blockage.
+
+If the product is understandable and the first slice is unblocked, DEFINE is complete.
+
 Verify:
 
 * purpose clear
@@ -711,7 +750,11 @@ Verify:
 
 Do not seek theoretical perfection.
 
+Do not continue DEFINE to exhaust research, fill unused Source of Truth files, or resolve reversible details.
+
 Reversible low-risk implementation details may remain open.
+
+Record remaining non-blocking uncertainty as ASSUMED, NEEDS RESEARCH, or in Open Issues. Never silently convert it into product truth.
 
 ⸻
 
@@ -989,12 +1032,20 @@ A Builder may receive:
 * task objective
 * related code
 
-A Reviewer may receive:
+A Reviewer may receive only:
 
 * relevant specification
 * expected behavior
 * diff
 * test evidence
+* concrete review criteria
+
+A Reviewer must not receive:
+
+* the interview history
+* the builder's narrative or rationale
+* the full project history
+* instructions to confirm the builder's conclusion
 
 Do not automatically send the entire project history.
 
@@ -1004,7 +1055,15 @@ Do not automatically send the entire project history.
 
 For meaningful work, independent review is preferred when the environment supports it.
 
+Independent review means a separate agent, or the user, judging the work against the Source of Truth, the diff and the test evidence.
+
 The agent that writes the implementation should not be the only authority deciding whether it is correct.
+
+The same model in the same session, given the builder's story, is not independent review.
+
+A lead agent re-reading its own work is not independent review.
+
+If the environment cannot provide a separate reviewer, record that limitation in STATUS and perform a constrained self-check against the Source of Truth. Do not call that self-check independent review.
 
 Review may include:
 
@@ -1016,6 +1075,8 @@ Review may include:
 * security
 
 The scale of review should match risk.
+
+Do not invent extra review roles for ceremony.
 
 ⸻
 
@@ -1119,7 +1180,9 @@ Are meaningful risks handled?
 
 Green tests are not enough.
 
-Before significant work is complete compare implementation against:
+Before significant work is complete compare implementation against the Source of Truth that exists.
+
+When the full set is present, that includes:
 
 * 01-VISION.md
 * 02-PRODUCT-SPEC.md
@@ -1127,6 +1190,8 @@ Before significant work is complete compare implementation against:
 * 04-ARCHITECTURE.md
 * 05-QUALITY.md
 * 06-DECISIONS.md
+
+When collapsed, compare against the surviving files. Collapsed topics still count.
 
 If implementation differs:
 
@@ -1140,7 +1205,7 @@ B. product intent intentionally changed.
 
 Never silently choose B.
 
-If required behavior is missing, do not stop at noticing it. Fix it now when it belongs in the current slice. Otherwise register the missing work in 08-OPEN-ISSUES.md. Do not continue as if the spec were satisfied.
+If required behavior is missing, do not stop at noticing it. Fix it now when it belongs in the current slice. Otherwise register the missing work in Open Issues. Do not continue as if the spec were satisfied.
 
 ⸻
 
@@ -1163,7 +1228,7 @@ or:
 
 REGISTER
 
-in 08-OPEN-ISSUES.md
+in Open Issues
 
 if it:
 
@@ -1453,7 +1518,7 @@ Spend tokens defensively on:
 
 Use the smallest sufficient context for each agent.
 
-When switching from DEFINE to BUILD, or between major slices, reload from the eight Source of Truth files. Those files outrank interview chat. If the session is repeating mistakes or has grown too long, start a fresh session and load only those files plus `AGENTS.md`.
+When switching from DEFINE to BUILD, or between major slices, reload from the Source of Truth files that exist. Those files outrank interview chat. If the session is repeating mistakes or has grown too long, start a fresh session and load only those files plus `AGENTS.md`.
 
 When the main thread is long or repeating errors, move bounded work to subagents or start a fresh session. Do not keep loading the lead agent with work a subagent can finish from a small brief.
 
@@ -1461,7 +1526,7 @@ When the main thread is long or repeating errors, move bounded work to subagents
 
 ## 59. DOCUMENT DISCIPLINE
 
-Default persistent documentation remains exactly:
+The full default set is:
 
 1. Vision
 2. Product Spec
@@ -1472,13 +1537,19 @@ Default persistent documentation remains exactly:
 7. Status
 8. Open Issues
 
+The minimum set for a small or low-risk product is Vision, Product Spec and Status.
+
 Add another permanent document only when a concrete project need justifies it.
+
+Do not keep all eight files on a small product merely because the full set exists.
 
 ⸻
 
 ## 60. SCALE TO THE PROJECT
 
 ADB must not over-engineer small products.
+
+A small product should collapse the Source of Truth. A large or high-integrity product should split it.
 
 A small game may require concise Source-of-Truth files and few agents.
 
@@ -1516,7 +1587,7 @@ Completion means, where relevant:
 * design is coherent
 * specification is satisfied
 * relevant tests pass
-* independent review passes
+* independent review passes, when required and actually independent
 * open issues are appropriately resolved
 * unnecessary complexity has been removed
 * no release-blocking issue remains

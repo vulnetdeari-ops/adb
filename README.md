@@ -22,7 +22,7 @@ Do not combine ADB with BMAD.
 ## What it does
 
 - **Ask** — grill the product, not the user. Research what can be discovered. Offer real choices. `Decide for me` is valid.
-- **Decide** — keep a durable source of truth (`adb/01` … `adb/08`). Uncertain findings get registered, not swallowed.
+- **Decide** — keep a durable source of truth. Small products may collapse to Vision, Product Spec and Status. Larger products use `adb/01` … `adb/08`. Uncertain findings get registered, not swallowed.
 - **Build** — execute against that truth. Small products stay small. Missing required behavior is fixed or written down, not ignored.
 
 The full method is in [`SKILL.md`](SKILL.md).
