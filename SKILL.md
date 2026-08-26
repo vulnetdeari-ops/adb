@@ -259,7 +259,9 @@ Research should:
 
 ## 9. USE PARALLEL RESEARCH
 
-When independent research questions exist, use available subagents or parallel workers.
+When independent research questions exist, use available subagents or parallel workers. This is desired, not optional.
+
+The reason is context: research does not belong in the lead agent's main thread when it can run elsewhere.
 
 Example:
 
@@ -789,6 +791,10 @@ Work autonomously on reversible implementation decisions.
 
 The Source of Truth now governs work.
 
+The questions are largely answered. That is the moment to execute hard, not to ease off. Keep building and keep leading until the product meets the completion standard or the user explicitly pauses.
+
+After each slice: state what is done, what still stands between this and a finished product, and the concrete next work. Do not end BUILD by leaving specified remaining work as a note for later with no next move.
+
 ⸻
 
 ## 29. OFFENSIVE ON OUTCOME
@@ -891,7 +897,9 @@ Before adding meaningful implementation complexity ask:
 
 ## 32. MULTI-AGENT IS AN EXECUTION CAPABILITY
 
-ADB assumes modern coding environments may provide multiple agents.
+Using multiple agents is desired, not merely allowed.
+
+The reason is context. The lead agent talks to the user, holds the Source of Truth, and merges results. Bounded work such as research, a slice, tests or review belongs in subagents with the minimum sufficient context. That keeps the main-thread context small so the lead agent does not get lost.
 
 ADB does not prescribe fixed agent names.
 
@@ -907,7 +915,7 @@ Agent count follows the work.
 
 The work does not exist to justify agent count.
 
-Prefer subagents for bounded work such as research, a slice, tests or review. The lead agent stays the integrator: it talks to the user, holds the Source of Truth, and merges results. This keeps the main-thread context small so the lead agent does not get lost. Do not spawn agents for ceremony or fake roles.
+Do not spawn agents for ceremony or fake roles.
 
 ⸻
 
@@ -1517,6 +1525,8 @@ Spend tokens defensively on:
 * repeated explanations of known facts
 
 Use the smallest sufficient context for each agent.
+
+Multiple agents are desired because they protect context.
 
 When switching from DEFINE to BUILD, or between major slices, reload from the Source of Truth files that exist. Those files outrank interview chat. If the session is repeating mistakes or has grown too long, start a fresh session and load only those files plus `AGENTS.md`.
 

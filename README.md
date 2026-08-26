@@ -26,3 +26,5 @@ Do not combine ADB with BMAD.
 - **Build** — execute against that truth. Small products stay small. Missing required behavior is fixed or written down, not ignored.
 
 The full method is in [`SKILL.md`](SKILL.md).
+
+Zum Lesen auf Deutsch: [`ADB-LESEN-DE.html`](ADB-LESEN-DE.html). Agenten folgen nicht dieser Datei — nur `SKILL.md`.

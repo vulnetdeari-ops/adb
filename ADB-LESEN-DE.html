@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>ADB — nur zum Lesen</title>
+<style>
+  body { font-family: -apple-system, Helvetica, Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 24px 80px; color: #111; line-height: 1.45; }
+  .warn { background: #fff3cd; border: 2px solid #c9a227; padding: 14px 16px; margin-bottom: 28px; }
+  h1 { font-size: 26px; }
+  h2 { font-size: 18px; margin-top: 28px; }
+  h3 { font-size: 15px; }
+  ul, ol { padding-left: 20px; }
+  code { font-size: 13px; }
+  hr { border: none; border-top: 1px solid #ddd; margin: 32px 0; }
+</style>
+</head>
+<body>
+<div class="warn">
+<strong>NUR ZUM LESEN.</strong> Agenten folgen nicht dieser Datei. Die einzige gültige Quelle ist das englische Original:<br>
+<code>/Users/bubby/Development/_System/Methods/ADB/SKILL.md</code>
+</div>
+
+<h1>ADB — Ask. Decide. Build.</h1>
+<p>Leichte Methode, um ein Software-Produkt zu verstehen, festzuhalten und zu bauen. Keine Agenten-Firma. Kein Extra-Orchestrator. Nutzt die Mittel der aktuellen Umgebung.</p>
+<p>Erbt die globalen Regeln aus <code>AGENTS.md</code>: beim Ergebnis angreifen, beim Bau verteidigen.</p>
+<p><strong>Ziel:</strong> Das Produkt so klar verstehen, dass man sicher bauen kann. Dieses Verständnis dauerhaft festhalten. Dann aggressiv auf ein außergewöhnliches Produkt hinarbeiten — bei so wenig unnötigem Code und Komplexität wie möglich.</p>
+<p>Jeder Punkt ist ein Maßstab, kein Auftrag extra Dateien oder Agenten zu erzeugen. Was nicht passt, darf keine Extra-Arbeit erzeugen. Punkt 60 bestimmt die Tiefe aller anderen Punkte.</p>
+
+<hr>
+
+<h2>1. Aktivierung</h2>
+<p>ADB startet nicht von allein in fremden bestehenden Projekten.</p>
+<p>ADB gilt, wenn:</p>
+<ul>
+  <li><code>METHOD.md</code> enthält <code>METHOD: ADB</code></li>
+  <li>jemand ausdrücklich <code>/adb</code> oder „ADB nutzen“ sagt</li>
+  <li>ein neues oder fast leeres Projekt geöffnet wird und klar ein neues Produkt gebaut werden soll</li>
+</ul>
+<p>Bei einer bestehenden App nur auf ausdrücklichen Wunsch.</p>
+
+<h2>2. Projektmodus</h2>
+<p><strong>Greenfield:</strong> Es gibt noch keine sinnvolle App. Mit DEFINE starten.</p>
+<p><strong>Brownfield:</strong> Es gibt schon eine App. Vor Code-Änderungen anschauen: was existiert, was funktioniert, was fehlt, was falsch ist, was bleiben soll, was Bubby wirklich will. Vorhandener Code ist Beweis — nicht automatisch die Wahrheit.</p>
+
+<h2>3. Zwei Phasen</h2>
+<p>Nur zwei Hauptphasen: <strong>DEFINE</strong> (verstehen und festhalten) und <strong>BUILD</strong> (bauen). Recherche, Planung, Tests, Review und Issues leben darin — keine Extra-Schicht darüber.</p>
+
+<hr>
+<h2>Phase 1 — DEFINE</h2>
+
+<h2>4. Ziel von DEFINE</h2>
+<p>Während DEFINE nicht schon das Produkt groß bauen.</p>
+<p>Fertig ist DEFINE, wenn ein frischer fähiger Agent das Produkt aus der Source of Truth verstehen und bauen kann — ohne Chat-Verlauf und ohne wichtiges Verhalten zu erfinden. Restliche Unsicherheit darf den ersten sichtbaren Schritt nicht blockieren.</p>
+<p>Mehr Recherche wäre immer möglich. Das hält DEFINE nicht offen.</p>
+
+<h2>5. Das Produkt grillen, nicht den Menschen</h2>
+<p>Discovery ist ein Entscheidungsbaum, kein Fragebogen. Nur Fragen, die echte Unsicherheit verringern. Keine Fragen aus Gründlichkeit vortäuschen. Aufhören, wenn die nächste Frage am Produkt oder am ersten Schritt nichts mehr ändert.</p>
+
+<h2>6. Eine wichtige Entscheidung nach der anderen</h2>
+<p>Frage → Antwort → nachschauen → recherchieren wenn nützlich → Verständnis und Source of Truth aktualisieren → nächste beste Frage. Keine großen Fragebögen, außer Bubby will das.</p>
+
+<h2>7. Nicht fragen, was man finden kann</h2>
+<p>Erst selbst nachschauen: Code, Doku, Tests, Daten, Konventionen, Tools. Bubby nur zu Absicht, Business Rules, Prioritäten, Workflow, Vorlieben und echten Abwägungen fragen.</p>
+
+<h2>8. Recherche gehört zu DEFINE</h2>
+<p>Recherchieren, wenn es die nächste Entscheidung oder die Produktqualität wirklich verbessert. Vergleichbare Produkte, UX, Doku, Technik, Sicherheit. Kein Theater.</p>
+
+<h2>9. Parallele Recherche</h2>
+<p>Unabhängige Recherchefragen: mehrere Agenten nutzen. Das ist <strong>erwünscht, nicht optional</strong>.</p>
+<p><strong>Grund: Kontext.</strong> Recherche gehört nicht in den Haupt-Chat, wenn sie woanders laufen kann. Unabhängiges parallel. Abhängiges nacheinander. Der Leit-Agent führt die Ergebnisse zusammen.</p>
+
+<h2>10. Fragen sollen gute Antworten mitbringen</h2>
+<p>Wichtige Fragen mit 2–4 echten Optionen, einer Empfehlung, Warum, und immer <strong>Decide for me</strong>. Keine schwachen Extra-Optionen. Bubby soll Technik, UX oder Design nicht aus dem Nichts erfinden müssen.</p>
+
+<h2>11. „Decide for me“</h2>
+<p>Gültig. Dann entscheiden nach Vision, bisherigen Antworten, Recherche, Einfachheit, Bedienung, Qualität, Wartbarkeit, Risiko, geringster begründeter Komplexität. Wichtige autonome Entscheidungen nach <code>06-DECISIONS.md</code>.</p>
+
+<h2>12. Schlechte Entscheidungen ansprechen</h2>
+<p>Bubby bleibt der Produkt-Eigentümer. Trotzdem widersprechen, wenn schlechte Bedienung, unnötige Komplexität, Sicherheit, Daten, Architektur oder Widerspruch drohen. Nicht streiten über Geschmack.</p>
+
+<h2>13. UX und Design</h2>
+<p>Weiß Bubby WAS, aber nicht WIE es aussehen soll: ADB übernimmt mehr. Starke Vorbilder recherchieren. Ein stimmiges Bild empfehlen. Schön, klar, verständlich. Keine generischen KI-Oberflächen. Dekoration ist nicht Qualität.</p>
+
+<h2>14. Unsicherheit benennen</h2>
+<p>KNOWN / UNKNOWN / ASSUMED / CONFLICTING / NEEDS RESEARCH / NEEDS USER DECISION. Nie still eine Annahme zur Produktwahrheit machen.</p>
+
+<h2>15. Source of Truth</h2>
+<p>Maximal acht Dateien unter <code>adb/</code>:</p>
+<ol>
+  <li>01-VISION.md</li>
+  <li>02-PRODUCT-SPEC.md</li>
+  <li>03-UX-DESIGN.md</li>
+  <li>04-ARCHITECTURE.md</li>
+  <li>05-QUALITY.md</li>
+  <li>06-DECISIONS.md</li>
+  <li>07-STATUS.md</li>
+  <li>08-OPEN-ISSUES.md</li>
+</ol>
+<p>Kleines oder risikoarmes Produkt darf auf Vision, Product Spec und Status schrumpfen. UX, Architektur, Qualität und Entscheidungen leben dann in der Spec. Offene Issues im Status, bis sie stören.</p>
+<p>Eine nummerierte Datei nur anlegen, wenn Zusammenlegen Wichtiges versteckt. Dateinamen nicht umbenennen. Keine Extra-Doku ohne konkreten Nutzen.</p>
+
+<h2>16–23. Was in die Dateien gehört</h2>
+<p><strong>Vision:</strong> kurz und stabil. Was es ist, warum, für wen, Kernproblem, gewünschtes Erlebnis, Prinzipien, was es absichtlich nicht ist.</p>
+<p><strong>Product Spec:</strong> das Verhalten. Features, Rollen, Workflows, Business Rules, Zustände, Daten, Fehler, Kantenfälle. Lieber klares Verhalten als vage Wünsche.</p>
+<p><strong>UX/Design:</strong> Navigation, Screens, Zustände, Typografie, Abstände, Komponenten, Bewegung, Responsive, Barrierefreiheit, leer/laden/Fehler.</p>
+<p><strong>Architektur:</strong> nur was zählt. Technik, Grenzen, Daten, APIs, Auth, Speichern, Deployment, Sicherheit. WHY bei folgenreichen Entscheidungen. Keine Architektur für hypothetische Zukunft.</p>
+<p><strong>Quality:</strong> was DONE hier heißt. Tests, Sicherheit, Tempo, Fehler, Logging, Backup, Production — je nach Risiko. Keine sinnlosen Tore.</p>
+<p><strong>Decisions:</strong> wichtiges WHY. Entscheidung, Grund, Alternativen, Folge. Keine trivialen Bau-Details.</p>
+<p><strong>Status:</strong> Phase, erledigt, aktuell, restlich, Blocker, nächste wichtige Aktion, offene Issues.</p>
+<p><strong>Open Issues:</strong> alle sinnvollen ungelösten Probleme dauerhaft speichern. Chat-Gedächtnis reicht nicht. Unsicher? Eintragen. Nicht still überspringen. Keine erfundene Produktentscheidung.</p>
+
+<h2>24. Issues nicht verschmutzen</h2>
+<p>Keine vagen Ideen, Spekulation, „irgendwann mal“, Stil ohne Produktwirkung. Unsicherheit ist keine Verschmutzung. Ein möglicher Bug oder Widerspruch ist ein konkretes Risiko.</p>
+
+<h2>25. Issue-Format</h2>
+<p>Stabile IDs: ISSUE-001. Titel, Typ, Schwere, Fundort, Problem, Beweis, Erwartung, Status, Abhängigkeiten, Lösung, geprüft von.</p>
+<p>Status: OPEN, IN PROGRESS, BLOCKED, READY FOR VERIFY, CLOSED. Schwere: CRITICAL, HIGH, MEDIUM, LOW.</p>
+
+<h2>26. DEFINE ist fertig wenn</h2>
+<p>Ein frisches Team könnte aus den Dateien bauen, ohne Wichtiges zu erfinden. Und: keine offene Unsicherheit blockiert den ersten sichtbaren Schritt. Keine theoretische Perfektion. Umkehrbare Kleinigkeiten dürfen offen bleiben — als Annahme oder Issue, nie still als Wahrheit.</p>
+
+<h2>27. Freigabe zum Bauen</h2>
+<p>Kurz zusammenfassen, dann einmal fragen: <strong>ADB DEFINE ist fertig. BUILD starten?</strong> Danach keine ständigen Extra-Freigaben für Routine.</p>
+
+<hr>
+<h2>Phase 2 — BUILD</h2>
+
+<h2>28. Verhalten in BUILD</h2>
+<p>Nicht mehr vor allem Interviewer. Umkehrbare Bau-Entscheidungen selbst treffen. Die Source of Truth regiert.</p>
+<p>Die Fragen sind weitgehend beantwortet. Jetzt hart ausführen, nicht nachlassen. Weiter bauen und weiter führen, bis das Produkt dem Fertig-Maßstab entspricht oder Bubby bewusst pausiert.</p>
+<p>Nach jedem Slice: was erledigt ist, was bis zur fertigen App noch fehlt, was konkret als Nächstes kommt. BUILD nicht beenden, indem festgelegte Restarbeit nur als Notiz für später stehen bleibt — ohne nächsten Schritt.</p>
+
+<h2>29. Beim Ergebnis: Angriff</h2>
+<p>„Läuft“ ist nicht „fertig“. Funktion, Aussehen, Bedienung, Tempo, Zuverlässigkeit, Kantenfälle, Politur. Extra Aufwand, wenn er das Produkt wirklich besser macht.</p>
+
+<h2>30. Beim Bau: Verteidigung</h2>
+<p>Dasselbe Ergebnis mit dem kleinsten begründeten technischen System. Nicht „möglichst wenige Buchstaben“. Jede Datei, Abhängigkeit, Abstraktion, Tabelle, Hintergrundprozess muss sich rechtfertigen. Nichts Spekulatives.</p>
+
+<h2>31. Einfachheits-Check</h2>
+<p>Vor extra Komplexität: Braucht das eine echte Anforderung? Gibt es Einfacheres? Löst etwas Vorhandenes das schon? Ist die Abstraktion jetzt nötig?</p>
+
+<h2>32. Mehrere Agenten</h2>
+<p>Mehrere Agenten sind <strong>erwünscht — nicht nur erlaubt</strong>.</p>
+<p><strong>Grund: Kontext.</strong> Der Leit-Agent spricht mit Bubby, hält die Source of Truth und führt Ergebnisse zusammen. Begrenzte Arbeit (Recherche, ein Slice, Tests, Review) gehört in Unter-Agenten mit nur dem nötigen Kontext. So bleibt der Haupt-Chat klein, und der Leit-Agent verliert sich nicht.</p>
+<p>Keine festen Agenten-Namen. Anzahl folgt der Arbeit — die Arbeit existiert nicht, um Agenten zu rechtfertigen. Kein Theater, keine Fake-Rollen.</p>
+
+<h2>33. Wann parallel</h2>
+<p>Parallel, wenn wirklich unabhängig. Nicht parallel, wenn dieselben Dateien, widersprüchliche Architektur oder unfertige Abhängigkeiten drohen.</p>
+
+<h2>34–37. Große Apps in Slices</h2>
+<p>Nie eine große App als eine ununterbrochene Aufgabe. Vor dem großen Bau: Plan aus der Source of Truth. Kleine senkrechte Scheiben mit sichtbarer Fähigkeit — nicht „erst das ganze Backend“.</p>
+<p>Unabhängige Slices parallel, abhängige nacheinander.</p>
+<p>Jeder sinnvolle Slice: SPEC → PLAN → IMPLEMENT → TEST → REVIEW → SPEC CHECK → ISSUE TRIAGE → VERIFY → INTEGRATE. Erst dann fertig.</p>
+<p>Kleine prüfbare Aufgaben. Keinen großen unverprüften Code-Haufen.</p>
+
+<h2>38. Kontext für Unter-Agenten</h2>
+<p>Nur das Minimum. Ein Builder bekommt relevante Spec, UX, Architektur, Ziel, Code. Ein Reviewer bekommt Spec, erwartetes Verhalten, Diff, Testbeweis, Kriterien — nicht den Interview-Verlauf und nicht die Geschichte des Builders.</p>
+
+<h2>39. Unabhängiges Review</h2>
+<p>Bei sinnvoller Arbeit bevorzugt, wenn die Umgebung das hergibt. Wer gebaut hat, darf nicht allein entscheiden, ob es stimmt. Derselbe Chat mit der Builder-Geschichte ist kein unabhängiges Review. Geht es nicht: in STATUS notieren und gegen die Source of Truth selbst prüfen — das nicht „unabhängiges Review“ nennen. Tiefe nach Risiko. Keine Extra-Rollen aus Theater.</p>
+
+<h2>40–42. Code</h2>
+<p>Kleinste sichere Änderung, die die Anforderung ganz löst. Kein Umbau nur wegen Stil. Unnötiges entfernen, wenn sicher. Abhängigkeiten: reife Bibliotheken für schwere Probleme, nicht für Triviales. Sicherheits-Standards nicht neu erfinden, nur um Pakete zu vermeiden.</p>
+
+<h2>43. Tests</h2>
+<p>Wichtiges Verhalten: Business Rules, Rechnungen, Zustände, kritische Abläufe, Rechte, Integrationen, Regressionen. E2E für wichtige Nutzerwege. Keine Test-Menge nur für Coverage.</p>
+
+<h2>44–45. Review und Spec-Check</h2>
+<p>Grüne Tests reichen nicht. Umsetzung gegen die Source of Truth halten. Weicht sie ab: ist die Umsetzung falsch, oder hat sich die Absicht geändert? Nie still Variante B wählen. Fehlendes Pflicht-Verhalten: jetzt fixen, wenn es zum Slice gehört, sonst als Issue eintragen.</p>
+
+<h2>46–50. Issues</h2>
+<p>Jeder Agent merkt Probleme auch außerhalb seines Jobs. Jetzt fixen wenn klein, sicher und zum aktuellen Job. Sonst eintragen. Unsicher: eintragen.</p>
+<p>Ablauf: DISCOVER → REGISTER → TRIAGE → SELECT → FIX → TEST → REVIEW → VERIFY → CLOSE. Geschlossen heißt geprüft. Nicht schließen, nur weil Code geändert wurde. Kein Fake-Schließen durch Löschen oder Herabstufen.</p>
+<p>Produkt nicht „fertig“ nennen bei CRITICAL, bei HIGH gegen Quality, bei kaputtem Pflicht-Verhalten oder ungelösten Widersprüchen in der Wahrheit.</p>
+
+<h2>51–53. Bestehende Projekte und Migration</h2>
+<p>Erst anschauen, dann einteilen: KEEP / IMPROVE / REFACTOR / REPLACE / REMOVE / MISSING / UNCLEAR. Gutes stehen lassen. Dann Bubby grillen, bis der Soll-Zustand klar ist.</p>
+<p>Lücke planen: Ist-Zustand gegen Soll-Zustand. Richtiges nicht neu bauen. Falsches nicht behalten, nur weil es schon da ist.</p>
+<p>Migration: nicht alten Code mechanisch übersetzen. Erst technikunabhängige Regeln, Logik, Daten, Integrationen holen. Dann die einfachste passende Ziel-Architektur.</p>
+
+<h2>54. Hohe Integrität</h2>
+<p>Buchhaltung, Geld, Zahlungen: strenger. Rechnungen, Rundung, Transaktionen, Rechte, Backup. Korrektheit nie opfern, um Code zu sparen. Schema-Änderungen brauchen eine klare Migrations-Spec und Bubby muss Bescheid wissen.</p>
+
+<h2>55–56. Spätere Änderungen</h2>
+<p>Erst einordnen: nur Umsetzung falsch? Passende Erweiterung? Spec-, UX- oder Architektur-Änderung? Vision-Konflikt? Betroffene Wahrheits-Dateien aktualisieren, bevor die Arbeit fertig ist. Viele kleine Änderungen dürfen das Produkt nicht schleichend verbiegen.</p>
+
+<h2>57. Autonomie</h2>
+<p>Nach DEFINE: nützliche Autonomie. Nicht stören für Routine, offensichtliche Details, umkehrbare Kleinigkeiten. Fragen bei echter Produkt-Unklarheit, folgenreichen Abwägungen, Konflikt mit bekannter Absicht, unumkehrbarem Risiko, oder wenn Geld/Zugänge/Erlaubnis nötig sind.</p>
+
+<h2>58. Token-Disziplin</h2>
+<p>Tokens ausgeben, wo sie Produkt, Recherche, UX, Architektur, Debugging, Tests, Sicherheit, Review wirklich verbessern. Nicht für Zeremonie, doppelte Doku, irrelevante Geschichte, Fake-Rollen.</p>
+<p>Jeder Agent nur den nötigen Kontext. <strong>Mehrere Agenten sind erwünscht, weil sie Kontext schützen.</strong> Wird der Haupt-Chat lang oder wiederholt Fehler: begrenzte Arbeit in Unter-Agenten, oder neue Session nur mit Source of Truth plus <code>AGENTS.md</code>.</p>
+
+<h2>59. Dokument-Disziplin</h2>
+<p>Volle acht Dateien sind das Maximum, nicht die Pflicht. Klein: Vision, Spec, Status. Eine weitere Dauerdatei nur bei konkretem Bedarf.</p>
+
+<h2>60. Größe anpassen</h2>
+<p><strong>ADB darf kleine Produkte nicht überbauen.</strong> Kleines Produkt: Source of Truth schrumpfen. Großes oder hochintegrales: aufteilen. Die Methode skaliert mit Komplexität, Risiko, Größe, Integrität — nicht mit Theater. Verboten: jeden Großprojekt-Schritt auf ein kleines Produkt zu legen, nur um eine Checkliste abzuhaken.</p>
+
+<h2>61. Fertig heißt</h2>
+<p>Nicht: Code existiert, kompiliert, Demo läuft, Unit Tests grün. Sondern: beabsichtigtes Verhalten da, Kantenfälle, UX, Design, Spec erfüllt, relevante Tests, Review wenn nötig wirklich unabhängig, Issues angemessen, unnötige Komplexität weg, kein Release-Blocker.</p>
+
+<h2>62. Die letzte ADB-Regel</h2>
+<p>Vor BUILD: neugierig, skeptisch, präzise.</p>
+<p>Während BUILD: aggressiv auf ein außergewöhnliches Produkt.</p>
+<p>Beim Umsetzen: konservativ bei Code, Abstraktionen und beweglichen Teilen.</p>
+<p>Bei der Ausführung: Unabhängiges parallel, Abhängiges nacheinander.</p>
+<p>Beim Review: Beweis und Source of Truth, nicht Agenten-Selbstbewusstsein.</p>
+<p>Nicht das Ziel: maximaler Code, maximale Agentenzahl, maximale Doku, maximale Architektur.</p>
+<p><strong>Das Ziel: das kleinste stimmige System, das das volle beabsichtigte Produkt in außergewöhnlicher Qualität liefert.</strong></p>
+</body>
+</html>
