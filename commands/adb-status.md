@@ -37,7 +37,7 @@ Record the review limitation here when the environment cannot provide a separate
 
 Cheap, and it catches the class of defect that hides everything else.
 
-- `ADB.md` first line carries a `METHOD-VERSION` stamp. Missing or older than the canonical repo → say so; refresh only outside an active slice.
+- `ADB.md` carries a `METHOD-VERSION` stamp as its first line, or as the first line after the frontmatter block when the copy keeps one. Never above frontmatter. Missing or older than the canonical repo → say so; refresh only outside an active slice.
 - The numbered files that exist are the ADB ones. No ADB topic lives under an invented filename.
 - No topic exists twice — not in a numbered file and an ad-hoc file, not in STATUS and a separate register.
 - The issue register is `adb/08-OPEN-ISSUES.md`, or the STATUS section while the Source of Truth is genuinely collapsed. Not both.
