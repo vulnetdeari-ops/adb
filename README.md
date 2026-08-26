@@ -16,7 +16,7 @@ METHOD: ADB
 ```
 
 3. Tell the agent to follow `ADB.md`.
-4. Stamp `ADB.md` with `METHOD-VERSION` (see `SKILL.md` point 1A). Keep YAML frontmatter first when the copy has it; the stamp goes on the next line.
+4. Stamp `ADB.md` with `METHOD-VERSION` (see `SKILL.md` point 1A). Keep YAML frontmatter first when the copy has it; the stamp is the first line after the closing `---`, with nothing between.
 5. Ensure the issue register is `adb/08-OPEN-ISSUES.md` (not a root `OPEN-ISSUES.md`).
 6. Install slash commands **into that project**, never into the user home (P1).
 
@@ -38,9 +38,11 @@ adopt-project
 
 `setup-into-project.sh` copies/stamps `ADB.md`, creates `adb/08-OPEN-ISSUES.md` if missing, and runs `install-commands.sh` for that project.
 
-If an existing `ADB.md` body differs from `SKILL.md`, the script reports `STALE` and does **not** stamp it — a stamp naming the current version on an old body would answer the age question wrongly (P1A). Use `--refresh` to update the body on purpose, or record a decision to stay on the older version.
+If an existing `ADB.md` body differs from `SKILL.md`, the script reports `STALE` and does **not** stamp it — a stamp naming the current version on an old body would answer the age question wrongly (P1A). It also leaves the slash commands alone in that case, so the project does not end up with an old method and new commands citing points it lacks. Use `--refresh` to update body and commands together, or record a decision to stay on the older version.
 
 Slash commands (`/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`) live in [`commands/`](commands/). They point at `SKILL.md`; they are not a second method.
+
+Inside this repository, `.cursor/commands/`, `.claude/commands/` and `.codex/prompts/` are **symlinks** into `commands/`. There is one copy to edit, so the harnesses cannot drift apart.
 
 ```text
 ./install-commands.sh                 # into the current project only

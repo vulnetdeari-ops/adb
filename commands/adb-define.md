@@ -37,26 +37,19 @@ One meaningful decision at a time:
 
 QUESTION → ANSWER → INSPECT → RESEARCH IF USEFUL → UPDATE UNDERSTANDING → UPDATE SOURCE OF TRUTH → NEXT BEST QUESTION
 
-Every important question ships 2–4 serious options in this format:
+Every important question ships 2–4 serious options as A/B/C, in the user's language. The user answers with **one letter** (P10, and global `AGENTS.md` → Decision Questions, which is authoritative):
 
 ```
-Decision
+A) Kurzer Titel — eine Zeile Erklärung
+B) Kurzer Titel — eine Zeile Erklärung
+C) Entscheide du
 
-A — Option
-Short explanation.
-
-B — Option
-Short explanation.
-
-RECOMMENDATION: B
-
-WHY:
-Short contextual reasoning.
-
-ANSWER: A / B / Other / Decide for me
+Empfehlung: A — kurze Begründung.
 ```
 
-No fake alternatives. No questionnaires unless the user asks for batch questions. No manufactured questions to look thorough. `Decide for me` is valid — then decide on Vision, prior answers, research, simplicity, usability, quality, maintainability, risk and lowest justified complexity, and record it in DECISIONS (P11).
+The last letter is always the decide-for-me option. Never ask for full option text or a sentence.
+
+No fake alternatives. No questionnaires unless the user asks for batch questions. No manufactured questions to look thorough. The decide-for-me answer is valid — also in plain words ("entscheide du", "egal", "weiß nicht"). Then decide on Vision, prior answers, research, simplicity, usability, quality, maintainability, risk and lowest justified complexity, and record it in DECISIONS (P11).
 
 Challenge choices that cause poor usability, avoidable complexity, security problems, data-integrity risk, architectural damage or inconsistency: concern → consequence → recommended alternative (P12). Not on subjective preferences.
 
@@ -85,12 +78,10 @@ Do not continue to exhaust research, fill unused files, or resolve reversible de
 
 Summarize briefly: product, core principles, major workflows, UX/design direction, architecture direction, significant risks.
 
-Then ask exactly once:
-
-**ADB DEFINE is complete. Start BUILD?**
+Then ask exactly once, **in the user's language**: DEFINE is complete — start BUILD? Offer it as a decision (A start BUILD / B still open points / C entscheide du) so a single letter answers it.
 
 ## Forbidden
 
-- Extra files, agents, slices or reviews to show a point was visited (P46).
+- Extra files, agents, slices or reviews to show a point was visited (P60).
 - Large-project machinery on a small product (P60).
-- Secrets in the repository or in persistent ADB files (P-secrets).
+- Secrets in the repository or in persistent ADB files (see the secrets rule in `SKILL.md`, and global `AGENTS.md` → Secrets).

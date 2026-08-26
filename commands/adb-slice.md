@@ -29,6 +29,8 @@ Do not parallelize work that would modify the same code, make conflicting archit
 
 You are the Lead. Ask/Decide and the Source of Truth stay in this thread; heavy BUILD work goes to workers. Workers start fresh and see only the brief.
 
+Delegate on the harness's own **visible** agent surface, so the user can see who is working (P32A). A subagent inside your own session is not delegation the user can see. Name them `{Project}-Worker` and `Reviewer`.
+
 Complete silently before every delegated task — if any item is unknown and material, Ask/Decide with the user first. Never send a vague brief.
 
 1. **Goal** — what done looks like, 1–2 sentences.
@@ -55,7 +57,9 @@ Run every meaningful slice through (P36):
 
 SPEC → PLAN → IMPLEMENT → TEST → REVIEW → SPEC CHECK → ISSUE TRIAGE → VERIFY → INTEGRATE
 
-**Scaling (P46, P60):** when the Source of Truth is collapsed and the slice is low-risk, reduce to SPEC → IMPLEMENT → TEST → VERIFY. Running the full nine stations on a small product is exactly the ceremony ADB forbids. State which variant you are using and why.
+**Scaling:** use the variant defined in P36 ("Scaling the loop") — do not invent a shorter loop here. SPEC, IMPLEMENT, TEST, SPEC CHECK, VERIFY and INTEGRATE never drop. State which variant you are running and why.
+
+**If REVIEW, SPEC CHECK or VERIFY fails:** follow P36 ("When a station fails"). Do not integrate, and do not let an open issue stand in for missing behavior.
 
 Use small verifiable tasks, each with clear objective, relevant specification, expected behavior, bounded scope and verification method. Do not accumulate large quantities of unreviewed code (P37).
 

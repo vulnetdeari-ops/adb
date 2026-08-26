@@ -637,6 +637,7 @@ Track:
 * number of open issues
 * critical/high issue count
 * any issue at CARRIED: 3 and its required exit
+* any review limitation in force — for example a slice reviewed only by a constrained self-check because no separate reviewer was available (P39)
 
 ⸻
 
@@ -745,6 +746,14 @@ Severity:
 
 CARRIED is an integer. It counts how many status reviews the issue has survived while still OPEN. A new issue is CARRIED: 0. Every status review increments it for every issue still OPEN.
 
+A **status review** is the point at which the register is read as a whole and judged, not a single issue being touched. It happens at least:
+
+* when a slice completes (INTEGRATE, P36),
+* before asking the user to approve a release or a deploy,
+* whenever the user asks for status.
+
+`/adb-status` runs it where slash commands exist. A project driven by `ADB.md` alone owes the same review at the same three moments — otherwise CARRIED never rises, P50A never bites, and open issues drift forever (L-002).
+
 ⸻
 
 ## 26. DEFINE COMPLETENESS GATE
@@ -796,9 +805,11 @@ When DEFINE is complete, summarize briefly:
 * architecture direction
 * significant risks
 
-Ask once:
+Ask once, **in the user's language** (global `AGENTS.md` sets the language; do not quote an English sentence at a German-speaking user): DEFINE is complete — start BUILD?
 
-ADB DEFINE is complete. Start BUILD?
+Offer it as a decision so one letter answers it: start BUILD / still open points / decide for me.
+
+If the answer is not a clear yes, treat the named blockage as the only remaining DEFINE work (P26), resolve it, then ask once more. Do not restart DEFINE as a whole, and do not begin BUILD on silence.
 
 Do not require repeated approvals during routine execution.
 
@@ -1076,6 +1087,31 @@ INTEGRATE
 
 Only then is the slice complete.
 
+What the stations mean, where it is not obvious:
+
+* **SPEC CHECK** — the built behavior is compared against the Source of Truth (P45), not against the implementer's memory of the task.
+* **VERIFY** — the claim is proven, not asserted: what was tested, how, and what happened. For anything user-facing that means exercising the real path, in a browser for web UI. See global `AGENTS.md` → Prove it works, which is authoritative.
+* **INTEGRATE** — the verified work lands where the project keeps its truth: merged into the working branch, Source of Truth and STATUS updated, worker branch or worktree closed out. A slice sitting verified but unintegrated is not done.
+
+### Scaling the loop (P60)
+
+Small, low-risk slices may skip **REVIEW** and **ISSUE TRIAGE** when no issue was found and no independent review is required (P39).
+
+**SPEC, IMPLEMENT, TEST, SPEC CHECK, VERIFY and INTEGRATE never drop.** PLAN may collapse into SPEC for a one-file change.
+
+State which variant you are running and why. Do not invent a shorter loop anywhere else — a slash command must reference this point, not define its own.
+
+### When a station fails
+
+REVIEW, SPEC CHECK or VERIFY failing is a normal outcome, not an exception:
+
+1. **Do not integrate.** Unverified work never lands because a slice was already "nearly done".
+2. Fix inside the same slice when the cause is small and understood, then re-run from the failed station.
+3. Otherwise register it (P46) and either narrow the slice to what is genuinely verified, or abandon the slice and return the branch to its last good state.
+4. Record what happened in STATUS. A slice that failed and was cut down must not be reported as delivered in full (P49, P61).
+
+Never mark a slice complete with a failed station and an open issue standing in for the missing behavior.
+
 ⸻
 
 ## 37. SMALL VERIFIABLE TASKS
@@ -1098,7 +1134,7 @@ Do not accumulate large quantities of unreviewed code.
 
 Subagents receive the minimum sufficient context.
 
-A Builder may receive:
+A Worker may receive:
 
 * relevant Product Spec
 * relevant UX
@@ -1341,6 +1377,8 @@ REVIEW
 VERIFY
 ↓
 CLOSE
+
+This is the loop from global `AGENTS.md` → Complaints, Bugs and Discovered Problems, spelled out for ADB. Global `PRIORITIZE` is ADB's **TRIAGE** (rank by severity and impact, P48). **SELECT** is the extra ADB station: deciding which triaged issues enter the next slice, so a ranked list does not sit ranked forever. Same loop, more stations — where the two texts differ, global `AGENTS.md` wins on intent.
 
 Do not mark CLOSED because code changed.
 
@@ -1702,7 +1740,7 @@ A finding belongs to the method when any of these is true:
 
 * the method is silent where a project needed a rule
 * two parts of the method or its inherited `AGENTS.md` disagree
-* the method demanded work that P46 or P60 should have prevented
+* the method demanded work that P60 or the anti-ceremony rule should have prevented
 * following the method produced the defect
 
 When a finding belongs to the method, append an entry to `LESSONS.md` in the canonical ADB repository:

@@ -47,13 +47,18 @@ for arg in "$@"; do
   esac
 done
 
-[ -n "$PROJECT" ] || { echo "usage: $0 [--check] /path/to/project" >&2; exit 2; }
+[ -n "$PROJECT" ] || { echo "usage: $0 [--check] [--refresh] /path/to/project" >&2; exit 2; }
 [ -d "$PROJECT" ] || { echo "not a directory: $PROJECT" >&2; exit 1; }
 [ -f "$SKILL" ] || { echo "SKILL.md missing: $SKILL" >&2; exit 1; }
 [ -x "$INSTALLER" ] || { echo "install-commands.sh missing or not executable: $INSTALLER" >&2; exit 1; }
 
 PROJECT="$(cd "$PROJECT" && pwd -P)"
 sha="$(git -C "$ADB_ROOT" rev-parse --short HEAD 2>/dev/null || echo unknown)"
+# An uncommitted SKILL.md would be copied while the stamp names the last commit,
+# so the stamp would point at a different body (P1A). Mark it instead of lying.
+if ! git -C "$ADB_ROOT" diff --quiet -- SKILL.md 2>/dev/null; then
+  sha="${sha}-dirty"
+fi
 day="$(date +%Y-%m-%d)"
 stamp="METHOD-VERSION: ${sha} ${day}"
 
@@ -63,24 +68,22 @@ note_changed() {
 
 # --- 1. ADB.md ---
 adb_md="$PROJECT/ADB.md"
+FRESH_COPY=0
 if [ ! -f "$adb_md" ]; then
   if [ $CHECK -eq 1 ]; then
-    echo "WOULD CREATE $adb_md"
+    echo "WOULD CREATE $adb_md (stamped $stamp)"
   else
     cp "$SKILL" "$adb_md"
     note_changed "ADB.md"
+    FRESH_COPY=1
   fi
 fi
 
 # --- 1A. Body drift (P1A: a stamp must not outrank the body it labels) ---
-# Compare bodies only. The stamp line, and the single blank line the stamper
-# inserts after it, are expected to exist in the copy and not in SKILL.md.
+# Compare bodies only. The stamp line is the one line expected in the copy and
+# not in SKILL.md; the stamper inserts nothing else, so nothing else is dropped.
 strip_stamp() {
-  awk '
-    /^METHOD-VERSION:/ { drop_blank=1; next }
-    drop_blank==1 && $0=="" { drop_blank=0; next }
-    { drop_blank=0; print }
-  ' "$1"
+  awk '!/^METHOD-VERSION:/' "$1"
 }
 
 STALE=0
@@ -96,6 +99,7 @@ if [ $STALE -eq 1 ] && [ $REFRESH -eq 1 ]; then
   else
     cp "$SKILL" "$adb_md"
     note_changed "ADB.md"
+    FRESH_COPY=1
   fi
   STALE=0
 fi
@@ -108,37 +112,24 @@ stamp_adb_md() {
   local tmp
   tmp="$(mktemp)"
 
+  # The stamp always goes on the first line after the frontmatter, as P1A
+  # requires and /adb-status Step 2A checks. Placing it by position rather than
+  # by hunting for a heading keeps it correct in a file that has no `# ` line,
+  # and leaves the format example later in the body untouched.
+  # The stamp is inserted, and any previous stamp removed. Nothing else in the
+  # file is touched — no blank line is added or swallowed — so the body stays
+  # byte-identical to SKILL.md and strip_stamp can compare the two directly.
   awk -v stamp="$stamp" '
-    BEGIN { fm=0; past_header=0; has_header_stamp=0; stamped=0 }
+    BEGIN { fm=0; placed=0 }
+    /^METHOD-VERSION:/ && placed==1 { next }
     NR==1 && $0=="---" { fm=1; print; next }
+    NR==1 { print stamp; placed=1; if ($0 ~ /^METHOD-VERSION:/) next }
     fm==1 {
       print
-      if ($0=="---") fm=0
-      next
-    }
-    !past_header && /^METHOD-VERSION:/ {
-      print stamp
-      has_header_stamp=1
-      stamped=1
-      next
-    }
-    !past_header && /^# / {
-      if (!has_header_stamp && !stamped) {
-        print stamp
-        print ""
-        stamped=1
-      }
-      past_header=1
-      print
+      if ($0=="---") { fm=0; print stamp; placed=1 }
       next
     }
     { print }
-    END {
-      if (!stamped && !past_header) {
-        print ""
-        print stamp
-      }
-    }
   ' "$file" > "$tmp"
 
   if cmp -s "$file" "$tmp"; then
@@ -157,7 +148,7 @@ if [ -f "$adb_md" ] && [ $STALE -eq 0 ]; then
   if stamp_adb_md "$adb_md"; then
     if [ $CHECK -eq 1 ]; then
       echo "WOULD STAMP $adb_md ($stamp)"
-    else
+    elif [ $FRESH_COPY -eq 0 ]; then
       note_changed "ADB.md"
     fi
   fi
@@ -210,7 +201,13 @@ list_cmd_links() {
   (cd "$PROJECT" && find .cursor/commands .claude/commands .codex/prompts -name 'adb-*.md' 2>/dev/null | sed 's|^\./||' | sort || true)
 }
 
-if [ $CHECK -eq 1 ]; then
+# A stale ADB.md means the project is deliberately or accidentally on an older
+# method. Installing current commands next to it would produce exactly the drift
+# P1A exists to prevent: commands citing points the project's ADB.md lacks.
+if [ $STALE -eq 1 ]; then
+  echo "STALE: skipping slash commands — current commands would cite points this ADB.md does not have."
+  echo "STALE: run with --refresh to update both together."
+elif [ $CHECK -eq 1 ]; then
   (cd "$PROJECT" && "$INSTALLER" --check) || true
 else
   before="$(list_cmd_links)"

@@ -25,6 +25,7 @@
 <p>Erbt die globalen Regeln aus <code>AGENTS.md</code>: beim Ergebnis angreifen, beim Bau verteidigen.</p>
 <p><strong>Ziel:</strong> Das Produkt so klar verstehen, dass man sicher bauen kann. Dieses Verständnis dauerhaft festhalten. Dann aggressiv auf ein außergewöhnliches Produkt hinarbeiten — bei so wenig unnötigem Code und Komplexität wie möglich.</p>
 <p>Jeder Punkt ist ein Maßstab, kein Auftrag extra Dateien oder Agenten zu erzeugen. Was nicht passt, darf keine Extra-Arbeit erzeugen. Punkt 60 bestimmt die Tiefe aller anderen Punkte.</p>
+<p><strong>Geheimnisse:</strong> Keine Passwörter, Schlüssel, Tokens oder echten <code>.env</code>-Dateien in das Repo und auch nicht in die dauerhaften ADB-Dateien. Auch nicht in ein Issue, das mit im Repo liegt. Beispiel-Dateien ohne echte Werte sind in Ordnung.</p>
 
 <hr>
 
@@ -42,7 +43,11 @@
 <h2>1A. Methoden-Version</h2>
 <p>Die Projektdatei <code>ADB.md</code> ist eine Kopie — Kopien werden still alt.</p>
 <p>Jede <code>ADB.md</code> braucht den Stempel <code>METHOD-VERSION: &lt;kurze Git-Sha des ADB-Repos&gt; &lt;Datum&gt;</code>. Entweder in der ersten Zeile, oder in der ersten Zeile <em>nach</em> dem YAML-Kopf, wenn die Kopie einen hat. Nie darüber — das zerbricht den Kopf.</p>
-<p>Stempel setzen beim Kopieren, neu schreiben beim Aktualisieren — die Helfer <code>new-project … adb</code>, <code>adopt-project</code> und <code>setup-into-project.sh</code> machen das automatisch. Fehlt er: Alter unbekannt, vor dem Verlassen auf Punktnummern auffrischen. Eine ältere Version darf absichtlich bleiben — dann als Entscheidung festhalten, nicht mitten im BUILD still überschreiben.</p>
+<p>Stempel setzen beim Kopieren, neu schreiben beim Aktualisieren — die Helfer <code>new-project … adb</code>, <code>adopt-project</code> und <code>setup-into-project.sh</code> erledigen das.</p>
+
+<p><strong>Wichtig:</strong> Ein Stempel wird nie auf einen Text gesetzt, der nicht mitaufgefrischt wurde. Weicht der Text im Projekt von der Methode ab, meldet das Werkzeug ihn als <code>STALE</code>, lässt den alten Stempel stehen und rührt auch die Slash-Befehle nicht an — sonst wäre die Methode alt und die Befehle neu. Mit <code>--refresh</code> wird beides zusammen aktualisiert. Sonst würde der Stempel eine Version behaupten, die die Datei nicht hat.</p>
+
+<p>Fehlt der Stempel: Alter unbekannt, vor dem Verlassen auf Punktnummern auffrischen. Eine ältere Version darf absichtlich bleiben — dann als Entscheidung festhalten, nicht mitten im BUILD still überschreiben.</p>
 
 <h2>2. Projektmodus</h2>
 <p><strong>Greenfield:</strong> Es gibt noch keine sinnvolle App. Mit DEFINE starten.</p>
@@ -176,13 +181,20 @@
 <p>Nie eine große App als eine ununterbrochene Aufgabe. Vor dem großen Bau: Plan aus der Source of Truth. Kleine senkrechte Scheiben mit sichtbarer Fähigkeit — nicht „erst das ganze Backend“.</p>
 <p>Unabhängige Slices parallel, abhängige nacheinander.</p>
 <p>Jeder sinnvolle Slice: SPEC → PLAN → IMPLEMENT → TEST → REVIEW → SPEC CHECK → ISSUE TRIAGE → VERIFY → INTEGRATE. Erst dann fertig.</p>
+
+<p>Was die weniger offensichtlichen Stationen heißen: <strong>SPEC CHECK</strong> = das Gebaute gegen die Source of Truth halten, nicht gegen die Erinnerung. <strong>VERIFY</strong> = beweisen, nicht behaupten: was getestet, wie, was passiert ist — bei Web-Oberflächen im Browser. <strong>INTEGRATE</strong> = die geprüfte Arbeit landet dort, wo das Projekt seine Wahrheit hält: in den Arbeitszweig übernommen, Source of Truth und STATUS aktualisiert, Worker-Zweig geschlossen. Geprüft aber nicht übernommen ist nicht fertig.</p>
+
+<p><strong>Kürzen bei kleinen Slices:</strong> REVIEW und ISSUE TRIAGE dürfen wegfallen, wenn nichts gefunden wurde und kein unabhängiges Review nötig ist. SPEC, IMPLEMENT, TEST, SPEC CHECK, VERIFY und INTEGRATE fallen nie weg. Immer sagen, welche Variante läuft.</p>
+
+<p><strong>Wenn REVIEW, SPEC CHECK oder VERIFY durchfällt:</strong> nicht übernehmen. Kleine, verstandene Ursache im gleichen Slice beheben und ab der gefallenen Station neu prüfen. Sonst registrieren und entweder den Slice auf das kürzen, was wirklich geprüft ist, oder den Slice abbrechen und den Zweig auf den letzten guten Stand zurücksetzen. In STATUS festhalten. Ein durchgefallener Slice wird nie als voll geliefert gemeldet, und ein offenes Issue ersetzt nie fehlendes Verhalten.</p>
+
 <p>Kleine prüfbare Aufgaben. Keinen großen unverprüften Code-Haufen.</p>
 
 <h2>38. Kontext für Unter-Agenten</h2>
-<p>Nur das Minimum. Ein Builder bekommt relevante Spec, UX, Architektur, Ziel, Code. Ein Reviewer bekommt Spec, erwartetes Verhalten, Diff, Testbeweis, Kriterien — nicht den Interview-Verlauf und nicht die Geschichte des Builders.</p>
+<p>Nur das Minimum. Ein Worker bekommt relevante Spec, UX, Architektur, Ziel, Code. Ein Reviewer bekommt Spec, erwartetes Verhalten, Diff, Testbeweis, Kriterien — nicht den Interview-Verlauf und nicht die Geschichte des Workers.</p>
 
 <h2>39. Unabhängiges Review</h2>
-<p>Bei sinnvoller Arbeit bevorzugt, wenn die Umgebung das hergibt. Wer gebaut hat, darf nicht allein entscheiden, ob es stimmt. Derselbe Chat mit der Builder-Geschichte ist kein unabhängiges Review. Geht es nicht: in STATUS notieren und gegen die Source of Truth selbst prüfen — das nicht „unabhängiges Review“ nennen. Tiefe nach Risiko. Keine Extra-Rollen aus Theater.</p>
+<p>Bei sinnvoller Arbeit bevorzugt, wenn die Umgebung das hergibt. Wer gebaut hat, darf nicht allein entscheiden, ob es stimmt. Derselbe Chat mit der Bau-Geschichte ist kein unabhängiges Review. Geht es nicht: in STATUS notieren und gegen die Source of Truth selbst prüfen — das nicht „unabhängiges Review“ nennen. Tiefe nach Risiko. Keine Extra-Rollen aus Theater.</p>
 
 <h2>40–42. Code</h2>
 <p>Kleinste sichere Änderung, die die Anforderung ganz löst. Kein Umbau nur wegen Stil. Unnötiges entfernen, wenn sicher. Abhängigkeiten: reife Bibliotheken für schwere Probleme, nicht für Triviales. Sicherheits-Standards nicht neu erfinden, nur um Pakete zu vermeiden.</p>
@@ -196,6 +208,8 @@
 <h2>46–50. Issues</h2>
 <p>Jeder Agent merkt Probleme auch außerhalb seines Jobs. Jetzt fixen wenn klein, sicher und zum aktuellen Job. Sonst eintragen. Unsicher: eintragen.</p>
 <p>Ablauf: DISCOVER → REGISTER → TRIAGE → SELECT → FIX → TEST → REVIEW → VERIFY → CLOSE. Geschlossen heißt geprüft. Nicht schließen, nur weil Code geändert wurde. Kein Fake-Schließen durch Löschen oder Herabstufen.</p>
+<p>Das ist die Schleife aus der globalen <code>AGENTS.md</code>, nur genauer: <strong>TRIAGE</strong> ist dort „PRIORITIZE“ (nach Schwere und Wirkung ordnen), <strong>SELECT</strong> ist ADBs zusätzliche Station — entscheiden, welche Issues in den nächsten Slice gehen, damit eine geordnete Liste nicht geordnet liegen bleibt.</p>
+<p>Reihenfolge beim Ordnen: kaputtes Pflicht-Verhalten und Datenverlust zuerst, dann Sicherheit, dann was Bubby beim Benutzen wirklich blockiert, dann Kosmetik. Ein billiger Fix darf vorgezogen werden, wenn er echten Ärger sofort wegnimmt.</p>
 <p>Produkt nicht „fertig“ nennen bei CRITICAL, bei HIGH gegen Quality, bei kaputtem Pflicht-Verhalten oder ungelösten Widersprüchen in der Wahrheit.</p>
 
 <h2>50A. Issues müssen enden</h2>
