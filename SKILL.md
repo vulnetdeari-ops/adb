@@ -938,9 +938,11 @@ If the environment supports delegation to other agents or workspaces (for exampl
 * **Default for BUILD and heavy research:** delegate. Do not keep large code exploration, implementation, test runs or review transcripts in the Lead thread when a worker can do them.
 * **Stay in the Lead thread** for: short clarification with the user, tiny one-file edits, Decide questions, status summaries, and work where delegation would cost more than it saves.
 
-ADB does not prescribe fixed agent names, but when the harness is **Paseo**, use these **English titles** consistently:
+**Delegate on the harness's visible agent surface.** Each harness has one — in Paseo it is a workspace agent that appears as its own tab. A subagent that runs inside the Lead's own session is not delegation the user can see; use it only when no visible surface exists, or when a visible agent would cost more than it saves. When the user asks who is working, the answer must be visible in the app, not only in the Lead transcript.
 
-| Title | When | Labels (optional) |
+Use these titles consistently across harnesses:
+
+| Title | When | Labels (when supported) |
 |---|---|---|
 | **Lead** | User-facing chat; Ask/Decide and Source of Truth | `role=lead` |
 | **{Project}-Worker** | Delegated BUILD, research, or status in a project workspace (e.g. `Fleisch-Worker`, `buchhaltung-web-Worker`) | `role=worker`, `project=<slug>` |
