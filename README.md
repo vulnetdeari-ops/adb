@@ -19,7 +19,7 @@ METHOD: ADB
 
 3. Tell the agent to follow `ADB.md`.
 4. Stamp `ADB.md` with `METHOD-VERSION` (see `SKILL.md` point 1A). Keep YAML frontmatter first when the copy has it; the stamp is the first line after the closing `---`, with nothing between.
-5. Ensure the issue register is `adb/08-OPEN-ISSUES.md` (not a root `OPEN-ISSUES.md`).
+5. Issue register: for **collapsed** Source of Truth (default for small products), issues live in `adb/07-STATUS.md` under `## Open issues` — setup does **not** create `adb/08-OPEN-ISSUES.md`. Create `08` only when the list outgrows STATUS (P23), or run `./setup-into-project.sh --register` when the project already uses a separate file. Never use a root `OPEN-ISSUES.md`.
 6. Install slash commands **into that project**, never into the user home (P1).
 
 Preferred: use the Development helpers so steps 1 and 4–6 are automatic.
@@ -36,9 +36,10 @@ adopt-project
 ./setup-into-project.sh /path/to/project
 ./setup-into-project.sh --check /path/to/project    # report only
 ./setup-into-project.sh --refresh /path/to/project  # update an outdated ADB.md body
+./setup-into-project.sh --register /path/to/project # optional: create adb/08-OPEN-ISSUES.md
 ```
 
-`setup-into-project.sh` copies/stamps `ADB.md`, creates `METHOD.md` when missing, creates `adb/08-OPEN-ISSUES.md` if missing, and runs `install-commands.sh` for that project.
+`setup-into-project.sh` copies/stamps `ADB.md`, creates `METHOD.md` when missing, installs slash commands, and **does not** create `adb/08-OPEN-ISSUES.md` unless you pass `--register` (collapsed default: issues in `adb/07-STATUS.md`).
 
 If an existing `ADB.md` body differs from `SKILL.md`, the script reports `STALE` and does **not** stamp it — a stamp naming the current version on an old body would answer the age question wrongly (P1A). It also leaves the slash commands alone in that case, so the project does not end up with an old method and new commands citing points it lacks. Use `--refresh` to update body and commands together, or record a decision to stay on the older version.
 
@@ -56,7 +57,7 @@ Do not combine ADB with BMAD.
 
 Defects in the method itself, found by real projects, go in [`LESSONS.md`](LESSONS.md). Ordinary project issues do not.
 
-Vision, Product Spec and the rest of `adb/01`…`adb/07` are **not** created by setup. They are written in DEFINE. Only the issue register is prepared so agents have one honest place to write.
+Vision, Product Spec and the rest of `adb/01`…`adb/07` are **not** created by setup. They are written in DEFINE. The issue register starts in `adb/07-STATUS.md` for collapsed products; split to `adb/08-OPEN-ISSUES.md` when the list needs its own file (P23).
 
 ## What it does
 

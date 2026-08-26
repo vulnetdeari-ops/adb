@@ -647,6 +647,8 @@ Track:
 
 All meaningful unresolved problems discovered during work must be persisted here, or in the Open Issues section of STATUS when the Source of Truth is collapsed.
 
+**Project setup does not create this file.** For collapsed products, DEFINE/BUILD start with issues in `07-STATUS.md` under `## Open issues`. Run `setup-into-project.sh --register` only when the project already uses a separate register.
+
 Split to 08-OPEN-ISSUES.md as soon as the issue list would clutter status or hide severity.
 
 Examples:

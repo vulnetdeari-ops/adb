@@ -6,7 +6,7 @@
 # Does, idempotently:
 #   1. Ensure ADB.md exists (copy from this repo's SKILL.md if missing)
 #   2. Stamp METHOD-VERSION (P1A) after frontmatter when present
-#   3. Ensure adb/08-OPEN-ISSUES.md exists (ADB register; not root OPEN-ISSUES.md)
+#   3. Optionally ensure adb/08-OPEN-ISSUES.md (--register only; collapsed default is STATUS)
 #   4. Install slash commands into the project (never into $HOME)
 #   5. Ensure METHOD.md contains METHOD: ADB when missing
 #
@@ -19,6 +19,7 @@
 #   ./setup-into-project.sh /path/to/project
 #   ./setup-into-project.sh --check /path/to/project
 #   ./setup-into-project.sh --refresh /path/to/project
+#   ./setup-into-project.sh --register /path/to/project   # create adb/08-OPEN-ISSUES.md if missing
 #
 # Exit 0 on success. Prints changed paths, one per line, prefixed with CHANGED:
 # so callers can stage them.
@@ -31,12 +32,14 @@ INSTALLER="$ADB_ROOT/install-commands.sh"
 
 CHECK=0
 REFRESH=0
+REGISTER=0
 PROJECT=""
 
 for arg in "$@"; do
   case "$arg" in
     --check) CHECK=1 ;;
     --refresh) REFRESH=1 ;;
+    --register) REGISTER=1 ;;
     -*) echo "unknown argument: $arg" >&2; exit 2 ;;
     *)
       if [ -n "$PROJECT" ]; then
@@ -48,7 +51,7 @@ for arg in "$@"; do
   esac
 done
 
-[ -n "$PROJECT" ] || { echo "usage: $0 [--check] [--refresh] /path/to/project" >&2; exit 2; }
+[ -n "$PROJECT" ] || { echo "usage: $0 [--check] [--refresh] [--register] /path/to/project" >&2; exit 2; }
 [ -d "$PROJECT" ] || { echo "not a directory: $PROJECT" >&2; exit 1; }
 [ -f "$SKILL" ] || { echo "SKILL.md missing: $SKILL" >&2; exit 1; }
 [ -x "$INSTALLER" ] || { echo "install-commands.sh missing or not executable: $INSTALLER" >&2; exit 1; }
@@ -230,16 +233,18 @@ elif ! grep -qx 'METHOD: ADB' "$method_md" 2>/dev/null; then
   echo "WARN: $method_md exists but does not contain METHOD: ADB — not overwriting." >&2
 fi
 
-# --- 3. Issue register: adb/08-OPEN-ISSUES.md ---
-mkdir_adb=0
-[ -d "$PROJECT/adb" ] || mkdir_adb=1
+# --- 3. Issue register (optional; P15, P23) ---
+# Collapsed Source of Truth keeps issues in adb/07-STATUS.md under ## Open issues.
+# Creating 08 here by default forced a second register and made /adb-status report a
+# spec conflict on small products. Use --register only when the project already uses
+# a separate file (or after splitting out of STATUS in DEFINE/BUILD).
 register="$PROJECT/adb/08-OPEN-ISSUES.md"
 
 write_register() {
   cat > "$1" <<'EOF'
 # Open Issues
 
-CANONICAL: This file (`adb/08-OPEN-ISSUES.md`) when the Source of Truth is not collapsed. When collapsed, issues live in `adb/07-STATUS.md` under `## Open issues` instead — do not duplicate both.
+CANONICAL: This file (`adb/08-OPEN-ISSUES.md`)
 
 Record real unresolved complaints, bugs, regressions, UX or design defects, data problems, specification conflicts, and failing critical behavior here. Remove an entry only after its fix is tested and verified.
 
@@ -253,15 +258,19 @@ CARRIED counts status reviews survived while OPEN (P25, P50A). At CARRIED: 3 an 
 EOF
 }
 
-if [ ! -f "$register" ]; then
-  if [ $CHECK -eq 1 ]; then
-    [ $mkdir_adb -eq 1 ] && echo "WOULD CREATE $PROJECT/adb/"
-    echo "WOULD CREATE $register"
-  else
-    mkdir -p "$PROJECT/adb"
-    write_register "$register"
-    note_changed "adb/08-OPEN-ISSUES.md"
+if [ $REGISTER -eq 1 ]; then
+  if [ ! -f "$register" ]; then
+    if [ $CHECK -eq 1 ]; then
+      echo "WOULD CREATE $PROJECT/adb/"
+      echo "WOULD CREATE $register"
+    else
+      mkdir -p "$PROJECT/adb"
+      write_register "$register"
+      note_changed "adb/08-OPEN-ISSUES.md"
+    fi
   fi
+elif [ $CHECK -eq 1 ] && [ ! -f "$register" ]; then
+  echo "NOTE: no adb/08-OPEN-ISSUES.md — expected for collapsed Source of Truth (issues in adb/07-STATUS.md). Pass --register to create the file."
 fi
 
 # If a root OPEN-ISSUES.md still claims to be canonical and 08 is empty of bodies,
