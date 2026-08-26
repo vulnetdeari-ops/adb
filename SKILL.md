@@ -945,7 +945,15 @@ If the environment supports delegation to other agents or workspaces (for exampl
 * **Default for BUILD and heavy research:** delegate. Do not keep large code exploration, implementation, test runs or review transcripts in the Lead thread when a worker can do them.
 * **Stay in the Lead thread** for: short clarification with the user, tiny one-file edits, Decide questions, status summaries, and work where delegation would cost more than it saves.
 
-ADB does not prescribe fixed agent names.
+ADB does not prescribe fixed agent names, but when the harness is **Paseo**, use these **English titles** consistently:
+
+| Title | When | Labels (optional) |
+|---|---|---|
+| **Lead** | User-facing chat; Ask/Decide and Source of Truth | `role=lead` |
+| **{Project}-Worker** | Delegated BUILD, research, or status in a project workspace (e.g. `Fleisch-Worker`, `buchhaltung-web-Worker`) | `role=worker`, `project=<slug>` |
+| **Reviewer** | Independent review before merge; brief contains diff + spec only | `role=reviewer` |
+
+Workspace titles match the project short name (`Fleisch`, `VuliX`, `buchhaltung-web`, `Lead`). One-off tasks still use `{Project}-Worker`; spawn **Reviewer** only when checklist item 8 requires it.
 
 The lead agent dynamically chooses:
 
@@ -964,7 +972,7 @@ Do not spawn agents for ceremony or fake roles.
 
 ⸻
 
-## 32A. CHEF CHECKLIST
+## 32A. LEAD CHECKLIST
 
 Before each delegated BUILD or heavy research task, the Lead completes this checklist (silently is fine; do not dump ceremony at the user):
 
