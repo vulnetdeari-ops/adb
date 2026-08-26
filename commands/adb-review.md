@@ -78,3 +78,11 @@ Severity: CRITICAL / HIGH / MEDIUM / LOW.
 Types: BUG, PRODUCT, UX, DESIGN, ARCHITECTURE, SECURITY, DATA, TEST, PERFORMANCE, ACCESSIBILITY, MIGRATION, SPEC-CONFLICT, TECH-DEBT, INVESTIGATION.
 
 A verdict of PASS is not available while a CRITICAL issue stands, while a HIGH issue violates `05-QUALITY.md`, while required product behavior is broken, or while an unresolved Source-of-Truth conflict remains (P50).
+
+## PASS WITH ISSUES (P36)
+
+When the verdict is **PASS WITH ISSUES**:
+
+1. Register every finding via `/adb-triage` before the Lead integrates.
+2. The Lead may integrate only if VERIFY already passed for this slice's scope and **RELEASE BLOCKERS** is `none`, or names only MEDIUM/LOW items explicitly deferred to a named later slice.
+3. Treat as **FAIL** (do not integrate) when any condition that forbids PASS (above) applies — return to P36 “When a station fails”.

@@ -1,6 +1,6 @@
 ---
 name: adb
-description: "Ask. Decide. Build. Define and build a software product with a lightweight discovery-first method using native agents. Use only when the project's METHOD.md says METHOD: ADB; never combine it with BMAD."
+description: "Ask. Decide. Build. Product method for AI coding agents. Activates when METHOD.md says METHOD: ADB, the user invokes /adb or asks to use ADB, or a new application is being defined with ADB. Never combine with BMAD."
 ---
 
 # ADB
@@ -346,27 +346,9 @@ Do not create fake alternatives merely to provide choice.
 
 ## 11. “DECIDE FOR ME”
 
-The user may answer:
+See global `AGENTS.md` → Decision Questions (including what to optimize for when the user picks decide-for-me); that file is authoritative for the format and criteria.
 
-* the decide-for-me letter (the last option)
-* "Entscheide du" / "Decide for me" / "You choose" / "I don't know" / "egal"
-* any option letter or number
-
-All of these are valid. Never re-ask because the answer was a single letter.
-
-ADB then chooses based on:
-
-* Product Vision
-* previous answers
-* research
-* simplicity
-* usability
-* quality
-* maintainability
-* risk
-* lowest justified complexity
-
-Meaningful autonomous decisions must be recorded in 06-DECISIONS.md.
+ADB addition: meaningful autonomous decisions must be recorded in `06-DECISIONS.md`, or in STATUS / Product Spec when those files are collapsed (P15).
 
 ⸻
 
@@ -640,6 +622,7 @@ Track:
 * critical/high issue count
 * any issue at CARRIED: 3 and its required exit
 * any review limitation in force — for example a slice reviewed only by a constrained self-check because no separate reviewer was available (P39)
+* **execution plan** — when BUILD spans more than one slice, keep `## Execution plan` in this file: ordered slices, dependencies, and each slice's status (P34). Chat is not the plan (P58).
 
 ⸻
 
@@ -679,18 +662,9 @@ If the problem matters and remains unresolved, register it.
 
 ## 24. DO NOT POLLUTE OPEN ISSUES
 
-Do not register:
+See global `AGENTS.md` → Complaints, Bugs and Discovered Problems (what not to register as an issue); that file is authoritative.
 
-* vague ideas
-* theoretical improvements
-* speculative features
-* hypothetical refactors
-* “maybe useful someday”
-* coding-style preferences without product impact
-
-Uncertainty is not pollution. A possible bug, unused path, contradiction, or missing decision is a concrete risk. A wish for a new feature that is not a current problem is pollution.
-
-Open Issues tracks concrete problems and risks.
+ADB addition: uncertainty about a possible bug, unused path, or contradiction is **not** pollution — register it. A wish for a new feature that is not a current problem **is** pollution.
 
 ⸻
 
@@ -842,85 +816,15 @@ After each slice: state what is done, what still stands between this and a finis
 
 ## 29. OFFENSIVE ON OUTCOME
 
-Spend effort aggressively where it improves the actual product.
+See global `AGENTS.md` → Offensive on Outcome; that file is authoritative.
 
-“Works” is not equivalent to “finished.”
-
-Aim for exceptional:
-
-* functionality
-* visual quality
-* usability
-* understandability
-* interaction
-* responsiveness
-* accessibility
-* performance
-* reliability
-* error handling
-* edge-case handling
-* consistency
-* polish
-* production readiness
-
-If building Snake, do not stop when the mechanics function.
-
-The finished experience should have deliberate:
-
-* visual identity
-* typography
-* spacing
-* motion
-* controls
-* start state
-* pause state
-* game-over state
-* feedback
-* responsive behavior
-
-No effort should be saved when that effort creates meaningful user-facing value.
+ADB illustration — if building Snake, do not stop when the mechanics function. The finished experience should have deliberate visual identity, typography, spacing, motion, controls, start/pause/game-over states, feedback and responsive behavior. No effort should be saved when it creates meaningful user-facing value.
 
 ⸻
 
 ## 30. DEFENSIVE ON IMPLEMENTATION
 
-Achieve that result with the smallest justified technical system.
-
-This does NOT mean minimum characters.
-
-It means:
-
-Maximum product value per justified line of code, dependency and technical concept.
-
-Every:
-
-* file
-* line
-* dependency
-* abstraction
-* configuration
-* service
-* API
-* database table
-* background job
-* infrastructure component
-
-must justify itself.
-
-Do not add things because:
-
-* they may be useful later
-* they make the system look sophisticated
-* enterprise projects often have them
-* they create theoretical flexibility
-
-No speculative features.
-
-No speculative architecture.
-
-No speculative abstractions.
-
-No premature future-proofing.
+See global `AGENTS.md` → Defensive on Implementation; that file is authoritative. Every slice and artifact this method creates must obey it.
 
 ⸻
 
@@ -1034,6 +938,8 @@ derive a dependency-aware execution plan from the Source of Truth.
 
 Organize work into small vertical slices that create meaningful integrated product capability.
 
+**Persist the plan** in `adb/07-STATUS.md` under `## Execution plan`: slice names, dependencies, and status (pending / current / done). Update it when the plan changes and when each slice completes. This is the durable home — not chat memory (P58).
+
 Prefer:
 
 User-visible capability
@@ -1118,6 +1024,14 @@ REVIEW, SPEC CHECK or VERIFY failing is a normal outcome, not an exception:
 4. Record what happened in STATUS. A slice that failed and was cut down must not be reported as delivered in full (P49, P61).
 
 Never mark a slice complete with a failed station and an open issue standing in for the missing behavior.
+
+### Review verdict: PASS WITH ISSUES
+
+When independent review returns **PASS WITH ISSUES** (P39, `/adb-review`):
+
+1. **Register every finding** before INTEGRATE (P46).
+2. **INTEGRATE is allowed** only if VERIFY already passed for the slice as scoped, and **RELEASE BLOCKERS** is `none`, or lists only MEDIUM/LOW items explicitly deferred for a later slice with Bubby's acceptance recorded.
+3. Treat as **FAIL for integration** if any CRITICAL issue stands, any HIGH issue violates Quality, required product behavior is broken, or an unresolved Source-of-Truth conflict remains (P50) — follow “When a station fails” above.
 
 ⸻
 
@@ -1208,17 +1122,7 @@ When none apply and the slice is a small, low-risk change on a collapsed Source 
 
 ## 40. CODE DEFENSIVELY
 
-When modifying existing code, prefer the smallest safe change that fully solves the requirement.
-
-Do not:
-
-* refactor unrelated code
-* rename unrelated structures
-* rewrite working components for stylistic preference
-* introduce patterns without demonstrated need
-* add unused configuration
-* add unused dependencies
-* create generic helpers for hypothetical future use
+When modifying existing code, apply P30 and global `AGENTS.md` → Defensive on Implementation: prefer the smallest safe change that fully solves the requirement. No drive-by refactors, renames, or new patterns without demonstrated need.
 
 ⸻
 
@@ -1337,38 +1241,9 @@ If required behavior is missing, do not stop at noticing it. Fix it now when it 
 
 ## 46. ISSUE DISCOVERY RULE
 
-Every agent is responsible for noticing problems outside its immediate task.
+See global `AGENTS.md` → Complaints, Bugs and Discovered Problems (FIX NOW vs REGISTER); that file is authoritative.
 
-If discovered:
-
-FIX NOW
-
-if it:
-
-* directly affects current scope
-* is safe
-* is small
-* should logically be resolved with the current work
-
-or:
-
-REGISTER
-
-in Open Issues
-
-if it:
-
-* is outside scope
-* requires separate investigation
-* depends on other work
-* requires user decision
-* would create harmful context switching
-* is a meaningful risk
-* is something the agent is not sure is wrong, unused, contradictory, or still needed
-
-Never silently ignore it.
-
-If unsure: register it. Do not skip it. Do not invent a fix. Do not wait for a later chat to remember it.
+ADB addition: **REGISTER** means the project's issue register (P23) — `adb/08-OPEN-ISSUES.md`, or `## Open issues` in `adb/07-STATUS.md` while the Source of Truth is collapsed. Never rely on chat history. If unsure whether something is wrong: register it.
 
 ⸻
 

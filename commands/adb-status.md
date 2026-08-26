@@ -18,6 +18,8 @@ Keep it concise. Overwrite the header fields below, do not append a changelog.
 
 **If the Source of Truth is collapsed and issues live in this file, preserve the entire `## Open issues` section verbatim** — every issue body, ID and field. Updating the header counts must not delete register content (P49).
 
+**Preserve `## Execution plan` verbatim** when it exists — update slice statuses in place, do not drop the plan (P34, P58).
+
 ```
 # STATUS
 
