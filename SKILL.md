@@ -86,9 +86,11 @@ Never place the stamp above frontmatter. That breaks the block for any harness t
 
 Write the stamp when setup copies the method, and rewrite it whenever the copy is refreshed.
 
+**Never stamp a body you did not refresh.** A stamp that names the current version on an older body is worse than no stamp: it answers the age question wrongly and hides the drift. Before stamping, compare the copy against the canonical `SKILL.md` (ignoring the stamp line itself). If the body differs, report it as stale and leave the old stamp alone.
+
 Project helpers that must apply the stamp automatically:
 
-* `setup-into-project.sh` in this repository
+* `setup-into-project.sh` in this repository — refuses to stamp a stale body; `--refresh` updates the body deliberately
 * `new-project … adb` and `adopt-project` when ADB is selected
 
 This makes one question answerable without guessing: is this project running the current method, or an older one.
@@ -321,26 +323,18 @@ Before asking:
 4. remove clearly inferior choices
 5. recommend the strongest choice
 
-Preferred format (suggestion chips — short tappable labels, not A/B/C letters). Prefer German labels when talking to Bubby:
+Required format: **A/B/C (or 1/2/3) — the user answers with a single letter or number.** Prefer German option text when talking to Bubby. See global `AGENTS.md` → Decision Questions; that file is authoritative.
 
-**Vorschläge:**
+```
+A) Kurzer Titel — eine Zeile Erklärung
+B) Kurzer Titel — eine Zeile Erklärung
+C) Kurzer Titel — eine Zeile Erklärung
+D) Entscheide du
+```
 
-• **Short label** — one-line explanation
+**Empfehlung:** A — short contextual reasoning.
 
-• **Short label** — one-line explanation
-
-• **Short label** — one-line explanation
-
-• **Anderes** / Other
-
-• **Entscheide für mich** / Decide for me
-
-**Empfehlung:** Short label
-
-**Warum:**
-Short contextual reasoning.
-
-Until the app renders real clickable chips, the user answers by typing the label (or a clear short form). Do not require A/B/C.
+The last letter is always the decide-for-me option. Never ask the user to type full option text or a long sentence; a single letter is a complete answer.
 
 Normally offer 2–4 serious options.
 
@@ -352,12 +346,11 @@ Do not create fake alternatives merely to provide choice.
 
 The user may answer:
 
-* Entscheide für mich / Decide for me
-* You choose
-* I don’t know
-* the recommended label, or any option label
+* the decide-for-me letter (the last option)
+* "Entscheide du" / "Decide for me" / "You choose" / "I don't know" / "egal"
+* any option letter or number
 
-This is valid.
+All of these are valid. Never re-ask because the answer was a single letter.
 
 ADB then chooses based on:
 

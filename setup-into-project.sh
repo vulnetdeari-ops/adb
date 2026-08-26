@@ -9,9 +9,15 @@
 #   3. Ensure adb/08-OPEN-ISSUES.md exists (ADB register; not root OPEN-ISSUES.md)
 #   4. Install slash commands into the project (never into $HOME)
 #
+# The stamp must never claim a version the file body does not have (P1A). When an
+# existing ADB.md body differs from SKILL.md, this script reports STALE and skips
+# stamping. Use --refresh to overwrite the body, which is a deliberate act because
+# a project may stay on an older method version on purpose.
+#
 # Usage:
 #   ./setup-into-project.sh /path/to/project
 #   ./setup-into-project.sh --check /path/to/project
+#   ./setup-into-project.sh --refresh /path/to/project
 #
 # Exit 0 on success. Prints changed paths, one per line, prefixed with CHANGED:
 # so callers can stage them.
@@ -23,11 +29,13 @@ SKILL="$ADB_ROOT/SKILL.md"
 INSTALLER="$ADB_ROOT/install-commands.sh"
 
 CHECK=0
+REFRESH=0
 PROJECT=""
 
 for arg in "$@"; do
   case "$arg" in
     --check) CHECK=1 ;;
+    --refresh) REFRESH=1 ;;
     -*) echo "unknown argument: $arg" >&2; exit 2 ;;
     *)
       if [ -n "$PROJECT" ]; then
@@ -62,6 +70,34 @@ if [ ! -f "$adb_md" ]; then
     cp "$SKILL" "$adb_md"
     note_changed "ADB.md"
   fi
+fi
+
+# --- 1A. Body drift (P1A: a stamp must not outrank the body it labels) ---
+# Compare bodies only. The stamp line, and the single blank line the stamper
+# inserts after it, are expected to exist in the copy and not in SKILL.md.
+strip_stamp() {
+  awk '
+    /^METHOD-VERSION:/ { drop_blank=1; next }
+    drop_blank==1 && $0=="" { drop_blank=0; next }
+    { drop_blank=0; print }
+  ' "$1"
+}
+
+STALE=0
+if [ -f "$adb_md" ]; then
+  if ! diff -q <(strip_stamp "$SKILL") <(strip_stamp "$adb_md") >/dev/null; then
+    STALE=1
+  fi
+fi
+
+if [ $STALE -eq 1 ] && [ $REFRESH -eq 1 ]; then
+  if [ $CHECK -eq 1 ]; then
+    echo "WOULD REFRESH $adb_md (body differs from SKILL.md)"
+  else
+    cp "$SKILL" "$adb_md"
+    note_changed "ADB.md"
+  fi
+  STALE=0
 fi
 
 # --- 2. METHOD-VERSION stamp (P1A) ---
@@ -117,7 +153,7 @@ stamp_adb_md() {
   return 0
 }
 
-if [ -f "$adb_md" ]; then
+if [ -f "$adb_md" ] && [ $STALE -eq 0 ]; then
   if stamp_adb_md "$adb_md"; then
     if [ $CHECK -eq 1 ]; then
       echo "WOULD STAMP $adb_md ($stamp)"
@@ -125,6 +161,10 @@ if [ -f "$adb_md" ]; then
       note_changed "ADB.md"
     fi
   fi
+elif [ $STALE -eq 1 ]; then
+  echo "STALE: $adb_md body differs from the canonical SKILL.md."
+  echo "STALE: not stamping — a stamp would claim a version this file does not have (P1A)."
+  echo "STALE: run with --refresh to update the body, or record a decision to stay on the older version."
 fi
 
 # --- 3. Issue register: adb/08-OPEN-ISSUES.md ---

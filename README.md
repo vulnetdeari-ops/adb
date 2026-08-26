@@ -32,9 +32,13 @@ adopt-project
 
 # or only the ADB pieces, against any project path
 ./setup-into-project.sh /path/to/project
+./setup-into-project.sh --check /path/to/project    # report only
+./setup-into-project.sh --refresh /path/to/project  # update an outdated ADB.md body
 ```
 
 `setup-into-project.sh` copies/stamps `ADB.md`, creates `adb/08-OPEN-ISSUES.md` if missing, and runs `install-commands.sh` for that project.
+
+If an existing `ADB.md` body differs from `SKILL.md`, the script reports `STALE` and does **not** stamp it — a stamp naming the current version on an old body would answer the age question wrongly (P1A). Use `--refresh` to update the body on purpose, or record a decision to stay on the older version.
 
 Slash commands (`/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`) live in [`commands/`](commands/). They point at `SKILL.md`; they are not a second method.
 
