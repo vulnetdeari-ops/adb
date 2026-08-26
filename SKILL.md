@@ -86,6 +86,11 @@ Never place the stamp above frontmatter. That breaks the block for any harness t
 
 Write the stamp when setup copies the method, and rewrite it whenever the copy is refreshed.
 
+Project helpers that must apply the stamp automatically:
+
+* `setup-into-project.sh` in this repository
+* `new-project … adb` and `adopt-project` when ADB is selected
+
 This makes one question answerable without guessing: is this project running the current method, or an older one.
 
 When the stamp is missing, treat the copy as unknown age and refresh it before relying on point numbers.

@@ -42,7 +42,7 @@
 <h2>1A. Methoden-Version</h2>
 <p>Die Projektdatei <code>ADB.md</code> ist eine Kopie — Kopien werden still alt.</p>
 <p>Jede <code>ADB.md</code> braucht den Stempel <code>METHOD-VERSION: &lt;kurze Git-Sha des ADB-Repos&gt; &lt;Datum&gt;</code>. Entweder in der ersten Zeile, oder in der ersten Zeile <em>nach</em> dem YAML-Kopf, wenn die Kopie einen hat. Nie darüber — das zerbricht den Kopf.</p>
-<p>Stempel setzen beim Kopieren, neu schreiben beim Aktualisieren. Fehlt er: Alter unbekannt, vor dem Verlassen auf Punktnummern auffrischen. Eine ältere Version darf absichtlich bleiben — dann als Entscheidung festhalten, nicht mitten im BUILD still überschreiben.</p>
+<p>Stempel setzen beim Kopieren, neu schreiben beim Aktualisieren — die Helfer <code>new-project … adb</code>, <code>adopt-project</code> und <code>setup-into-project.sh</code> machen das automatisch. Fehlt er: Alter unbekannt, vor dem Verlassen auf Punktnummern auffrischen. Eine ältere Version darf absichtlich bleiben — dann als Entscheidung festhalten, nicht mitten im BUILD still überschreiben.</p>
 
 <h2>2. Projektmodus</h2>
 <p><strong>Greenfield:</strong> Es gibt noch keine sinnvolle App. Mit DEFINE starten.</p>

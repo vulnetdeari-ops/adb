@@ -60,3 +60,14 @@ SYMPTOM: `/adb-define` and the other four commands appeared in every Cursor, Cod
 ROOT CAUSE: `install-commands.sh` targeted `$HOME/.cursor/commands`, `$HOME/.codex/prompts` and `$HOME/.claude/commands`. P1 forbids ADB from affecting ordinary work in unrelated projects. A home-level command list is exactly that.
 PROPOSED CHANGE: Install into the project's own harness directories. Remove leftover home-level links. State the rule in P1.
 STATUS: ADOPTED — installer is project-scoped; P1 forbids home-level installs; `--remove-global` cleans leftovers, 2026-08-26.
+
+---
+
+## L-006 — Project helpers copied ADB.md without stamp, commands, or adb/08
+
+DATE: 2026-08-26
+PROJECT: ADB method + Shared/Scripts
+SYMPTOM: `new-project` / `adopt-project` wrote `METHOD.md` and a bare `ADB.md`, but left no `METHOD-VERSION` stamp, installed no project-local slash commands, and still created a root `OPEN-ISSUES.md` that contradicts P15/P23 and `AGENTS.md`.
+ROOT CAUSE: Setup lived outside the method. The method gained P1A, project-scoped commands and the numbered issue register; the helpers were never updated.
+PROPOSED CHANGE: One `setup-into-project.sh` that stamps, ensures `adb/08-OPEN-ISSUES.md`, and installs commands into the project. Wire it into `new-project` and `adopt-project`. Do not auto-create Vision/Spec — that is DEFINE.
+STATUS: ADOPTED — 2026-08-26.
