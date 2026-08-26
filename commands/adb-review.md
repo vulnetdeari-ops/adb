@@ -8,7 +8,7 @@ description: "ADB independent review. Reviewer receives Spec + Diff + Evidence o
 Canonical method: `ADB.md` in the project root (or `~/Development/_System/Methods/ADB/SKILL.md`).
 This command enforces P38, P39, P44, P45 and P50.
 
-## Spawn rules (for the Chef)
+## Spawn rules (for the Lead)
 
 Spawn this as a **separate agent**. The same model in the same session, given the builder's story, is not independent review. A lead agent re-reading its own work is not independent review (P39).
 

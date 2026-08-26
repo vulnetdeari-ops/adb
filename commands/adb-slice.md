@@ -1,6 +1,6 @@
 ---
 name: adb-slice
-description: "ADB Phase 2 — BUILD one vertical slice. Chef writes the brief, workers do the heavy work, slice closes only after VERIFY and INTEGRATE."
+description: "ADB Phase 2 — BUILD one vertical slice. Lead writes the brief, workers do the heavy work, slice closes only after VERIFY and INTEGRATE."
 ---
 
 # /adb-slice
@@ -25,9 +25,9 @@ State the slice graph: which slices are independent (parallel) and which wait fo
 
 Do not parallelize work that would modify the same code, make conflicting architectural decisions, depend on unfinished work, or create integration churn.
 
-## Step 2 — Chef checklist before delegating (P32, P32A)
+## Step 2 — Lead checklist before delegating (P32, P32A)
 
-You are the Chef. Ask/Decide and the Source of Truth stay in this thread; heavy BUILD work goes to workers. Workers start fresh and see only the brief.
+You are the Lead. Ask/Decide and the Source of Truth stay in this thread; heavy BUILD work goes to workers. Workers start fresh and see only the brief.
 
 Complete silently before every delegated task — if any item is unknown and material, Ask/Decide with the user first. Never send a vague brief.
 

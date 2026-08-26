@@ -54,7 +54,7 @@ Vision, Product Spec and the rest of `adb/01`…`adb/07` are **not** created by 
 
 - **Ask** — grill the product, not the user. Research what can be discovered. Offer real choices. `Decide for me` is valid.
 - **Decide** — keep a durable source of truth. Small products may collapse to Vision, Product Spec and Status. Larger products use `adb/01` … `adb/08`. Uncertain findings get registered, not swallowed.
-- **Build** — execute against that truth. When the harness can delegate, the lead agent stays **Chef** and workers do heavy slices (see `SKILL.md` points 32 and 32A). Small products stay small. Missing required behavior is fixed or written down, not ignored.
+- **Build** — execute against that truth. When the harness can delegate, the lead agent stays **Lead** and workers do heavy slices (see `SKILL.md` points 32 and 32A). Small products stay small. Missing required behavior is fixed or written down, not ignored.
 
 The full method is in [`SKILL.md`](SKILL.md).
 

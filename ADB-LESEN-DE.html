@@ -21,7 +21,7 @@
 </div>
 
 <h1>ADB — Ask. Decide. Build.</h1>
-<p>Leichte Methode, um ein Software-Produkt zu verstehen, festzuhalten und zu bauen. Keine Agenten-Firma. Kein Extra-Framework. Nutzt die Mittel der aktuellen Umgebung — wenn die Umgebung delegieren kann (z. B. Paseo), arbeitet der Leit-Agent als <strong>Chef</strong>.</p>
+<p>Leichte Methode, um ein Software-Produkt zu verstehen, festzuhalten und zu bauen. Keine Agenten-Firma. Kein Extra-Framework. Nutzt die Mittel der aktuellen Umgebung — wenn die Umgebung delegieren kann (z. B. Paseo), arbeitet der <strong>Lead</strong> in diesem Chat.</p>
 <p>Erbt die globalen Regeln aus <code>AGENTS.md</code>: beim Ergebnis angreifen, beim Bau verteidigen.</p>
 <p><strong>Ziel:</strong> Das Produkt so klar verstehen, dass man sicher bauen kann. Dieses Verständnis dauerhaft festhalten. Dann aggressiv auf ein außergewöhnliches Produkt hinarbeiten — bei so wenig unnötigem Code und Komplexität wie möglich.</p>
 <p>Jeder Punkt ist ein Maßstab, kein Auftrag extra Dateien oder Agenten zu erzeugen. Was nicht passt, darf keine Extra-Arbeit erzeugen. Punkt 60 bestimmt die Tiefe aller anderen Punkte.</p>
@@ -73,7 +73,7 @@
 
 <h2>9. Parallele Recherche</h2>
 <p>Unabhängige Recherchefragen: mehrere Agenten nutzen. Das ist <strong>erwünscht, nicht optional</strong>.</p>
-<p><strong>Grund: Kontext.</strong> Recherche gehört nicht in den Haupt-Chat, wenn sie woanders laufen kann. Unabhängiges parallel. Abhängiges nacheinander. Der Leit-Agent führt die Ergebnisse zusammen.</p>
+<p><strong>Grund: Kontext.</strong> Recherche gehört nicht in den Lead-Chat, wenn sie woanders laufen kann. Unabhängiges parallel. Abhängiges nacheinander. Der Lead führt die Ergebnisse zusammen.</p>
 
 <h2>10. Fragen sollen gute Antworten mitbringen</h2>
 <p>Wichtige Fragen mit 2–4 echten Optionen als <strong>kurze Vorschläge</strong> (wie Chips, nicht A/B/C), einer Empfehlung, Warum, und immer <strong>Anderes</strong> sowie <strong>Entscheide für mich</strong>. Keine schwachen Extra-Optionen. Bubby soll Technik, UX oder Design nicht aus dem Nichts erfinden müssen. Antwort: Label tippen (oder antippen, sobald Paseo echte Chips hat).</p>
@@ -135,7 +135,7 @@
 <h2>28. Verhalten in BUILD</h2>
 <p>Nicht mehr vor allem Interviewer. Umkehrbare Bau-Entscheidungen selbst treffen. Die Source of Truth regiert.</p>
 <p>Die Fragen sind weitgehend beantwortet. Jetzt hart ausführen, nicht nachlassen. Weiter bauen und weiter führen, bis das Produkt dem Fertig-Maßstab entspricht oder Bubby bewusst pausiert.</p>
-<p>Kann die Umgebung delegieren: Leit-Agent bleibt <strong>Chef</strong> (Ask/Decide + Wahrheit + kurze Aufträge). Schwere BUILD-Arbeit läuft bei Arbeitern — siehe 32 und 32A.</p>
+<p>Kann die Umgebung delegieren: der <strong>Lead</strong> bleibt hier (Ask/Decide + Wahrheit + kurze Aufträge). Schwere BUILD-Arbeit läuft bei <strong>Workern</strong> — siehe 32 und 32A.</p>
 <p>Nach jedem Slice: was erledigt ist, was bis zur fertigen App noch fehlt, was konkret als Nächstes kommt. BUILD nicht beenden, indem festgelegte Restarbeit nur als Notiz für später stehen bleibt — ohne nächsten Schritt.</p>
 
 <h2>29. Beim Ergebnis: Angriff</h2>
@@ -147,13 +147,13 @@
 <h2>31. Einfachheits-Check</h2>
 <p>Vor extra Komplexität: Braucht das eine echte Anforderung? Gibt es Einfacheres? Löst etwas Vorhandenes das schon? Ist die Abstraktion jetzt nötig?</p>
 
-<h2>32. Mehrere Agenten — Chef</h2>
+<h2>32. Mehrere Agenten — Lead &amp; Worker</h2>
 <p>Mehrere Agenten sind <strong>erwünscht — nicht nur erlaubt</strong>.</p>
-<p><strong>Grund: Kontext.</strong> Der Leit-Agent spricht mit Bubby, hält die Source of Truth und führt Ergebnisse zusammen. Begrenzte Arbeit (Recherche, ein Slice, Tests, Review) gehört in Unter-Agenten mit nur dem nötigen Kontext. So bleibt der Haupt-Chat klein.</p>
-<p><strong>Chef-Default</strong> (wenn die Umgebung delegieren kann, z. B. Paseo): Leit-Agent = Chef. Arbeiter starten <strong>frisch</strong> (sehen den Chef-Chat nicht — nur den Auftrag). Folgeaufgaben an denselben Arbeiter, wenn Kontinuität hilft. BUILD und schwere Recherche standardmäßig delegieren. Im Chef-Chat bleiben: kurze Klärung, Decide, Status, winzige Änderungen.</p>
+<p><strong>Grund: Kontext.</strong> Der <strong>Lead</strong> spricht mit Bubby, hält die Source of Truth und führt Ergebnisse zusammen. Begrenzte Arbeit (Recherche, ein Slice, Tests, Review) gehört in <strong>Worker</strong> mit nur dem nötigen Kontext. So bleibt der Lead-Chat klein.</p>
+<p><strong>Lead-Default</strong> (wenn die Umgebung delegieren kann, z. B. Paseo): Lead = dieser Chat. Worker starten <strong>frisch</strong> (sehen den Lead-Chat nicht — nur den Auftrag). Folgeaufgaben an denselben Worker, wenn Kontinuität hilft. BUILD und schwere Recherche standardmäßig delegieren. Im Lead-Chat bleiben: kurze Klärung, Decide, Status, winzige Änderungen.</p>
 <p>Keine festen Agenten-Namen. Anzahl folgt der Arbeit. Kein Theater, keine Fake-Rollen.</p>
 
-<h2>32A. Chef-Checkliste</h2>
+<h2>32A. Lead checklist</h2>
 <p>Vor jedem delegierten BUILD oder schwerer Recherche (darf still ablaufen):</p>
 <ol>
   <li><strong>Ziel</strong> — was „fertig“ heißt</li>
@@ -162,9 +162,9 @@
   <li><strong>Scope</strong> — drin / nicht drin</li>
   <li><strong>Grenzen</strong> — Secrets, keine Drive-by-Refactors, Sonderregeln</li>
   <li><strong>Beweis</strong> — wie prüfen (Tests, Befehle, Screenshot)</li>
-  <li><strong>Rückgabe</strong> — kurzes Format; Chef fasst für Bubby zusammen</li>
-  <li><strong>Review</strong> — eigener Reviewer-Agent ja/nein</li>
-  <li><strong>Kontinuität</strong> — neuer Arbeiter oder Folge an bestehende Session</li>
+  <li><strong>Rückgabe</strong> — kurzes Format; Lead fasst für Bubby zusammen</li>
+  <li><strong>Review</strong> — eigener Reviewer-Worker ja/nein</li>
+  <li><strong>Kontinuität</strong> — neuer Worker oder Folge an bestehende Session</li>
 </ol>
 <p>Fehlt etwas Wichtiges: erst Ask/Decide mit Bubby. Keine vagen Aufträge.</p>
 

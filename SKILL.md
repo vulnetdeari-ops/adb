@@ -17,7 +17,7 @@ ADB does not prescribe a fixed organization of artificial roles.
 
 ADB does not invent a custom agent framework or fake company of roles.
 
-ADB uses the active harness in the **Chef** role when that harness can delegate (subagents, parallel workers, workspace agents such as Paseo). That is native capability, not a separate product.
+ADB uses the active harness in the **Lead** role when that harness can delegate (subagents, parallel workers, workspace agents such as Paseo). That is native capability, not a separate product.
 
 ADB uses the native capabilities of the active coding environment.
 
@@ -825,7 +825,7 @@ The Source of Truth now governs work.
 
 The questions are largely answered. That is the moment to execute hard, not to ease off. Keep building and keep leading until the product meets the completion standard or the user explicitly pauses.
 
-When the harness can delegate, the lead agent stays **Chef**: Ask/Decide and Source of Truth stay in the user-facing thread; heavy BUILD work runs in delegated agents. See points 32 and 32A.
+When the harness can delegate, the lead agent stays **Lead**: Ask/Decide and Source of Truth stay in the user-facing thread; heavy BUILD work runs in delegated agents. See points 32 and 32A.
 
 After each slice: state what is done, what still stands between this and a finished product, and the concrete next work. Do not end BUILD by leaving specified remaining work as a note for later with no next move.
 
@@ -935,15 +935,15 @@ Using multiple agents is desired, not merely allowed.
 
 The reason is context. The lead agent talks to the user, holds the Source of Truth, and merges results. Bounded work such as research, a slice, tests or review belongs in subagents with the minimum sufficient context. That keeps the main-thread context small so the lead agent does not get lost.
 
-### Chef default (when the harness can delegate)
+### Lead default (when the harness can delegate)
 
 If the environment supports delegation to other agents or workspaces (for example Paseo workspace agents, native subagents, parallel workers):
 
-* The **user-facing agent is the Chef**. It clarifies intent, runs Ask/Decide with the user, maintains the Source of Truth, writes complete task briefs, and merges results.
-* **Workers start fresh.** A new delegated agent does not see the Chef chat—only the brief. Put everything needed for the task in that brief.
+* The **user-facing agent is the Lead**. It clarifies intent, runs Ask/Decide with the user, maintains the Source of Truth, writes complete task briefs, and merges results.
+* **Workers start fresh.** A new delegated agent does not see the Lead chat—only the brief. Put everything needed for the task in that brief.
 * **Follow-ups reuse the same worker** when continuity helps (same slice, same files, same investigation). The worker then sees prior tasks in its own session.
-* **Default for BUILD and heavy research:** delegate. Do not keep large code exploration, implementation, test runs or review transcripts in the Chef thread when a worker can do them.
-* **Stay in the Chef thread** for: short clarification with the user, tiny one-file edits, Decide questions, status summaries, and work where delegation would cost more than it saves.
+* **Default for BUILD and heavy research:** delegate. Do not keep large code exploration, implementation, test runs or review transcripts in the Lead thread when a worker can do them.
+* **Stay in the Lead thread** for: short clarification with the user, tiny one-file edits, Decide questions, status summaries, and work where delegation would cost more than it saves.
 
 ADB does not prescribe fixed agent names.
 
@@ -966,7 +966,7 @@ Do not spawn agents for ceremony or fake roles.
 
 ## 32A. CHEF CHECKLIST
 
-Before each delegated BUILD or heavy research task, the Chef completes this checklist (silently is fine; do not dump ceremony at the user):
+Before each delegated BUILD or heavy research task, the Lead completes this checklist (silently is fine; do not dump ceremony at the user):
 
 1. **Goal** — what done looks like, in one or two sentences.
 2. **Workspace / path** — exact project directory or workspace the worker must use.
@@ -974,7 +974,7 @@ Before each delegated BUILD or heavy research task, the Chef completes this chec
 4. **Scope** — in scope / out of scope. Explicit “do not” list when needed.
 5. **Constraints** — secrets rules, no drive-by refactors, financial/safety limits if any.
 6. **Proof** — how the worker must prove the result (commands, tests, screenshots, git status).
-7. **Return format** — what to report back (short). The Chef summarizes for the user.
+7. **Return format** — what to report back (short). The Lead summarizes for the user.
 8. **Review** — whether an independent reviewer agent is required before merge; if yes, spawn separately with diff + spec only.
 9. **Continuity** — new worker vs follow-up to an existing worker id/session.
 
