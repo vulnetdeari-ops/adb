@@ -1,0 +1,22 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - img "Symbol für www.perplexity.ai" [ref=e5]
+        - heading "www.perplexity.ai" [level=1] [ref=e6]
+      - heading "Sicherheitsüberprüfung wird durchgeführt" [level=2] [ref=e7]
+      - paragraph [ref=e8]: Diese Website nutzt einen Sicherheitsservice, um sich vor böswilligen Bots zu schützen. Diese Seite wird angezeigt, solange die Website überprüft, dass Sie kein Bot sind.
+  - contentinfo [ref=e15]:
+    - generic [ref=e17]:
+      - generic [ref=e19]:
+        - text: "Ray ID:"
+        - code [ref=e20]: a308d8c8ed3051d5
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - text: Performance und Sicherheit von
+          - link "Cloudflare, wird in einem neuen Tab geöffnet" [ref=e23] [cursor=pointer]:
+            - /url: https://www.cloudflare.com?utm_source=challenge&utm_campaign=m
+            - text: Cloudflare
+        - link "Privatsphäre, wird in einem neuen Tab geöffnet" [ref=e25] [cursor=pointer]:
+          - /url: https://www.cloudflare.com/de-de/privacypolicy/
+          - text: Privatsphäre
