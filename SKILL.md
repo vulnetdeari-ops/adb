@@ -72,6 +72,24 @@ Once ADB is activated for a project, its ADB Source of Truth governs future ADB 
 
 ⸻
 
+## 1A. METHOD VERSION
+
+The project copy `ADB.md` is a copy, and copies age silently.
+
+The first line of every project `ADB.md` must be a stamp:
+
+METHOD-VERSION: <short git sha of the canonical ADB repo> <date>
+
+Write the stamp when setup copies the method, and rewrite it whenever the copy is refreshed.
+
+This makes one question answerable without guessing: is this project running the current method, or an older one.
+
+When the stamp is missing, treat the copy as unknown age and refresh it before relying on point numbers.
+
+A project may deliberately stay on an older method version. Record that as a decision. Do not refresh silently mid-BUILD.
+
+⸻
+
 ## 2. PROJECT MODE
 
 Determine the project mode first.
@@ -617,6 +635,7 @@ Track:
 * next important action
 * number of open issues
 * critical/high issue count
+* any issue at CARRIED: 3 and its required exit
 
 ⸻
 
@@ -687,6 +706,7 @@ Each issue contains:
 * EXPECTED
 * STATUS
 * DEPENDENCIES
+* CARRIED
 * RESOLUTION
 * VERIFIED BY
 
@@ -721,6 +741,8 @@ Severity:
 * HIGH
 * MEDIUM
 * LOW
+
+CARRIED is an integer. It counts how many status reviews the issue has survived while still OPEN. A new issue is CARRIED: 0. Every status review increments it for every issue still OPEN.
 
 ⸻
 
@@ -1359,6 +1381,28 @@ MEDIUM/LOW issues may remain only when they are acceptable within the documented
 
 ⸻
 
+## 50A. ISSUE CONVERGENCE
+
+An open issue is a debt, not a record. Debt that is never called in stops meaning anything.
+
+At CARRIED: 3 the issue must leave the OPEN state in that same review. There is no fourth carry.
+
+Exactly one of three exits:
+
+* FIX — resolve it and verify it under P47 and P49
+* ACCEPT — record a decision in 06-DECISIONS.md and write the limitation into 05-QUALITY.md, then close the issue as accepted
+* REJECT — record why it is not a real problem, then close it
+
+ACCEPT is not defeat. An honest quality bar with a named limit is worth more than a bar the product silently violates.
+
+ACCEPT is forbidden for CRITICAL issues and for HIGH issues that violate a data-integrity or security requirement. Those exit by FIX only.
+
+When the exit needs a user decision, that decision becomes the single next important action in 07-STATUS.md. Do not run another review around it.
+
+The purpose of this point is to make “almost complete” a terminating state instead of a permanent one.
+
+⸻
+
 ## 51. BROWNFIELD EXECUTION
 
 When ADB is activated on an existing project, first inspect:
@@ -1634,6 +1678,38 @@ Completion means, where relevant:
 * open issues are appropriately resolved
 * unnecessary complexity has been removed
 * no release-blocking issue remains
+
+⸻
+
+## 61A. METHOD FEEDBACK
+
+ADB is a product too. It has defects, and projects are where they surface.
+
+Some findings are not project failures. They are method failures that a project paid for.
+
+A finding belongs to the method when any of these is true:
+
+* the method is silent where a project needed a rule
+* two parts of the method or its inherited `AGENTS.md` disagree
+* the method demanded work that P46 or P60 should have prevented
+* following the method produced the defect
+
+When a finding belongs to the method, append an entry to `LESSONS.md` in the canonical ADB repository:
+
+* DATE
+* PROJECT
+* SYMPTOM — what actually went wrong, concretely
+* ROOT CAUSE — which point failed, or which point is missing
+* PROPOSED CHANGE — the smallest method change that would have prevented it
+* STATUS — PROPOSED, ADOPTED or REJECTED
+
+LESSONS.md is append-only. Never delete an entry. A rejected proposal is a useful record.
+
+Only the user adopts a lesson into the numbered points. Writing a lesson is not permission to rewrite the method.
+
+Still fix the project. The lesson is in addition, never instead.
+
+Do not use LESSONS.md for ordinary project issues. Those belong in 08-OPEN-ISSUES.md. A method lesson is rare by nature; if lessons accumulate faster than issues, the bar is being applied wrongly.
 
 ⸻
 

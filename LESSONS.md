@@ -1,0 +1,40 @@
+# ADB Lessons
+
+Append-only record of defects in the method itself, found by real projects (P61A).
+
+This file is not an issue tracker. Project problems belong in that project's `adb/08-OPEN-ISSUES.md`. Only findings whose root cause is ADB itself belong here.
+
+Nothing here changes the method until the user adopts it. STATUS says whether that happened.
+
+---
+
+## L-001 — Setup never enforced the issue-register location
+
+DATE: 2026-08-26
+PROJECT: buchhaltung-web
+SYMPTOM: The project kept its issue register at the repository root as `OPEN-ISSUES.md`, declared that file canonical inside the file itself, and also carried an `## Open issues` section in `adb/07-STATUS.md`. `adb/08-OPEN-ISSUES.md` did not exist although the Source of Truth was not collapsed. Three candidate locations, and the STATUS section claimed `0` open issues while real unresolved conflicts existed.
+ROOT CAUSE: P15 forbids alternate filenames and P23 names the register, but nothing in the method verifies the register's location once a project is running. The inherited `AGENTS.md` already routed ADB projects to `adb/08-OPEN-ISSUES.md`, so the method and its own rules file disagreed in practice with no point responsible for noticing. Method silent where the project needed a rule.
+PROPOSED CHANGE: Give the status review an explicit Source-of-Truth layout check: the numbered files present, no ADB content living under non-ADB filenames, no topic duplicated between a numbered file and an ad-hoc one.
+STATUS: ADOPTED — added as Step 2A of `/adb-status`, 2026-08-26.
+
+---
+
+## L-002 — No terminating condition for open issues
+
+DATE: 2026-08-26
+PROJECT: buchhaltung-web
+SYMPTOM: The product could sit indefinitely in "almost complete". P61 correctly refused to call it complete, but nothing forced any open issue toward an exit, so a status review could run any number of times and produce the same verdict with no progress.
+ROOT CAUSE: P50 defines what blocks release and P61 defines what completion means, but neither bounds how long an issue may stay OPEN. A gate that can be re-failed forever is a report, not a gate.
+PROPOSED CHANGE: Count how many reviews each issue survives and force an exit — FIX, ACCEPT or REJECT — at a fixed count.
+STATUS: ADOPTED — added as P50A ISSUE CONVERGENCE and the `CARRIED` field in P25, 2026-08-26.
+
+---
+
+## L-003 — Project copies of the method have no age
+
+DATE: 2026-08-26
+PROJECT: buchhaltung-web
+SYMPTOM: The project's `ADB.md` was modified but uncommitted. Its working copy was byte-identical to the canonical `SKILL.md`, so the committed version was some older method revision — but which one, and how old, was not answerable from the repository.
+ROOT CAUSE: Setup copies the method into the project and the copy carries no provenance. A copy with no version is unfalsifiable.
+PROPOSED CHANGE: Stamp the copy with the canonical repository's short git sha and date on its first line.
+STATUS: ADOPTED — added as P1A METHOD VERSION, 2026-08-26.
