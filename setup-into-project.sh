@@ -8,6 +8,7 @@
 #   2. Stamp METHOD-VERSION (P1A) after frontmatter when present
 #   3. Ensure adb/08-OPEN-ISSUES.md exists (ADB register; not root OPEN-ISSUES.md)
 #   4. Install slash commands into the project (never into $HOME)
+#   5. Ensure METHOD.md contains METHOD: ADB when missing
 #
 # The stamp must never claim a version the file body does not have (P1A). When an
 # existing ADB.md body differs from SKILL.md, this script reports STALE and skips
@@ -54,9 +55,9 @@ done
 
 PROJECT="$(cd "$PROJECT" && pwd -P)"
 sha="$(git -C "$ADB_ROOT" rev-parse --short HEAD 2>/dev/null || echo unknown)"
-# An uncommitted SKILL.md would be copied while the stamp names the last commit,
+# An uncommitted or staged SKILL.md would be copied while the stamp names HEAD,
 # so the stamp would point at a different body (P1A). Mark it instead of lying.
-if ! git -C "$ADB_ROOT" diff --quiet -- SKILL.md 2>/dev/null; then
+if ! git -C "$ADB_ROOT" diff HEAD --quiet -- SKILL.md 2>/dev/null; then
   sha="${sha}-dirty"
 fi
 day="$(date +%Y-%m-%d)"
@@ -80,17 +81,36 @@ if [ ! -f "$adb_md" ]; then
 fi
 
 # --- 1A. Body drift (P1A: a stamp must not outrank the body it labels) ---
-# Compare bodies only. The stamp line is the one line expected in the copy and
-# not in SKILL.md; the stamper inserts nothing else, so nothing else is dropped.
+# Compare bodies only. Remove the header stamp (never examples in the body).
+# After removal, swallow one optional blank line left by older stampers.
 strip_stamp() {
-  awk '!/^METHOD-VERSION:/' "$1"
+  awk '
+    BEGIN { fm=0; fm_closed=0; removed=0; past_h1=0 }
+    /^# / { past_h1=1 }
+    past_h1 { print; next }
+    NR==1 && $0=="---" { fm=1; print; next }
+    NR==1 && $0 ~ /^METHOD-VERSION:/ { removed=1; next }
+    fm==1 {
+      print
+      if ($0=="---") { fm=0; fm_closed=1 }
+      next
+    }
+    fm_closed && !removed && $0 ~ /^METHOD-VERSION:/ { removed=1; next }
+    fm_closed && removed && $0 ~ /^METHOD-VERSION:/ { next }
+    { print }
+  ' "$1"
 }
 
 STALE=0
 if [ -f "$adb_md" ]; then
-  if ! diff -q <(strip_stamp "$SKILL") <(strip_stamp "$adb_md") >/dev/null; then
+  _skill_body="$(mktemp)"
+  _adb_body="$(mktemp)"
+  strip_stamp "$SKILL" > "$_skill_body"
+  strip_stamp "$adb_md" > "$_adb_body"
+  if ! diff -q "$_skill_body" "$_adb_body" >/dev/null; then
     STALE=1
   fi
+  rm -f "$_skill_body" "$_adb_body"
 fi
 
 if [ $STALE -eq 1 ] && [ $REFRESH -eq 1 ]; then
@@ -105,31 +125,70 @@ if [ $STALE -eq 1 ] && [ $REFRESH -eq 1 ]; then
 fi
 
 # --- 2. METHOD-VERSION stamp (P1A) ---
-# Only the header stamp counts. SKILL.md also documents the format later in
-# the body ("METHOD-VERSION: <short git sha…>"); never rewrite that example.
+# Only the header stamp is touched. The format example in the body (indented in
+# SKILL.md) must survive. Never place a stamp above frontmatter (L-004).
+remove_stamp_above_frontmatter() {
+  local file="$1"
+  local tmp first second
+  tmp="$(mktemp)"
+  first="$(head -1 "$file" 2>/dev/null || true)"
+  second="$(sed -n '2p' "$file" 2>/dev/null || true)"
+  if [[ "$first" =~ ^METHOD-VERSION: ]] && [ "$second" = "---" ]; then
+    tail -n +2 "$file" > "$tmp"
+    mv "$tmp" "$file"
+    return 0
+  fi
+  return 1
+}
+
 stamp_adb_md() {
   local file="$1"
   local tmp
   tmp="$(mktemp)"
 
-  # The stamp always goes on the first line after the frontmatter, as P1A
-  # requires and /adb-status Step 2A checks. Placing it by position rather than
-  # by hunting for a heading keeps it correct in a file that has no `# ` line,
-  # and leaves the format example later in the body untouched.
-  # The stamp is inserted, and any previous stamp removed. Nothing else in the
-  # file is touched — no blank line is added or swallowed — so the body stays
-  # byte-identical to SKILL.md and strip_stamp can compare the two directly.
+  if [ ! -s "$file" ]; then
+    echo "WARN: $file is empty — cannot stamp (P1A)." >&2
+    rm -f "$tmp"
+    return 1
+  fi
+
+  if head -1 "$file" | grep -qx '---'; then
+    if ! awk 'BEGIN{fm=0} /^---/{fm++} fm==2{exit 0} END{exit 1}' "$file"; then
+      echo "WARN: $file has frontmatter without a closing --- — cannot stamp (P1A)." >&2
+      rm -f "$tmp"
+      return 1
+    fi
+  fi
+
+  if [ $CHECK -eq 0 ]; then
+    remove_stamp_above_frontmatter "$file" || true
+  fi
+
   awk -v stamp="$stamp" '
-    BEGIN { fm=0; placed=0 }
-    /^METHOD-VERSION:/ && placed==1 { next }
+    BEGIN { fm=0; fm_closed=0; stamp_done=0; past_h1=0 }
+    /^# / { past_h1=1 }
+    past_h1 { print; next }
     NR==1 && $0=="---" { fm=1; print; next }
-    NR==1 { print stamp; placed=1; if ($0 ~ /^METHOD-VERSION:/) next }
+    NR==1 && $0 ~ /^METHOD-VERSION:/ { print stamp; stamp_done=1; next }
+    NR==1 { print stamp; stamp_done=1; print; next }
     fm==1 {
       print
-      if ($0=="---") { fm=0; print stamp; placed=1 }
+      if ($0=="---") {
+        fm=0
+        fm_closed=1
+        print stamp
+        stamp_done=1
+      }
       next
     }
+    fm_closed && !stamp_done && $0 ~ /^METHOD-VERSION:/ { print stamp; stamp_done=1; next }
+    fm_closed && stamp_done && $0 ~ /^METHOD-VERSION:/ { next }
     { print }
+    END {
+      if (!stamp_done && !past_h1) {
+        print stamp
+      }
+    }
   ' "$file" > "$tmp"
 
   if cmp -s "$file" "$tmp"; then
@@ -158,6 +217,19 @@ elif [ $STALE -eq 1 ]; then
   echo "STALE: run with --refresh to update the body, or record a decision to stay on the older version."
 fi
 
+# --- 2B. METHOD.md ---
+method_md="$PROJECT/METHOD.md"
+if [ ! -f "$method_md" ]; then
+  if [ $CHECK -eq 1 ]; then
+    echo "WOULD CREATE $method_md (METHOD: ADB)"
+  else
+    printf '%s\n' 'METHOD: ADB' > "$method_md"
+    note_changed "METHOD.md"
+  fi
+elif ! grep -qx 'METHOD: ADB' "$method_md" 2>/dev/null; then
+  echo "WARN: $method_md exists but does not contain METHOD: ADB — not overwriting." >&2
+fi
+
 # --- 3. Issue register: adb/08-OPEN-ISSUES.md ---
 mkdir_adb=0
 [ -d "$PROJECT/adb" ] || mkdir_adb=1
@@ -167,7 +239,7 @@ write_register() {
   cat > "$1" <<'EOF'
 # Open Issues
 
-CANONICAL: This file (`adb/08-OPEN-ISSUES.md`)
+CANONICAL: This file (`adb/08-OPEN-ISSUES.md`) when the Source of Truth is not collapsed. When collapsed, issues live in `adb/07-STATUS.md` under `## Open issues` instead — do not duplicate both.
 
 Record real unresolved complaints, bugs, regressions, UX or design defects, data problems, specification conflicts, and failing critical behavior here. Remove an entry only after its fix is tested and verified.
 
@@ -175,7 +247,7 @@ Never record secrets, private data, or actionable vulnerability details in this 
 
 OPEN: 0 · READY FOR VERIFY: 0 · CRITICAL: 0 · HIGH: 0 · MEDIUM: 0 · LOW: 0 · CLOSED: 0
 
-Closed issues stay in this file and stay traceable (P49).
+Closed issues stay in this file and stay traceable (P49). Do not close by deleting the entry.
 
 CARRIED counts status reviews survived while OPEN (P25, P50A). At CARRIED: 3 an issue must exit OPEN by FIX, ACCEPT or REJECT — there is no fourth carry.
 EOF
@@ -198,7 +270,15 @@ fi
 
 # --- 4. Slash commands into the project ---
 list_cmd_links() {
-  (cd "$PROJECT" && find .cursor/commands .claude/commands .codex/prompts -name 'adb-*.md' 2>/dev/null | sed 's|^\./||' | sort || true)
+  (cd "$PROJECT" && find .cursor/commands .claude/commands .codex/prompts -name 'adb*.md' 2>/dev/null | sed 's|^\./||' | sort || true)
+}
+
+list_cmd_link_targets() {
+  (cd "$PROJECT" && find .cursor/commands .claude/commands .codex/prompts -name 'adb*.md' -type l 2>/dev/null \
+    | while IFS= read -r rel; do
+        [ -n "$rel" ] || continue
+        printf '%s -> %s\n' "$rel" "$(readlink "$rel" 2>/dev/null || echo '?')"
+      done | sort || true)
 }
 
 # A stale ADB.md means the project is deliberately or accidentally on an older
@@ -210,11 +290,13 @@ if [ $STALE -eq 1 ]; then
 elif [ $CHECK -eq 1 ]; then
   (cd "$PROJECT" && "$INSTALLER" --check) || true
 else
-  before="$(list_cmd_links)"
+  before_paths="$(list_cmd_links)"
+  before_targets="$(list_cmd_link_targets)"
   (cd "$PROJECT" && "$INSTALLER") >/dev/null
-  after="$(list_cmd_links)"
-  if [ "$before" != "$after" ]; then
-    printf '%s\n' "$after" | while IFS= read -r rel; do
+  after_paths="$(list_cmd_links)"
+  after_targets="$(list_cmd_link_targets)"
+  if [ "$before_paths" != "$after_paths" ] || [ "$before_targets" != "$after_targets" ]; then
+    printf '%s\n' "$after_paths" | while IFS= read -r rel; do
       [ -n "$rel" ] || continue
       note_changed "$rel"
     done

@@ -80,13 +80,15 @@ The project copy `ADB.md` is a copy, and copies age silently.
 
 Every project `ADB.md` must carry a stamp as its first line, or as the first line after the frontmatter block when the copy keeps one:
 
-METHOD-VERSION: <short git sha of the canonical ADB repo> <date>
+    METHOD-VERSION: <short git sha of the canonical ADB repo> <date>
 
 Never place the stamp above frontmatter. That breaks the block for any harness that parses it.
 
 Write the stamp when setup copies the method, and rewrite it whenever the copy is refreshed.
 
-**Never stamp a body you did not refresh.** A stamp that names the current version on an older body is worse than no stamp: it answers the age question wrongly and hides the drift. Before stamping, compare the copy against the canonical `SKILL.md` (ignoring the stamp line itself). If the body differs, report it as stale and leave the old stamp alone.
+**Never stamp a body you did not refresh.** A stamp that names the current version on an older body is worse than no stamp: it answers the age question wrongly and hides the drift. Before stamping, compare the copy against the canonical `SKILL.md` (ignoring the header stamp line only). If the body differs, report it as stale and leave the old stamp alone.
+
+Canonical method repository: `~/Development/_System/Methods/ADB` (`SKILL.md` in that directory). Use that path for refreshing copies and for appending method lessons to `LESSONS.md` (P61A).
 
 Project helpers that must apply the stamp automatically:
 
@@ -733,7 +735,8 @@ Statuses:
 
 * OPEN
 * IN PROGRESS
-* BLOCKED
+* BLOCKED — still counts as open for CARRIED and P50A; it is not an exit from OPEN
+* WAITING ON USER — exit decision needs the user; CARRIED is frozen until the decision is recorded (P50A)
 * READY FOR VERIFY
 * CLOSED
 
@@ -744,11 +747,11 @@ Severity:
 * MEDIUM
 * LOW
 
-CARRIED is an integer. It counts how many status reviews the issue has survived while still OPEN. A new issue is CARRIED: 0. Every status review increments it for every issue still OPEN.
+CARRIED is an integer. It counts how many status reviews the issue has survived while still OPEN. A new issue is CARRIED: 0. Every status review increments it for every issue still OPEN — except issues in **WAITING ON USER** (P50A), whose CARRIED is frozen until the named user decision is recorded.
 
 A **status review** is the point at which the register is read as a whole and judged, not a single issue being touched. It happens at least:
 
-* when a slice completes (INTEGRATE, P36),
+* when a slice completes (INTEGRATE, P36) — this satisfies the ISSUE TRIAGE station for that slice,
 * before asking the user to approve a release or a deploy,
 * whenever the user asks for status.
 
@@ -989,7 +992,7 @@ Before each delegated BUILD or heavy research task, the Lead completes this chec
 5. **Constraints** — secrets rules, no drive-by refactors, financial/safety limits if any.
 6. **Proof** — how the worker must prove the result (commands, tests, screenshots, git status).
 7. **Return format** — what to report back (short). The Lead summarizes for the user.
-8. **Review** — whether an independent reviewer agent is required before merge; if yes, spawn separately with diff + spec only.
+8. **Review** — apply P39: is independent review required? If yes, spawn Reviewer separately with diff + spec only; if no, name the constrained self-check and record any limitation in STATUS.
 9. **Continuity** — new worker vs follow-up to an existing worker id/session.
 
 If any item is unknown and material, Ask/Decide with the user first. Do not send a vague brief.
@@ -1091,13 +1094,15 @@ What the stations mean, where it is not obvious:
 
 * **SPEC CHECK** — the built behavior is compared against the Source of Truth (P45), not against the implementer's memory of the task.
 * **VERIFY** — the claim is proven, not asserted: what was tested, how, and what happened. For anything user-facing that means exercising the real path, in a browser for web UI. See global `AGENTS.md` → Prove it works, which is authoritative.
-* **INTEGRATE** — the verified work lands where the project keeps its truth: merged into the working branch, Source of Truth and STATUS updated, worker branch or worktree closed out. A slice sitting verified but unintegrated is not done.
+* **INTEGRATE** — the verified work lands where the project keeps its truth: Source of Truth and STATUS updated, worker branch or worktree closed out when one was used. Commit only when the user asked (global `AGENTS.md` → Git). A slice sitting verified but not reflected in the project's truth is not done.
 
 ### Scaling the loop (P60)
 
-Small, low-risk slices may skip **REVIEW** and **ISSUE TRIAGE** when no issue was found and no independent review is required (P39).
+Small, low-risk slices may skip the **REVIEW** station when independent review is not required (P39) — decide before IMPLEMENT, not after.
 
 **SPEC, IMPLEMENT, TEST, SPEC CHECK, VERIFY and INTEGRATE never drop.** PLAN may collapse into SPEC for a one-file change.
+
+The **ISSUE TRIAGE** station is satisfied by the status review at slice completion (P25): read the register, increment CARRIED, apply P50A. Do not skip that review; skipping the station name is not skipping the work.
 
 State which variant you are running and why. Do not invent a shorter loop anywhere else — a slash command must reference this point, not define its own.
 
@@ -1107,7 +1112,7 @@ REVIEW, SPEC CHECK or VERIFY failing is a normal outcome, not an exception:
 
 1. **Do not integrate.** Unverified work never lands because a slice was already "nearly done".
 2. Fix inside the same slice when the cause is small and understood, then re-run from the failed station.
-3. Otherwise register it (P46) and either narrow the slice to what is genuinely verified, or abandon the slice and return the branch to its last good state.
+3. Otherwise register it (P46) and either narrow the slice to what is genuinely verified, or abandon unverified work and revert local changes to the last good state (use version control when the slice used a branch; otherwise discard uncommitted changes).
 4. Record what happened in STATUS. A slice that failed and was cut down must not be reported as delivered in full (P49, P61).
 
 Never mark a slice complete with a failed station and an open issue standing in for the missing behavior.
@@ -1187,6 +1192,15 @@ Review may include:
 The scale of review should match risk.
 
 Do not invent extra review roles for ceremony.
+
+**Independent review is required** when any of these apply:
+
+* money, billing, payroll or financial calculation logic changes
+* security, authentication, authorization or secrets handling changes
+* data integrity, migration or destructive data operations
+* the slice touches more than three production files or changes a public API surface
+
+When none apply and the slice is a small, low-risk change on a collapsed Source of Truth, REVIEW may be a constrained self-check (P39) and the scaling variant in P36 applies. Decide before IMPLEMENT and record the variant in the slice brief.
 
 ⸻
 
@@ -1434,19 +1448,21 @@ MEDIUM/LOW issues may remain only when they are acceptable within the documented
 
 An open issue is a debt, not a record. Debt that is never called in stops meaning anything.
 
-At CARRIED: 3 the issue must leave the OPEN state in that same review. There is no fourth carry.
+At CARRIED: 3 the issue must leave the OPEN state in that same review — unless the exit needs a user decision. There is no fourth carry.
 
-Exactly one of three exits:
+When the exit needs a user decision, set the issue to **WAITING ON USER**, freeze CARRIED at its current value, and make that decision the single next important action in 07-STATUS.md. Do not increment CARRIED while the issue is WAITING ON USER. After the user decides, apply FIX, ACCEPT or REJECT in that or the next review without treating the wait as a fourth carry.
+
+Exactly one of three exits once the decision is available:
 
 * FIX — resolve it and verify it under P47 and P49
-* ACCEPT — record a decision in 06-DECISIONS.md and write the limitation into 05-QUALITY.md, then close the issue as accepted
+* ACCEPT — record a decision in 06-DECISIONS.md when that file exists, otherwise in 07-STATUS.md or the collapsed decision section; write the limitation into 05-QUALITY.md when it exists, otherwise into 07-STATUS.md, then close the issue as accepted
 * REJECT — record why it is not a real problem, then close it
 
 ACCEPT is not defeat. An honest quality bar with a named limit is worth more than a bar the product silently violates.
 
 ACCEPT is forbidden for CRITICAL issues and for HIGH issues that violate a data-integrity or security requirement. Those exit by FIX only.
 
-When the exit needs a user decision, that decision becomes the single next important action in 07-STATUS.md. Do not run another review around it.
+When the exit needs a user decision, that decision becomes the single next important action in 07-STATUS.md. Do not run another full status review whose only purpose is waiting for that answer — but the user's status question still triggers a review of everything else (P25).
 
 The purpose of this point is to make “almost complete” a terminating state instead of a permanent one.
 

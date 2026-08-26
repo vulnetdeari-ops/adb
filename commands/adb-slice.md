@@ -29,7 +29,7 @@ Do not parallelize work that would modify the same code, make conflicting archit
 
 You are the Lead. Ask/Decide and the Source of Truth stay in this thread; heavy BUILD work goes to workers. Workers start fresh and see only the brief.
 
-Delegate on the harness's own **visible** agent surface, so the user can see who is working (P32A). A subagent inside your own session is not delegation the user can see. Name them `{Project}-Worker` and `Reviewer`.
+Delegate on the harness's own **visible** agent surface, so the user can see who is working (P32). A subagent inside your own session is not delegation the user can see. Name them `{Project}-Worker` and `Reviewer`.
 
 Complete silently before every delegated task — if any item is unknown and material, Ask/Decide with the user first. Never send a vague brief.
 

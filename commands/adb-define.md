@@ -78,7 +78,15 @@ Do not continue to exhaust research, fill unused files, or resolve reversible de
 
 Summarize briefly: product, core principles, major workflows, UX/design direction, architecture direction, significant risks.
 
-Then ask exactly once, **in the user's language**: DEFINE is complete — start BUILD? Offer it as a decision (A start BUILD / B still open points / C entscheide du) so a single letter answers it.
+Then ask exactly once, **in the user's language**: DEFINE ist fertig — mit BUILD starten?
+
+```
+A) BUILD starten
+B) Noch offene Punkte klären
+C) Entscheide du
+```
+
+If the answer is **B**, treat the named blockage as the only remaining DEFINE work (P26), resolve it, then ask once more. Do not restart DEFINE as a whole. If the answer is **C**, decide and record in DECISIONS (P11).
 
 ## Forbidden
 

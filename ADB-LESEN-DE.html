@@ -184,7 +184,7 @@
 
 <p>Was die weniger offensichtlichen Stationen heißen: <strong>SPEC CHECK</strong> = das Gebaute gegen die Source of Truth halten, nicht gegen die Erinnerung. <strong>VERIFY</strong> = beweisen, nicht behaupten: was getestet, wie, was passiert ist — bei Web-Oberflächen im Browser. <strong>INTEGRATE</strong> = die geprüfte Arbeit landet dort, wo das Projekt seine Wahrheit hält: in den Arbeitszweig übernommen, Source of Truth und STATUS aktualisiert, Worker-Zweig geschlossen. Geprüft aber nicht übernommen ist nicht fertig.</p>
 
-<p><strong>Kürzen bei kleinen Slices:</strong> REVIEW und ISSUE TRIAGE dürfen wegfallen, wenn nichts gefunden wurde und kein unabhängiges Review nötig ist. SPEC, IMPLEMENT, TEST, SPEC CHECK, VERIFY und INTEGRATE fallen nie weg. Immer sagen, welche Variante läuft.</p>
+<p><strong>Kürzen bei kleinen Slices:</strong> REVIEW darf wegfallen, wenn unabhängiges Review nicht nötig ist (P39 — vorher entscheiden). SPEC, IMPLEMENT, TEST, SPEC CHECK, VERIFY und INTEGRATE fallen nie weg. Die Issue-Station heißt beim Slice-Ende „Status-Review“ (P25): Register lesen, CARRIED erhöhen — das darf nicht wegfallen.</p>
 
 <p><strong>Wenn REVIEW, SPEC CHECK oder VERIFY durchfällt:</strong> nicht übernehmen. Kleine, verstandene Ursache im gleichen Slice beheben und ab der gefallenen Station neu prüfen. Sonst registrieren und entweder den Slice auf das kürzen, was wirklich geprüft ist, oder den Slice abbrechen und den Zweig auf den letzten guten Stand zurücksetzen. In STATUS festhalten. Ein durchgefallener Slice wird nie als voll geliefert gemeldet, und ein offenes Issue ersetzt nie fehlendes Verhalten.</p>
 
@@ -209,11 +209,11 @@
 <p>Jeder Agent merkt Probleme auch außerhalb seines Jobs. Jetzt fixen wenn klein, sicher und zum aktuellen Job. Sonst eintragen. Unsicher: eintragen.</p>
 <p>Ablauf: DISCOVER → REGISTER → TRIAGE → SELECT → FIX → TEST → REVIEW → VERIFY → CLOSE. Geschlossen heißt geprüft. Nicht schließen, nur weil Code geändert wurde. Kein Fake-Schließen durch Löschen oder Herabstufen.</p>
 <p>Das ist die Schleife aus der globalen <code>AGENTS.md</code>, nur genauer: <strong>TRIAGE</strong> ist dort „PRIORITIZE“ (nach Schwere und Wirkung ordnen), <strong>SELECT</strong> ist ADBs zusätzliche Station — entscheiden, welche Issues in den nächsten Slice gehen, damit eine geordnete Liste nicht geordnet liegen bleibt.</p>
-<p>Reihenfolge beim Ordnen: kaputtes Pflicht-Verhalten und Datenverlust zuerst, dann Sicherheit, dann was Bubby beim Benutzen wirklich blockiert, dann Kosmetik. Ein billiger Fix darf vorgezogen werden, wenn er echten Ärger sofort wegnimmt.</p>
+<p>Reihenfolge beim Ordnen (P48): zuerst Schwere, dann Wirkung auf das Produkt, dann Sicherheits- und Datenrisiko, dann was den nächsten Slice blockiert, dann Regressionsrisiko, dann Abhängigkeiten, dann Kosten des Aufschiebens.</p>
 <p>Produkt nicht „fertig“ nennen bei CRITICAL, bei HIGH gegen Quality, bei kaputtem Pflicht-Verhalten oder ungelösten Widersprüchen in der Wahrheit.</p>
 
 <h2>50A. Issues müssen enden</h2>
-<p>Ein offenes Issue ist eine Schuld, kein Denkmal. Bei <strong>CARRIED: 3</strong> muss es in demselben Lauf OPEN verlassen. Es gibt kein viertes Mitnehmen.</p>
+<p>Ein offenes Issue ist eine Schuld, kein Denkmal. Bei <strong>CARRIED: 3</strong> muss es in demselben Lauf OPEN verlassen — außer der Ausgang braucht Bubby. Dann <strong>WARTET AUF BUBBY</strong>, CARRIED eingefroren, und die Entscheidung wird die eine nächste wichtige Aktion. Es gibt kein viertes Mitnehmen.</p>
 <p>Genau einer von drei Ausgängen: <strong>FIX</strong> (lösen und prüfen), <strong>ACCEPT</strong> (Entscheidung plus die Grenze in die Quality-Datei schreiben), <strong>REJECT</strong> (war kein echtes Problem, mit Grund schließen).</p>
 <p>ACCEPT ist kein Scheitern — eine ehrliche Quality-Leiste mit benannter Grenze ist besser als eine, die das Produkt still bricht. ACCEPT ist verboten bei CRITICAL und bei HIGH, die Datenintegrität oder Sicherheit verletzen. Die gehen nur über FIX.</p>
 <p>Braucht der Ausgang Bubby: das wird die eine nächste wichtige Aktion im Status. Keinen weiteren Review darum herum legen. Ziel: „fast fertig“ ist ein Ende, kein Dauerzustand.</p>
@@ -246,7 +246,7 @@
 <p>Nicht: Code existiert, kompiliert, Demo läuft, Unit Tests grün. Sondern: beabsichtigtes Verhalten da, Kantenfälle, UX, Design, Spec erfüllt, relevante Tests, Review wenn nötig wirklich unabhängig, Issues angemessen, unnötige Komplexität weg, kein Release-Blocker.</p>
 
 <h2>61A. Feedback an die Methode</h2>
-<p>ADB ist selbst ein Produkt. Manche Funde sind keine Projektfehler — die Methode war still, zwei Stellen widersprechen sich, sie hat Arbeit verlangt die Punkt 46/60 verbieten, oder genau das Befolgen hat den Defekt erzeugt.</p>
+<p>ADB ist selbst ein Produkt. Manche Funde sind keine Projektfehler — die Methode war still, zwei Stellen widersprechen sich, sie hat Arbeit verlangt die Punkt 60 oder die Anti-Zeremonie-Regel verbieten, oder genau das Befolgen hat den Defekt erzeugt.</p>
 <p>Dann einen Eintrag in <code>LESSONS.md</code> im ADB-Repo: Datum, Projekt, Symptom, Ursache, kleinste vorgeschlagene Änderung, Status (PROPOSED / ADOPTED / REJECTED). Die Datei nur anhängen, nie löschen. Nur Bubby übernimmt eine Lektion in die nummerierten Punkte. Das Projekt trotzdem fixen — die Lektion ist zusätzlich, nicht stattdessen.</p>
 <p>Normale Projekt-Issues gehören nicht hierhin. Eine Methoden-Lektion ist von Natur aus selten. Häufen sich Lektionen schneller als Issues, ist die Leiste falsch angewendet.</p>
 

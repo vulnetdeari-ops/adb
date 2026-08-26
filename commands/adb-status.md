@@ -14,7 +14,9 @@ Read the Source of Truth files that exist plus `AGENTS.md`. Those files outrank 
 
 ## Step 2 — Rewrite `adb/07-STATUS.md` (P22)
 
-Keep it concise. Overwrite, do not append a changelog.
+Keep it concise. Overwrite the header fields below, do not append a changelog.
+
+**If the Source of Truth is collapsed and issues live in this file, preserve the entire `## Open issues` section verbatim** — every issue body, ID and field. Updating the header counts must not delete register content (P49).
 
 ```
 # STATUS
@@ -29,6 +31,10 @@ OPEN ISSUES:        n
 CRITICAL / HIGH:    n / n
 AT CARRIED 3:       none | ISSUE-00N (required exit)
 REVIEW LIMITATION:  none | no independent reviewer available in this environment
+
+## Open issues
+
+(omit this section when issues live in adb/08-OPEN-ISSUES.md instead)
 ```
 
 Record the review limitation here when the environment cannot provide a separate reviewer (P39).
@@ -56,13 +62,13 @@ Never let accidental implementation become new product truth. Never leave the sp
 
 ## Step 3A — Convergence (P50A)
 
-Increment `CARRIED` on every issue still OPEN. This review counts.
+Increment `CARRIED` on every issue still OPEN. This review counts. Do **not** increment issues in **WAITING ON USER** (P50A).
 
-Any issue reaching `CARRIED: 3` must leave OPEN in this same review: FIX, ACCEPT (decision in `06-DECISIONS.md` plus the limitation written into `05-QUALITY.md`), or REJECT with a reason. No fourth carry.
+Any issue reaching `CARRIED: 3` must leave OPEN in this same review — unless the required exit needs the user: then set **WAITING ON USER**, freeze CARRIED, and name the decision as NEXT IMPORTANT ACTION. FIX, ACCEPT (decision in `06-DECISIONS.md` or STATUS when collapsed; limitation in `05-QUALITY.md` or STATUS when collapsed), or REJECT with a reason. No fourth carry.
 
 ACCEPT is forbidden for CRITICAL, and for HIGH issues that violate a data-integrity or security requirement.
 
-If the exit needs the user, that decision becomes the single NEXT IMPORTANT ACTION. Do not schedule another review around it.
+If the exit needs the user, set WAITING ON USER and make that decision the single NEXT IMPORTANT ACTION. Do not increment CARRIED while waiting. A status question from the user still triggers a review of everything else (P25).
 
 ## Step 4 — Completion standard (P61)
 
@@ -92,7 +98,7 @@ Answer in three lines, then act:
 3. Which issue was found late that an earlier gate should have caught? → tighten that gate or record it in DECISIONS.
 4. Was any finding caused by the method rather than the project? → append it to `LESSONS.md` in the canonical ADB repository (P61A) and still fix the project.
 
-The method test for question 4: ADB was silent where a rule was needed, two parts of ADB or `AGENTS.md` disagreed, ADB demanded work P46/P60 should have prevented, or following ADB produced the defect. Anything else is a project issue, not a lesson.
+The method test for question 4: ADB was silent where a rule was needed, two parts of ADB or `AGENTS.md` disagreed, ADB demanded work P60 or the anti-ceremony rule should have prevented, or following ADB produced the defect. Anything else is a project issue, not a lesson.
 
 If the session is long or repeating errors, start a fresh session loading only the Source of Truth plus `AGENTS.md` (P58).
 

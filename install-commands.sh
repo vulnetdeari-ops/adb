@@ -49,9 +49,9 @@ done
 [ -d "$SRC" ] || { echo "no commands/ directory at $SRC" >&2; exit 1; }
 
 shopt -s nullglob
-FILES=("$SRC"/adb-*.md)
+FILES=("$SRC"/adb*.md)
 shopt -u nullglob
-[ ${#FILES[@]} -gt 0 ] || { echo "no adb-*.md files in $SRC" >&2; exit 1; }
+[ ${#FILES[@]} -gt 0 ] || { echo "no adb*.md files in $SRC" >&2; exit 1; }
 
 is_ours() {
   local dst="$1" src="$2"
