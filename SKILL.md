@@ -314,28 +314,26 @@ Before asking:
 4. remove clearly inferior choices
 5. recommend the strongest choice
 
-Preferred format:
+Preferred format (suggestion chips — short tappable labels, not A/B/C letters). Prefer German labels when talking to Bubby:
 
-Decision
+**Vorschläge:**
 
-A — Option
+• **Short label** — one-line explanation
 
-Short explanation.
+• **Short label** — one-line explanation
 
-B — Option
+• **Short label** — one-line explanation
 
-Short explanation.
+• **Anderes** / Other
 
-C — Option
+• **Entscheide für mich** / Decide for me
 
-Short explanation.
+**Empfehlung:** Short label
 
-RECOMMENDATION: B
-
-WHY:
+**Warum:**
 Short contextual reasoning.
 
-ANSWER: A / B / C / Other / Decide for me
+Until the app renders real clickable chips, the user answers by typing the label (or a clear short form). Do not require A/B/C.
 
 Normally offer 2–4 serious options.
 
@@ -347,9 +345,10 @@ Do not create fake alternatives merely to provide choice.
 
 The user may answer:
 
-* Decide for me
+* Entscheide für mich / Decide for me
 * You choose
 * I don’t know
+* the recommended label, or any option label
 
 This is valid.
 
