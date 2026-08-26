@@ -18,13 +18,15 @@ METHOD: ADB
 3. Tell the agent to follow `ADB.md`.
 4. Stamp `ADB.md` with `METHOD-VERSION` (see `SKILL.md` point 1A). Keep YAML frontmatter first when the copy has it; the stamp goes on the next line.
 
-Slash commands (`/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`) live in [`commands/`](commands/). They point at `SKILL.md`; they are not a second method. Install or repair them in Cursor, Codex and Claude with:
+Slash commands (`/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`) live in [`commands/`](commands/). They point at `SKILL.md`; they are not a second method.
+
+Install them **into the current project**, never into the user home (P1):
 
 ```text
 ./install-commands.sh
 ```
 
-`./install-commands.sh --check` reports without changing anything. Each harness gets a symlink, so one edit here updates all three.
+That writes symlinks under `.cursor/commands`, `.claude/commands` and `.codex/prompts` of this directory. `./install-commands.sh --check` reports without changing anything. `./install-commands.sh --remove-global` deletes leftover home-level installs from an earlier mistake.
 
 Do not combine ADB with BMAD.
 

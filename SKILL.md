@@ -51,6 +51,8 @@ If a point does not apply, extra work is forbidden. Do not create files, agents,
 
 ADB must not automatically affect ordinary work in unrelated existing projects.
 
+Slash commands that invoke ADB phases belong in the project (`.cursor/commands`, `.claude/commands`, `.codex/prompts` of that repository). They must not be installed into the user home. A home-level install would list `/adb-define` in every project and violate the sentence above.
+
 ADB activates when:
 
 * the project's `METHOD.md` contains `METHOD: ADB`

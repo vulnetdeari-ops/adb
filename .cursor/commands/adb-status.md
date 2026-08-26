@@ -1,0 +1,1 @@
+../../commands/adb-status.md

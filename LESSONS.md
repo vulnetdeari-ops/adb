@@ -49,3 +49,14 @@ SYMPTOM: P1A demanded the `METHOD-VERSION` stamp on the first line of the projec
 ROOT CAUSE: The point was written without checking the file it governs. A rule about a copy must hold for the actual shape of that copy.
 PROPOSED CHANGE: Allow the stamp as the first line after the frontmatter block, and forbid placing it above frontmatter.
 STATUS: ADOPTED — P1A reworded 2026-08-26, same day it was introduced.
+
+---
+
+## L-005 — Slash commands were installed into the user home
+
+DATE: 2026-08-26
+PROJECT: ADB method repo
+SYMPTOM: `/adb-define` and the other four commands appeared in every Cursor, Codex and Claude session, including projects without `METHOD: ADB`.
+ROOT CAUSE: `install-commands.sh` targeted `$HOME/.cursor/commands`, `$HOME/.codex/prompts` and `$HOME/.claude/commands`. P1 forbids ADB from affecting ordinary work in unrelated projects. A home-level command list is exactly that.
+PROPOSED CHANGE: Install into the project's own harness directories. Remove leftover home-level links. State the rule in P1.
+STATUS: ADOPTED — installer is project-scoped; P1 forbids home-level installs; `--remove-global` cleans leftovers, 2026-08-26.
