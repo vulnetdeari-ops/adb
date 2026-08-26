@@ -21,7 +21,7 @@
 </div>
 
 <h1>ADB — Ask. Decide. Build.</h1>
-<p>Leichte Methode, um ein Software-Produkt zu verstehen, festzuhalten und zu bauen. Keine Agenten-Firma. Kein Extra-Orchestrator. Nutzt die Mittel der aktuellen Umgebung.</p>
+<p>Leichte Methode, um ein Software-Produkt zu verstehen, festzuhalten und zu bauen. Keine Agenten-Firma. Kein Extra-Framework. Nutzt die Mittel der aktuellen Umgebung — wenn die Umgebung delegieren kann (z. B. Paseo), arbeitet der Leit-Agent als <strong>Orchestra</strong>.</p>
 <p>Erbt die globalen Regeln aus <code>AGENTS.md</code>: beim Ergebnis angreifen, beim Bau verteidigen.</p>
 <p><strong>Ziel:</strong> Das Produkt so klar verstehen, dass man sicher bauen kann. Dieses Verständnis dauerhaft festhalten. Dann aggressiv auf ein außergewöhnliches Produkt hinarbeiten — bei so wenig unnötigem Code und Komplexität wie möglich.</p>
 <p>Jeder Punkt ist ein Maßstab, kein Auftrag extra Dateien oder Agenten zu erzeugen. Was nicht passt, darf keine Extra-Arbeit erzeugen. Punkt 60 bestimmt die Tiefe aller anderen Punkte.</p>
@@ -128,6 +128,7 @@
 <h2>28. Verhalten in BUILD</h2>
 <p>Nicht mehr vor allem Interviewer. Umkehrbare Bau-Entscheidungen selbst treffen. Die Source of Truth regiert.</p>
 <p>Die Fragen sind weitgehend beantwortet. Jetzt hart ausführen, nicht nachlassen. Weiter bauen und weiter führen, bis das Produkt dem Fertig-Maßstab entspricht oder Bubby bewusst pausiert.</p>
+<p>Kann die Umgebung delegieren: Leit-Agent bleibt <strong>Orchestra</strong> (Ask/Decide + Wahrheit + kurze Aufträge). Schwere BUILD-Arbeit läuft bei Arbeitern — siehe 32 und 32A.</p>
 <p>Nach jedem Slice: was erledigt ist, was bis zur fertigen App noch fehlt, was konkret als Nächstes kommt. BUILD nicht beenden, indem festgelegte Restarbeit nur als Notiz für später stehen bleibt — ohne nächsten Schritt.</p>
 
 <h2>29. Beim Ergebnis: Angriff</h2>
@@ -139,10 +140,26 @@
 <h2>31. Einfachheits-Check</h2>
 <p>Vor extra Komplexität: Braucht das eine echte Anforderung? Gibt es Einfacheres? Löst etwas Vorhandenes das schon? Ist die Abstraktion jetzt nötig?</p>
 
-<h2>32. Mehrere Agenten</h2>
+<h2>32. Mehrere Agenten — Orchestra</h2>
 <p>Mehrere Agenten sind <strong>erwünscht — nicht nur erlaubt</strong>.</p>
-<p><strong>Grund: Kontext.</strong> Der Leit-Agent spricht mit Bubby, hält die Source of Truth und führt Ergebnisse zusammen. Begrenzte Arbeit (Recherche, ein Slice, Tests, Review) gehört in Unter-Agenten mit nur dem nötigen Kontext. So bleibt der Haupt-Chat klein, und der Leit-Agent verliert sich nicht.</p>
-<p>Keine festen Agenten-Namen. Anzahl folgt der Arbeit — die Arbeit existiert nicht, um Agenten zu rechtfertigen. Kein Theater, keine Fake-Rollen.</p>
+<p><strong>Grund: Kontext.</strong> Der Leit-Agent spricht mit Bubby, hält die Source of Truth und führt Ergebnisse zusammen. Begrenzte Arbeit (Recherche, ein Slice, Tests, Review) gehört in Unter-Agenten mit nur dem nötigen Kontext. So bleibt der Haupt-Chat klein.</p>
+<p><strong>Orchestra-Default</strong> (wenn die Umgebung delegieren kann, z. B. Paseo): Leit-Agent = Orchestra. Arbeiter starten <strong>frisch</strong> (sehen den Orchestra-Chat nicht — nur den Auftrag). Folgeaufgaben an denselben Arbeiter, wenn Kontinuität hilft. BUILD und schwere Recherche standardmäßig delegieren. Im Orchestra-Chat bleiben: kurze Klärung, Decide, Status, winzige Änderungen.</p>
+<p>Keine festen Agenten-Namen. Anzahl folgt der Arbeit. Kein Theater, keine Fake-Rollen.</p>
+
+<h2>32A. Orchestra-Checkliste</h2>
+<p>Vor jedem delegierten BUILD oder schwerer Recherche (darf still ablaufen):</p>
+<ol>
+  <li><strong>Ziel</strong> — was „fertig“ heißt</li>
+  <li><strong>Workspace / Pfad</strong> — genauer Projektordner</li>
+  <li><strong>Source of Truth</strong> — welche <code>adb/</code>-Teile gelten</li>
+  <li><strong>Scope</strong> — drin / nicht drin</li>
+  <li><strong>Grenzen</strong> — Secrets, keine Drive-by-Refactors, Sonderregeln</li>
+  <li><strong>Beweis</strong> — wie prüfen (Tests, Befehle, Screenshot)</li>
+  <li><strong>Rückgabe</strong> — kurzes Format; Orchestra fasst für Bubby zusammen</li>
+  <li><strong>Review</strong> — eigener Reviewer-Agent ja/nein</li>
+  <li><strong>Kontinuität</strong> — neuer Arbeiter oder Folge an bestehende Session</li>
+</ol>
+<p>Fehlt etwas Wichtiges: erst Ask/Decide mit Bubby. Keine vagen Aufträge.</p>
 
 <h2>33. Wann parallel</h2>
 <p>Parallel, wenn wirklich unabhängig. Nicht parallel, wenn dieselben Dateien, widersprüchliche Architektur oder unfertige Abhängigkeiten drohen.</p>

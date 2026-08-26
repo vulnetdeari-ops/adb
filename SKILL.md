@@ -15,7 +15,9 @@ ADB is not an agent framework.
 
 ADB does not prescribe a fixed organization of artificial roles.
 
-ADB does not build a custom orchestrator.
+ADB does not invent a custom agent framework or fake company of roles.
+
+ADB does use the active harness as an **orchestra** when that harness can delegate (subagents, parallel workers, workspace agents such as Paseo). That is native capability, not a separate product.
 
 ADB uses the native capabilities of the active coding environment.
 
@@ -793,6 +795,8 @@ The Source of Truth now governs work.
 
 The questions are largely answered. That is the moment to execute hard, not to ease off. Keep building and keep leading until the product meets the completion standard or the user explicitly pauses.
 
+When the harness can delegate, the lead agent stays **orchestra**: Ask/Decide and Source of Truth stay in the user-facing thread; heavy BUILD work runs in delegated agents. See points 32 and 32A.
+
 After each slice: state what is done, what still stands between this and a finished product, and the concrete next work. Do not end BUILD by leaving specified remaining work as a note for later with no next move.
 
 ⸻
@@ -901,6 +905,16 @@ Using multiple agents is desired, not merely allowed.
 
 The reason is context. The lead agent talks to the user, holds the Source of Truth, and merges results. Bounded work such as research, a slice, tests or review belongs in subagents with the minimum sufficient context. That keeps the main-thread context small so the lead agent does not get lost.
 
+### Orchestra default (when the harness can delegate)
+
+If the environment supports delegation to other agents or workspaces (for example Paseo workspace agents, native subagents, parallel workers):
+
+* The **user-facing agent is the orchestra**. It clarifies intent, runs Ask/Decide with the user, maintains the Source of Truth, writes complete task briefs, and merges results.
+* **Workers start fresh.** A new delegated agent does not see the orchestra chat—only the brief. Put everything needed for the task in that brief.
+* **Follow-ups reuse the same worker** when continuity helps (same slice, same files, same investigation). The worker then sees prior tasks in its own session.
+* **Default for BUILD and heavy research:** delegate. Do not keep large code exploration, implementation, test runs or review transcripts in the orchestra thread when a worker can do them.
+* **Stay in the orchestra thread** for: short clarification with the user, tiny one-file edits, Decide questions, status summaries, and work where delegation would cost more than it saves.
+
 ADB does not prescribe fixed agent names.
 
 The lead agent dynamically chooses:
@@ -910,12 +924,31 @@ The lead agent dynamically chooses:
 * degree of parallelism
 * context passed to each
 * when independent review is useful
+* which workspace or checkout a worker should use (when the harness has workspaces)
 
 Agent count follows the work.
 
 The work does not exist to justify agent count.
 
 Do not spawn agents for ceremony or fake roles.
+
+⸻
+
+## 32A. ORCHESTRA CHECKLIST
+
+Before each delegated BUILD or heavy research task, the orchestra completes this checklist (silently is fine; do not dump ceremony at the user):
+
+1. **Goal** — what done looks like, in one or two sentences.
+2. **Workspace / path** — exact project directory or workspace the worker must use.
+3. **Source of Truth pointers** — which `adb/` files or sections apply (or “none / brownfield inspect first”).
+4. **Scope** — in scope / out of scope. Explicit “do not” list when needed.
+5. **Constraints** — secrets rules, no drive-by refactors, financial/safety limits if any.
+6. **Proof** — how the worker must prove the result (commands, tests, screenshots, git status).
+7. **Return format** — what to report back (short). The orchestra summarizes for the user.
+8. **Review** — whether an independent reviewer agent is required before merge; if yes, spawn separately with diff + spec only.
+9. **Continuity** — new worker vs follow-up to an existing worker id/session.
+
+If any item is unknown and material, Ask/Decide with the user first. Do not send a vague brief.
 
 ⸻
 
