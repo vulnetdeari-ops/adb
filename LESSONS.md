@@ -38,3 +38,14 @@ SYMPTOM: The project's `ADB.md` was modified but uncommitted. Its working copy w
 ROOT CAUSE: Setup copies the method into the project and the copy carries no provenance. A copy with no version is unfalsifiable.
 PROPOSED CHANGE: Stamp the copy with the canonical repository's short git sha and date on its first line.
 STATUS: ADOPTED — added as P1A METHOD VERSION, 2026-08-26.
+
+---
+
+## L-004 — P1A collided with the frontmatter it was written for
+
+DATE: 2026-08-26
+PROJECT: buchhaltung-web
+SYMPTOM: P1A demanded the `METHOD-VERSION` stamp on the first line of the project `ADB.md`. The canonical `SKILL.md` opens with a YAML frontmatter block, and the project copy keeps it. Following P1A literally would have pushed `---` to line 3 and broken the block for any harness that parses it.
+ROOT CAUSE: The point was written without checking the file it governs. A rule about a copy must hold for the actual shape of that copy.
+PROPOSED CHANGE: Allow the stamp as the first line after the frontmatter block, and forbid placing it above frontmatter.
+STATUS: ADOPTED — P1A reworded 2026-08-26, same day it was introduced.

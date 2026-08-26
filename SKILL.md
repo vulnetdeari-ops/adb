@@ -76,9 +76,11 @@ Once ADB is activated for a project, its ADB Source of Truth governs future ADB 
 
 The project copy `ADB.md` is a copy, and copies age silently.
 
-The first line of every project `ADB.md` must be a stamp:
+Every project `ADB.md` must carry a stamp as its first line, or as the first line after the frontmatter block when the copy keeps one:
 
 METHOD-VERSION: <short git sha of the canonical ADB repo> <date>
+
+Never place the stamp above frontmatter. That breaks the block for any harness that parses it.
 
 Write the stamp when setup copies the method, and rewrite it whenever the copy is refreshed.
 
