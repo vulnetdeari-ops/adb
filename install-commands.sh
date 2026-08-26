@@ -53,25 +53,33 @@ FILES=("$SRC"/adb*.md)
 shopt -u nullglob
 [ ${#FILES[@]} -gt 0 ] || { echo "no adb*.md files in $SRC" >&2; exit 1; }
 
-is_ours() {
-  local dst="$1" src="$2"
-  if [ -L "$dst" ]; then
-    local target
-    target="$(readlink "$dst")"
-    [ "$target" = "$src" ] && return 0
-    [ "$target" = "../../commands/$(basename "$src")" ] && return 0
-    return 1
-  fi
-  [ -f "$dst" ] && cmp -s "$src" "$dst"
+link_target_for() {
+  local src="$1" dst_dir="$2"
+  command -v python3 >/dev/null 2>&1 || {
+    echo "python3 is required for relative command symlinks: $0" >&2
+    exit 1
+  }
+  python3 -c 'import os, sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))' "$src" "$dst_dir"
 }
 
-link_target_for() {
-  local src="$1"
-  if [ "$ROOT" = "$ADB_ROOT" ]; then
-    printf '%s' "../../commands/$(basename "$src")"
-  else
-    printf '%s' "$src"
+is_ours() {
+  local dst="$1" src="$2"
+  if [ ! -e "$dst" ] && [ ! -L "$dst" ]; then
+    return 1
   fi
+  if cmp -s "$src" "$dst" 2>/dev/null; then
+    return 0
+  fi
+  if [ -L "$dst" ]; then
+    local target want dst_dir
+    target="$(readlink "$dst")"
+    dst_dir="$(dirname "$dst")"
+    want="$(link_target_for "$src" "$dst_dir")"
+    [ "$target" = "$want" ] && return 0
+    [ "$target" = "$src" ] && return 0
+    [ "$target" = "../../commands/$(basename "$src")" ] && return 0
+  fi
+  return 1
 }
 
 remove_ours_from() {
@@ -165,7 +173,7 @@ for sub in "${PROJECT_SUBDIRS[@]}"; do
   for src in "${FILES[@]}"; do
     name="$(basename "$src")"
     dst="$dir/$name"
-    want="$(link_target_for "$src")"
+    want="$(link_target_for "$src" "$dir")"
 
     if [ "$MODE" = "link" ] && [ -L "$dst" ] && [ "$(readlink "$dst")" = "$want" ]; then
       continue
