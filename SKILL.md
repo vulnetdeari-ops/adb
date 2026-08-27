@@ -21,7 +21,7 @@ ADB uses the active harness in the **Lead** role when that harness can delegate 
 
 ADB uses the native capabilities of the active coding environment.
 
-ADB inherits the project's `AGENTS.md`, including Offensive on Outcome and Defensive on Implementation.
+ADB inherits `AGENTS.md`. **Global rules** = `~/Development/_System/Rules/AGENTS.md` (symlinked into harnesses). A project `AGENTS.md` may add project-specific rules only. That includes Offensive on Outcome and Defensive on Implementation.
 
 The objective is:
 
@@ -344,7 +344,7 @@ Do not create fake alternatives merely to provide choice.
 
 ⸻
 
-## 11. “DECIDE FOR ME”
+## 11. DECIDE FOR ME (“Entscheide du”)
 
 See global `AGENTS.md` → Decision Questions (including what to optimize for when the user picks decide-for-me); that file is authoritative for the format and criteria.
 
@@ -610,18 +610,18 @@ Avoid logging trivial implementation details.
 
 Keep concise.
 
-Track:
+Track (STATUS header fields, same names as `/adb-status`):
 
-* current phase
-* completed
-* current
-* remaining
-* blockers
-* next important action
-* number of open issues
-* critical/high issue count
-* any issue at CARRIED: 3 and its required exit
-* any review limitation in force — for example a slice reviewed only by a constrained self-check because no separate reviewer was available (P39)
+* PHASE
+* COMPLETED
+* CURRENT
+* REMAINING
+* BLOCKERS
+* NEXT IMPORTANT ACTION
+* OPEN ISSUES
+* CRITICAL / HIGH
+* AT CARRIED 3 — any issue at CARRIED: 3 and its required exit
+* REVIEW LIMITATION — `none`, or the limitation in force (e.g. no independent reviewer; constrained self-check only — P39)
 * **execution plan** — when BUILD spans more than one slice, keep `## Execution plan` in this file: ordered slices, dependencies, and each slice's status (P34). Chat is not the plan (P58).
 
 ⸻
@@ -965,11 +965,13 @@ Determine dependencies between slices.
 
 Example:
 
+```
 Slice 1 ─┐
-├→ Slice 4
+         ├→ Slice 4
 Slice 2 ─┘
 
 Slice 3 ─────────→ Slice 5
+```
 
 Independent slices may run in parallel.
 
@@ -1298,6 +1300,8 @@ Prioritize by:
 6. dependency order
 7. cost of postponing
 
+At equal severity, order a `CARRIED: 2` issue above a fresh one — it is about to force a decision (P50A).
+
 Do not interrupt every task immediately for every new issue.
 
 ⸻
@@ -1332,7 +1336,7 @@ MEDIUM/LOW issues may remain only when they are acceptable within the documented
 
 An open issue is a debt, not a record. Debt that is never called in stops meaning anything.
 
-At CARRIED: 3 the issue must leave the OPEN state in that same review — unless the exit needs a user decision. There is no fourth carry.
+At CARRIED: 3 the issue must leave the OPEN state in that same review — unless the exit needs a user decision. There is no fourth carry. When triaging at equal severity, prefer `CARRIED: 2` over a fresh issue (P48).
 
 When the exit needs a user decision, set the issue to **WAITING ON USER**, freeze CARRIED at its current value, and make that decision the single next important action in 07-STATUS.md. Do not increment CARRIED while the issue is WAITING ON USER. After the user decides, apply FIX, ACCEPT or REJECT in that or the next review without treating the wait as a fourth carry.
 

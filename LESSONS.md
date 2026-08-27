@@ -71,3 +71,14 @@ SYMPTOM: `new-project` / `adopt-project` wrote `METHOD.md` and a bare `ADB.md`, 
 ROOT CAUSE: Setup lived outside the method. The method gained P1A, project-scoped commands and the numbered issue register; the helpers were never updated.
 PROPOSED CHANGE: One `setup-into-project.sh` that stamps, ensures `adb/08-OPEN-ISSUES.md`, and installs commands into the project. Wire it into `new-project` and `adopt-project`. Do not auto-create Vision/Spec — that is DEFINE.
 STATUS: ADOPTED — 2026-08-26.
+
+---
+
+## L-007 — Chip labels vs A/B/C Decision Questions
+
+DATE: 2026-08-26/27
+PROJECT: ADB method + Paseo Decision Questions
+SYMPTOM: Draft decision UI used Perplexity-style chip labels. Agents and drafts drifted toward long label text instead of single-letter answers. That conflicted with global `AGENTS.md` Decision Questions (A/B/C + „Entscheide du“).
+ROOT CAUSE: A feature sketch taught a discarded interaction. The method and the reading copy already followed A/B/C; the feature note still named “chips” and looked like an open path.
+PROPOSED CHANGE: Keep A/B/C + „Entscheide du“ as the only rule. Mark chips rejected. Rename the feature note so the filename does not teach chips.
+STATUS: ADOPTED — A/B/C + Entscheide du; chips verworfen; `FEATURE-decision-options.md`, 2026-08-27.
