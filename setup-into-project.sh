@@ -155,8 +155,8 @@ stamp_adb_md() {
     return 1
   fi
 
-  if head -1 "$file" | grep -qx '---'; then
-    if ! awk 'BEGIN{fm=0} /^---/{fm++} fm==2{exit 0} END{exit 1}' "$file"; then
+  if [ "$(head -1 "$file")" = "---" ]; then
+    if ! awk 'BEGIN{fm=0; found=0} /^---/{fm++} fm==2{found=1; exit} END{exit !found}' "$file"; then
       echo "WARN: $file has frontmatter without a closing --- — cannot stamp (P1A)." >&2
       rm -f "$tmp"
       return 1
