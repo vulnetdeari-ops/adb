@@ -348,7 +348,7 @@ Do not create fake alternatives merely to provide choice.
 
 See global `AGENTS.md` → Decision Questions (including what to optimize for when the user picks decide-for-me); that file is authoritative for the format and criteria.
 
-ADB addition: meaningful autonomous decisions must be recorded in `06-DECISIONS.md`, or in STATUS / Product Spec when those files are collapsed (P15).
+ADB addition: meaningful autonomous decisions must be recorded in `06-DECISIONS.md`, or in the decisions section of `02-PRODUCT-SPEC.md` while the Source of Truth is collapsed (P15).
 
 ⸻
 
@@ -860,12 +860,15 @@ If the environment supports delegation to other agents or workspaces (for exampl
 
 **Delegate on the harness's visible agent surface.** Each harness has one — in Paseo it is a workspace agent that appears as its own tab. A subagent that runs inside the Lead's own session is not delegation the user can see; use it only when no visible surface exists, or when a visible agent would cost more than it saves. When the user asks who is working, the answer must be visible in the app, not only in the Lead transcript.
 
+**Layer model: see global `AGENTS.md` → Multi-Agent Work, which is authoritative.** Where the harness has project workspaces it requires three layers and no layer skips the next: **Lead** (rules, brief, routing — never project code) → **session coordinator** in the project workspace (splits the brief, spawns visible subagents, merges their output) → **subagents** (the actual code, tests and proof). The Lead does not brief an implementing worker directly in that case, and the coordinator does not absorb a multi-file feature alone.
+
 Use these titles consistently across harnesses:
 
 | Title | When | Labels (when supported) |
 |---|---|---|
 | **Lead** | User-facing chat; Ask/Decide and Source of Truth | `role=lead` |
-| **{Project}-Worker** | Delegated BUILD, research, or status in a project workspace (e.g. `Fleisch-Worker`, `buchhaltung-web-Worker`) | `role=worker`, `project=<slug>` |
+| **{Project} session coordinator** | The agent in a project workspace (e.g. `buchhaltung-web-Worker`): receives the Lead brief, splits it, spawns subagents, merges their results | `role=coordinator`, `project=<slug>` |
+| **{Project}-Worker** | Delegated BUILD, research, or status — a subagent under the session coordinator where the harness has project workspaces (e.g. `Fleisch-Worker`, `buchhaltung-web-Backend`) | `role=worker`, `project=<slug>` |
 | **Reviewer** | Independent review before merge; brief contains diff + spec only | `role=reviewer` |
 
 Workspace titles match the project short name (`Fleisch`, `VuliX`, `buchhaltung-web`, `Lead`). One-off tasks still use `{Project}-Worker`; spawn **Reviewer** only when checklist item 8 requires it.
@@ -902,6 +905,8 @@ Before each delegated BUILD or heavy research task, the Lead completes this chec
 9. **Continuity** — new worker vs follow-up to an existing worker id/session.
 
 If any item is unknown and material, Ask/Decide with the user first. Do not send a vague brief.
+
+The session coordinator runs the same checklist when briefing its own subagents.
 
 ⸻
 
@@ -1002,7 +1007,7 @@ What the stations mean, where it is not obvious:
 
 * **SPEC CHECK** — the built behavior is compared against the Source of Truth (P45), not against the implementer's memory of the task.
 * **VERIFY** — the claim is proven, not asserted: what was tested, how, and what happened. For anything user-facing that means exercising the real path, in a browser for web UI. See global `AGENTS.md` → Prove it works, which is authoritative.
-* **INTEGRATE** — the verified work lands where the project keeps its truth: Source of Truth and STATUS updated, worker branch or worktree closed out when one was used. Commit only when the user asked (global `AGENTS.md` → Git). A slice sitting verified but not reflected in the project's truth is not done.
+* **INTEGRATE** — the verified work lands where the project keeps its truth: Source of Truth and STATUS updated, worker branch or worktree closed out when one was used. Commit only when the user asked (global `AGENTS.md` → Git), and only after the `agy-review` commit loop has passed on that diff (global `AGENTS.md` → Antigravity CLI, which is authoritative — no ADB variant exempts it). A slice sitting verified but not reflected in the project's truth is not done.
 
 ### Scaling the loop (P60)
 
@@ -1108,6 +1113,8 @@ Review may include:
 The scale of review should match risk.
 
 Do not invent extra review roles for ceremony.
+
+**The `agy-review` commit loop is separate from this point and is never optional.** Global `AGENTS.md` → Antigravity CLI requires it on the uncommitted diff before every commit and every push, by whoever wrote the code; that file is authoritative. A constrained self-check under this point does not replace it, and an agy PASS does not satisfy independent review where this point requires one.
 
 **Independent review is required** when any of these apply:
 
@@ -1332,7 +1339,7 @@ When the exit needs a user decision, set the issue to **WAITING ON USER**, freez
 Exactly one of three exits once the decision is available:
 
 * FIX — resolve it and verify it under P47 and P49
-* ACCEPT — record a decision in 06-DECISIONS.md when that file exists, otherwise in 07-STATUS.md or the collapsed decision section; write the limitation into 05-QUALITY.md when it exists, otherwise into 07-STATUS.md, then close the issue as accepted
+* ACCEPT — record a decision in 06-DECISIONS.md when that file exists, otherwise in the decisions section of 02-PRODUCT-SPEC.md while the Source of Truth is collapsed; write the limitation into 05-QUALITY.md when it exists, otherwise into the quality section of 02-PRODUCT-SPEC.md (P15), then close the issue as accepted
 * REJECT — record why it is not a real problem, then close it
 
 ACCEPT is not defeat. An honest quality bar with a named limit is worth more than a bar the product silently violates.

@@ -41,7 +41,7 @@ CONTEXT:
 PROBLEM:
 EVIDENCE:
 EXPECTED:
-STATUS:       OPEN | IN PROGRESS | BLOCKED | READY FOR VERIFY | CLOSED
+STATUS:       OPEN | IN PROGRESS | BLOCKED | WAITING ON USER | READY FOR VERIFY | CLOSED
 DEPENDENCIES:
 CARRIED:      n          # status reviews survived while OPEN; new issue = 0
 RESOLUTION:
@@ -52,7 +52,13 @@ VERIFIED BY:
 
 `CARRIED` is incremented by `/adb-status`, not here. This command respects it.
 
-At `CARRIED: 3` the issue must exit OPEN in that review — FIX, ACCEPT (decision plus a written limitation in `05-QUALITY.md`), or REJECT. There is no fourth carry, and ACCEPT is not available for CRITICAL or for HIGH issues touching data integrity or security.
+`BLOCKED` still counts as OPEN for `CARRIED` and P50A — it is not an exit from OPEN. `WAITING ON USER` is the one status where `CARRIED` freezes, and only until the named user decision is recorded (P25, P50A).
+
+At `CARRIED: 3` the issue must exit OPEN in that review — FIX, ACCEPT, or REJECT. There is no fourth carry, and ACCEPT is not available for CRITICAL or for HIGH issues touching data integrity or security.
+
+An ACCEPT needs the decision plus a written limitation: in `adb/05-QUALITY.md` where that file exists, otherwise in the quality section of `adb/02-PRODUCT-SPEC.md` while the Source of Truth is collapsed (P15). Do not create `05-QUALITY.md` just to hold it.
+
+When the exit itself needs a user decision, set `STATUS: WAITING ON USER`, name the decision that is missing, and `CARRIED` freezes until it is recorded (P50A).
 
 When triaging, order a `CARRIED: 2` issue above an equally severe fresh one. It is about to force a decision either way.
 

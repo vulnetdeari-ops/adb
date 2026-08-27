@@ -29,7 +29,7 @@ Do not parallelize work that would modify the same code, make conflicting archit
 
 You are the Lead. Ask/Decide and the Source of Truth stay in this thread; heavy BUILD work goes to workers. Workers start fresh and see only the brief.
 
-Delegate on the harness's own **visible** agent surface, so the user can see who is working (P32). A subagent inside your own session is not delegation the user can see. Name them `{Project}-Worker` and `Reviewer`.
+Delegate on the harness's own **visible** agent surface, so the user can see who is working (P32). A subagent inside your own session is not delegation the user can see. Where the harness has project workspaces, the Lead briefs the project's session coordinator, which spawns the agents that do the work — see global `AGENTS.md` → Multi-Agent Work, which is authoritative. Name them `{Project}-Worker` and `Reviewer`.
 
 Complete silently before every delegated task — if any item is unknown and material, Ask/Decide with the user first. Never send a vague brief.
 
@@ -78,6 +78,8 @@ Prioritize Business Rules, calculations, state transitions, critical workflows, 
 ## Step 7 — Close the slice (P28, P45, P61)
 
 Green tests are not enough. Run SPEC CHECK against the Source of Truth. Missing required behavior is fixed now if it belongs in this slice, otherwise registered via `/adb-triage` — never continued past as if satisfied.
+
+**Then run the status review that INTEGRATE owes (P25).** Slice completion is a status review, and it satisfies the ISSUE TRIAGE station for this slice: read the whole register, increment `CARRIED` on every issue still OPEN except those in WAITING ON USER, and force the exit P50A requires for anything reaching `CARRIED: 3`. Run `/adb-status` for it, or do the same work here — but do not close the slice without it. Skipping it means `CARRIED` never rises and P50A never bites (L-002).
 
 Then report:
 

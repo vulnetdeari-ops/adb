@@ -66,7 +66,7 @@ Never let accidental implementation become new product truth. Never leave the sp
 
 Increment `CARRIED` on every issue still OPEN. This review counts. Do **not** increment issues in **WAITING ON USER** (P50A).
 
-Any issue reaching `CARRIED: 3` must leave OPEN in this same review — unless the required exit needs the user: then set **WAITING ON USER**, freeze CARRIED, and name the decision as NEXT IMPORTANT ACTION. FIX, ACCEPT (decision in `06-DECISIONS.md` or STATUS when collapsed; limitation in `05-QUALITY.md` or STATUS when collapsed), or REJECT with a reason. No fourth carry.
+Any issue reaching `CARRIED: 3` must leave OPEN in this same review — unless the required exit needs the user: then set **WAITING ON USER**, freeze CARRIED, and name the decision as NEXT IMPORTANT ACTION. FIX, ACCEPT (decision in `06-DECISIONS.md` or the decisions section of `adb/02-PRODUCT-SPEC.md` when collapsed; limitation in `05-QUALITY.md` or its quality section when collapsed — P15), or REJECT with a reason. No fourth carry.
 
 ACCEPT is forbidden for CRITICAL, and for HIGH issues that violate a data-integrity or security requirement.
 

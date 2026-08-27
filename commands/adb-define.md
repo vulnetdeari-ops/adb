@@ -63,6 +63,7 @@ Never silently convert an assumption into product truth.
 Default to the collapsed set: `adb/01-VISION.md`, `adb/02-PRODUCT-SPEC.md`, `adb/07-STATUS.md`.
 Split a topic into its numbered file only when keeping it merged would hide important truth.
 Keep the numbered filenames. Never invent `SPEC.md`. Never create a file to complete the set of eight.
+While collapsed, UX, architecture, quality and decisions live in `adb/02-PRODUCT-SPEC.md` (P15) — so "record in DECISIONS" anywhere in this command means the decisions section there until the topic earns its own `adb/06-DECISIONS.md`.
 
 ## Step 7 — Completeness gate (P26)
 
