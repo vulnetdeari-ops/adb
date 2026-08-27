@@ -246,13 +246,13 @@ write_register() {
 
 CANONICAL: This file (`adb/08-OPEN-ISSUES.md`)
 
-Record real unresolved complaints, bugs, regressions, UX or design defects, data problems, specification conflicts, and failing critical behavior here. Remove an entry only after its fix is tested and verified.
+Record real unresolved complaints, bugs, regressions, UX or design defects, data problems, specification conflicts, and failing critical behavior here.
 
 Never record secrets, private data, or actionable vulnerability details in this tracked file. Use an explicitly private channel for sensitive security reports.
 
 OPEN: 0 · READY FOR VERIFY: 0 · CRITICAL: 0 · HIGH: 0 · MEDIUM: 0 · LOW: 0 · CLOSED: 0
 
-Closed issues stay in this file and stay traceable (P49). Do not close by deleting the entry.
+Closed issues stay in this file and stay traceable (P49). Mark CLOSED only after the fix is tested and verified. Do not close by deleting the entry.
 
 CARRIED counts status reviews survived while OPEN (P25, P50A). At CARRIED: 3 an issue must exit OPEN by FIX, ACCEPT or REJECT — there is no fourth carry.
 EOF

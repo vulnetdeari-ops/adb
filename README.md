@@ -48,8 +48,9 @@ Slash commands (`/adb`, `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status
 Inside this repository, `.cursor/commands/`, `.claude/commands/` and `.codex/prompts/` are **symlinks** into `commands/`. There is one copy to edit, so the harnesses cannot drift apart.
 
 ```text
-./install-commands.sh                 # into the current project only
-./install-commands.sh --check
+./install-commands.sh                 # install into the current directory
+./install-commands.sh --check         # report only
+./install-commands.sh --remove        # remove from the current directory
 ./install-commands.sh --remove-global # delete leftover home-level installs
 ```
 
