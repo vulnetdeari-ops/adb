@@ -6,7 +6,7 @@ description: "Rewrite ADB STATUS and judge the work against the Completion Stand
 # /adb-status
 
 Canonical method: `ADB.md` in the project root (or `~/Development/_System/Methods/ADB/SKILL.md`).
-This command enforces P1A, P22, P45, P50A, P55, P56, P58, P61 and P61A.
+This command enforces P1A, P22, P45, P50A, P55, P56, P58, P61, P61B and P61A.
 
 ## Step 1 — Reload truth, not chat (P58)
 
@@ -19,6 +19,8 @@ Keep it concise. Overwrite the header fields below, do not append a changelog.
 **If the Source of Truth is collapsed and issues live in this file, preserve the entire `## Open issues` section verbatim** — every issue body, ID and field. Updating the header counts must not delete register content (P49).
 
 **Preserve `## Execution plan` verbatim** when it exists — update slice statuses in place, do not drop the plan (P34, P58).
+
+**Preserve `## Readiness` verbatim** when it exists — same spirit as Execution plan. Copy `READINESS`, `READINESS-AT`, `READINESS-BY` from the existing STATUS. Do **not** invent a new verdict here; only the independent walker (`/adb-ready`, P61B) writes those fields. If they are missing, keep the field names with `READINESS: none` and empty AT/BY — do not invent ALPHA/BETA/LIVE.
 
 ```
 # STATUS
@@ -33,6 +35,9 @@ OPEN ISSUES:        n
 CRITICAL / HIGH:    n / n
 AT CARRIED 3:       none | ISSUE-00N (required exit)
 REVIEW LIMITATION:  none | no independent reviewer available in this environment
+READINESS:          none | NICHT_FERTIG | ALPHA | BETA | LIVE
+READINESS-AT:
+READINESS-BY:       independent | constrained-self-check
 
 ## Open issues
 
@@ -40,6 +45,8 @@ REVIEW LIMITATION:  none | no independent reviewer available in this environment
 ```
 
 Record the review limitation here when the environment cannot provide a separate reviewer (P39).
+
+`READINESS-BY` is **not** `REVIEW LIMITATION`.
 
 ## Step 2A — Layout and version check (P1A, P15, P23)
 
@@ -72,7 +79,7 @@ ACCEPT is forbidden for CRITICAL, and for HIGH issues that violate a data-integr
 
 If the exit needs the user, set WAITING ON USER and make that decision the single NEXT IMPORTANT ACTION. Do not increment CARRIED while waiting. A status question from the user still triggers a review of everything else (P25).
 
-## Step 4 — Completion standard (P61)
+## Step 4 — Completion standard (P61, P61B)
 
 Code existing, compiling, demoing or passing unit tests is not completion. Judge each relevant item and mark it yes / no / not applicable:
 
@@ -86,6 +93,9 @@ Code existing, compiling, demoing or passing unit tests is not completion. Judge
 - open issues appropriately resolved
 - unnecessary complexity removed
 - no release-blocking issue remains
+- P61B ran on the **current** product (stamp present and not stale)
+
+**Stamp missing or stale** (P61B: later slice INTEGRATE, or required behavior / SoT this walk covered changed; date alone is not currency): NEXT IMPORTANT ACTION is `/adb-ready`, not “complete”. **ALPHA is never completion.**
 
 Any "no" means not complete. Name the concrete next work rather than a note for later.
 

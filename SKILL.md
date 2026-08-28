@@ -182,7 +182,7 @@ Preserve important WHY: decision, reason, alternatives if relevant, consequence.
 
 ## 22. 07-STATUS.md
 
-Concise. Header fields (same names as `/adb-status`): PHASE, COMPLETED, CURRENT, REMAINING, BLOCKERS, NEXT IMPORTANT ACTION, OPEN ISSUES, CRITICAL/HIGH, AT CARRIED 3, REVIEW LIMITATION (`none` or the P39 limitation in force). When BUILD spans more than one slice: `## Execution plan` — ordered slices, dependencies, status (P34). Chat is not the plan (P58).
+Concise. Header fields (same names as `/adb-status`): PHASE, COMPLETED, CURRENT, REMAINING, BLOCKERS, NEXT IMPORTANT ACTION, OPEN ISSUES, CRITICAL/HIGH, AT CARRIED 3, REVIEW LIMITATION (`none` or the P39 limitation in force), READINESS, READINESS-AT, READINESS-BY. When BUILD spans more than one slice: `## Execution plan` — ordered slices, dependencies, status (P34). Chat is not the plan (P58). Preserve `## Readiness` on `/adb-status` rewrite like `## Execution plan` — do not invent a new verdict; the independent walker writes the stamp (P61B).
 
 ⸻
 
@@ -530,6 +530,37 @@ Do not over-engineer small products (collapse SoT). Large/high-integrity: split,
 ## 61. COMPLETION STANDARD
 
 Not complete because code exists, compiles, a demo works, or unit tests pass. Where relevant: intended behavior, important edges, polished UX, coherent design, spec satisfied, relevant tests pass, independent review passes when required and actually independent, open issues appropriately resolved, unnecessary complexity removed, no release-blocking issue.
+
+The product is not complete until P61B ran on the **current** product (stamp not stale). **ALPHA is never P61 completion.** The quality bar does not choose ALPHA vs BETA; it only chooses **BETA** (real use) vs **LIVE** (production).
+
+⸻
+
+## 61B. PRODUCT READINESS
+
+Whole-product readiness when BUILD or Bubby claims the app is finished. Slice VERIFY and `/adb-review` unchanged. Not per slice. Not a fake company.
+
+**Verdicts** (STATUS keys; German for Bubby):
+
+| Key | Meaning |
+|---|---|
+| `NICHT_FERTIG` | Core path broken, spec unsatisfied, or P50 blockers. |
+| `ALPHA` | Real user can complete the **core** path. Gaps registered. Not for real operations. **Never** P61 completion. Quality bar does **not** choose ALPHA vs BETA; it only chooses **BETA** (real use) vs **LIVE** (production). |
+| `BETA` | Agreed scope matches SoT. Important journeys, empty/loading/error, relevant edges proven on a real path (browser if UI). Only MEDIUM/LOW remain if acceptable under P50 (ACCEPT recorded if needed). |
+| `LIVE` | BETA + P50 clear + applicable `05-QUALITY` production items. **Does not mean already deployed.** Deploy only when Bubby asks, via the project's documented path. Constrained self-check **must not** return LIVE. |
+
+**When it runs:** before anyone may say the **product** is complete (P61); Bubby says fertig / Alpha / Beta / Live / Release / „ist es wirklich fertig“ / declare complete; `/adb-ready`. **Stamp is stale** after a later slice INTEGRATE, or after required behavior / SoT that this walk covered **changed**. Date alone is not currency. Stale stamp → `/adb-ready` again before “fertig”. Not on every slice. Do **not** add a station to P36. Do **not** change `adb-slice` to call this per slice. P61 still means don’t call the product done; it must **not** turn every slice INTEGRATE into `/adb-ready`.
+
+**Who:** separate agent. Builder’s session + builder’s story ≠ independent. Lead re-reading own work ≠ independent. If none: STATUS `REVIEW LIMITATION` as today; constrained self-check; do not call it independent; **not LIVE**.
+
+Walker does not implement product code (P39). Discoveries: REGISTER (P46). Mini-fixes: BUILD afterwards, then a **new** walk if needed. Walker must not grade their own repair.
+
+**Who writes the stamp:** the independent walker writes `READINESS`, `READINESS-AT`, `READINESS-BY` and overwrites `## Readiness`. Lead/coordinator must **not** change the key. `READINESS-BY` is `independent` \| `constrained-self-check` — **not** the same field as `REVIEW LIMITATION` (code/plan).
+
+**How:** reload SoT + STATUS + issues (P58). User-facing: harness browser, real clicks. High-integrity: relevant calc/permissions. P45/P46. No invented leftover work. Depth scales (P60), not skip.
+
+**Where:** no new numbered ADB file. `adb/07-STATUS.md` header must name `READINESS`, `READINESS-AT`, `READINESS-BY` (P22). `## Readiness` — overwrite, not a changelog; preserve on `/adb-status` rewrite like `## Execution plan` (P22 + `/adb-status` Step 2). Real issues go to the existing register; don’t duplicate full issue bodies in STATUS if 08 exists.
+
+METHOD: ADB → STATUS. **Not ADB:** do not create ADB files; tell Bubby the verdict; persist only in a tracker the project already has (`AGENTS.md` REGISTER paths).
 
 ⸻
 

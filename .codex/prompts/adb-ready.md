@@ -1,0 +1,1 @@
+../../commands/adb-ready.md

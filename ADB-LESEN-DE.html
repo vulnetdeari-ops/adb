@@ -118,7 +118,7 @@
 <p><strong>Architektur:</strong> nur was zählt. Technik, Grenzen, Daten, APIs, Auth, Speichern, Deployment, Sicherheit. WHY bei folgenreichen Entscheidungen. Keine Architektur für hypothetische Zukunft.</p>
 <p><strong>Quality:</strong> was DONE hier heißt. Tests, Sicherheit, Tempo, Fehler, Logging, Backup, Production — je nach Risiko. Keine sinnlosen Tore.</p>
 <p><strong>Decisions:</strong> wichtiges WHY. Entscheidung, Grund, Alternativen, Folge. Keine trivialen Bau-Details.</p>
-<p><strong>Status:</strong> Header-Felder wie im Status-Template: Phase, erledigt, aktuell, restlich, Blocker, nächste wichtige Aktion, offene Issues, CRITICAL/HIGH, CARRIED-3-Ausgang, <strong>REVIEW LIMITATION</strong> — und ab mehreren Slices ein <strong>Ausführungsplan</strong> unter <code>## Execution plan</code> (P34), nicht im Chat.</p>
+<p><strong>Status:</strong> Header-Felder wie im Status-Template: Phase, erledigt, aktuell, restlich, Blocker, nächste wichtige Aktion, offene Issues, CRITICAL/HIGH, CARRIED-3-Ausgang, <strong>REVIEW LIMITATION</strong>, <strong>READINESS / READINESS-AT / READINESS-BY</strong> — und ab mehreren Slices ein <strong>Ausführungsplan</strong> unter <code>## Execution plan</code> (P34), nicht im Chat. <code>## Readiness</code> bleibt beim Status-Rewrite erhalten (wie der Ausführungsplan); den Schlüssel schreibt nur der Walker (P61B).</p>
 <p><strong>Open Issues:</strong> alle sinnvollen ungelösten Probleme dauerhaft speichern. Chat-Gedächtnis reicht nicht. Unsicher? Eintragen. Nicht still überspringen. Keine erfundene Produktentscheidung.</p>
 
 <h2>24. Issues nicht verschmutzen</h2>
@@ -245,7 +245,10 @@
 <p><strong>ADB darf kleine Produkte nicht überbauen.</strong> Kleines Produkt: Source of Truth schrumpfen. Großes oder hochintegrales: aufteilen. Die Methode skaliert mit Komplexität, Risiko, Größe, Integrität — nicht mit Theater. Verboten: jeden Großprojekt-Schritt auf ein kleines Produkt zu legen, nur um eine Checkliste abzuhaken.</p>
 
 <h2>61. Fertig heißt</h2>
-<p>Nicht: Code existiert, kompiliert, Demo läuft, Unit Tests grün. Sondern: beabsichtigtes Verhalten da, Kantenfälle, UX, Design, Spec erfüllt, relevante Tests, Review wenn nötig wirklich unabhängig, Issues angemessen, unnötige Komplexität weg, kein Release-Blocker.</p>
+<p>Nicht: Code existiert, kompiliert, Demo läuft, Unit Tests grün. Sondern: beabsichtigtes Verhalten da, Kantenfälle, UX, Design, Spec erfüllt, relevante Tests, Review wenn nötig wirklich unabhängig, Issues angemessen, unnötige Komplexität weg, kein Release-Blocker. Das Produkt ist erst fertig, wenn 61B am <strong>aktuellen</strong> Stand gelaufen ist (Stempel nicht alt). ALPHA ist nie Fertig. Die Qualitätsleiste wählt nicht ALPHA gegen BETA, nur BETA (echter Betrieb) gegen LIVE (Produktion).</p>
+
+<h2>61B. Produkt-Reife</h2>
+<p>Bevor jemand das <strong>Produkt</strong> fertig nennt: eigener Walk, nicht jede Scheibe. Stempel in Status: READINESS, READINESS-AT, READINESS-BY. ALPHA ist nie Fertig. LIVE nur nach unabhängigem Walk, nicht nach Selbstcheck. Stempel ist alt nach späterem INTEGRATE oder wenn das geprüfte Verhalten sich geändert hat — Datum allein zählt nicht. Walker ändert keinen Produkt-Code. Nicht dieselbe Prüfung wie Slice-VERIFY oder <code>/adb-review</code>.</p>
 
 <h2>61A. Feedback an die Methode</h2>
 <p>ADB ist selbst ein Produkt. Manche Funde sind keine Projektfehler — die Methode war still, zwei Stellen widersprechen sich, sie hat Arbeit verlangt die Punkt 60 oder die Anti-Zeremonie-Regel verbieten, oder genau das Befolgen hat den Defekt erzeugt.</p>

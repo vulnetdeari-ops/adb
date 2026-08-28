@@ -43,7 +43,7 @@ adopt-project
 
 If an existing `ADB.md` body differs from `SKILL.md`, the script reports `STALE` and does **not** stamp it — a stamp naming the current version on an old body would answer the age question wrongly (P1A). It also leaves the slash commands alone in that case, so the project does not end up with an old method and new commands citing points it lacks. Use `--refresh` to update body and commands together, or record a decision to stay on the older version.
 
-Slash commands (`/adb`, `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`) live in [`commands/`](commands/). They point at `SKILL.md`; they are not a second method.
+Slash commands (`/adb`, `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`, `/adb-ready`) live in [`commands/`](commands/). They point at `SKILL.md`; they are not a second method.
 
 Inside this repository, `.cursor/commands/`, `.claude/commands/` and `.codex/prompts/` are **symlinks** into `commands/`. There is one copy to edit, so the harnesses cannot drift apart.
 

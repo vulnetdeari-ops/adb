@@ -12,7 +12,8 @@ If `METHOD.md` does not contain `METHOD: ADB`, stop and ask whether to activate 
 Otherwise:
 
 1. Read `adb/07-STATUS.md` when it exists. If PHASE is DEFINE or STATUS is missing, run `/adb-define`.
-2. If PHASE is BUILD and the user asked for status or progress, run `/adb-status`.
-3. Otherwise ask once what they want next: continue DEFINE, start or continue a slice, review, triage issues, or status — then run the matching command.
+2. If PHASE is BUILD and the user asked for complete, ready, alpha, beta, live, fertig, or declare complete, run `/adb-ready`.
+3. If PHASE is BUILD and the user asked for status or progress, run `/adb-status`.
+4. Otherwise ask once what they want next: continue DEFINE, start or continue a slice, review, triage issues, status, or product readiness — then run the matching command.
 
-Do not invent a sixth workflow. The five phase commands are `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, and `/adb-triage`.
+The six commands are `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`, and `/adb-ready`.
