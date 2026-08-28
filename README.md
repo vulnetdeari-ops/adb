@@ -2,7 +2,7 @@
 
 **Ask. Decide. Build.**
 
-ADB is a product method for AI coding agents. It asks until the intended product is clear, proposes decisions, then builds. It is not an agent framework, a fake company, or a pile of extra process.
+ADB is a product method for AI coding agents. Bubby sets where the product must land. The agent asks until that is written down, then builds in slices and proves it. It is not an agent framework, a fake company, or a pile of extra process.
 
 This is not the Android Debug Bridge.
 
@@ -59,8 +59,8 @@ Vision, Product Spec and the rest of `adb/01`…`adb/07` are **not** created by 
 ## What it does
 
 - **Ask** — grill the product, not the user. Research what can be discovered. Offer real choices. `Decide for me` is valid.
-- **Decide** — keep a durable source of truth. Small products may collapse to Vision, Product Spec and Status. Larger products use `adb/01` … `adb/08`. Uncertain findings get registered, not swallowed.
-- **Build** — execute against that truth. Default: one visible worker; prove on a real path. Missing required behavior is fixed or written down, not ignored.
+- **Decide** — keep that in `adb/`. Small products may collapse to Vision, Product Spec and Status. Larger products use `adb/01` … `adb/08`. Uncertain findings get registered, not swallowed.
+- **Build** — execute against `adb/`. Prove on a real path (browser, tests, logins). Missing required behavior is fixed or written down, not ignored.
 
 The full method is in [`SKILL.md`](SKILL.md).
 

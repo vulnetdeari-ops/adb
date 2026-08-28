@@ -96,11 +96,11 @@ Record real unresolved complaints, bugs, regressions, UX or design defects, data
 
 Never record secrets, private data, or actionable vulnerability details in this tracked file. Use an explicitly private channel for sensitive security reports.
 
-OPEN: 0 · READY FOR VERIFY: 0 · CRITICAL: 0 · HIGH: 0 · MEDIUM: 0 · LOW: 0 · CLOSED: 0
+OPEN: 0
 
-Closed issues stay in this file and stay traceable (P49). Mark CLOSED only after the fix is tested and verified. Do not close by deleting the entry.
+Closed issues stay in this file and stay traceable (SKILL.md Issues). Mark CLOSED only after the fix is tested and verified. Do not close by deleting the entry.
 
-CARRIED counts status reviews survived while OPEN (P25, P50A). At CARRIED: 3 an issue must exit OPEN by FIX, ACCEPT or REJECT — there is no fourth carry.
+CARRIED: at 3 an issue must leave OPEN by FIX, ACCEPT or REJECT (SKILL.md Issues).
 EOF
 }
 

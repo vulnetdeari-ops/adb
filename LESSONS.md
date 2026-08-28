@@ -94,3 +94,15 @@ ROOT CAUSE: A copy ages. Machinery to keep the copy honest became larger than th
 PROPOSED CHANGE: Do not copy the method into the project. `METHOD.md` is the switch. Agents read canonical `SKILL.md`. Commands stay short. Leftover `ADB.md` is ignored; `--refresh` removes it. Drop the P60 citation.
 STATUS: ADOPTED — 2026-08-28.
 
+---
+
+## L-009 — Rulebook should state who sets the destination
+
+DATE: 2026-08-28
+PROJECT: ADB method
+SYMPTOM: The method explained phases and files. It did not say in one place: Bubby sets where the product must land; the agent writes that down, builds in slices that fit context, and proves it (browser, tests, logins).
+ROOT CAUSE: The method was written as numbered process. The reason it exists is a non-programmer owner.
+PROPOSED CHANGE: Open `SKILL.md` with that job. DEFINE / BUILD / COMPLETION in plain language. Commands point at those sections, not at old point numbers.
+STATUS: ADOPTED — 2026-08-28.
+
+
