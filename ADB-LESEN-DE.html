@@ -25,6 +25,7 @@
 <p>Erbt die globalen Regeln aus <code>AGENTS.md</code>: beim Ergebnis angreifen, beim Bau verteidigen.</p>
 <p><strong>Ziel:</strong> Das Produkt so klar verstehen, dass man sicher bauen kann. Dieses Verständnis dauerhaft festhalten. Dann aggressiv auf ein außergewöhnliches Produkt hinarbeiten — bei so wenig unnötigem Code und Komplexität wie möglich.</p>
 <p>Jeder Punkt ist ein Maßstab, kein Auftrag extra Dateien oder Agenten zu erzeugen. Was nicht passt, darf keine Extra-Arbeit erzeugen. Punkt 60 bestimmt die Tiefe aller anderen Punkte.</p>
+<p><strong>Zuerst tun:</strong> DEFINE, bis ein frischer Agent aus den Dateien bauen kann. BUILD in Scheiben. <strong>Größe:</strong> klein = kurzer Auftrag; groß = Plan + Fertig-Kriterien, und ein Reviewer liest den Plan <em>bevor</em> jemand coded. <code>agy</code> vor jedem Commit. <strong>Prüf-Runden höchstens 3</strong>, dann Bubby — das ist <em>nicht</em> Issue-CARRIED.</p>
 <p><strong>Geheimnisse:</strong> Keine Passwörter, Schlüssel, Tokens oder echten <code>.env</code>-Dateien in das Repo und auch nicht in die dauerhaften ADB-Dateien. Auch nicht in ein Issue, das mit im Repo liegt. Beispiel-Dateien ohne echte Werte sind in Ordnung.</p>
 
 <hr>
@@ -125,8 +126,8 @@
 
 <h2>25. Issue-Format</h2>
 <p>Stabile IDs: ISSUE-001. Titel, Typ, Schwere, Fundort, Problem, Beweis, Erwartung, Status, Abhängigkeiten, CARRIED, Lösung, geprüft von.</p>
-<p>Status: OPEN, IN PROGRESS, BLOCKED, READY FOR VERIFY, CLOSED. Schwere: CRITICAL, HIGH, MEDIUM, LOW.</p>
-<p><strong>CARRIED</strong> zählt, wie viele Status-Läufe das Issue überlebt hat, während es OPEN war. Neu: 0. Jeder Status-Lauf erhöht es für jedes noch offene Issue.</p>
+<p>Status: OPEN, IN PROGRESS, BLOCKED (zählt für CARRIED weiter als offen), WAITING ON USER (CARRIED eingefroren), READY FOR VERIFY, CLOSED. Schwere: CRITICAL, HIGH, MEDIUM, LOW.</p>
+<p><strong>CARRIED</strong> zählt, wie viele Status-Läufe das Issue überlebt hat, während es OPEN war. Neu: 0. Jeder Status-Lauf erhöht es für jedes noch offene Issue — außer WAITING ON USER. Das ist <strong>nicht</strong> die Prüf-Runden-Grenze bei <code>agy</code>/Review (max. 3, dann Bubby).</p>
 
 <h2>26. DEFINE ist fertig wenn</h2>
 <p>Ein frisches Team könnte aus den Dateien bauen, ohne Wichtiges zu erfinden. Und: keine offene Unsicherheit blockiert den ersten sichtbaren Schritt. Keine theoretische Perfektion. Umkehrbare Kleinigkeiten dürfen offen bleiben — als Annahme oder Issue, nie still als Wahrheit.</p>
@@ -169,8 +170,9 @@
   <li><strong>Grenzen</strong> — Secrets, keine Drive-by-Refactors, Sonderregeln</li>
   <li><strong>Beweis</strong> — wie prüfen (Tests, Befehle, Screenshot)</li>
   <li><strong>Rückgabe</strong> — kurzes Format; Lead fasst für Bubby zusammen</li>
-  <li><strong>Review</strong> — eigener Reviewer-Worker ja/nein</li>
+  <li><strong>Review (Code)</strong> — eigener Reviewer-Worker ja/nein (P39)</li>
   <li><strong>Kontinuität</strong> — neuer Worker oder Folge an bestehende Session</li>
+  <li><strong>Plan-Review (nur groß)</strong> — Reviewer liest Plan + Fertig-Kriterien + Spec, <em>bevor</em> Bau-Worker starten. Einmal nachbessern, dann Bubby. Worker raten Scope, Reihenfolge und „fertig“ nicht.</li>
 </ol>
 <p>Fehlt etwas Wichtiges: erst Ask/Decide mit Bubby. Keine vagen Aufträge.</p>
 
@@ -184,14 +186,14 @@
 
 <p>Was die weniger offensichtlichen Stationen heißen: <strong>SPEC CHECK</strong> = das Gebaute gegen die Source of Truth halten, nicht gegen die Erinnerung. <strong>VERIFY</strong> = beweisen, nicht behaupten: was getestet, wie, was passiert ist — bei Web-Oberflächen im Browser. <strong>INTEGRATE</strong> = die geprüfte Arbeit landet dort, wo das Projekt seine Wahrheit hält: in den Arbeitszweig übernommen, Source of Truth und STATUS aktualisiert, Worker-Zweig geschlossen. Geprüft aber nicht übernommen ist nicht fertig.</p>
 
-<p><strong>Kürzen bei kleinen Slices:</strong> REVIEW darf wegfallen, wenn unabhängiges Review nicht nötig ist (P39 — vorher entscheiden). SPEC, IMPLEMENT, TEST, SPEC CHECK, VERIFY und INTEGRATE fallen nie weg. Die Issue-Station heißt beim Slice-Ende „Status-Review“ (P25): Register lesen, CARRIED erhöhen — das darf nicht wegfallen.</p>
+<p><strong>Kürzen bei kleinen Slices:</strong> Code-REVIEW darf wegfallen, wenn unabhängiges Review nicht nötig ist (P39 — vorher entscheiden). SPEC, IMPLEMENT, TEST, SPEC CHECK, VERIFY und INTEGRATE fallen nie weg. Bei <strong>großen</strong> Slices bleibt das Plan-Gegenlesen (vor dem Coden). Die Issue-Station heißt beim Slice-Ende „Status-Review“ (P25): Register lesen, CARRIED erhöhen — das darf nicht wegfallen.</p>
 
-<p><strong>Wenn REVIEW, SPEC CHECK oder VERIFY durchfällt:</strong> nicht übernehmen. Kleine, verstandene Ursache im gleichen Slice beheben und ab der gefallenen Station neu prüfen. Sonst registrieren und entweder den Slice auf das kürzen, was wirklich geprüft ist, oder den Slice abbrechen und den Zweig auf den letzten guten Stand zurücksetzen. In STATUS festhalten. Ein durchgefallener Slice wird nie als voll geliefert gemeldet, und ein offenes Issue ersetzt nie fehlendes Verhalten.</p>
+<p><strong>Wenn REVIEW, SPEC CHECK oder VERIFY durchfällt:</strong> nicht übernehmen. Kleine, verstandene Ursache im gleichen Slice beheben und ab der gefallenen Station neu prüfen. Höchstens <strong>3 Prüf-Runden</strong>, dann Bubby (nicht CARRIED). Sonst registrieren und entweder den Slice auf das kürzen, was wirklich geprüft ist, oder den Slice abbrechen und den Zweig auf den letzten guten Stand zurücksetzen. In STATUS festhalten. Ein durchgefallener Slice wird nie als voll geliefert gemeldet, und ein offenes Issue ersetzt nie fehlendes Verhalten.</p>
 
 <p>Kleine prüfbare Aufgaben. Keinen großen unverprüften Code-Haufen.</p>
 
 <h2>38. Kontext für Unter-Agenten</h2>
-<p>Nur das Minimum. Ein Worker bekommt relevante Spec, UX, Architektur, Ziel, Code. Ein Reviewer bekommt Spec, erwartetes Verhalten, Diff, Testbeweis, Kriterien — nicht den Interview-Verlauf und nicht die Geschichte des Workers.</p>
+<p>Nur das Minimum. Ein Worker bekommt relevante Spec, UX, Architektur, Ziel, Code — bei großem Auftrag auch Plan und Fertig-Kriterien. Ein Reviewer bekommt bei <strong>Plan-Review</strong> Spec + Plan + Fertig-Kriterien (kein Diff); bei <strong>Code-Review</strong> Spec, erwartetes Verhalten, Diff, Testbeweis, Kriterien — nicht den Interview-Verlauf und nicht die Geschichte des Workers. Reviewer coded nie.</p>
 
 <h2>39. Unabhängiges Review</h2>
 <p>Bei sinnvoller Arbeit bevorzugt, wenn die Umgebung das hergibt. Wer gebaut hat, darf nicht allein entscheiden, ob es stimmt. Derselbe Chat mit der Bau-Geschichte ist kein unabhängiges Review. Geht es nicht: in STATUS notieren und gegen die Source of Truth selbst prüfen — das nicht „unabhängiges Review“ nennen. Tiefe nach Risiko. Keine Extra-Rollen aus Theater.</p>

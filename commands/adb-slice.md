@@ -29,27 +29,26 @@ Do not parallelize work that would modify the same code, make conflicting archit
 
 You are the Lead. Ask/Decide and the Source of Truth stay in this thread; heavy BUILD work goes to workers. Workers start fresh and see only the brief.
 
-Delegate on the harness's own **visible** agent surface, so the user can see who is working (P32). A subagent inside your own session is not delegation the user can see. Where the harness has project workspaces, the Lead briefs the project's session coordinator, which spawns the agents that do the work — see global `AGENTS.md` → Multi-Agent Work, which is authoritative. Name them `{Project}-Worker` and `Reviewer`.
+Delegate on the harness's own **visible** agent surface (P32). See global `AGENTS.md` → Multi-Agent Work (authoritative), including **Size gate**. Name workers `{Project}-Worker` and Reviewer `{Project}-Reviewer` when spawned.
 
-Complete silently before every delegated task — if any item is unknown and material, Ask/Decide with the user first. Never send a vague brief.
+Complete silently before every delegated task — if any item is unknown and material, Ask/Decide first. Never send a vague brief.
 
 1. **Goal** — what done looks like, 1–2 sentences.
-2. **Workspace / path** — exact project directory or workspace.
-3. **Source of Truth pointers** — which `adb/` files or sections apply, or "none / brownfield inspect first".
-4. **Scope** — in scope / out of scope, plus an explicit "do not" list when needed.
-5. **Constraints** — secrets rules, no drive-by refactors, financial/safety limits.
-6. **Proof** — commands, tests, screenshots, git status the worker must produce.
+2. **Workspace / path**
+3. **Source of Truth pointers** — or "none / brownfield inspect first".
+4. **Scope** — in / out, plus "do not" when needed.
+5. **Constraints** — secrets, no drive-by refactors, financial/safety limits.
+6. **Proof** — commands, tests, screenshots, git status.
 7. **Return format** — short; you summarize for the user.
-8. **Review** — is an independent reviewer required before merge? If yes, spawn separately with diff + spec only (`/adb-review`).
-9. **Continuity** — new worker, or follow-up to an existing worker id/session.
+8. **Review (code)** — P39: independent reviewer before merge? If yes, spawn with diff + spec only (`/adb-review`).
+9. **Continuity** — new worker vs follow-up.
+10. **Plan review (large only)** — Size gate: do **not** spawn implementers until Reviewer has passed on **plan + done criteria + relevant spec only**. One plan revision, then Bubby. Workers must not decide scope, architecture, ownership, or acceptance.
 
-Stay in this thread only for: short clarification, tiny one-file edits, Decide questions, status summaries, and work where delegation costs more than it saves.
-
-Agent count follows the work. No agents for ceremony or fake roles.
+Stay in this thread only for: short clarification, tiny one-file edits, Decide questions, status summaries, and work where delegation costs more than it saves. No agents for ceremony.
 
 ## Step 3 — Subagent context (P38)
 
-Give each worker the minimum sufficient context: relevant Product Spec, relevant UX, relevant Architecture, task objective, related code. Never send the whole project history.
+Give each worker the minimum sufficient context: relevant Product Spec, relevant UX, relevant Architecture, task objective, related code. For **large** work also include the decision-complete plan and done criteria (P38). Never send the whole project history.
 
 ## Step 4 — Slice loop
 
@@ -57,9 +56,9 @@ Run every meaningful slice through (P36):
 
 SPEC → PLAN → IMPLEMENT → TEST → REVIEW → SPEC CHECK → ISSUE TRIAGE → VERIFY → INTEGRATE
 
-**Scaling:** use the variant defined in P36 ("Scaling the loop") — do not invent a shorter loop here. SPEC, IMPLEMENT, TEST, SPEC CHECK, VERIFY and INTEGRATE never drop. State which variant you are running and why.
+**Scaling:** use P36 ("Scaling the loop") — do not invent a shorter loop. SPEC, IMPLEMENT, TEST, SPEC CHECK, VERIFY and INTEGRATE never drop. Large-work **plan review still runs** even when code REVIEW is skipped. State which variant and why.
 
-**If REVIEW, SPEC CHECK or VERIFY fails:** follow P36 ("When a station fails"). Do not integrate, and do not let an open issue stand in for missing behavior.
+**If REVIEW, SPEC CHECK or VERIFY fails:** P36 ("When a station fails"). **Review-round cap: 3** fix cycles on the same station/`agy` diff, then ask Bubby — this is **not** issue `CARRIED`. Do not integrate, and do not let an open issue stand in for missing behavior.
 
 Use small verifiable tasks, each with clear objective, relevant specification, expected behavior, bounded scope and verification method. Do not accumulate large quantities of unreviewed code (P37).
 

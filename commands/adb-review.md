@@ -1,6 +1,6 @@
 ---
 name: adb-review
-description: "ADB independent review. Reviewer receives Spec + Diff + Evidence only — never the builder's narrative."
+description: "ADB independent review. Plan review: spec + plan + done criteria. Code review: spec + diff + evidence. Never the builder's narrative."
 ---
 
 # /adb-review
@@ -12,15 +12,11 @@ This command enforces P38, P39, P44, P45 and P50.
 
 Spawn this as a **separate agent**. The same model in the same session, given the builder's story, is not independent review. A lead agent re-reading its own work is not independent review (P39).
 
-Hand the reviewer exactly:
+**Code review** — hand exactly: relevant specification, expected behavior, the diff, test evidence, concrete review criteria.
 
-- the relevant specification (from the Source of Truth files that exist)
-- expected behavior
-- the diff
-- test evidence
-- concrete review criteria
+**Plan review (large work, before implementers)** — hand exactly: relevant specification, the written plan, done criteria. No implementer chat. No diff yet. Verdict pass → Lead/coordinator may spawn implementers. One revision, then Bubby (P32A, P36 PLAN).
 
-Never hand the reviewer: interview history, the builder's narrative or rationale, full project history, or any instruction to confirm the builder's conclusion (P38).
+Never hand the reviewer: interview history, the builder's narrative or rationale, full project history, or any instruction to confirm the builder's conclusion (P38). Reviewer never implements.
 
 If the environment cannot provide a separate reviewer, record that limitation in STATUS and run a constrained self-check instead. Do not call that self-check independent review.
 
@@ -28,7 +24,19 @@ Scale the review to risk. Do not invent extra review roles for ceremony.
 
 ## Reviewer instructions
 
-You are reviewing against the Source of Truth, the diff and the test evidence. Agent confidence is not evidence. Green tests are not sufficient proof (P45).
+Detect mode from the brief: **plan review** (plan + done criteria, no diff) or **code review** (diff + tests). Agent confidence is not evidence.
+
+### Plan review
+
+Judge the written plan against the Source of Truth and done criteria. There is no diff and no implementation yet.
+
+Ask: Is the plan decision-complete (who, order, parallel only when independent)? Can a worker execute without deciding scope, architecture, ownership, or acceptance? Are done criteria concrete (command, test, or browser path)? Does the plan invent work the spec does not require?
+
+Do not implement. Do not request a diff.
+
+### Code review
+
+You are reviewing against the Source of Truth, the diff and the test evidence. Green tests are not sufficient proof (P45).
 
 Judge only the dimensions that are relevant (P44):
 
@@ -46,7 +54,7 @@ When the Source of Truth is collapsed, compare against the surviving files. Coll
 
 ## Divergence rule (P45)
 
-If implementation differs from the Source of Truth, decide explicitly:
+**Code review only.** If implementation differs from the Source of Truth, decide explicitly:
 
 - **A** — the implementation is wrong, or
 - **B** — product intent intentionally changed.
