@@ -82,3 +82,15 @@ SYMPTOM: Draft decision UI used Perplexity-style chip labels. Agents and drafts 
 ROOT CAUSE: A feature sketch taught a discarded interaction. The method and the reading copy already followed A/B/C; the feature note still named “chips” and looked like an open path.
 PROPOSED CHANGE: Keep A/B/C + „Entscheide du“ as the only rule. Mark chips rejected. Rename the feature note so the filename does not teach chips.
 STATUS: ADOPTED — A/B/C + Entscheide du; chips verworfen; `FEATURE-decision-options.md`, 2026-08-27.
+
+---
+
+## L-008 — Project copy of the method was a second source
+
+DATE: 2026-08-28
+PROJECT: ADB method
+SYMPTOM: Setup copied `SKILL.md` into every project as `ADB.md`, then needed a version stamp, a STALE check, and slash commands that restated the method so they would not cite a stale copy. Agents had two method files. P60 was cited though it had no own section.
+ROOT CAUSE: A copy ages. Machinery to keep the copy honest became larger than the method. Commands restated `SKILL.md` instead of pointing at it.
+PROPOSED CHANGE: Do not copy the method into the project. `METHOD.md` is the switch. Agents read canonical `SKILL.md`. Commands stay short. Leftover `ADB.md` is ignored; `--refresh` removes it. Drop the P60 citation.
+STATUS: ADOPTED — 2026-08-28.
+

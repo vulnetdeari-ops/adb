@@ -5,15 +5,11 @@ description: "Ask. Decide. Build. Entry point when the user invokes /adb on an A
 
 # /adb
 
-Canonical method: `ADB.md` in the project root (or `~/Development/_System/Methods/ADB/SKILL.md`).
+Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md`. Ignore a leftover project `ADB.md`.
 
-If `METHOD.md` does not contain `METHOD: ADB`, stop and ask whether to activate ADB on this project.
+If `METHOD.md` does not contain `METHOD: ADB`, stop and ask whether to activate ADB.
 
-Otherwise:
-
-1. Read `adb/07-STATUS.md` when it exists. If PHASE is DEFINE or STATUS is missing, run `/adb-define`.
-2. If PHASE is BUILD and the user asked for complete, ready, alpha, beta, live, fertig, or declare complete, run `/adb-ready`.
-3. If PHASE is BUILD and the user asked for status or progress, run `/adb-status`.
-4. Otherwise ask once what they want next: continue DEFINE, start or continue a slice, review, triage issues, status, or product readiness — then run the matching command.
-
-The six commands are `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`, and `/adb-ready`.
+1. No STATUS, or PHASE is DEFINE → `/adb-define`.
+2. User said fertig / alpha / beta / live / complete → `/adb-ready`.
+3. User asked status or progress → `/adb-status`.
+4. Else ask once: DEFINE, slice, review, triage, status, or ready — then that command.

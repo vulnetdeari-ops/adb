@@ -5,7 +5,7 @@ description: "Ask. Decide. Build. Product method. Activates when METHOD.md says 
 
 # ADB
 
-Ask. Decide. Build. Canonical: this file. Setup copies it to the project as `ADB.md`.
+Ask. Decide. Build. Canonical: this file. Do not copy it into the project.
 
 **Job:** a product that holds in real life. Bubby is not the tester. You ask until the product is clear, write that down, then build and prove. Not a fake company. Not a second rulebook — inherit `/Users/bubby/Development/_System/Rules/AGENTS.md` for talk, proof, secrets, git, and how work is sent.
 
@@ -15,7 +15,7 @@ Ask. Decide. Build. Canonical: this file. Setup copies it to the project as `ADB
 * BUILD in slices: **SPEC → BUILD → PROVE → RECORD**. `agy-review` at project commit (AGENTS.md). Review-round cap: 3, then Bubby. That cap is not `CARRIED`.
 * Workers: AGENTS.md (default one visible worker; written plan only when **heavy**: money, login/security, live, data migration, new public contract).
 
-Each point judges the product. If it does not apply, extra work is forbidden. P60 sets depth.
+Each point judges the product. If it does not apply, extra work is forbidden. No ceremony to tick points.
 
 ⸻
 
@@ -23,15 +23,11 @@ Each point judges the product. If it does not apply, extra work is forbidden. P6
 
 Slash commands live **in the project**, never in the user home.
 
-Activates when: `METHOD.md` contains `METHOD: ADB`; user invokes `/adb`; or a new product is clearly wanted. Existing apps: only when asked. Then the project’s ADB files govern. Do not load a second product method.
+Activates when: `METHOD.md` contains `METHOD: ADB`; user invokes `/adb`; or a new product is clearly wanted. Existing apps: only when asked. This file is the method. Product truth is the project’s `adb/` files. Do not load a second product method.
 
-## 1A. METHOD VERSION
+## 1A. NO PROJECT COPY
 
-Stamp as first line after YAML frontmatter:
-
-    METHOD-VERSION: <short git sha of the canonical ADB repo> <date>
-
-Never stamp a body you did not refresh. If the copy differs from this file (ignore stamp): STALE, leave the old stamp. Helpers: `setup-into-project.sh`, `new-project … adb`, `adopt-project`. Canonical: `~/Development/_System/Methods/ADB`. Lessons: `LESSONS.md` (P61A). Do not refresh a live project silently mid-BUILD.
+Do not copy this file into the project. `METHOD.md` with `METHOD: ADB` is the switch. Helpers install `METHOD.md` and slash commands: `setup-into-project.sh`, `new-project … adb`, `adopt-project`. Canonical repo: `~/Development/_System/Methods/ADB`. Lessons: `LESSONS.md` (P61A). A leftover project `ADB.md` is not the method — ignore it.
 
 ## 2. PROJECT MODE
 
@@ -81,7 +77,7 @@ Small products collapse to Vision + Spec + Status. Other topics live in 02 until
 - **04** — stack, boundaries, data, deploy, security — only what matters, with WHY.
 - **05** — what DONE means for this product.
 - **06** — important WHY, not trivia.
-- **07** — STATUS header (same names as `/adb-status`): PHASE, COMPLETED, CURRENT, REMAINING, BLOCKERS, NEXT IMPORTANT ACTION, OPEN ISSUES, CRITICAL/HIGH, AT CARRIED 3, REVIEW LIMITATION, READINESS, READINESS-AT, READINESS-BY. Multi-slice BUILD: `## Execution plan`. Preserve `## Readiness` on rewrite — the walker writes the stamp (P61B).
+- **07** — STATUS header: PHASE, COMPLETED, CURRENT, REMAINING, BLOCKERS, NEXT IMPORTANT ACTION, OPEN ISSUES, CRITICAL/HIGH, AT CARRIED 3, REVIEW LIMITATION, READINESS, READINESS-AT, READINESS-BY. Multi-slice BUILD: `## Execution plan`. Preserve `## Readiness` on rewrite — the walker writes the stamp (P61B).
 - **08** — unresolved real problems, or `## Open issues` in 07 while collapsed.
 
 ## 24–25. ISSUES
