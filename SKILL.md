@@ -258,7 +258,7 @@ Before adding meaningful complexity: real requirement? meaningful quality/reliab
 
 Desired, not merely allowed. Reason: context. Lead talks to the user, holds the Source of Truth, merges. Bounded work (research, slice, tests, review) goes to subagents with minimum sufficient context.
 
-**Layers, visibility, size gate, finish-notify, launch profile:** see global `AGENTS.md` → Multi-Agent Work (authoritative). Lead does not brief an implementing worker directly when a project workspace exists; coordinator does not absorb a multi-file feature alone.
+**Layers, visibility, size gate:** see global `AGENTS.md` → Multi-Agent Work (authoritative). **Launch profile, finish-notify, `/reset`:** skill `paseo-orchestration` (`~/Development/_System/Rules/skills/paseo-orchestration/SKILL.md`). Lead does not brief an implementing worker directly when a project workspace exists; coordinator does not absorb a multi-file feature alone.
 
 **ADB-specific:**
 
