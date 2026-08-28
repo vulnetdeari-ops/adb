@@ -8,7 +8,7 @@ description: "ADB Phase 1 — DEFINE. Grill the product, not the user. Build the
 Canonical method: `ADB.md` in the project root (or `~/Development/_System/Methods/ADB/SKILL.md`).
 This command enforces P2, P4–P14 and P26. Read the referenced points there; do not restate them here.
 
-Inherit the project's `AGENTS.md`: Offensive on Outcome, Defensive on Implementation.
+Inherit global `AGENTS.md` (talk, proof, A/B/C).
 
 ## Preconditions
 
@@ -37,7 +37,7 @@ One meaningful decision at a time:
 
 QUESTION → ANSWER → INSPECT → RESEARCH IF USEFUL → UPDATE UNDERSTANDING → UPDATE SOURCE OF TRUTH → NEXT BEST QUESTION
 
-Every important question ships 2–4 serious options as A/B/C, in the user's language. The user answers with **one letter** (P10, and global `AGENTS.md` → Decision Questions, which is authoritative):
+Every important question ships 2–4 serious options as A/B/C, in the user's language. The user answers with **one letter** (P10, and global `AGENTS.md` → Talk (Bubby), which is authoritative):
 
 ```
 A) Kurzer Titel — eine Zeile Erklärung
@@ -93,4 +93,4 @@ If the answer is **B**, treat the named blockage as the only remaining DEFINE wo
 
 - Extra files, agents, slices or reviews to show a point was visited (P60).
 - Large-project machinery on a small product (P60).
-- Secrets in the repository or in persistent ADB files (see the secrets rule in `SKILL.md`, and global `AGENTS.md` → Secrets).
+- Secrets in the repository or in persistent ADB files (see the secrets rule in `SKILL.md`, and global `AGENTS.md` → Hold).

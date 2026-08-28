@@ -54,7 +54,7 @@ Inside this repository, `.cursor/commands/`, `.claude/commands/` and `.codex/pro
 ./install-commands.sh --remove-global # delete leftover home-level installs
 ```
 
-Do not combine ADB with BMAD.
+Do not load a second product method on top of ADB.
 
 Defects in the method itself, found by real projects, go in [`LESSONS.md`](LESSONS.md). Ordinary project issues do not.
 
@@ -64,7 +64,7 @@ Vision, Product Spec and the rest of `adb/01`…`adb/07` are **not** created by 
 
 - **Ask** — grill the product, not the user. Research what can be discovered. Offer real choices. `Decide for me` is valid.
 - **Decide** — keep a durable source of truth. Small products may collapse to Vision, Product Spec and Status. Larger products use `adb/01` … `adb/08`. Uncertain findings get registered, not swallowed.
-- **Build** — execute against that truth. When the harness can delegate, the lead agent stays **Lead** and workers do heavy slices (see `SKILL.md` points 32 and 32A). Small products stay small. Missing required behavior is fixed or written down, not ignored.
+- **Build** — execute against that truth. Default: one visible worker; prove on a real path. Missing required behavior is fixed or written down, not ignored.
 
 The full method is in [`SKILL.md`](SKILL.md).
 

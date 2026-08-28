@@ -30,7 +30,7 @@ The walker **writes the stamp** (`READINESS`, `READINESS-AT`, `READINESS-BY` and
 
 If the environment cannot provide a separate walker, record that limitation in STATUS `REVIEW LIMITATION` as today and run a constrained self-check instead. Do not call that self-check independent. Constrained self-check **must not** return `LIVE`. `READINESS-BY` is then `constrained-self-check` — that field is **not** `REVIEW LIMITATION`.
 
-Do **not** run this at every slice INTEGRATE. Slice VERIFY and `/adb-review` stay unchanged. Not a station on P36.
+Do **not** run this at every slice RECORD. Slice PROVE and `/adb-review` stay unchanged. Not a station on P36.
 
 ## Walker instructions
 
@@ -69,5 +69,5 @@ READINESS: NICHT_FERTIG | ALPHA | BETA | LIVE
 READINESS-BY: independent | constrained-self-check
 WALKED: what, how, what happened
 GAPS: none | ISSUE-IDs registered
-STALE-NEXT: when this stamp would go stale (later INTEGRATE / SoT or required behavior this walk covered changes)
+STALE-NEXT: when this stamp would go stale (later RECORD / SoT or required behavior this walk covered changes)
 ```

@@ -8,260 +8,31 @@
   .warn { background: #fff3cd; border: 2px solid #c9a227; padding: 14px 16px; margin-bottom: 28px; }
   h1 { font-size: 26px; }
   h2 { font-size: 18px; margin-top: 28px; }
-  h3 { font-size: 15px; }
-  ul, ol { padding-left: 20px; }
+  ul { padding-left: 20px; }
   code { font-size: 13px; }
-  hr { border: none; border-top: 1px solid #ddd; margin: 32px 0; }
 </style>
 </head>
 <body>
 <div class="warn">
-<strong>NUR ZUM LESEN.</strong> Agenten folgen nicht dieser Datei. Die einzige gültige Quelle ist das englische Original:<br>
-<code>/Users/bubby/Development/_System/Methods/ADB/SKILL.md</code>
+<strong>NUR ZUM LESEN.</strong> Agenten folgen nicht dieser Datei. Die gültige Quelle ist:<br>
+<code>/Users/bubby/Development/_System/Methods/ADB/SKILL.md</code><br>
+Stand: 28.08.2026. Wenn das Original neuer ist, gilt das Original. Sprechen und Beweisen stehen in der kurzen Fabrik-Datei <code>AGENTS.md</code>.
 </div>
 
 <h1>ADB — Ask. Decide. Build.</h1>
-<p>Leichte Methode, um ein Software-Produkt zu verstehen, festzuhalten und zu bauen. Keine Agenten-Firma. Kein Extra-Framework. Nutzt die Mittel der aktuellen Umgebung — wenn die Umgebung delegieren kann (z. B. Paseo), arbeitet der <strong>Lead</strong> in diesem Chat.</p>
-<p>Erbt die globalen Regeln aus <code>AGENTS.md</code>: beim Ergebnis angreifen, beim Bau verteidigen.</p>
-<p><strong>Ziel:</strong> Das Produkt so klar verstehen, dass man sicher bauen kann. Dieses Verständnis dauerhaft festhalten. Dann aggressiv auf ein außergewöhnliches Produkt hinarbeiten — bei so wenig unnötigem Code und Komplexität wie möglich.</p>
-<p>Jeder Punkt ist ein Maßstab, kein Auftrag extra Dateien oder Agenten zu erzeugen. Was nicht passt, darf keine Extra-Arbeit erzeugen. Punkt 60 bestimmt die Tiefe aller anderen Punkte.</p>
-<p><strong>Zuerst tun:</strong> DEFINE, bis ein frischer Agent aus den Dateien bauen kann. BUILD in Scheiben. <strong>Größe:</strong> klein = kurzer Auftrag; groß = Plan + Fertig-Kriterien, und ein Reviewer liest den Plan <em>bevor</em> jemand coded. <code>agy</code> vor jedem Commit. <strong>Prüf-Runden höchstens 3</strong>, dann Bubby — das ist <em>nicht</em> Issue-CARRIED.</p>
-<p><strong>Geheimnisse:</strong> Keine Passwörter, Schlüssel, Tokens oder echten <code>.env</code>-Dateien in das Repo und auch nicht in die dauerhaften ADB-Dateien. Auch nicht in ein Issue, das mit im Repo liegt. Beispiel-Dateien ohne echte Werte sind in Ordnung.</p>
+<p>Methode für ein Produkt, das im echten Leben hält. Erst verstehen und aufschreiben, dann bauen und selbst prüfen. Bubby ist nicht der Dauertester.</p>
 
-<hr>
+<h2>Zwei Phasen</h2>
+<p><strong>DEFINE</strong> — so lange fragen und festhalten, bis ein frischer Agent aus den Dateien bauen kann, ohne Verhalten zu erfinden. Dann einmal fragen: BUILD starten?</p>
+<p><strong>BUILD</strong> — in Scheiben: Spec, bauen, beweisen, festhalten. Offene Probleme dürfen nicht ewig „fast fertig“ bleiben (CARRIED).</p>
 
-<h2>1. Aktivierung</h2>
-<p>ADB startet nicht von allein in fremden bestehenden Projekten.</p>
-<p>Slash-Befehle für ADB-Phasen gehören <strong>ins Projekt</strong> (<code>.cursor/commands</code>, <code>.claude/commands</code>, <code>.codex/prompts</code> dieses Repos). Nicht ins Home-Verzeichnis. Sonst taucht <code>/adb-define</code> in jedem Chat auf.</p>
-<p>ADB gilt, wenn:</p>
-<ul>
-  <li><code>METHOD.md</code> enthält <code>METHOD: ADB</code></li>
-  <li>jemand ausdrücklich <code>/adb</code> oder „ADB nutzen“ sagt</li>
-  <li>ein neues oder fast leeres Projekt geöffnet wird und klar ein neues Produkt gebaut werden soll</li>
-</ul>
-<p>Bei einer bestehenden App nur auf ausdrücklichen Wunsch.</p>
+<h2>Was festgehalten wird</h2>
+<p>Klein: Vision, Spec, Status. Größer: die nummerierten Dateien unter <code>adb/</code>. Wünsche gehören nicht ins Issue-Register.</p>
 
-<h2>1A. Methoden-Version</h2>
-<p>Die Projektdatei <code>ADB.md</code> ist eine Kopie — Kopien werden still alt.</p>
-<p>Jede <code>ADB.md</code> braucht den Stempel <code>METHOD-VERSION: &lt;kurze Git-Sha des ADB-Repos&gt; &lt;Datum&gt;</code>. Entweder in der ersten Zeile, oder in der ersten Zeile <em>nach</em> dem YAML-Kopf, wenn die Kopie einen hat. Nie darüber — das zerbricht den Kopf.</p>
-<p>Stempel setzen beim Kopieren, neu schreiben beim Aktualisieren — die Helfer <code>new-project … adb</code>, <code>adopt-project</code> und <code>setup-into-project.sh</code> erledigen das.</p>
+<h2>Arbeit</h2>
+<p>Ein sichtbarer Worker ist die Norm. Schwer (Geld, Login, Live, Daten): erst Plan, dann Bau. Beweis: echter Weg, bei Oberflächen im Browser dieses Tools.</p>
 
-<p><strong>Wichtig:</strong> Ein Stempel wird nie auf einen Text gesetzt, der nicht mitaufgefrischt wurde. Weicht der Text im Projekt von der Methode ab, meldet das Werkzeug ihn als <code>STALE</code>, lässt den alten Stempel stehen und rührt auch die Slash-Befehle nicht an — sonst wäre die Methode alt und die Befehle neu. Mit <code>--refresh</code> wird beides zusammen aktualisiert. Sonst würde der Stempel eine Version behaupten, die die Datei nicht hat.</p>
-
-<p>Fehlt der Stempel: Alter unbekannt, vor dem Verlassen auf Punktnummern auffrischen. Eine ältere Version darf absichtlich bleiben — dann als Entscheidung festhalten, nicht mitten im BUILD still überschreiben.</p>
-
-<h2>2. Projektmodus</h2>
-<p><strong>Greenfield:</strong> Es gibt noch keine sinnvolle App. Mit DEFINE starten.</p>
-<p><strong>Brownfield:</strong> Es gibt schon eine App. Vor Code-Änderungen anschauen: was existiert, was funktioniert, was fehlt, was falsch ist, was bleiben soll, was Bubby wirklich will. Vorhandener Code ist Beweis — nicht automatisch die Wahrheit.</p>
-
-<h2>3. Zwei Phasen</h2>
-<p>Nur zwei Hauptphasen: <strong>DEFINE</strong> (verstehen und festhalten) und <strong>BUILD</strong> (bauen). Recherche, Planung, Tests, Review und Issues leben darin — keine Extra-Schicht darüber.</p>
-
-<hr>
-<h2>Phase 1 — DEFINE</h2>
-
-<h2>4. Ziel von DEFINE</h2>
-<p>Während DEFINE nicht schon das Produkt groß bauen.</p>
-<p>Fertig ist DEFINE, wenn ein frischer fähiger Agent das Produkt aus der Source of Truth verstehen und bauen kann — ohne Chat-Verlauf und ohne wichtiges Verhalten zu erfinden. Restliche Unsicherheit darf den ersten sichtbaren Schritt nicht blockieren.</p>
-<p>Mehr Recherche wäre immer möglich. Das hält DEFINE nicht offen.</p>
-
-<h2>5. Das Produkt grillen, nicht den Menschen</h2>
-<p>Discovery ist ein Entscheidungsbaum, kein Fragebogen. Nur Fragen, die echte Unsicherheit verringern. Keine Fragen aus Gründlichkeit vortäuschen. Aufhören, wenn die nächste Frage am Produkt oder am ersten Schritt nichts mehr ändert.</p>
-
-<h2>6. Eine wichtige Entscheidung nach der anderen</h2>
-<p>Frage → Antwort → nachschauen → recherchieren wenn nützlich → Verständnis und Source of Truth aktualisieren → nächste beste Frage. Keine großen Fragebögen, außer Bubby will das.</p>
-
-<h2>7. Nicht fragen, was man finden kann</h2>
-<p>Erst selbst nachschauen: Code, Doku, Tests, Daten, Konventionen, Tools. Bubby nur zu Absicht, Business Rules, Prioritäten, Workflow, Vorlieben und echten Abwägungen fragen.</p>
-
-<h2>8. Recherche gehört zu DEFINE</h2>
-<p>Recherchieren, wenn es die nächste Entscheidung oder die Produktqualität wirklich verbessert. Vergleichbare Produkte, UX, Doku, Technik, Sicherheit. Kein Theater.</p>
-
-<h2>9. Parallele Recherche</h2>
-<p>Unabhängige Recherchefragen: mehrere Agenten nutzen. Das ist <strong>erwünscht, nicht optional</strong>.</p>
-<p><strong>Grund: Kontext.</strong> Recherche gehört nicht in den Lead-Chat, wenn sie woanders laufen kann. Unabhängiges parallel. Abhängiges nacheinander. Der Lead führt die Ergebnisse zusammen.</p>
-
-<h2>10. Fragen sollen gute Antworten mitbringen</h2>
-<p>Wichtige Fragen mit 2–4 echten Optionen als <strong>A/B/C</strong> (oder 1/2/3), einer Empfehlung und einem kurzen Warum. Letzter Buchstabe ist immer <strong>„Entscheide du“</strong>. Keine schwachen Extra-Optionen. Bubby soll Technik, UX oder Design nicht aus dem Nichts erfinden müssen. <strong>Antwort: ein Buchstabe genügt</strong> — nie ganze Sätze verlangen.</p>
-
-<h2>11. „Entscheide du“</h2>
-<p>Gültig — als letzter Buchstabe oder in Worten („Entscheide du“, „Decide for me“, „egal“, „weiß nicht“). Dann entscheiden nach Vision, bisherigen Antworten, Recherche, Einfachheit, Bedienung, Qualität, Wartbarkeit, Risiko, geringster begründeter Komplexität. Wichtige autonome Entscheidungen nach <code>06-DECISIONS.md</code>.</p>
-
-<h2>12. Schlechte Entscheidungen ansprechen</h2>
-<p>Bubby bleibt der Produkt-Eigentümer. Trotzdem widersprechen, wenn schlechte Bedienung, unnötige Komplexität, Sicherheit, Daten, Architektur oder Widerspruch drohen. Nicht streiten über Geschmack.</p>
-
-<h2>13. UX und Design</h2>
-<p>Weiß Bubby WAS, aber nicht WIE es aussehen soll: ADB übernimmt mehr. Starke Vorbilder recherchieren. Ein stimmiges Bild empfehlen. Schön, klar, verständlich. Keine generischen KI-Oberflächen. Dekoration ist nicht Qualität.</p>
-
-<h2>14. Unsicherheit benennen</h2>
-<p>KNOWN / UNKNOWN / ASSUMED / CONFLICTING / NEEDS RESEARCH / NEEDS USER DECISION. Nie still eine Annahme zur Produktwahrheit machen.</p>
-
-<h2>15. Source of Truth</h2>
-<p>Maximal acht Dateien unter <code>adb/</code>:</p>
-<ol>
-  <li>01-VISION.md</li>
-  <li>02-PRODUCT-SPEC.md</li>
-  <li>03-UX-DESIGN.md</li>
-  <li>04-ARCHITECTURE.md</li>
-  <li>05-QUALITY.md</li>
-  <li>06-DECISIONS.md</li>
-  <li>07-STATUS.md</li>
-  <li>08-OPEN-ISSUES.md</li>
-</ol>
-<p>Kleines oder risikoarmes Produkt darf auf Vision, Product Spec und Status schrumpfen. UX, Architektur, Qualität und Entscheidungen leben dann in der Spec. Offene Issues im Status unter <code>## Open issues</code>, bis sie stören — Setup legt dafür keine <code>08-OPEN-ISSUES.md</code> an (P23).</p>
-<p>Eine nummerierte Datei nur anlegen, wenn Zusammenlegen Wichtiges versteckt. Dateinamen nicht umbenennen. Keine Extra-Doku ohne konkreten Nutzen.</p>
-
-<h2>16–23. Was in die Dateien gehört</h2>
-<p><strong>Vision:</strong> kurz und stabil. Was es ist, warum, für wen, Kernproblem, gewünschtes Erlebnis, Prinzipien, was es absichtlich nicht ist.</p>
-<p><strong>Product Spec:</strong> das Verhalten. Features, Rollen, Workflows, Business Rules, Zustände, Daten, Fehler, Kantenfälle. Lieber klares Verhalten als vage Wünsche.</p>
-<p><strong>UX/Design:</strong> Navigation, Screens, Zustände, Typografie, Abstände, Komponenten, Bewegung, Responsive, Barrierefreiheit, leer/laden/Fehler.</p>
-<p><strong>Architektur:</strong> nur was zählt. Technik, Grenzen, Daten, APIs, Auth, Speichern, Deployment, Sicherheit. WHY bei folgenreichen Entscheidungen. Keine Architektur für hypothetische Zukunft.</p>
-<p><strong>Quality:</strong> was DONE hier heißt. Tests, Sicherheit, Tempo, Fehler, Logging, Backup, Production — je nach Risiko. Keine sinnlosen Tore.</p>
-<p><strong>Decisions:</strong> wichtiges WHY. Entscheidung, Grund, Alternativen, Folge. Keine trivialen Bau-Details.</p>
-<p><strong>Status:</strong> Header-Felder wie im Status-Template: Phase, erledigt, aktuell, restlich, Blocker, nächste wichtige Aktion, offene Issues, CRITICAL/HIGH, CARRIED-3-Ausgang, <strong>REVIEW LIMITATION</strong>, <strong>READINESS / READINESS-AT / READINESS-BY</strong> — und ab mehreren Slices ein <strong>Ausführungsplan</strong> unter <code>## Execution plan</code> (P34), nicht im Chat. <code>## Readiness</code> bleibt beim Status-Rewrite erhalten (wie der Ausführungsplan); den Schlüssel schreibt nur der Walker (P61B).</p>
-<p><strong>Open Issues:</strong> alle sinnvollen ungelösten Probleme dauerhaft speichern. Chat-Gedächtnis reicht nicht. Unsicher? Eintragen. Nicht still überspringen. Keine erfundene Produktentscheidung.</p>
-
-<h2>24. Issues nicht verschmutzen</h2>
-<p>Keine vagen Ideen, Spekulation, „irgendwann mal“, Stil ohne Produktwirkung. Unsicherheit ist keine Verschmutzung. Ein möglicher Bug oder Widerspruch ist ein konkretes Risiko.</p>
-
-<h2>25. Issue-Format</h2>
-<p>Stabile IDs: ISSUE-001. Titel, Typ, Schwere, Fundort, Problem, Beweis, Erwartung, Status, Abhängigkeiten, CARRIED, Lösung, geprüft von.</p>
-<p>Status: OPEN, IN PROGRESS, BLOCKED (zählt für CARRIED weiter als offen), WAITING ON USER (CARRIED eingefroren), READY FOR VERIFY, CLOSED. Schwere: CRITICAL, HIGH, MEDIUM, LOW.</p>
-<p><strong>CARRIED</strong> zählt, wie viele Status-Läufe das Issue überlebt hat, während es OPEN war. Neu: 0. Jeder Status-Lauf erhöht es für jedes noch offene Issue — außer WAITING ON USER. Das ist <strong>nicht</strong> die Prüf-Runden-Grenze bei <code>agy</code>/Review (max. 3, dann Bubby).</p>
-
-<h2>26. DEFINE ist fertig wenn</h2>
-<p>Ein frisches Team könnte aus den Dateien bauen, ohne Wichtiges zu erfinden. Und: keine offene Unsicherheit blockiert den ersten sichtbaren Schritt. Keine theoretische Perfektion. Umkehrbare Kleinigkeiten dürfen offen bleiben — als Annahme oder Issue, nie still als Wahrheit.</p>
-
-<h2>27. Freigabe zum Bauen</h2>
-<p>Kurz zusammenfassen, dann einmal fragen: <strong>ADB DEFINE ist fertig. BUILD starten?</strong> Danach keine ständigen Extra-Freigaben für Routine.</p>
-
-<hr>
-<h2>Phase 2 — BUILD</h2>
-
-<h2>28. Verhalten in BUILD</h2>
-<p>Nicht mehr vor allem Interviewer. Umkehrbare Bau-Entscheidungen selbst treffen. Die Source of Truth regiert.</p>
-<p>Die Fragen sind weitgehend beantwortet. Jetzt hart ausführen, nicht nachlassen. Weiter bauen und weiter führen, bis das Produkt dem Fertig-Maßstab entspricht oder Bubby bewusst pausiert.</p>
-<p>Kann die Umgebung delegieren: der <strong>Lead</strong> bleibt hier (Ask/Decide + Wahrheit + kurze Aufträge). Schwere BUILD-Arbeit läuft bei <strong>Workern</strong> — siehe 32 und 32A.</p>
-<p>Nach jedem Slice: was erledigt ist, was bis zur fertigen App noch fehlt, was konkret als Nächstes kommt. BUILD nicht beenden, indem festgelegte Restarbeit nur als Notiz für später stehen bleibt — ohne nächsten Schritt.</p>
-
-<h2>29. Beim Ergebnis: Angriff</h2>
-<p>„Läuft“ ist nicht „fertig“. Funktion, Aussehen, Bedienung, Tempo, Zuverlässigkeit, Kantenfälle, Politur. Extra Aufwand, wenn er das Produkt wirklich besser macht.</p>
-
-<h2>30. Beim Bau: Verteidigung</h2>
-<p>Dasselbe Ergebnis mit dem kleinsten begründeten technischen System. Nicht „möglichst wenige Buchstaben“. Jede Datei, Abhängigkeit, Abstraktion, Tabelle, Hintergrundprozess muss sich rechtfertigen. Nichts Spekulatives.</p>
-
-<h2>31. Einfachheits-Check</h2>
-<p>Vor extra Komplexität: Braucht das eine echte Anforderung? Gibt es Einfacheres? Löst etwas Vorhandenes das schon? Ist die Abstraktion jetzt nötig?</p>
-
-<h2>32. Mehrere Agenten — Lead &amp; Worker</h2>
-<p>Mehrere Agenten sind <strong>erwünscht — nicht nur erlaubt</strong>.</p>
-<p><strong>Grund: Kontext.</strong> Der <strong>Lead</strong> spricht mit Bubby, hält die Source of Truth und führt Ergebnisse zusammen. Begrenzte Arbeit (Recherche, ein Slice, Tests, Review) gehört in <strong>Worker</strong> mit nur dem nötigen Kontext. So bleibt der Lead-Chat klein.</p>
-<p><strong>Lead-Default</strong> (wenn die Umgebung delegieren kann, z. B. Paseo): Lead = dieser Chat. Worker starten <strong>frisch</strong> (sehen den Lead-Chat nicht — nur den Auftrag). Folgeaufgaben an denselben Worker, wenn Kontinuität hilft. BUILD und schwere Recherche standardmäßig delegieren. Im Lead-Chat bleiben: kurze Klärung, Decide, Status, winzige Änderungen.</p>
-<p><strong>Sichtbar delegieren:</strong> Worker laufen dort, wo Bubby sie sieht (in Paseo als eigener Tab) — nicht als unsichtbarer Unter-Agent in der Lead-Sitzung. Fragt Bubby „wer arbeitet?“, muss die Antwort in der App stehen.</p>
-<p>Namen einheitlich: <strong>Lead</strong>, <strong>{Project}-Worker</strong>, <strong>Reviewer</strong>. Anzahl folgt der Arbeit. Kein Theater, keine Fake-Rollen.</p>
-
-<h2>32A. Lead-Checkliste</h2>
-<p>Vor jedem delegierten BUILD oder schwerer Recherche (darf still ablaufen):</p>
-<ol>
-  <li><strong>Ziel</strong> — was „fertig“ heißt</li>
-  <li><strong>Workspace / Pfad</strong> — genauer Projektordner</li>
-  <li><strong>Source of Truth</strong> — welche <code>adb/</code>-Teile gelten</li>
-  <li><strong>Scope</strong> — drin / nicht drin</li>
-  <li><strong>Grenzen</strong> — Secrets, keine Drive-by-Refactors, Sonderregeln</li>
-  <li><strong>Beweis</strong> — wie prüfen (Tests, Befehle, Screenshot)</li>
-  <li><strong>Rückgabe</strong> — kurzes Format; Lead fasst für Bubby zusammen</li>
-  <li><strong>Review (Code)</strong> — eigener Reviewer-Worker ja/nein (P39)</li>
-  <li><strong>Kontinuität</strong> — neuer Worker oder Folge an bestehende Session</li>
-  <li><strong>Plan-Review (nur groß)</strong> — Reviewer liest Plan + Fertig-Kriterien + Spec, <em>bevor</em> Bau-Worker starten. Einmal nachbessern, dann Bubby. Worker raten Scope, Reihenfolge und „fertig“ nicht.</li>
-</ol>
-<p>Fehlt etwas Wichtiges: erst Ask/Decide mit Bubby. Keine vagen Aufträge.</p>
-
-<h2>33. Wann parallel</h2>
-<p>Parallel, wenn wirklich unabhängig. Nicht parallel, wenn dieselben Dateien, widersprüchliche Architektur oder unfertige Abhängigkeiten drohen.</p>
-
-<h2>34–37. Große Apps in Slices</h2>
-<p>Nie eine große App als eine ununterbrochene Aufgabe. Vor dem großen Bau: Plan aus der Source of Truth. Kleine senkrechte Scheiben mit sichtbarer Fähigkeit — nicht „erst das ganze Backend“.</p>
-<p>Unabhängige Slices parallel, abhängige nacheinander.</p>
-<p>Jeder sinnvolle Slice: SPEC → PLAN → IMPLEMENT → TEST → REVIEW → SPEC CHECK → ISSUE TRIAGE → VERIFY → INTEGRATE. Erst dann fertig.</p>
-
-<p>Was die weniger offensichtlichen Stationen heißen: <strong>SPEC CHECK</strong> = das Gebaute gegen die Source of Truth halten, nicht gegen die Erinnerung. <strong>VERIFY</strong> = beweisen, nicht behaupten: was getestet, wie, was passiert ist — bei Web-Oberflächen im Browser. <strong>INTEGRATE</strong> = die geprüfte Arbeit landet dort, wo das Projekt seine Wahrheit hält: in den Arbeitszweig übernommen, Source of Truth und STATUS aktualisiert, Worker-Zweig geschlossen. Geprüft aber nicht übernommen ist nicht fertig.</p>
-
-<p><strong>Kürzen bei kleinen Slices:</strong> Code-REVIEW darf wegfallen, wenn unabhängiges Review nicht nötig ist (P39 — vorher entscheiden). SPEC, IMPLEMENT, TEST, SPEC CHECK, VERIFY und INTEGRATE fallen nie weg. Bei <strong>großen</strong> Slices bleibt das Plan-Gegenlesen (vor dem Coden). Die Issue-Station heißt beim Slice-Ende „Status-Review“ (P25): Register lesen, CARRIED erhöhen — das darf nicht wegfallen.</p>
-
-<p><strong>Wenn REVIEW, SPEC CHECK oder VERIFY durchfällt:</strong> nicht übernehmen. Kleine, verstandene Ursache im gleichen Slice beheben und ab der gefallenen Station neu prüfen. Höchstens <strong>3 Prüf-Runden</strong>, dann Bubby (nicht CARRIED). Sonst registrieren und entweder den Slice auf das kürzen, was wirklich geprüft ist, oder den Slice abbrechen und den Zweig auf den letzten guten Stand zurücksetzen. In STATUS festhalten. Ein durchgefallener Slice wird nie als voll geliefert gemeldet, und ein offenes Issue ersetzt nie fehlendes Verhalten.</p>
-
-<p>Kleine prüfbare Aufgaben. Keinen großen unverprüften Code-Haufen.</p>
-
-<h2>38. Kontext für Unter-Agenten</h2>
-<p>Nur das Minimum. Ein Worker bekommt relevante Spec, UX, Architektur, Ziel, Code — bei großem Auftrag auch Plan und Fertig-Kriterien. Ein Reviewer bekommt bei <strong>Plan-Review</strong> Spec + Plan + Fertig-Kriterien (kein Diff); bei <strong>Code-Review</strong> Spec, erwartetes Verhalten, Diff, Testbeweis, Kriterien — nicht den Interview-Verlauf und nicht die Geschichte des Workers. Reviewer coded nie.</p>
-
-<h2>39. Unabhängiges Review</h2>
-<p>Bei sinnvoller Arbeit bevorzugt, wenn die Umgebung das hergibt. Wer gebaut hat, darf nicht allein entscheiden, ob es stimmt. Derselbe Chat mit der Bau-Geschichte ist kein unabhängiges Review. Geht es nicht: in STATUS notieren und gegen die Source of Truth selbst prüfen — das nicht „unabhängiges Review“ nennen. Tiefe nach Risiko. Keine Extra-Rollen aus Theater.</p>
-
-<h2>40–42. Code</h2>
-<p>Kleinste sichere Änderung, die die Anforderung ganz löst. Kein Umbau nur wegen Stil. Unnötiges entfernen, wenn sicher. Abhängigkeiten: reife Bibliotheken für schwere Probleme, nicht für Triviales. Sicherheits-Standards nicht neu erfinden, nur um Pakete zu vermeiden.</p>
-
-<h2>43. Tests</h2>
-<p>Wichtiges Verhalten: Business Rules, Rechnungen, Zustände, kritische Abläufe, Rechte, Integrationen, Regressionen. E2E für wichtige Nutzerwege. Keine Test-Menge nur für Coverage.</p>
-
-<h2>44–45. Review und Spec-Check</h2>
-<p>Grüne Tests reichen nicht. Umsetzung gegen die Source of Truth halten. Weicht sie ab: ist die Umsetzung falsch, oder hat sich die Absicht geändert? Nie still Variante B wählen. Fehlendes Pflicht-Verhalten: jetzt fixen, wenn es zum Slice gehört, sonst als Issue eintragen.</p>
-
-<h2>46–50. Issues</h2>
-<p>Jeder Agent merkt Probleme auch außerhalb seines Jobs. Jetzt fixen wenn klein, sicher und zum aktuellen Job. Sonst eintragen. Unsicher: eintragen.</p>
-<p>Ablauf: DISCOVER → REGISTER → TRIAGE → SELECT → FIX → TEST → REVIEW → VERIFY → CLOSE. Geschlossen heißt geprüft. Nicht schließen, nur weil Code geändert wurde. Kein Fake-Schließen durch Löschen oder Herabstufen.</p>
-<p>Das ist die Schleife aus der globalen <code>AGENTS.md</code>, nur genauer: <strong>TRIAGE</strong> ist dort „PRIORITIZE“ (nach Schwere und Wirkung ordnen), <strong>SELECT</strong> ist ADBs zusätzliche Station — entscheiden, welche Issues in den nächsten Slice gehen, damit eine geordnete Liste nicht geordnet liegen bleibt.</p>
-<p>Reihenfolge beim Ordnen (P48): zuerst Schwere, dann Wirkung auf das Produkt, dann Sicherheits- und Datenrisiko, dann was den nächsten Slice blockiert, dann Regressionsrisiko, dann Abhängigkeiten, dann Kosten des Aufschiebens. Bei gleicher Schwere: <strong>CARRIED: 2</strong> vor einem frischen Issue (P50A).</p>
-<p>Produkt nicht „fertig“ nennen bei CRITICAL, bei HIGH gegen Quality, bei kaputtem Pflicht-Verhalten oder ungelösten Widersprüchen in der Wahrheit.</p>
-
-<h2>50A. Issues müssen enden</h2>
-<p>Ein offenes Issue ist eine Schuld, kein Denkmal. Bei <strong>CARRIED: 3</strong> muss es in demselben Lauf OPEN verlassen — außer der Ausgang braucht Bubby. Dann <strong>WARTET AUF BUBBY</strong>, CARRIED eingefroren, und die Entscheidung wird die eine nächste wichtige Aktion. Es gibt kein viertes Mitnehmen.</p>
-<p>Genau einer von drei Ausgängen: <strong>FIX</strong> (lösen und prüfen), <strong>ACCEPT</strong> (Entscheidung plus die Grenze in die Quality-Datei schreiben), <strong>REJECT</strong> (war kein echtes Problem, mit Grund schließen).</p>
-<p>ACCEPT ist kein Scheitern — eine ehrliche Quality-Leiste mit benannter Grenze ist besser als eine, die das Produkt still bricht. ACCEPT ist verboten bei CRITICAL und bei HIGH, die Datenintegrität oder Sicherheit verletzen. Die gehen nur über FIX.</p>
-<p>Braucht der Ausgang Bubby: das wird die eine nächste wichtige Aktion im Status. Keinen weiteren Review darum herum legen. Ziel: „fast fertig“ ist ein Ende, kein Dauerzustand.</p>
-
-<h2>51–53. Bestehende Projekte und Migration</h2>
-<p>Erst anschauen, dann einteilen: KEEP / IMPROVE / REFACTOR / REPLACE / REMOVE / MISSING / UNCLEAR. Gutes stehen lassen. Dann Bubby grillen, bis der Soll-Zustand klar ist.</p>
-<p>Lücke planen: Ist-Zustand gegen Soll-Zustand. Richtiges nicht neu bauen. Falsches nicht behalten, nur weil es schon da ist.</p>
-<p>Migration: nicht alten Code mechanisch übersetzen. Erst technikunabhängige Regeln, Logik, Daten, Integrationen holen. Dann die einfachste passende Ziel-Architektur.</p>
-
-<h2>54. Hohe Integrität</h2>
-<p>Buchhaltung, Geld, Zahlungen: strenger. Rechnungen, Rundung, Transaktionen, Rechte, Backup. Korrektheit nie opfern, um Code zu sparen. Schema-Änderungen brauchen eine klare Migrations-Spec und Bubby muss Bescheid wissen.</p>
-
-<h2>55–56. Spätere Änderungen</h2>
-<p>Erst einordnen: nur Umsetzung falsch? Passende Erweiterung? Spec-, UX- oder Architektur-Änderung? Vision-Konflikt? Betroffene Wahrheits-Dateien aktualisieren, bevor die Arbeit fertig ist. Viele kleine Änderungen dürfen das Produkt nicht schleichend verbiegen.</p>
-
-<h2>57. Autonomie</h2>
-<p>Nach DEFINE: nützliche Autonomie. Nicht stören für Routine, offensichtliche Details, umkehrbare Kleinigkeiten. Fragen bei echter Produkt-Unklarheit, folgenreichen Abwägungen, Konflikt mit bekannter Absicht, unumkehrbarem Risiko, oder wenn Geld/Zugänge/Erlaubnis nötig sind.</p>
-
-<h2>58. Token-Disziplin</h2>
-<p>Tokens ausgeben, wo sie Produkt, Recherche, UX, Architektur, Debugging, Tests, Sicherheit, Review wirklich verbessern. Nicht für Zeremonie, doppelte Doku, irrelevante Geschichte, Fake-Rollen.</p>
-<p>Jeder Agent nur den nötigen Kontext. <strong>Mehrere Agenten sind erwünscht, weil sie Kontext schützen.</strong> Wird der Haupt-Chat lang oder wiederholt Fehler: begrenzte Arbeit in Unter-Agenten, oder neue Session nur mit Source of Truth plus <code>AGENTS.md</code>.</p>
-
-<h2>59. Dokument-Disziplin</h2>
-<p>Volle acht Dateien sind das Maximum, nicht die Pflicht. Klein: Vision, Spec, Status. Eine weitere Dauerdatei nur bei konkretem Bedarf.</p>
-
-<h2>60. Größe anpassen</h2>
-<p><strong>ADB darf kleine Produkte nicht überbauen.</strong> Kleines Produkt: Source of Truth schrumpfen. Großes oder hochintegrales: aufteilen. Die Methode skaliert mit Komplexität, Risiko, Größe, Integrität — nicht mit Theater. Verboten: jeden Großprojekt-Schritt auf ein kleines Produkt zu legen, nur um eine Checkliste abzuhaken.</p>
-
-<h2>61. Fertig heißt</h2>
-<p>Nicht: Code existiert, kompiliert, Demo läuft, Unit Tests grün. Sondern: beabsichtigtes Verhalten da, Kantenfälle, UX, Design, Spec erfüllt, relevante Tests, Review wenn nötig wirklich unabhängig, Issues angemessen, unnötige Komplexität weg, kein Release-Blocker. Das Produkt ist erst fertig, wenn 61B am <strong>aktuellen</strong> Stand gelaufen ist (Stempel nicht alt). ALPHA ist nie Fertig. Die Qualitätsleiste wählt nicht ALPHA gegen BETA, nur BETA (echter Betrieb) gegen LIVE (Produktion).</p>
-
-<h2>61B. Produkt-Reife</h2>
-<p>Bevor jemand das <strong>Produkt</strong> fertig nennt: eigener Walk, nicht jede Scheibe. Stempel in Status: READINESS, READINESS-AT, READINESS-BY. ALPHA ist nie Fertig. LIVE nur nach unabhängigem Walk, nicht nach Selbstcheck. Stempel ist alt nach späterem INTEGRATE oder wenn das geprüfte Verhalten sich geändert hat — Datum allein zählt nicht. Walker ändert keinen Produkt-Code. Nicht dieselbe Prüfung wie Slice-VERIFY oder <code>/adb-review</code>.</p>
-
-<h2>61A. Feedback an die Methode</h2>
-<p>ADB ist selbst ein Produkt. Manche Funde sind keine Projektfehler — die Methode war still, zwei Stellen widersprechen sich, sie hat Arbeit verlangt die Punkt 60 oder die Anti-Zeremonie-Regel verbieten, oder genau das Befolgen hat den Defekt erzeugt.</p>
-<p>Dann einen Eintrag in <code>LESSONS.md</code> im ADB-Repo: Datum, Projekt, Symptom, Ursache, kleinste vorgeschlagene Änderung, Status (PROPOSED / ADOPTED / REJECTED). Die Datei nur anhängen, nie löschen. Nur Bubby übernimmt eine Lektion in die nummerierten Punkte. Das Projekt trotzdem fixen — die Lektion ist zusätzlich, nicht stattdessen.</p>
-<p>Normale Projekt-Issues gehören nicht hierhin. Eine Methoden-Lektion ist von Natur aus selten. Häufen sich Lektionen schneller als Issues, ist die Leiste falsch angewendet.</p>
-
-<h2>62. Die letzte ADB-Regel</h2>
-<p>Vor BUILD: neugierig, skeptisch, präzise.</p>
-<p>Während BUILD: aggressiv auf ein außergewöhnliches Produkt.</p>
-<p>Beim Umsetzen: konservativ bei Code, Abstraktionen und beweglichen Teilen.</p>
-<p>Bei der Ausführung: Unabhängiges parallel, Abhängiges nacheinander.</p>
-<p>Beim Review: Beweis und Source of Truth, nicht Agenten-Selbstbewusstsein.</p>
-<p>Nicht das Ziel: maximaler Code, maximale Agentenzahl, maximale Doku, maximale Architektur.</p>
-<p><strong>Das Ziel: das kleinste stimmige System, das das volle beabsichtigte Produkt in außergewöhnlicher Qualität liefert.</strong></p>
+<h2>Fertig</h2>
+<p>Kompiliert zählt nicht. Alpha ist nie „Produkt fertig“. Wenn Bubby fertig sagt: eigener Check (<code>/adb-ready</code>), nicht die Geschichte des Bauers.</p>
 </body>
 </html>

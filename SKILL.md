@@ -1,579 +1,193 @@
 ---
 name: adb
-description: "Ask. Decide. Build. Product method for AI coding agents. Activates when METHOD.md says METHOD: ADB, the user invokes /adb or asks to use ADB, or a new application is being defined with ADB. Never combine with BMAD."
+description: "Ask. Decide. Build. Product method. Activates when METHOD.md says METHOD: ADB, the user invokes /adb, or a new app is being defined with ADB. Talk, proof, secrets, git, and workers: global AGENTS.md."
 ---
 
 # ADB
 
-ADB means Ask. Decide. Build. Canonical source: this file. Project setup copies it to the repo root as `ADB.md`.
+Ask. Decide. Build. Canonical: this file. Setup copies it to the project as `ADB.md`.
 
-**Not** an agent framework, fake company, or extra product. Uses the active harness. When that harness can delegate, the user-facing agent is **Lead**. Inherits global `AGENTS.md` (`~/Development/_System/Rules/AGENTS.md`).
-
-**Objective:** understand the product enough to build confidently; persist that as a Source of Truth; then execute hard toward an exceptional product with minimum justified complexity.
-
-**Principles:** Offensive on outcome. Defensive on implementation. Parallelize where safe; serialize where dependent. Specification before scale. **Secrets never enter the repo or persistent ADB files** (use env/secret store; `.env.example` only without real values).
-
-Each point is a **rule to judge the product**, not a task to produce extra files/agents. If a point does not apply, extra work is forbidden. Point 60 sets depth.
+**Job:** a product that holds in real life. Bubby is not the tester. You ask until the product is clear, write that down, then build and prove. Not a fake company. Not a second rulebook — inherit `/Users/bubby/Development/_System/Rules/AGENTS.md` for talk, proof, secrets, git, and how work is sent.
 
 **Follow this first**
 
 * DEFINE until a fresh agent can build from the files without inventing behavior; then ask once to start BUILD.
-* BUILD in slices. **Size gate** (global `AGENTS.md`): large → decision-complete brief + **plan review before implementers**; small → short brief.
-* Slice: SPEC → PLAN → IMPLEMENT → TEST → REVIEW → SPEC CHECK → ISSUE TRIAGE → VERIFY → INTEGRATE.
-* `agy-review` before every project commit/push. **Review-round cap: 3** (not issue `CARRIED`). Then ask Bubby.
+* BUILD in slices: **SPEC → BUILD → PROVE → RECORD**. `agy-review` at project commit (AGENTS.md). Review-round cap: 3, then Bubby. That cap is not `CARRIED`.
+* Workers: AGENTS.md (default one visible worker; written plan only when **heavy**: money, login/security, live, data migration, new public contract).
+
+Each point judges the product. If it does not apply, extra work is forbidden. P60 sets depth.
 
 ⸻
 
 ## 1. ACTIVATION
 
-ADB must not affect unrelated existing projects by itself.
+Slash commands live **in the project**, never in the user home.
 
-Slash commands live **in the project** (`.cursor/commands`, `.claude/commands`, `.codex/prompts`). Never in the user home (that would list `/adb-define` everywhere).
-
-Activates when: `METHOD.md` contains `METHOD: ADB`; user invokes `/adb` or asks to use ADB; or a new/empty project and the user clearly wants a new product. Existing apps: only when explicitly requested. Once activated, the project's ADB Source of Truth governs later ADB work.
-
-⸻
+Activates when: `METHOD.md` contains `METHOD: ADB`; user invokes `/adb`; or a new product is clearly wanted. Existing apps: only when asked. Then the project’s ADB files govern. Do not load a second product method.
 
 ## 1A. METHOD VERSION
 
-Project `ADB.md` is a copy and ages silently.
-
-Stamp as first line, or first line **after** YAML frontmatter (never above `---`):
+Stamp as first line after YAML frontmatter:
 
     METHOD-VERSION: <short git sha of the canonical ADB repo> <date>
 
-Stamp on copy and on refresh. **Never stamp a body you did not refresh.** If the copy differs from this `SKILL.md` (ignore stamp line), report STALE and leave the old stamp. Helpers: `setup-into-project.sh` (refuses to stamp stale; `--refresh` overwrites deliberately); `new-project … adb`; `adopt-project`. Canonical repo: `~/Development/_System/Methods/ADB`. Append method lessons to `LESSONS.md` (P61A). Missing stamp → unknown age; refresh before relying on point numbers. A project may stay on an older version — record that decision; do not refresh silently mid-BUILD.
-
-⸻
+Never stamp a body you did not refresh. If the copy differs from this file (ignore stamp): STALE, leave the old stamp. Helpers: `setup-into-project.sh`, `new-project … adb`, `adopt-project`. Canonical: `~/Development/_System/Methods/ADB`. Lessons: `LESSONS.md` (P61A). Do not refresh a live project silently mid-BUILD.
 
 ## 2. PROJECT MODE
 
-**GREENFIELD** — no meaningful app yet → start DEFINE.
+**GREENFIELD** — no app yet → DEFINE. **BROWNFIELD** — inspect first: what exists / works / is wrong / unclear / keep / what Bubby wants. Existing code is evidence, not automatically truth.
 
-**BROWNFIELD** — app exists → inspect before changing code: what exists / works / incomplete / incorrect / unclear / should be preserved / what Bubby wants it to become. Existing code is evidence, not automatically truth.
+## 3. TWO PHASES
 
-⸻
-
-## 3. TWO PRIMARY PHASES
-
-**DEFINE** — understand and persist the Source of Truth. **BUILD** — execute it. Research, planning, tests, review, issues live **inside** these two. No extra layer on top.
-
-⸻
+**DEFINE** — persist the Source of Truth. **BUILD** — execute it. No extra layer on top.
 
 # PHASE 1 — DEFINE
 
 ## 4. DEFINE OBJECTIVE
 
-Do not begin substantial product implementation during DEFINE.
+No substantial product implementation in DEFINE. Done when a fresh agent can build from the files without inventing important behavior, and leftover uncertainty does not block the first slice. More research possible ≠ keep DEFINE open.
 
-Done when a fresh capable agent can understand and build from the Source of Truth without the interview history and without inventing important behavior — and remaining uncertainty does not block the first vertical slice. More research being possible does not keep DEFINE open.
+## 5–7. ASK THE PRODUCT, NOT BUBBY
 
-Combine: user, repo, docs, research, data, tests, external systems.
+Ask only what changes important behavior. One decision at a time. Never ask what repo, docs, tests, or research can answer. Ask Bubby for intent, priorities, and trade-offs. A/B/C: AGENTS.md (only when the prompt can mean two things).
 
-⸻
+## 8–9. RESEARCH
 
-## 5. GRILL THE PRODUCT, NOT THE USER
+Research when it improves the next decision. Independent questions → visible workers (AGENTS.md). Lead integrates.
 
-Discovery is a decision tree, not a questionnaire. Ask only what reduces meaningful uncertainty. A useful answer closes uncertainty, exposes a dependency/conflict, creates a better question, eliminates alternatives, triggers research, or affects another decision. No target question count. Never manufacture questions to look thorough. Stop a line when the next question would not change important behavior or a first-slice decision.
+## 10–12. DECISIONS
 
-⸻
+Important questions: 2–4 real options, last = Entscheide du. Record autonomous decisions in `06-DECISIONS.md` or the decisions section of `02` while collapsed. Challenge choices that hurt usability, safety, or coherence — not taste.
 
-## 6. ONE MEANINGFUL DECISION AT A TIME
+## 13. UX
 
-Prefer one question or one connected group. Loop: QUESTION → ANSWER → INSPECT → RESEARCH IF USEFUL → UPDATE UNDERSTANDING → UPDATE SOURCE OF TRUTH → NEXT BEST QUESTION. No large questionnaires unless the user asks for batch questions.
+If Bubby knows WHAT but not HOW it should look: you own a coherent, usable direction. No generic AI look.
 
-⸻
+## 14. UNCERTAINTY
 
-## 7. DO NOT ASK WHAT CAN BE DISCOVERED
+KNOWN / UNKNOWN / ASSUMED / CONFLICTING / NEEDS RESEARCH / NEEDS USER DECISION. Never silently turn an assumption into product truth.
 
-If the answer is in the repo, docs, config, tests, data, official docs, conventions, research, or tools — investigate. Ask the user for intent: desired behavior, Business Rules, priorities, workflow, preference, meaningful UX, trade-offs, irreversible decisions.
+## 15–23. SOURCE OF TRUTH
 
-⸻
-
-## 8. RESEARCH IS PART OF DEFINE
-
-Research when it materially improves the next decision or product quality (comparables, UX, a11y, docs, architecture, stack, security, standards). Not for ceremony. It should answer questions, kill bad options, expose risks, improve recommendations.
-
-⸻
-
-## 9. USE PARALLEL RESEARCH
-
-Independent research questions → subagents/parallel workers. Desired, not optional. Reason: keep research out of the Lead thread. Parallelize only independent work. Lead integrates.
-
-⸻
-
-## 10. QUESTIONS SHOULD INCLUDE GOOD ANSWERS
-
-Important questions ship a few meaningful options. Do not force Bubby to invent solutions from scratch. Before asking: context → research if valuable → sensible choices → drop inferior ones → recommend the strongest.
-
-Format: **A/B/C (or 1/2/3)** — one letter/number. German option text for Bubby. See global `AGENTS.md` → Decision Questions (authoritative). Last letter always Entscheide du. 2–4 serious options. No fake alternatives.
-
-⸻
-
-## 11. DECIDE FOR ME (“Entscheide du”)
-
-See global `AGENTS.md` → Decision Questions (authoritative). ADB addition: record meaningful autonomous decisions in `06-DECISIONS.md`, or the decisions section of `02-PRODUCT-SPEC.md` while collapsed (P15).
-
-⸻
-
-## 12. CHALLENGE BAD DECISIONS
-
-User is final product owner. Still challenge choices likely to cause poor usability, avoidable complexity, security/data-integrity risk, architectural damage, inconsistency, or conflict with the established product. Explain concern → consequence → recommended alternative. Not argumentative about subjective preference.
-
-⸻
-
-## 13. UX AND DESIGN RESPONSIBILITY
-
-If the user knows WHAT but not HOW it should look/behave, ADB takes more responsibility. Research strong references. Recommend a coherent direction: beauty, clarity, hierarchy, understandable flows, typography, spacing, consistent components, restrained visuals, motion, feedback, a11y, responsive, excellent empty/loading/error. No generic AI-looking UI. Decoration ≠ quality.
-
-⸻
-
-## 14. UNCERTAINTY STATES
-
-KNOWN / UNKNOWN / ASSUMED / CONFLICTING / NEEDS RESEARCH / NEEDS USER DECISION. Never silently convert an assumption into product truth.
-
-⸻
-
-## 15. SOURCE OF TRUTH
-
-Maximum default set (not a fill-all checklist):
+Maximum set (not a fill-all list):
 
 `adb/01-VISION.md` `02-PRODUCT-SPEC.md` `03-UX-DESIGN.md` `04-ARCHITECTURE.md` `05-QUALITY.md` `06-DECISIONS.md` `07-STATUS.md` `08-OPEN-ISSUES.md`
 
-Small/low-risk may collapse to Vision + Product Spec + Status. Then UX/architecture/quality/decisions live in 02 until a topic needs its file; Open Issues live in 07 until the list needs 08. Split when merged would hide important truth. Never create a numbered file merely to complete eight. Keep numbered names — no `SPEC.md`. Points 16–23 define content whether file or section. No extra permanent docs without concrete value.
+Small products collapse to Vision + Spec + Status. Other topics live in 02 until they need a file. Issues live in 07 until the list needs 08. Setup does **not** create 08. Keep numbered names. No extra permanent docs without a concrete need.
 
-⸻
+- **01** — what it is, who, why, what it is not.
+- **02** — behavior: features, rules, states, data, errors, examples.
+- **03** — journeys, screens, states, hierarchy, empty/loading/error.
+- **04** — stack, boundaries, data, deploy, security — only what matters, with WHY.
+- **05** — what DONE means for this product.
+- **06** — important WHY, not trivia.
+- **07** — STATUS header (same names as `/adb-status`): PHASE, COMPLETED, CURRENT, REMAINING, BLOCKERS, NEXT IMPORTANT ACTION, OPEN ISSUES, CRITICAL/HIGH, AT CARRIED 3, REVIEW LIMITATION, READINESS, READINESS-AT, READINESS-BY. Multi-slice BUILD: `## Execution plan`. Preserve `## Readiness` on rewrite — the walker writes the stamp (P61B).
+- **08** — unresolved real problems, or `## Open issues` in 07 while collapsed.
 
-## 16. 01-VISION.md
+## 24–25. ISSUES
 
-Short and stable: what it is, why, who, core problem, desired experience, core principles, non-negotiables, what it intentionally is not.
+Do not file wishes. Format: stable `ISSUE-00N`; TITLE, TYPE, SEVERITY, FOUND BY, CONTEXT, PROBLEM, EVIDENCE, EXPECTED, STATUS, DEPENDENCIES, CARRIED, RESOLUTION, VERIFIED BY.
 
-⸻
+Statuses: OPEN; IN PROGRESS; BLOCKED (still OPEN for CARRIED); WAITING ON USER; READY FOR VERIFY; CLOSED.
 
-## 17. 02-PRODUCT-SPEC.md
+**CARRIED:** how many **status reviews** the issue survived while OPEN. New = 0. Each status review increments still-OPEN except WAITING ON USER. A status review is: slice RECORD (P36), before release, or when Bubby asks status. CARRIED is not the agy round cap.
 
-Primary behavioral truth. When relevant: features, roles, permissions, workflows, Business Rules, states/transitions, calculations, data, integrations, notifications, payments, admin, errors, edge cases, examples, expected observable behavior. Prefer explicit behavior over vague requirements.
+## 26–27. LEAVE DEFINE
 
-⸻
-
-## 18. 03-UX-DESIGN.md
-
-Useful decisions: IA, navigation, journeys, screens and states, interaction, hierarchy, type, spacing, components, motion, responsive, a11y, loading/empty/error, feedback.
-
-⸻
-
-## 19. 04-ARCHITECTURE.md
-
-Only architecture that matters: stack, structure, boundaries, data model, APIs, authz/authn, storage, integrations, deploy, security, constraints. Document WHY for consequential decisions. No architecture for hypothetical futures.
-
-⸻
-
-## 20. 05-QUALITY.md
-
-What DONE means. Depending on risk: unit/integration/E2E, security, performance, a11y, responsive, errors, logging, monitoring, migrations, backups, recovery, deploy, production readiness. No meaningless gates.
-
-⸻
-
-## 21. 06-DECISIONS.md
-
-Preserve important WHY: decision, reason, alternatives if relevant, consequence. No trivial implementation logs.
-
-⸻
-
-## 22. 07-STATUS.md
-
-Concise. Header fields (same names as `/adb-status`): PHASE, COMPLETED, CURRENT, REMAINING, BLOCKERS, NEXT IMPORTANT ACTION, OPEN ISSUES, CRITICAL/HIGH, AT CARRIED 3, REVIEW LIMITATION (`none` or the P39 limitation in force), READINESS, READINESS-AT, READINESS-BY. When BUILD spans more than one slice: `## Execution plan` — ordered slices, dependencies, status (P34). Chat is not the plan (P58). Preserve `## Readiness` on `/adb-status` rewrite like `## Execution plan` — do not invent a new verdict; the independent walker writes the stamp (P61B).
-
-⸻
-
-## 23. 08-OPEN-ISSUES.md
-
-Persist all meaningful unresolved problems here, or in STATUS `## Open issues` while collapsed. **Setup does not create this file.** Collapsed default: issues in 07. `--register` only when the project already uses a separate register. Split to 08 when the list would clutter status or hide severity. Examples: bugs, regressions, missing required behavior, UX/design/architecture, security, data, tests, perf, a11y, migration, spec conflict, concrete debt, suspicious behavior. Chat memory is not enough. Unsure → register. Do not invent a product decision.
-
-⸻
-
-## 24. DO NOT POLLUTE OPEN ISSUES
-
-See global `AGENTS.md` → Complaints, Bugs and Discovered Problems (authoritative). ADB: uncertainty about a possible bug/unused path/contradiction is **not** pollution. A wish for a new feature that is not a current problem **is**.
-
-⸻
-
-## 25. ISSUE FORMAT
-
-Stable IDs: `ISSUE-001`. Fields: TITLE, TYPE, SEVERITY, FOUND BY, CONTEXT, PROBLEM, EVIDENCE, EXPECTED, STATUS, DEPENDENCIES, CARRIED, RESOLUTION, VERIFIED BY.
-
-Types: BUG, PRODUCT, UX, DESIGN, ARCHITECTURE, SECURITY, DATA, TEST, PERFORMANCE, ACCESSIBILITY, MIGRATION, SPEC-CONFLICT, TECH-DEBT, INVESTIGATION.
-
-Statuses: OPEN; IN PROGRESS; BLOCKED (still open for CARRIED/P50A — not an exit); WAITING ON USER (exit needs user; CARRIED frozen until the decision is recorded); READY FOR VERIFY; CLOSED.
-
-Severity: CRITICAL, HIGH, MEDIUM, LOW.
-
-**CARRIED** is an integer: how many **status reviews** the issue survived while still OPEN. New = 0. Each status review increments every still-OPEN issue except **WAITING ON USER**. A status review is reading the register as a whole: at slice INTEGRATE (P36) — that is this slice's ISSUE TRIAGE; before asking for release/deploy; whenever the user asks for status. `/adb-status` where commands exist; `ADB.md`-only projects owe the same three moments (L-002).
-
-**CARRIED is not the review-round cap** in global `AGENTS.md` (agy/plan-review cycles).
-
-⸻
-
-## 26. DEFINE COMPLETENESS GATE
-
-Before BUILD: could a fresh team build from these files without interview history and without inventing important decisions? Does any UNKNOWN, CONFLICTING, or NEEDS USER DECISION block the first slice? If blocked, continue DEFINE only for that blockage. Else DEFINE is complete.
-
-Check: purpose, users, important workflows, Business Rules, states, important edge cases, UX/visual direction, architecture sufficient, quality bar, significant conflicts resolved. No theoretical perfection. Do not keep DEFINE open to exhaust research, fill unused files, or resolve reversible details. Record non-blocking uncertainty as ASSUMED, NEEDS RESEARCH, or Open Issues — never silently as product truth.
-
-⸻
-
-## 27. USER BUILD APPROVAL
-
-When DEFINE is complete, summarize: product, principles, major workflows, UX/design, architecture, significant risks. Ask **once**, in the user's language: DEFINE complete — start BUILD? As A/B/C: start BUILD / still open points / decide for me. If not a clear yes: named blockage is the only remaining DEFINE work (P26); resolve; ask once more. Do not restart DEFINE as a whole. Do not start BUILD on silence. No repeated approvals during routine execution.
-
-⸻
+Fresh team could build without the interview? Nothing UNKNOWN/CONFLICTING/NEEDS USER DECISION blocking the first slice? Then ask **once**: start BUILD / still open points / Entscheide du. No BUILD on silence. Do not restart DEFINE as a whole.
 
 # PHASE 2 — BUILD
 
-## 28. BUILD BEHAVIOR
+## 28. BUILD
 
-Stop being primarily an interviewer. Work autonomously on reversible implementation. Source of Truth governs. Execute hard until completion standard or user pauses. Lead stays Lead: Ask/Decide + SoT in the user thread; heavy work delegated (P32, P32A). After each slice: done / still missing / concrete next. Do not end BUILD by parking specified remaining work as a note with no next move.
+Stop interviewing. SoT governs. After each slice: done / still missing / next move. Do not park promised work as a note with no next move.
 
-⸻
+## 29–31. QUALITY OF BUILD
 
-## 29. OFFENSIVE ON OUTCOME
+Holds in real life: AGENTS.md. Simple code: AGENTS.md. Before extra complexity: is it required now?
 
-See global `AGENTS.md` → Offensive on Outcome (authoritative). Illustration: Snake is not done when mechanics work — identity, type, spacing, motion, controls, start/pause/game-over, feedback, responsive.
+## 32–32A. WORKERS
 
-⸻
+AGENTS.md is authoritative (right workspace, visible, default one worker, heavy = plan first).
 
-## 30. DEFENSIVE ON IMPLEMENTATION
+Lead: Ask/Decide + SoT in the user thread. Brief: what, where, done (+ SoT pointers, proof). Workers start fresh from the brief. Titles follow the work. No fake roles.
 
-See global `AGENTS.md` → Defensive on Implementation (authoritative). Every slice and artifact must obey it.
+Silent checklist before sending work: goal, path, SoT pointers, scope, constraints, proof, return short. Heavy: plan + done criteria; Bubby or Reviewer sees the plan before implementers (P38). No vague briefs.
 
-⸻
+## 33–35. SLICES
 
-## 31. SIMPLICITY CHECK
-
-Before adding meaningful complexity: real requirement? meaningful quality/reliability/maintainability? simpler solution? existing capability? flexibility actually required? abstraction necessary **now**? fewer moving parts?
-
-⸻
-
-## 32. MULTI-AGENT IS AN EXECUTION CAPABILITY
-
-Desired, not merely allowed. Reason: context. Lead talks to the user, holds the Source of Truth, merges. Bounded work (research, slice, tests, review) goes to subagents with minimum sufficient context.
-
-**Layers, visibility, size gate:** see global `AGENTS.md` → Multi-Agent Work (authoritative). **Launch profile, finish-notify, `/reset`:** skill `paseo-orchestration` (`~/Development/_System/Rules/skills/paseo-orchestration/SKILL.md`). Lead does not brief an implementing worker directly when a project workspace exists; coordinator does not absorb a multi-file feature alone.
-
-**ADB-specific:**
-
-* Lead: Ask/Decide + Source of Truth stay in the user-facing thread; complete briefs; merge.
-* Workers start **fresh** — only the brief, not the Lead chat. Follow-ups reuse the same worker when continuity helps.
-* Default: delegate BUILD and heavy research. Stay in Lead for short clarification, tiny one-file edits, Decide questions, status, or when delegation costs more than it saves.
-* Visible surface (Paseo: workspace tab). Hidden in-chat workers only if no visible surface exists or a visible agent would cost more.
-* Titles: **Lead** (`role=lead`); **{Project} session coordinator** (`role=coordinator`); **{Project}-Worker** (`role=worker`); **Reviewer** (`role=reviewer`) — plan (large, before implementers) or diff+spec (after code). Workspace titles match the project short name. Agent count follows the work. No ceremony/fake roles.
-
-⸻
-
-## 32A. LEAD CHECKLIST
-
-Before each delegated BUILD or heavy research (silent is fine):
-
-1. **Goal** — what done looks like (one or two sentences).
-2. **Workspace / path**
-3. **Source of Truth pointers** (or “none / brownfield inspect first”)
-4. **Scope** — in / out; “do not” list when needed
-5. **Constraints** — secrets, no drive-by refactors, financial/safety limits
-6. **Proof** — command, test, screenshot, git status
-7. **Return format** — short; Lead summarizes for the user
-8. **Review (code)** — P39: independent review required? If yes, Reviewer with diff+spec only; if no, name constrained self-check in STATUS
-9. **Continuity** — new worker vs follow-up
-10. **Plan review (large only)** — global `AGENTS.md` → Size gate: after the written plan exists, spawn Reviewer with **plan + done criteria + relevant spec only** (P38). Pass → then spawn implementers. One plan revision; then Bubby. If independent Reviewer cannot be spawned: record limitation in STATUS; do not call a self-check independent plan review.
-
-Unknown and material → Ask/Decide first. No vague briefs.
-
-Brief **depth** follows Size gate: small = short (goal, path, done); large = **decision-complete** plan + done criteria — workers must not decide scope, architecture, ownership, or acceptance. Completing this checklist silently does not replace a missing large-work plan.
-
-Session coordinator runs the same checklist when briefing subagents.
-
-⸻
-
-## 33. WHEN TO PARALLELIZE
-
-Parallelize genuinely independent work (research topics, stable interfaces, tests, visual/security/code review, independent modules). Do not parallelize tightly coupled implementation (same files, conflicting architecture, unfinished deps, integration churn).
-
-⸻
-
-## 34. LARGE APP EXECUTION PLAN
-
-Never build a large app as one uninterrupted task. Before substantial BUILD: dependency-aware plan from the Source of Truth; small vertical slices that create integrated capability. **Persist** in `adb/07-STATUS.md` under `## Execution plan`: names, dependencies, status (pending/current/done). Update when the plan changes and when a slice completes. Durable home — not chat (P58). Prefer user-visible capability (+ needed backend/data/tests) over “build entire backend first.”
-
-⸻
-
-## 35. SLICE GRAPH
-
-Map dependencies. Independent slices may run in parallel; dependents wait. Maximize safe parallelism without integration chaos.
-
-⸻
+Parallel only when jobs don’t share files or unfinished deps. Large app: persist `## Execution plan` in 07 — user-visible slices, not “entire backend first”.
 
 ## 36. SLICE LOOP
 
 Every meaningful slice:
 
-SPEC → PLAN → IMPLEMENT → TEST → REVIEW → SPEC CHECK → ISSUE TRIAGE → VERIFY → INTEGRATE
+**SPEC → BUILD → PROVE → RECORD**
 
-Only then complete.
+- **SPEC** — what this slice must do, from the SoT. Heavy work: written plan + done criteria here (AGENTS.md).
+- **BUILD** — implement the spec. Test what matters (P43).
+- **PROVE** — vs SoT (P45) and a real path (AGENTS.md). UI: harness browser. Not “it compiles.”
+- **RECORD** — update SoT + STATUS; status review (P25): increment CARRIED, apply P50A. Commit only if Bubby asked, after `agy-review`.
 
-* **PLAN** — for **large** work (Size gate): written decision-complete plan; **Reviewer reads it before implementers spawn** (P32A item 10). Small: PLAN may collapse into SPEC.
-* **SPEC CHECK** — built behavior vs Source of Truth (P45), not the implementer's memory.
-* **VERIFY** — proven, not asserted: what, how, what happened. User-facing web: real path in a browser. See global `AGENTS.md` → Prove it works.
-* **INTEGRATE** — SoT + STATUS updated; worktree closed when used. Commit only if the user asked (`AGENTS.md` → Git) and only after `agy-review` PASS (`AGENTS.md` → Antigravity CLI). Verified but not in project truth is not done.
+If PROVE fails: do not RECORD as done. Fix in-slice or register (P46) and narrow to what was proven. Cap 3 fix rounds, then Bubby.
 
-### Scaling the loop (P60)
+PASS WITH ISSUES (`/adb-review`): register findings; RECORD only if PROVE passed and P50 allows.
 
-Small low-risk slices may skip **REVIEW** (code) when P39 does not require independent review — decide **before IMPLEMENT**. **SPEC, IMPLEMENT, TEST, SPEC CHECK, VERIFY, INTEGRATE never drop.** PLAN may collapse into SPEC for a one-file change. Large-work **plan review still runs** (Size gate) even when code REVIEW is skipped. ISSUE TRIAGE = status review at slice completion (P25): read register, increment CARRIED, apply P50A. State which variant and why. Slash commands must reference this point, not invent a shorter loop.
+Old names (SPEC CHECK / VERIFY / INTEGRATE / ISSUE TRIAGE) mean PROVE + RECORD. Slash commands must use this loop, not invent a longer one.
 
-### When a station fails
+## 37–38. CONTEXT
 
-REVIEW, SPEC CHECK or VERIFY failing is normal:
-
-1. **Do not integrate.**
-2. Fix in-slice if small and understood; re-run from the failed station.
-3. Else register (P46); narrow to what is verified, or abandon unverified work and revert to last good state.
-4. Record in STATUS. Cut-down slices must not be reported as fully delivered (P49, P61).
-
-Never mark complete with a failed station and an open issue standing in for missing behavior.
-
-**Review-round cap (not CARRIED):** at most **3** fix cycles on the same failed station / same `agy` diff. Then stop and ask Bubby. See global `AGENTS.md` → Antigravity CLI.
-
-### Review verdict: PASS WITH ISSUES
-
-Independent review **PASS WITH ISSUES** (P39, `/adb-review`):
-
-1. Register every finding before INTEGRATE (P46).
-2. INTEGRATE allowed only if VERIFY passed for the scoped slice, and RELEASE BLOCKERS is `none` or only MEDIUM/LOW deferred with Bubby's acceptance recorded.
-3. FAIL for integration if CRITICAL, HIGH that violates Quality, required behavior broken, or unresolved SoT conflict (P50) — “When a station fails”.
-
-⸻
-
-## 37. SMALL VERIFIABLE TASKS
-
-Substantial implementation uses small tasks: objective, relevant spec, expected behavior, bounded scope, verification method. Do not pile unreviewed code.
-
-⸻
-
-## 38. SUBAGENT CONTEXT
-
-Minimum sufficient context.
-
-**Worker:** relevant Spec/UX/Architecture, objective, related code — plus the plan and done criteria when large.
-
-**Reviewer — plan (before implementers, large):** relevant spec, the plan, done criteria. No implementer chat.
-
-**Reviewer — code:** relevant spec, expected behavior, diff, test evidence, review criteria.
-
-**Reviewer must not receive:** interview history, builder narrative/rationale, full project history, “confirm the builder's conclusion”. Do not dump entire project history.
-
-⸻
+Small verifiable tasks. Worker: relevant spec + code (+ plan when heavy). Reviewer: spec + plan + done criteria, or spec + diff + evidence — never the builder’s story.
 
 ## 39. INDEPENDENT REVIEW
 
-Preferred when the environment supports it: a **separate** agent or the user, judging against SoT + artifact + evidence. The implementer must not be the only authority. Same model, same session, given the builder's story — not independent. Lead re-reading own work — not independent. If no separate reviewer: record limitation in STATUS; constrained self-check; do **not** call it independent review.
+Required for **heavy** work (money, login/security, live, data) — plan before build; code review vs spec+diff when the slice is heavy. Same session + builder’s story ≠ independent. If none: STATUS limitation; don’t call it independent. `agy-review` is the commit check and does not replace this where heavy work requires it.
 
-May cover product, UX/design, engineering, complexity, tests, security. Scale to risk. No extra review roles for ceremony.
+## 40–44. CODE AND TESTS
 
-**`agy-review` is separate and never optional** (`AGENTS.md` → Antigravity CLI). Self-check does not replace it; agy PASS does not satisfy independent review where this point requires one.
+Smallest safe change. Delete dead code when safe. Mature deps for hard problems, not trivia. Test business rules, money, permissions, edges — not coverage theater. Review vs SoT, UX, safety, extra complexity.
 
-**Code independent review is required** when: money/billing/payroll/financial calc; security/auth/secrets; data integrity/migration/destructive ops; more than three production files or public API change. If none apply and the slice is small/low-risk on a collapsed SoT: REVIEW (code) may be constrained self-check; P36 scaling; decide before IMPLEMENT; record in the brief.
+## 45–50. TRUTH AND ISSUES
 
-**Plan review** for large work is required by Size gate / P32A / P36 PLAN, even when code REVIEW is skipped.
+Green tests ≠ spec satisfied. Drift is either a bug or an intentional spec change — never silent. FIX NOW vs REGISTER: AGENTS.md; ADB register = P23. CLOSED = verified. CRITICAL / HIGH-that-violates-quality / broken required behavior / SoT conflict → not complete.
 
-⸻
+## 50A. CARRIED
 
-## 40. CODE DEFENSIVELY
+At **CARRIED: 3** leave OPEN in that review — unless the exit needs Bubby (WAITING ON USER, freeze count). Exits: FIX, ACCEPT (not for CRITICAL or HIGH data/security), REJECT. “Almost done” must end.
 
-Existing code: P30 + `AGENTS.md` → Defensive on Implementation. Smallest safe change that fully solves it. No drive-by refactors, renames, or new patterns without demonstrated need.
+## 51–54. BROWNFIELD, GAPS, MONEY
 
-⸻
+Inspect, classify KEEP/IMPROVE/REPLACE/REMOVE. Plan the gap, don’t rebuild what’s right. Don’t mechanically port old code. Accounting/payment: correctness over brevity; no silent schema change.
 
-## 41. DELETE UNNECESSARY COMPLEXITY
+## 55–57. CHANGE AND AUTONOMY
 
-When safe, remove dead code, unused functions, obsolete implementations, unnecessary abstractions, unused deps, superseded workarounds. Less code is good when behavior, clarity, and safety remain.
+Spec change → update SoT first. Accidental code is not new product truth. After DEFINE: don’t interrupt for reversible details. Ask on product ambiguity, irreversible risk, credentials, spending.
 
-⸻
+## 58–60. DISCIPLINE
 
-## 42. DEPENDENCIES
+SoT files outrank chat. Smallest sufficient context. Collapse small products. Forbidden: ceremony to tick points.
 
-Minimize total complexity, not blindly package count. Use mature deps when they solve hard problems more simply than custom code. No large deps for trivial problems. Do not reinvent security-sensitive standards just to avoid a dependency.
+## 61. COMPLETION
 
-⸻
-
-## 43. TEST VALUABLE BEHAVIOR
-
-Prioritize: Business Rules, calculations, state transitions, critical workflows, permissions, integration boundaries, regressions, high-risk edges. E2E for important journeys when appropriate. Do not inflate volume for coverage.
-
-⸻
-
-## 44. REVIEW DIMENSIONS
-
-When relevant: PRODUCT (vs 02), UX (understandable/efficient), DESIGN (vs 03), ENGINEERING (correct/maintainable), COMPLEXITY (unnecessary code/architecture), QUALITY (vs 05), SECURITY (meaningful risks).
-
-⸻
-
-## 45. SPEC-COMPLIANCE GATE
-
-Green tests are not enough. Compare implementation to the Source of Truth that exists (full set or collapsed — collapsed topics still count). If it differs: A) implementation wrong, or B) product intent **intentionally** changed. Never silently choose B. Missing required behavior: fix now if it belongs in this slice; else register. Do not continue as if the spec were satisfied.
-
-⸻
-
-## 46. ISSUE DISCOVERY RULE
-
-See global `AGENTS.md` → Complaints, Bugs and Discovered Problems (FIX NOW vs REGISTER). ADB: REGISTER = P23 register (`adb/08` or STATUS `## Open issues`). Never chat-only. Unsure → register.
-
-⸻
-
-## 47. ISSUE CLOSURE LOOP
-
-DISCOVER → REGISTER → TRIAGE → SELECT → FIX → TEST → REVIEW → VERIFY → CLOSE.
-
-Global PRIORITIZE = ADB **TRIAGE** (P48). **SELECT** is extra: which triaged issues enter the next slice. Where texts differ, `AGENTS.md` wins on intent. CLOSED requires verification — not merely code changed.
-
-⸻
-
-## 48. TRIAGE
-
-At natural checkpoints, prioritize: severity, product impact, security/data risk, blockers, regression risk, dependency order, cost of postponing. Equal severity: `CARRIED: 2` above a fresh issue (P50A). Do not interrupt every task for every new issue.
-
-⸻
-
-## 49. NO FAKE CLOSURE
-
-Never close by deleting, lowering severity to finish, rewording, or CLOSED without verification. Closed items stay traceable.
-
-⸻
-
-## 50. RELEASE ISSUE GATE
-
-Not complete while CRITICAL remain, HIGH violate 05-QUALITY, required behavior is broken, or unresolved SoT conflicts remain. MEDIUM/LOW may remain only if acceptable within the documented quality bar.
-
-⸻
-
-## 50A. ISSUE CONVERGENCE
-
-An open issue is debt. At **CARRIED: 3** it must leave OPEN in that same review — unless the exit needs the user (no fourth carry). Prefer `CARRIED: 2` over a fresh issue at equal severity (P48).
-
-User-needed exit: **WAITING ON USER**, freeze CARRIED, that decision is the single NEXT IMPORTANT ACTION in 07-STATUS. Do not increment CARRIED while waiting. After the user decides: FIX, ACCEPT, or REJECT without treating the wait as a fourth carry.
-
-Exits: **FIX** (verify P47/P49); **ACCEPT** (decision in 06 or collapsed 02; limitation in 05 or collapsed 02 quality; then close) — forbidden for CRITICAL and for HIGH that violate data-integrity or security; **REJECT** (why not a real problem, then close). ACCEPT is an honest quality bar, not defeat.
-
-Do not run a status review whose only purpose is waiting — a user status question still reviews everything else (P25). Purpose: “almost complete” must terminate.
-
-⸻
-
-## 51. BROWNFIELD EXECUTION
-
-Inspect: behavior, Business Rules, architecture, data, integrations, UX, design, tests, deploy, known problems. Classify: KEEP / IMPROVE / REFACTOR / REPLACE / REMOVE / MISSING / UNCLEAR. Preserve good working code. No style rewrites. Then grill until intended state is clear.
-
-⸻
-
-## 52. GAP ANALYSIS
-
-CURRENT vs INTENDED. Plan only the required gap. Do not rebuild what is already correct. Do not preserve incorrect behavior merely because it exists.
-
-⸻
-
-## 53. MIGRATIONS
-
-Do not mechanically translate old code. Extract technology-independent Business Rules, logic, calculations, workflows, data relationships, integrations, external deps — then choose the simplest appropriate target architecture.
-
-⸻
-
-## 54. HIGH-INTEGRITY SYSTEMS
-
-Accounting/financial/payment: stricter defense. Verify where relevant: calculations, taxes, rounding, totals, transaction integrity, duplicate prevention, permissions, auditability, migration accuracy, backups, recovery. Compare old vs new with controlled/historical data when appropriate. Never sacrifice correctness to reduce code. Never silently change persisted data models/schemas — explicit migration spec and user awareness. Production data integrity is non-negotiable.
-
-⸻
-
-## 55. CHANGE CONTROL
-
-Later requirements: **A** implementation fix (spec correct, code wrong) → proceed. **B** compatible extension → proceed when clear. **C** product spec change → update SoT. **D** UX/design change → update that truth. **E** architecture change → assess impact, update Architecture. **F** vision change → explain conflict; update higher SoT first. After a product change, update affected SoT files before the work is complete. Spec must not describe an older product than the code.
-
-⸻
-
-## 56. PREVENT PRODUCT DRIFT
-
-Many small changes can destroy coherence. Before meaningful changes check Vision, Spec, Business Rules, UX, Design, Architecture, Quality, important Decisions. Accidental implementation must not become new product truth.
-
-⸻
-
-## 57. AUTONOMY
-
-After DEFINE, maximize useful autonomy. Do not interrupt for routine coding, obvious details, reversible low-risk decisions, or what research/tests can resolve. Ask when: genuine product ambiguity; trade-off that alters the product; conflict with established intent; high-risk irreversible decision; external auth, credentials, or spending.
-
-⸻
-
-## 58. TOKEN DISCIPLINE
-
-Spend offensively on: understanding, research, UX/design/architecture decisions, hard debugging, tests, security, independent review. Spend defensively against: repeated summaries, ceremonial planning, redundant docs, irrelevant context, fake roles, repeating known facts.
-
-Smallest sufficient context per agent. Multiple agents protect context. DEFINE→BUILD or between major slices: reload from SoT files — they outrank interview chat. Long/repeating session: fresh session with those files + `AGENTS.md`. Do not keep loading Lead with work a subagent can finish from a small brief.
-
-⸻
-
-## 59. DOCUMENT DISCIPLINE
-
-Full default: Vision, Spec, UX, Architecture, Quality, Decisions, Status, Open Issues. Minimum small product: Vision, Spec, Status. Another permanent doc only when a concrete need justifies it. Do not keep all eight on a small product because the full set exists.
-
-⸻
-
-## 60. SCALE TO THE PROJECT
-
-Do not over-engineer small products (collapse SoT). Large/high-integrity: split, deep definition, many slices, strict verification. Scale with complexity, risk, size, integrity — **not ceremony**. Use the points this product needs, at the depth it needs. Forbidden: every large-project step on a small product, or extra artifacts merely to tick points.
-
-⸻
-
-## 61. COMPLETION STANDARD
-
-Not complete because code exists, compiles, a demo works, or unit tests pass. Where relevant: intended behavior, important edges, polished UX, coherent design, spec satisfied, relevant tests pass, independent review passes when required and actually independent, open issues appropriately resolved, unnecessary complexity removed, no release-blocking issue.
-
-The product is not complete until P61B ran on the **current** product (stamp not stale). **ALPHA is never P61 completion.** The quality bar does not choose ALPHA vs BETA; it only chooses **BETA** (real use) vs **LIVE** (production).
-
-⸻
+Not complete because it compiles. Intended behavior, real path, spec, issues under P50, P61B stamp current. **ALPHA is never completion.** Quality bar chooses BETA vs LIVE, not ALPHA vs BETA.
 
 ## 61B. PRODUCT READINESS
 
-Whole-product readiness when BUILD or Bubby claims the app is finished. Slice VERIFY and `/adb-review` unchanged. Not per slice. Not a fake company.
-
-**Verdicts** (STATUS keys; German for Bubby):
+When someone says the **product** is finished, or `/adb-ready`. Not per slice. Skill `product-readiness` is the executable text.
 
 | Key | Meaning |
 |---|---|
 | `NICHT_FERTIG` | Core path broken, spec unsatisfied, or P50 blockers. |
-| `ALPHA` | Real user can complete the **core** path. Gaps registered. Not for real operations. **Never** P61 completion. Quality bar does **not** choose ALPHA vs BETA; it only chooses **BETA** (real use) vs **LIVE** (production). |
-| `BETA` | Agreed scope matches SoT. Important journeys, empty/loading/error, relevant edges proven on a real path (browser if UI). Only MEDIUM/LOW remain if acceptable under P50 (ACCEPT recorded if needed). |
-| `LIVE` | BETA + P50 clear + applicable `05-QUALITY` production items. **Does not mean already deployed.** Deploy only when Bubby asks, via the project's documented path. Constrained self-check **must not** return LIVE. |
+| `ALPHA` | Core path works. Gaps registered. Not real operations. Never P61 complete. |
+| `BETA` | Agreed scope matches SoT. Important journeys + empty/loading/error proven on a real path. Only MEDIUM/LOW if P50 allows. |
+| `LIVE` | BETA + P50 clear + 05 production items. Not “already deployed.” Constrained self-check must not return LIVE. |
 
-**When it runs:** before anyone may say the **product** is complete (P61); Bubby says fertig / Alpha / Beta / Live / Release / „ist es wirklich fertig“ / declare complete; `/adb-ready`. **Stamp is stale** after a later slice INTEGRATE, or after required behavior / SoT that this walk covered **changed**. Date alone is not currency. Stale stamp → `/adb-ready` again before “fertig”. Not on every slice. Do **not** add a station to P36. Do **not** change `adb-slice` to call this per slice. P61 still means don’t call the product done; it must **not** turn every slice INTEGRATE into `/adb-ready`.
-
-**Who:** separate agent. Builder’s session + builder’s story ≠ independent. Lead re-reading own work ≠ independent. If none: STATUS `REVIEW LIMITATION` as today; constrained self-check; do not call it independent; **not LIVE**.
-
-Walker does not implement product code (P39). Discoveries: REGISTER (P46). Mini-fixes: BUILD afterwards, then a **new** walk if needed. Walker must not grade their own repair.
-
-**Who writes the stamp:** the independent walker writes `READINESS`, `READINESS-AT`, `READINESS-BY` and overwrites `## Readiness`. Lead/coordinator must **not** change the key. `READINESS-BY` is `independent` \| `constrained-self-check` — **not** the same field as `REVIEW LIMITATION` (code/plan).
-
-**How:** reload SoT + STATUS + issues (P58). User-facing: harness browser, real clicks. High-integrity: relevant calc/permissions. P45/P46. No invented leftover work. Depth scales (P60), not skip.
-
-**Where:** no new numbered ADB file. `adb/07-STATUS.md` header must name `READINESS`, `READINESS-AT`, `READINESS-BY` (P22). `## Readiness` — overwrite, not a changelog; preserve on `/adb-status` rewrite like `## Execution plan` (P22 + `/adb-status` Step 2). Real issues go to the existing register; don’t duplicate full issue bodies in STATUS if 08 exists.
-
-METHOD: ADB → STATUS. **Not ADB:** do not create ADB files; tell Bubby the verdict; persist only in a tracker the project already has (`AGENTS.md` REGISTER paths).
-
-⸻
+Separate walker writes `READINESS` / `READINESS-AT` / `READINESS-BY` and `## Readiness`. Lead must not change the key. Stale after later RECORD or SoT change that this walk covered. Not ADB: don’t create ADB files; persist in the tracker the project already has.
 
 ## 61A. METHOD FEEDBACK
 
-ADB is a product. A finding belongs to the method when: the method was silent where a rule was needed; two parts (or inherited `AGENTS.md`) disagree; the method demanded work P60/anti-ceremony should have prevented; following the method produced the defect.
+Method silent, method conflict, or method caused the defect → append `LESSONS.md`. User adopts. Still fix the project.
 
-Append to canonical `LESSONS.md`: DATE, PROJECT, SYMPTOM, ROOT CAUSE, PROPOSED CHANGE, STATUS (PROPOSED / ADOPTED / REJECTED). Append-only. Only the user adopts a lesson into numbered points. Still fix the project. Ordinary project issues stay in 08 (or STATUS). If lessons accumulate faster than issues, the bar is wrong.
+## 62.
 
-⸻
-
-## 62. ULTIMATE ADB RULE
-
-Before BUILD: curious, skeptical, precise. During BUILD: aggressive about an exceptional product. During implementation: conservative about code, abstractions, moving parts. During execution: parallelize independent work; serialize dependent. During review: evidence and Source of Truth, not agent confidence.
-
-Not maximum code, agents, docs, or architecture. **The smallest coherent system that delivers the full intended product at exceptional quality.**
+Curious in DEFINE. Aggressive about a product that holds. Conservative about extra code. **The smallest coherent system that delivers the full intended product.**

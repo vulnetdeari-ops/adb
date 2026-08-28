@@ -95,7 +95,7 @@ Code existing, compiling, demoing or passing unit tests is not completion. Judge
 - no release-blocking issue remains
 - P61B ran on the **current** product (stamp present and not stale)
 
-**Stamp missing or stale** (P61B: later slice INTEGRATE, or required behavior / SoT this walk covered changed; date alone is not currency): NEXT IMPORTANT ACTION is `/adb-ready`, not “complete”. **ALPHA is never completion.**
+**Stamp missing or stale** (P61B: later slice RECORD, or required behavior / SoT this walk covered changed; date alone is not currency): NEXT IMPORTANT ACTION is `/adb-ready`, not “complete”. **ALPHA is never completion.**
 
 Any "no" means not complete. Name the concrete next work rather than a note for later.
 

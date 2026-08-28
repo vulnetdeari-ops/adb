@@ -14,7 +14,7 @@ Spawn this as a **separate agent**. The same model in the same session, given th
 
 **Code review** — hand exactly: relevant specification, expected behavior, the diff, test evidence, concrete review criteria.
 
-**Plan review (large work, before implementers)** — hand exactly: relevant specification, the written plan, done criteria. No implementer chat. No diff yet. Verdict pass → Lead/coordinator may spawn implementers. One revision, then Bubby (P32A, P36 PLAN).
+**Plan review (heavy work, before implementers)** — hand exactly: relevant specification, the written plan, done criteria. No implementer chat. No diff yet. Verdict pass → implementers may spawn. One revision, then Bubby (P32A, P36).
 
 Never hand the reviewer: interview history, the builder's narrative or rationale, full project history, or any instruction to confirm the builder's conclusion (P38). Reviewer never implements.
 
@@ -24,7 +24,7 @@ Scale the review to risk. Do not invent extra review roles for ceremony.
 
 ## Reviewer instructions
 
-Detect mode from the brief: **plan review** (plan + done criteria, no diff) or **code review** (diff + tests). Agent confidence is not evidence.
+Detect mode from the brief: **plan review** (plan + done criteria, no diff) or **code review** (diff + tests). Agent confidence is not evidence. Plan review is for **heavy** work (money, login/security, live, data).
 
 ### Plan review
 
@@ -91,6 +91,6 @@ A verdict of PASS is not available while a CRITICAL issue stands, while a HIGH i
 
 When the verdict is **PASS WITH ISSUES**:
 
-1. Register every finding via `/adb-triage` before the Lead integrates.
-2. The Lead may integrate only if VERIFY already passed for this slice's scope and **RELEASE BLOCKERS** is `none`, or names only MEDIUM/LOW items explicitly deferred to a named later slice.
-3. Treat as **FAIL** (do not integrate) when any condition that forbids PASS (above) applies — return to P36 “When a station fails”.
+1. Register every finding via `/adb-triage` before RECORD.
+2. RECORD only if PROVE already passed for this slice's scope and **RELEASE BLOCKERS** is `none`, or names only MEDIUM/LOW items explicitly deferred to a named later slice.
+3. Treat as **FAIL** (do not RECORD as done) when any condition that forbids PASS (above) applies — return to P36 if PROVE failed.
