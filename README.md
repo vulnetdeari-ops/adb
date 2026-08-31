@@ -28,7 +28,7 @@ new-project my-app adb
 
 # existing repo (from its root)
 adopt-project
-# choose ADB when asked
+# ADB only — BMAD is retired; if a helper still asks, choose ADB
 
 # or only the ADB pieces, against any project path
 ./setup-into-project.sh /path/to/project
@@ -37,7 +37,7 @@ adopt-project
 ./setup-into-project.sh --register /path/to/project  # optional: create adb/08-OPEN-ISSUES.md
 ```
 
-`setup-into-project.sh` creates `METHOD.md` when missing, installs slash commands, and **does not** create `adb/08-OPEN-ISSUES.md` unless you pass `--register`. It does not copy `SKILL.md` into the project.
+`setup-into-project.sh` creates `METHOD.md` when missing, **replaces leftover `METHOD: BMAD`**, installs slash commands, **removes leftover BMAD engine files** (`_bmad/`, `.bmad-core/`, `.bmad-*`, BMAD-named commands/rules/skills, BMAD `core-config.yaml`), and **does not** create `adb/08-OPEN-ISSUES.md` unless you pass `--register`. It does **not** copy `SKILL.md` into the project. It does **not** delete BMAD planning leftovers such as `_bmad-output/` or an old PRD — those are brownfield evidence for DEFINE, not the method.
 
 Slash commands (`/adb`, `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`, `/adb-ready`) live in [`commands/`](commands/). They point at `SKILL.md`; they are not a second method.
 
@@ -50,7 +50,7 @@ Inside this repository, `.cursor/commands/`, `.claude/commands/` and `.codex/pro
 ./install-commands.sh --remove-global # delete leftover home-level installs
 ```
 
-Do not load a second product method on top of ADB.
+Do not load another product method on top of ADB. **BMAD is retired.** Do not follow leftover BMAD agents, commands, or `_bmad/` files. Ignore a leftover `METHOD: BMAD` — setup replaces it with `METHOD: ADB`.
 
 Defects in the method itself, found by real projects, go in [`LESSONS.md`](LESSONS.md). Ordinary project issues do not.
 

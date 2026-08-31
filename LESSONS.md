@@ -105,4 +105,15 @@ ROOT CAUSE: The method was written as numbered process. The reason it exists is 
 PROPOSED CHANGE: Open `SKILL.md` with that job. DEFINE / BUILD / COMPLETION in plain language. Commands point at those sections, not at old point numbers.
 STATUS: ADOPTED — 2026-08-28.
 
+---
+
+## L-010 — Dual-method framing kept BMAD alive after it was gone
+
+DATE: 2026-08-31
+PROJECT: ADB method
+SYMPTOM: Agents still treated BMAD as a peer method: `adopt-project` said “choose ADB when asked”, setup left `METHOD: BMAD` untouched, and leftover `_bmad/` / `.bmad-core/` / BMAD commands could still be followed. Bubby no longer has BMAD.
+ROOT CAUSE: The method was defined against BMAD (“never combine”). After BMAD was retired, that opposition still taught agents that BMAD exists. Setup had no job to replace the switch or remove the engine. Planning leftovers and the engine were not distinguished.
+PROPOSED CHANGE: ADB is the product method. BMAD is retired. Setup replaces `METHOD: BMAD` and removes the engine; planning leftovers stay as brownfield evidence for DEFINE. Commands and the reading copy say BMAD is not a method.
+STATUS: ADOPTED — 2026-08-31.
+
 

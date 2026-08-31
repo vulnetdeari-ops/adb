@@ -8,7 +8,7 @@ description: "ADB DEFINE. Grill the product, not the user. Write adb/, then gate
 Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (DEFINE). Ignore a leftover project `ADB.md`.
 Inherit global `AGENTS.md`. No product implementation in DEFINE.
 
-1. **Mode** — GREENFIELD or BROWNFIELD, one line. Brownfield: inspect first (SKILL.md DEFINE).
+1. **Mode** — GREENFIELD or BROWNFIELD, one line. Brownfield: inspect first (SKILL.md DEFINE). Leftover BMAD planning docs are evidence, not destination and not a second method.
 2. **Don’t ask** what repo, docs, tests or research can answer.
 3. **One decision** at a time. A/B/C as in AGENTS.md. Record in `adb/` (SKILL.md Source of truth). Default collapsed: `01-VISION`, `02-PRODUCT-SPEC`, `07-STATUS`.
 4. **Uncertainty** — KNOWN / UNKNOWN / ASSUMED / CONFLICTING / NEEDS RESEARCH / NEEDS USER DECISION. Never silently turn an assumption into product truth.

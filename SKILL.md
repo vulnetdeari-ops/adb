@@ -1,6 +1,6 @@
 ---
 name: adb
-description: "Ask. Decide. Build. Bubby sets the product destination. You implement, test, and sign in. Activates when METHOD.md says METHOD: ADB, the user invokes /adb, or a new app is being defined with ADB. Talk, proof, secrets, git, workers: global AGENTS.md."
+description: "Ask. Decide. Build. Bubby sets the product destination. You implement, test, and sign in. Activates when METHOD.md says METHOD: ADB, the user invokes /adb, or a new app is being defined with ADB. BMAD is retired — leftover BMAD is not a method. Talk, proof, secrets, git, workers: global AGENTS.md."
 ---
 
 # ADB
@@ -11,7 +11,7 @@ Ask. Decide. Build. Canonical: this file. Do not copy it into the project.
 
 Talk, proof, secrets, git, workers: `/Users/bubby/Development/_System/Rules/AGENTS.md`. Do not copy those rules here.
 
-Activates when `METHOD.md` contains `METHOD: ADB`, the user invokes `/adb`, or a new product is clearly wanted. Existing apps: only when asked. Slash commands live **in the project**, never in the user home. Ignore a leftover project `ADB.md`. Helpers: `setup-into-project.sh`, `new-project … adb`, `adopt-project`. Canonical repo: `~/Development/_System/Methods/ADB`. Method defects: `LESSONS.md`.
+Activates when `METHOD.md` contains `METHOD: ADB`, the user invokes `/adb`, or a new product is clearly wanted. Existing apps: only when asked. **BMAD is retired.** Leftover `METHOD: BMAD`, `_bmad/`, `.bmad-core/` or BMAD commands are not a method — do not follow them. Setup replaces the switch and removes the engine. Leftover BMAD planning docs (`_bmad-output`, old PRD) are brownfield evidence for DEFINE, not product truth. Slash commands live **in the project**, never in the user home. Ignore a leftover project `ADB.md`. Helpers: `setup-into-project.sh`, `new-project … adb`, `adopt-project`. Canonical repo: `~/Development/_System/Methods/ADB`. Method defects: `LESSONS.md`.
 
 Product truth is the project’s `adb/` files. Chat is not product truth. A later agent reads `adb/`, not the old interview.
 
@@ -25,7 +25,7 @@ No product code yet.
 
 **Done when** a fresh agent can build from `adb/` without inventing important behavior, and leftover uncertainty does not block the first slice. More research possible ≠ keep DEFINE open.
 
-**Greenfield** — nothing exists yet. **Brownfield** — inspect first: what exists / works / is wrong / unclear / keep / what Bubby wants. Existing code is evidence, not automatically the destination.
+**Greenfield** — nothing exists yet. **Brownfield** — inspect first: what exists / works / is wrong / unclear / keep / what Bubby wants. Existing code is evidence, not automatically the destination. Leftover BMAD planning files are evidence for DEFINE, not a second method and not `adb/`.
 
 Ask the **product**, not Bubby, for what repo, docs, tests or research can answer. Ask Bubby only for intent, priorities, trade-offs. One decision at a time. A/B/C: AGENTS.md. Record decisions in `06` or the decisions section of `02` while collapsed. Challenge choices that hurt usability, safety, or coherence — not taste. If Bubby knows WHAT but not HOW it should look: you own a coherent direction. No generic AI look.
 
