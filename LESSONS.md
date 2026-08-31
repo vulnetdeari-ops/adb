@@ -133,9 +133,20 @@ STATUS: ADOPTED — 2026-08-31.
 
 DATE: 2026-08-31
 PROJECT: ADB method
-SYMPTOM: After L-011, ADB told the reading agent to implement, prove, and commit only if Bubby asked; it allowed spawning a reviewer and loading ADB without `METHOD: ADB`. Global `AGENTS.md` (BubbyOS) says Lead only directs, Code implements and auto-commits after `agy-review` PASS, never spawn, and do not load ADB when `METHOD.md` is missing or `PLAIN`.
+SYMPTOM: After L-011, ADB told the reading agent to implement, prove, and commit only if Bubby asked; it allowed spawning a reviewer and loading ADB without `METHOD: ADB`. Global `AGENTS.md` (BubbyOS) says Lead only directs, Code implements and auto-commits when the job is done, never spawn, and do not load ADB when `METHOD.md` is missing or `PLAIN`.
 ROOT CAUSE: L-011 removed Paseo’s orchestra name “Lead” and took the BubbyOS session Lead with it. ADB restated git and activation instead of deferring to AGENTS.md.
 PROPOSED CHANGE: Paseo stays gone. BubbyOS Lead/Plan/Code/Review stay. ADB must not contradict AGENTS.md: Lead directs; never spawn; Code commits when the job is done; ADB loads only when `METHOD: ADB`; A/B/C includes scopes.
+STATUS: ADOPTED — 2026-08-31.
+
+---
+
+## L-013 — `agy-review` is gone
+
+DATE: 2026-08-31
+PROJECT: ADB method
+SYMPTOM: ADB still required `agy-review` PASS before auto-commit and treated it as the commit check. That skill no longer exists. Bubby is removing it from AGENTS.md as well.
+ROOT CAUSE: ADB copied a dead skill name from the OS instead of deferring git to AGENTS.md without naming a removed tool.
+PROPOSED CHANGE: Do not mention `agy-review`. `/adb-review` stays (independent product review). Git: Code commits when the job is done (AGENTS.md). CARRIED is not the PROVE 3-round cap.
 STATUS: ADOPTED — 2026-08-31.
 
 

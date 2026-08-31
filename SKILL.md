@@ -59,7 +59,7 @@ RESOLUTION:   (when CLOSED)
 VERIFIED BY:  (when CLOSED)
 ```
 
-**CARRIED:** status reviews survived while OPEN. New = 0. A review is: slice RECORD, before release, or Bubby asks status. Not the `agy-review` cap. At **3**: FIX, ACCEPT (not for CRITICAL, not for HIGH data/security), or REJECT. WAITING ON USER freezes the count. CLOSED = verified. Don’t delete closed issues.
+**CARRIED:** status reviews survived while OPEN. New = 0. A review is: slice RECORD, before release, or Bubby asks status. Not the PROVE 3-round cap. At **3**: FIX, ACCEPT (not for CRITICAL, not for HIGH data/security), or REJECT. WAITING ON USER freezes the count. CLOSED = verified. Don’t delete closed issues.
 
 Leave DEFINE: could a fresh team build from these files without the interview? Does any UNKNOWN / CONFLICTING / NEEDS USER DECISION block the first slice? Then ask **once**: start BUILD / still open points / Entscheide du. No BUILD on silence. Do not restart DEFINE as a whole.
 
@@ -71,7 +71,7 @@ Stop interviewing. `adb/` governs. A slice is done when its SPEC done-criteria a
 
 The whole product does not fit in one context window. User-visible slices — not “entire backend first”. Parallel only when jobs don’t share files or unfinished deps. Large product: `## Execution plan` in 07.
 
-Brief: what, where, done, `adb/` pointers, proof. The next agent gets `adb/`, not your story. Lead does not plan, implement, or review — Lead only directs the living named agents (AGENTS.md). Never spawn. **Heavy** (money, login/security, live, data, new public contract): **Plan** writes plan + done criteria first; do not skip Plan; then Code builds. **Review** sees the plan and never implements; same session + builder’s story ≠ independent. `agy-review` is the commit check; it does not replace the heavy plan.
+Brief: what, where, done, `adb/` pointers, proof. The next agent gets `adb/`, not your story. Lead does not plan, implement, or review — Lead only directs the living named agents (AGENTS.md). Never spawn. **Heavy** (money, login/security, live, data, new public contract): **Plan** writes plan + done criteria first; do not skip Plan; then Code builds. **Review** sees the plan and never implements; same session + builder’s story ≠ independent. A later Review does not replace the heavy plan.
 
 Every meaningful slice:
 
@@ -80,7 +80,7 @@ Every meaningful slice:
 - **SPEC** — what this slice must do, from `adb/`. Heavy: Plan writes plan + done criteria here.
 - **BUILD** — Code, smallest safe change. Delete dead code when safe. Test business rules, money, permissions, edges — not coverage theater.
 - **PROVE** — vs `adb/`, on a real path. UI: this harness’s browser. Code signs into sites (AGENTS.md; Bubby only for 2FA / captcha / passkey / OS-blocked keys). Not “it compiles.”
-- **RECORD** — update `adb/` + STATUS; increment CARRIED; apply the CARRIED-3 exit. Git: AGENTS.md — when this job is done (plan met, proved, meaningful diff), Code commits automatically after `agy-review` PASS. Do not wait for Bubby to say commit. Push only when Bubby asks.
+- **RECORD** — update `adb/` + STATUS; increment CARRIED; apply the CARRIED-3 exit. Git: AGENTS.md — when this job is done (plan met, proved, meaningful diff), Code commits automatically. Do not wait for Bubby to say commit. Push only when Bubby asks.
 
 PROVE fails: do not RECORD as done. Code fixes here or registers. Cap 3 fix rounds, then Bubby.
 

@@ -60,7 +60,7 @@ Vision, Product Spec and the rest of `adb/01`…`adb/07` are **not** created by 
 
 - **Ask** — grill the product, not the user. Research what can be discovered. Offer real choices. `Decide for me` is valid.
 - **Decide** — keep that in `adb/`. Small products may collapse to Vision, Product Spec and Status. Larger products use `adb/01` … `adb/08`. Uncertain findings get registered, not swallowed.
-- **Build** — Code executes against `adb/` (Lead directs). Prove on a real path (browser, tests, logins). Missing required behavior is fixed or written down, not ignored. Git: AGENTS.md (auto-commit after `agy-review` PASS when the job is done; push only when Bubby asks).
+- **Build** — Code executes against `adb/` (Lead directs). Prove on a real path (browser, tests, logins). Missing required behavior is fixed or written down, not ignored. Git: AGENTS.md (auto-commit when the job is done; push only when Bubby asks).
 
 The full method is in [`SKILL.md`](SKILL.md).
 
