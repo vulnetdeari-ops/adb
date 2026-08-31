@@ -1,19 +1,19 @@
 ---
 name: adb-ready
-description: "ADB whole-product readiness walk. Separate walker; stamp in STATUS. Not per slice."
+description: "ADB whole-product readiness walk. Review + product-readiness; stamp in STATUS. Not per slice."
 ---
 
 # /adb-ready
 
 Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (COMPLETION).
 Skill: `/Users/bubby/Development/_System/Rules/skills/product-readiness/SKILL.md`.
-Ignore a leftover project `ADB.md`.
+Ignore leftover `ADB.md`. Inherit AGENTS.md.
 
-Separate walker. Not per slice. No product-code edits. Lead does not change the READINESS key.
+Lead directs living **Review**. Not per slice. No product-code edits. Only Review writes the READINESS key.
 
-**Hand:** `adb/` pointers, `adb/07-STATUS.md`, issue register, project `AGENTS.md` (URLs). Never the builder’s story.
+**Hand:** `adb/` pointers, `07-STATUS`, issue register, project `AGENTS.md` (URLs). Never the builder’s story.
 
-Walker writes `READINESS` in the STATUS header and overwrites `## Readiness` (walked, when, independent or self-check). Constrained self-check must not return `LIVE`.
+Review overwrites `READINESS` and `## Readiness` (walked, when, independent or self-check). Constrained self-check must not return `LIVE`.
 
 Walk the **current product**, real path (browser if UI). Register issues in the existing register. Do not create a new numbered ADB file.
 

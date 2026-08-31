@@ -2,10 +2,11 @@
 # ADB — finish project setup that new-project / adopt-project leave for ADB.
 #
 # Does, idempotently:
-#   1. Ensure METHOD.md contains METHOD: ADB when missing
-#   2. Install slash commands into the project (never into $HOME)
-#   3. Optionally ensure adb/08-OPEN-ISSUES.md (--register only; collapsed default is STATUS)
-#   4. --refresh: reinstall commands; remove leftover project ADB.md (method is SKILL.md)
+#   1. Ensure METHOD.md contains METHOD: ADB when missing; replace leftover METHOD: BMAD
+#   2. Remove leftover BMAD engine files (BMAD is retired). Keep planning docs as evidence.
+#   3. Install slash commands into the project (never into $HOME)
+#   4. Optionally ensure adb/08-OPEN-ISSUES.md (--register only; collapsed default is STATUS)
+#   5. --refresh: reinstall commands; remove leftover project ADB.md (method is SKILL.md)
 #
 # Does not copy SKILL.md into the project.
 #
@@ -62,6 +63,13 @@ if [ ! -f "$method_md" ]; then
     printf '%s\n' 'METHOD: ADB' > "$method_md"
     note_changed "METHOD.md"
   fi
+elif grep -qiE '^METHOD:[[:space:]]*BMAD[[:space:]]*$' "$method_md" 2>/dev/null; then
+  if [ $CHECK -eq 1 ]; then
+    echo "WOULD REPLACE leftover METHOD: BMAD → METHOD: ADB in $method_md"
+  else
+    printf '%s\n' 'METHOD: ADB' > "$method_md"
+    note_changed "METHOD.md"
+  fi
 elif ! grep -qx 'METHOD: ADB' "$method_md" 2>/dev/null; then
   echo "WARN: $method_md exists but does not contain METHOD: ADB — not overwriting." >&2
 fi
@@ -81,6 +89,57 @@ if [ -f "$adb_md" ]; then
   else
     echo "NOTE: leftover $adb_md — not the method. Pass --refresh to remove."
   fi
+fi
+
+# --- Leftover BMAD engine (retired). Planning docs stay as brownfield evidence. ---
+remove_bmad_path() {
+  local rel="$1"
+  local path="$PROJECT/$rel"
+  if [ ! -e "$path" ] && [ ! -L "$path" ]; then
+    return 0
+  fi
+  if [ $CHECK -eq 1 ]; then
+    echo "WOULD REMOVE leftover BMAD $path"
+    return 0
+  fi
+  rm -rf "$path"
+  note_changed "$rel"
+}
+
+is_bmad_core_config() {
+  local f="$1"
+  [ -f "$f" ] || return 1
+  grep -qiE 'bmad-core|markdownExploder|prdFile|bmad_version|bmad-method|_bmad/' "$f"
+}
+
+for rel in _bmad .bmad bmad-agent bmad.config.yaml bmad-config.yaml bmad.config.js; do
+  remove_bmad_path "$rel"
+done
+
+shopt -s nullglob
+for path in "$PROJECT"/.bmad-*; do
+  remove_bmad_path "${path#"$PROJECT"/}"
+done
+shopt -u nullglob
+
+bmad_harness_roots=(
+  ".cursor/commands"
+  ".claude/commands"
+  ".codex/prompts"
+  ".cursor/rules"
+  ".cursor/skills"
+  ".claude/skills"
+  ".codex/skills"
+)
+for root in "${bmad_harness_roots[@]}"; do
+  [ -d "$PROJECT/$root" ] || continue
+  while IFS= read -r -d '' path; do
+    remove_bmad_path "${path#"$PROJECT"/}"
+  done < <(find "$PROJECT/$root" -maxdepth 1 \( -iname '*bmad*' \) -print0)
+done
+
+if is_bmad_core_config "$PROJECT/core-config.yaml"; then
+  remove_bmad_path "core-config.yaml"
 fi
 
 # --- Issue register (optional) ---

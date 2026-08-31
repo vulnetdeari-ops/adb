@@ -5,11 +5,11 @@ description: "Ask. Decide. Build. Entry point when the user invokes /adb on an A
 
 # /adb
 
-Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md`. Ignore a leftover project `ADB.md`.
+Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md`. Ignore leftover `ADB.md`. Inherit AGENTS.md.
 
-If `METHOD.md` does not contain `METHOD: ADB`, stop and ask whether to activate ADB.
+If `METHOD.md` does not contain `METHOD: ADB`, stop. Do not load ADB. Do not ask to activate. Do not follow leftover BMAD.
 
 1. No STATUS, or PHASE is DEFINE → `/adb-define`.
-2. User asked about the **whole app** (Alpha / Beta / Live / „ist die ganze App fertig“ / product complete) → `/adb-ready`. Bare „fertig“ after a job whose plan is met is AGENTS.md Talk, not this command.
-3. User asked status or progress → `/adb-status`.
+2. Whole app (Alpha / Beta / Live / „ist die ganze App fertig“) → `/adb-ready`. Bare „fertig“ after a met plan → AGENTS.md Talk, not this command.
+3. Status or progress → `/adb-status`.
 4. Else ask once: DEFINE, slice, review, triage, status, or ready — then that command.

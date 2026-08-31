@@ -77,7 +77,7 @@ STATUS: ADOPTED — 2026-08-26.
 ## L-007 — Chip labels vs A/B/C Decision Questions
 
 DATE: 2026-08-26/27
-PROJECT: ADB method + Paseo Decision Questions
+PROJECT: ADB method
 SYMPTOM: Draft decision UI used Perplexity-style chip labels. Agents and drafts drifted toward long label text instead of single-letter answers. That conflicted with global `AGENTS.md` Decision Questions (A/B/C + „Entscheide du“).
 ROOT CAUSE: A feature sketch taught a discarded interaction. The method and the reading copy already followed A/B/C; the feature note still named “chips” and looked like an open path.
 PROPOSED CHANGE: Keep A/B/C + „Entscheide du“ as the only rule. Mark chips rejected. Rename the feature note so the filename does not teach chips.
@@ -104,5 +104,60 @@ SYMPTOM: The method explained phases and files. It did not say in one place: Bub
 ROOT CAUSE: The method was written as numbered process. The reason it exists is a non-programmer owner.
 PROPOSED CHANGE: Open `SKILL.md` with that job. DEFINE / BUILD / COMPLETION in plain language. Commands point at those sections, not at old point numbers.
 STATUS: ADOPTED — 2026-08-28.
+
+---
+
+## L-010 — Dual-method framing kept BMAD alive after it was gone
+
+DATE: 2026-08-31
+PROJECT: ADB method
+SYMPTOM: Agents still treated BMAD as a peer method: `adopt-project` said “choose ADB when asked”, setup left `METHOD: BMAD` untouched, and leftover `_bmad/` / `.bmad-core/` / BMAD commands could still be followed. Bubby no longer has BMAD.
+ROOT CAUSE: The method was defined against BMAD (“never combine”). After BMAD was retired, that opposition still taught agents that BMAD exists. Setup had no job to replace the switch or remove the engine. Planning leftovers and the engine were not distinguished.
+PROPOSED CHANGE: ADB is the product method. BMAD is retired. Setup replaces `METHOD: BMAD` and removes the engine; planning leftovers stay as brownfield evidence for DEFINE. Commands and the reading copy say BMAD is not a method.
+STATUS: ADOPTED — 2026-08-31.
+
+---
+
+## L-011 — Paseo and Lead were still in the method after they were gone
+
+DATE: 2026-08-31
+PROJECT: ADB method
+SYMPTOM: The method still named Paseo (decision chips, upstream issue) and the Lead role (READINESS key, orchestra). Bubby no longer has Paseo. There is no Lead.
+ROOT CAUSE: Those names were leftover from the old chat UI and orchestra. After both were dropped, the files still taught agents to wait for Paseo rendering or a Lead.
+PROPOSED CHANGE: Remove Paseo. Remove Lead. Decision rule stays A/B/C + „Entscheide du“. The walker writes READINESS; the session agent does not. Briefs are executable without a worker role.
+STATUS: ADOPTED — 2026-08-31.
+
+---
+
+## L-012 — ADB without Lead contradicted BubbyOS
+
+DATE: 2026-08-31
+PROJECT: ADB method
+SYMPTOM: After L-011, ADB told the reading agent to implement, prove, and commit only if Bubby asked; it allowed spawning a reviewer and loading ADB without `METHOD: ADB`. Global `AGENTS.md` (BubbyOS) says Lead only directs, Code implements and auto-commits when the job is done, never spawn, and do not load ADB when `METHOD.md` is missing or `PLAIN`.
+ROOT CAUSE: L-011 removed Paseo’s orchestra name “Lead” and took the BubbyOS session Lead with it. ADB restated git and activation instead of deferring to AGENTS.md.
+PROPOSED CHANGE: Paseo stays gone. BubbyOS Lead/Plan/Code/Review stay. ADB must not contradict AGENTS.md: Lead directs; never spawn; Code commits when the job is done; ADB loads only when `METHOD: ADB`; A/B/C includes scopes.
+STATUS: ADOPTED — 2026-08-31.
+
+---
+
+## L-013 — `agy-review` is gone
+
+DATE: 2026-08-31
+PROJECT: ADB method
+SYMPTOM: ADB still required `agy-review` PASS before auto-commit and treated it as the commit check. That skill no longer exists. Bubby is removing it from AGENTS.md as well.
+ROOT CAUSE: ADB copied a dead skill name from the OS instead of deferring git to AGENTS.md without naming a removed tool.
+PROPOSED CHANGE: Do not mention `agy-review`. `/adb-review` stays (independent product review). Git: Code commits when the job is done (AGENTS.md). CARRIED is not the PROVE 3-round cap.
+STATUS: ADOPTED — 2026-08-31.
+
+---
+
+## L-014 — ADB restated the OS until the product rules were hard to see
+
+DATE: 2026-08-31
+PROJECT: ADB method
+SYMPTOM: After aligning with BubbyOS, SKILL.md and every slash command repeated Lead / spawn / git / BMAD. Agents had to wade through factory rules to reach DEFINE / BUILD / COMPLETION. No product rule was added; the same rules were said three times.
+ROOT CAUSE: Alignment copied AGENTS.md into ADB instead of one inherit line plus the product method.
+PROPOSED CHANGE: Inherit AGENTS.md once. Commands stay short pointers at SKILL.md sections. Do not cut product function.
+STATUS: ADOPTED — 2026-08-31.
 
 
