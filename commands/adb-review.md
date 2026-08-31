@@ -5,13 +5,12 @@ description: "ADB independent review. Plan: spec + plan + done criteria. Code: s
 
 # /adb-review
 
-Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (BUILD). Ignore a leftover project `ADB.md`.
+Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (BUILD). Ignore leftover `ADB.md`.
+Inherit AGENTS.md. Lead directs living **Review**. Never spawn. Review never implements. Same session + builder’s story ≠ independent. If not independent: STATUS limitation; constrained self-check; don’t call it independent.
 
-Lead directs the living named **Review** agent (AGENTS.md). Never spawn a new agent. Unnamed one-shots are forbidden. Review never implements. Same session + builder’s story ≠ independent. If Review cannot be independent: STATUS limitation; constrained self-check; don’t call it independent.
+**Hand:** plan → spec + plan + done criteria. Code → spec + diff + evidence. Never interview history, builder narrative, or “confirm the builder”.
 
-**Hand:** plan review → spec + plan + done criteria. Code review → spec + diff + evidence. Never interview history, builder narrative, or “confirm the builder”.
-
-**Plan (heavy, before Code implements):** decision-complete? Can the brief be executed without inventing scope? Done criteria concrete? Invents work the spec does not require?
+**Plan (heavy, before Code):** decision-complete? Executable without inventing scope? Done criteria concrete? Invents work the spec does not require?
 
 **Code:** vs `adb/`. Green tests ≠ spec. Divergence: A implementation wrong, or B spec changed (update `adb/` first).
 

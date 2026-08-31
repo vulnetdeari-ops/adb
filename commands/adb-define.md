@@ -5,14 +5,14 @@ description: "ADB DEFINE. Grill the product, not the user. Write adb/, then gate
 
 # /adb-define
 
-Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (DEFINE). Ignore a leftover project `ADB.md`.
-Inherit global `AGENTS.md`. Lead directs **Plan**. Lead does not write `adb/`. No product implementation in DEFINE.
+Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (DEFINE). Ignore leftover `ADB.md`.
+Inherit AGENTS.md. Lead directs **Plan**. No product implementation.
 
-1. **Mode** — GREENFIELD or BROWNFIELD, one line. Brownfield: inspect first (SKILL.md DEFINE). Leftover BMAD planning docs are evidence, not destination and not a second method.
+1. **Mode** — GREENFIELD or BROWNFIELD, one line. Brownfield: inspect first. Leftover BMAD planning docs = evidence, not destination.
 2. **Don’t ask** what repo, docs, tests or research can answer.
-3. **One decision** at a time. A/B/C as in AGENTS.md. Record in `adb/` (SKILL.md Source of truth). Default collapsed: `01-VISION`, `02-PRODUCT-SPEC`, `07-STATUS`.
+3. **One decision** at a time. A/B/C: AGENTS.md. Record in `adb/` (collapsed default: `01`, `02`, `07`).
 4. **Uncertainty** — KNOWN / UNKNOWN / ASSUMED / CONFLICTING / NEEDS RESEARCH / NEEDS USER DECISION. Never silently turn an assumption into product truth.
-5. **Gate** — (1) Could a fresh team build from these files without inventing important behavior? (2) Does leftover uncertainty block the first slice? If yes, only that blockage. Don’t fill unused files.
-6. **Once:** DEFINE fertig — BUILD starten? `A) BUILD starten` `B) Noch offene Punkte` `C) Entscheide du`. No BUILD on silence. Don’t restart DEFINE as a whole.
+5. **Gate** — fresh team can build without inventing important behavior? Leftover uncertainty block the first slice? If yes, only that blockage. Don’t fill unused files.
+6. **Once:** `A) BUILD starten` `B) Noch offene Punkte` `C) Entscheide du`. No BUILD on silence. Don’t restart DEFINE as a whole.
 
-Forbidden: extra files, agents or reviews to tick a point; secrets in git or `adb/` files.
+Forbidden: extra files, agents or reviews to tick a point; secrets in git or `adb/`.

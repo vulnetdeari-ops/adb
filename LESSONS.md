@@ -149,4 +149,15 @@ ROOT CAUSE: ADB copied a dead skill name from the OS instead of deferring git to
 PROPOSED CHANGE: Do not mention `agy-review`. `/adb-review` stays (independent product review). Git: Code commits when the job is done (AGENTS.md). CARRIED is not the PROVE 3-round cap.
 STATUS: ADOPTED — 2026-08-31.
 
+---
+
+## L-014 — ADB restated the OS until the product rules were hard to see
+
+DATE: 2026-08-31
+PROJECT: ADB method
+SYMPTOM: After aligning with BubbyOS, SKILL.md and every slash command repeated Lead / spawn / git / BMAD. Agents had to wade through factory rules to reach DEFINE / BUILD / COMPLETION. No product rule was added; the same rules were said three times.
+ROOT CAUSE: Alignment copied AGENTS.md into ADB instead of one inherit line plus the product method.
+PROPOSED CHANGE: Inherit AGENTS.md once. Commands stay short pointers at SKILL.md sections. Do not cut product function.
+STATUS: ADOPTED — 2026-08-31.
+
 
