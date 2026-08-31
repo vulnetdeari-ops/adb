@@ -3,12 +3,11 @@
 #
 # Does, idempotently:
 #   1. Ensure METHOD.md contains METHOD: ADB when missing; replace leftover METHOD: BMAD
-#   2. Remove leftover BMAD engine files (BMAD is retired). Keep planning docs as evidence.
-#   3. Install slash commands into the project (never into $HOME)
-#   4. Optionally ensure adb/08-OPEN-ISSUES.md (--register only; collapsed default is STATUS)
-#   5. --refresh: reinstall commands; remove leftover project ADB.md (method is SKILL.md)
-#
-# Does not copy SKILL.md into the project.
+#   2. Copy SKILL.md into the project as ADB.md and stamp METHOD-VERSION
+#   3. Remove leftover BMAD engine files (BMAD is retired). Keep planning docs as evidence.
+#   4. Install slash commands into the project as copies (never into $HOME, never only as links to this repo)
+#   5. Optionally ensure adb/08-OPEN-ISSUES.md (--register only; collapsed default is STATUS)
+#   6. --refresh: overwrite ADB.md from SKILL.md and reinstall commands
 #
 # Usage:
 #   ./setup-into-project.sh /path/to/project
@@ -21,6 +20,7 @@
 set -euo pipefail
 
 ADB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SKILL="$ADB_ROOT/SKILL.md"
 INSTALLER="$ADB_ROOT/install-commands.sh"
 
 CHECK=0
@@ -46,9 +46,16 @@ done
 
 [ -n "$PROJECT" ] || { echo "usage: $0 [--check] [--refresh] [--register] /path/to/project" >&2; exit 2; }
 [ -d "$PROJECT" ] || { echo "not a directory: $PROJECT" >&2; exit 1; }
+[ -f "$SKILL" ] || { echo "SKILL.md missing: $SKILL" >&2; exit 1; }
 [ -x "$INSTALLER" ] || { echo "install-commands.sh missing or not executable: $INSTALLER" >&2; exit 1; }
 
 PROJECT="$(cd "$PROJECT" && pwd -P)"
+sha="$(git -C "$ADB_ROOT" rev-parse --short HEAD 2>/dev/null || echo unknown)"
+if ! git -C "$ADB_ROOT" diff HEAD --quiet -- SKILL.md 2>/dev/null; then
+  sha="${sha}-dirty"
+fi
+day="$(date +%Y-%m-%d)"
+stamp="METHOD-VERSION: ${sha} ${day}"
 
 note_changed() {
   printf 'CHANGED: %s\n' "$1"
@@ -74,21 +81,148 @@ elif ! grep -qx 'METHOD: ADB' "$method_md" 2>/dev/null; then
   echo "WARN: $method_md exists but does not contain METHOD: ADB — not overwriting." >&2
 fi
 
-# --- Leftover project ADB.md (not the method) ---
+# --- ADB.md (copy of SKILL.md; the project follows this file) ---
 adb_md="$PROJECT/ADB.md"
+FRESH_COPY=0
+if [ ! -f "$adb_md" ]; then
+  if [ $CHECK -eq 1 ]; then
+    echo "WOULD CREATE $adb_md (stamped $stamp)"
+  else
+    cp "$SKILL" "$adb_md"
+    note_changed "ADB.md"
+    FRESH_COPY=1
+  fi
+fi
+
+strip_stamp() {
+  awk '
+    BEGIN { fm=0; fm_closed=0; removed=0; past_h1=0 }
+    /^# / { past_h1=1 }
+    past_h1 { print; next }
+    NR==1 && $0=="---" { fm=1; print; next }
+    NR==1 && $0 ~ /^METHOD-VERSION:/ { removed=1; next }
+    fm==1 {
+      print
+      if ($0=="---") { fm=0; fm_closed=1 }
+      next
+    }
+    fm_closed && !removed && $0 ~ /^METHOD-VERSION:/ { removed=1; next }
+    fm_closed && removed && $0 ~ /^METHOD-VERSION:/ { next }
+    { print }
+  ' "$1"
+}
+
+STALE=0
 if [ -f "$adb_md" ]; then
-  if [ $REFRESH -eq 1 ]; then
+  _skill_body="$(mktemp)"
+  _adb_body="$(mktemp)"
+  strip_stamp "$SKILL" > "$_skill_body"
+  strip_stamp "$adb_md" > "$_adb_body"
+  if ! diff -q "$_skill_body" "$_adb_body" >/dev/null; then
+    STALE=1
+  fi
+  rm -f "$_skill_body" "$_adb_body"
+fi
+
+if [ $STALE -eq 1 ] && [ $REFRESH -eq 1 ]; then
+  if [ $CHECK -eq 1 ]; then
+    echo "WOULD REFRESH $adb_md (body differs from SKILL.md)"
+  else
+    cp "$SKILL" "$adb_md"
+    note_changed "ADB.md"
+    FRESH_COPY=1
+  fi
+  STALE=0
+fi
+
+remove_stamp_above_frontmatter() {
+  local file="$1"
+  local tmp first second
+  tmp="$(mktemp)"
+  first="$(head -1 "$file" 2>/dev/null || true)"
+  second="$(sed -n '2p' "$file" 2>/dev/null || true)"
+  if [[ "$first" =~ ^METHOD-VERSION: ]] && [ "$second" = "---" ]; then
+    tail -n +2 "$file" > "$tmp"
+    mv "$tmp" "$file"
+    return 0
+  fi
+  return 1
+}
+
+stamp_adb_md() {
+  local file="$1"
+  local tmp
+  tmp="$(mktemp)"
+
+  if [ ! -s "$file" ]; then
+    echo "WARN: $file is empty — cannot stamp." >&2
+    rm -f "$tmp"
+    return 1
+  fi
+
+  if [ "$(head -1 "$file")" = "---" ]; then
+    if ! awk 'BEGIN{fm=0; found=0} /^---/{fm++} fm==2{found=1; exit} END{exit !found}' "$file"; then
+      echo "WARN: $file has frontmatter without a closing --- — cannot stamp." >&2
+      rm -f "$tmp"
+      return 1
+    fi
+  fi
+
+  if [ $CHECK -eq 0 ]; then
+    remove_stamp_above_frontmatter "$file" || true
+  fi
+
+  awk -v stamp="$stamp" '
+    BEGIN { fm=0; fm_closed=0; stamp_done=0; past_h1=0 }
+    /^# / { past_h1=1 }
+    past_h1 { print; next }
+    NR==1 && $0=="---" { fm=1; print; next }
+    NR==1 && $0 ~ /^METHOD-VERSION:/ { print stamp; stamp_done=1; next }
+    NR==1 { print stamp; stamp_done=1; print; next }
+    fm==1 {
+      print
+      if ($0=="---") {
+        fm=0
+        fm_closed=1
+        print stamp
+        stamp_done=1
+      }
+      next
+    }
+    fm_closed && !stamp_done && $0 ~ /^METHOD-VERSION:/ { print stamp; stamp_done=1; next }
+    fm_closed && stamp_done && $0 ~ /^METHOD-VERSION:/ { next }
+    { print }
+    END {
+      if (!stamp_done && !past_h1) {
+        print stamp
+      }
+    }
+  ' "$file" > "$tmp"
+
+  if cmp -s "$file" "$tmp"; then
+    rm -f "$tmp"
+    return 1
+  fi
+  if [ $CHECK -eq 1 ]; then
+    rm -f "$tmp"
+    return 0
+  fi
+  mv "$tmp" "$file"
+  return 0
+}
+
+if [ -f "$adb_md" ] && [ $STALE -eq 0 ]; then
+  if stamp_adb_md "$adb_md"; then
     if [ $CHECK -eq 1 ]; then
-      echo "WOULD REMOVE leftover $adb_md"
-    else
-      rm -f "$adb_md"
+      echo "WOULD STAMP $adb_md ($stamp)"
+    elif [ $FRESH_COPY -eq 0 ]; then
       note_changed "ADB.md"
     fi
-  elif [ $CHECK -eq 1 ]; then
-    echo "NOTE: leftover $adb_md — method is SKILL.md in the ADB repo; ignore or pass --refresh to remove."
-  else
-    echo "NOTE: leftover $adb_md — not the method. Pass --refresh to remove."
   fi
+elif [ $STALE -eq 1 ]; then
+  echo "STALE: $adb_md body differs from the canonical SKILL.md."
+  echo "STALE: not stamping — a stamp would claim a version this file does not have."
+  echo "STALE: run with --refresh to update the body, or record a decision to stay on the older version."
 fi
 
 # --- Leftover BMAD engine (retired). Planning docs stay as brownfield evidence. ---
@@ -178,7 +312,7 @@ elif [ $CHECK -eq 1 ] && [ ! -f "$register" ]; then
   echo "NOTE: no adb/08-OPEN-ISSUES.md — expected for collapsed Source of Truth (issues in adb/07-STATUS.md). Pass --register to create the file."
 fi
 
-# --- Slash commands ---
+# --- Slash commands (copies, so the project does not need this repo) ---
 list_cmd_links() {
   (cd "$PROJECT" && find .cursor/commands .claude/commands .codex/prompts -name 'adb*.md' 2>/dev/null | sed 's|^\./||' | sort || true)
 }
@@ -191,12 +325,15 @@ list_cmd_link_targets() {
       done | sort || true)
 }
 
-if [ $CHECK -eq 1 ]; then
-  (cd "$PROJECT" && "$INSTALLER" --check) || true
+if [ $STALE -eq 1 ]; then
+  echo "STALE: skipping slash commands — current commands would cite a method this ADB.md does not have."
+  echo "STALE: run with --refresh to update both together."
+elif [ $CHECK -eq 1 ]; then
+  (cd "$PROJECT" && "$INSTALLER" --copy --check) || true
 else
   before_paths="$(list_cmd_links)"
   before_targets="$(list_cmd_link_targets)"
-  (cd "$PROJECT" && "$INSTALLER") >/dev/null
+  (cd "$PROJECT" && "$INSTALLER" --copy) >/dev/null
   after_paths="$(list_cmd_links)"
   after_targets="$(list_cmd_link_targets)"
   if [ "$before_paths" != "$after_paths" ] || [ "$before_targets" != "$after_targets" ]; then
@@ -208,4 +345,5 @@ else
 fi
 
 echo "ADB setup into project: $PROJECT"
-echo "Method: $ADB_ROOT/SKILL.md"
+echo "Method copy: $PROJECT/ADB.md"
+echo "METHOD-VERSION target: $stamp"

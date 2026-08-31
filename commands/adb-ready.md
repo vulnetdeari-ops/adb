@@ -5,9 +5,9 @@ description: "ADB whole-product readiness walk. Review + product-readiness; stam
 
 # /adb-ready
 
-Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (COMPLETION).
+Canonical: this project’s `ADB.md` (COMPLETION). Method repo: `SKILL.md`.
 Skill: `/Users/bubby/Development/_System/Rules/skills/product-readiness/SKILL.md`.
-Ignore leftover `ADB.md`. Inherit AGENTS.md.
+Inherit AGENTS.md.
 
 Lead directs living **Review**. Not per slice. No product-code edits. Only Review writes the READINESS key.
 

@@ -1,17 +1,23 @@
 ---
 name: adb
-description: "Ask. Decide. Build. Bubby sets the product destination. Activates only when METHOD.md says METHOD: ADB — not when missing or PLAIN. BMAD is retired. Talk, proof, secrets, git, roles: global AGENTS.md."
+description: "Ask. Decide. Build. Bubby sets the product destination. Setup copies this file into each project as ADB.md. Activates only when METHOD.md says METHOD: ADB — not when missing or PLAIN. BMAD is retired. Talk, proof, secrets, git, roles: global AGENTS.md."
 ---
 
 # ADB
 
-Ask. Decide. Build. Canonical: this file. Do not copy it into the project.
+Ask. Decide. Build. Canonical: this file. Setup copies it into every project as `ADB.md`. Follow that copy. `--refresh` updates it.
+
+Stamp as first line after YAML frontmatter (never above `---`):
+
+    METHOD-VERSION: <short git sha of this repo> <date>
+
+Never stamp a body you did not refresh. If the copy differs from this file (ignore the stamp): STALE. `--refresh` to update, or stay on the older version on purpose.
 
 **Job:** Bubby knows where the product must land. He is not the coder, not the tester, not the one who signs into every site. Write that destination in `adb/`. Then Code builds it in slices that fit in context and proves it (browser, tests, logins). He chooses only when the prompt means two different products or scopes (A/B/C). Not a fake company.
 
 Talk, proof, secrets, git, roles: `/Users/bubby/Development/_System/Rules/AGENTS.md`. Do not copy. Do not contradict. Lead only directs; Plan / Code / Review do the work; never spawn.
 
-Activates **only** when `METHOD.md` contains `METHOD: ADB`. Missing or `PLAIN` → do not load. **BMAD is retired** — do not follow leftover BMAD; setup removes the engine; leftover planning docs are DEFINE evidence, not `adb/`. Slash commands live **in the project**, never in `$HOME`. Ignore leftover project `ADB.md`. Helpers: `setup-into-project.sh`, `new-project … adb`, `adopt-project`. Canonical: `~/Development/_System/Methods/ADB`. Method defects: `LESSONS.md`.
+Activates **only** when `METHOD.md` contains `METHOD: ADB`. Missing or `PLAIN` → do not load. Follow the project’s `ADB.md`. **BMAD is retired** — do not follow leftover BMAD; setup removes the engine; leftover planning docs are DEFINE evidence, not `adb/`. Slash commands live **in the project** as copies, never in `$HOME`. Helpers: `setup-into-project.sh`, `new-project … adb`, `adopt-project`. Method source: `~/Development/_System/Methods/ADB`. Method defects: `LESSONS.md`.
 
 Product truth is `adb/`. Chat is not. A later agent reads `adb/`, not the interview.
 

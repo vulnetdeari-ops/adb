@@ -6,7 +6,7 @@ ADB is a product method for AI coding agents. Bubby sets where the product must 
 
 This is not the Android Debug Bridge.
 
-The method is [`SKILL.md`](SKILL.md). Do not copy it into a project.
+The method is [`SKILL.md`](SKILL.md). Setup copies it into each project as `ADB.md`. Agents in a project follow that copy.
 
 ## Use it in a project
 
@@ -16,8 +16,8 @@ The method is [`SKILL.md`](SKILL.md). Do not copy it into a project.
 METHOD: ADB
 ```
 
-2. Install slash commands **into that project**, never into the user home.
-3. Tell the agent to follow `SKILL.md` in this repo when `METHOD.md` contains `METHOD: ADB`. If `METHOD.md` is missing or `PLAIN`, do not load ADB (AGENTS.md). Ignore a leftover project `ADB.md`.
+2. Install slash commands **into that project** as copies, never into the user home.
+3. Tell the agent to follow the project’s `ADB.md` when `METHOD.md` contains `METHOD: ADB`. If `METHOD.md` is missing or `PLAIN`, do not load ADB (AGENTS.md).
 4. Issue register: for **collapsed** Source of Truth (default for small products), issues live in `adb/07-STATUS.md` under `## Open issues` — setup does **not** create `adb/08-OPEN-ISSUES.md`. Create `08` only when the list outgrows STATUS, or run `./setup-into-project.sh --register`. Never use a root `OPEN-ISSUES.md`.
 
 Preferred: use the Development helpers.
@@ -33,13 +33,13 @@ adopt-project
 # or only the ADB pieces, against any project path
 ./setup-into-project.sh /path/to/project
 ./setup-into-project.sh --check /path/to/project
-./setup-into-project.sh --refresh /path/to/project   # reinstall commands; remove leftover ADB.md
+./setup-into-project.sh --refresh /path/to/project   # overwrite ADB.md from SKILL.md; reinstall commands
 ./setup-into-project.sh --register /path/to/project  # optional: create adb/08-OPEN-ISSUES.md
 ```
 
-`setup-into-project.sh` creates `METHOD.md` when missing, **replaces leftover `METHOD: BMAD`**, installs slash commands, **removes leftover BMAD engine files** (`_bmad/`, `.bmad-core/`, `.bmad-*`, BMAD-named commands/rules/skills, BMAD `core-config.yaml`), and **does not** create `adb/08-OPEN-ISSUES.md` unless you pass `--register`. It does **not** copy `SKILL.md` into the project. It does **not** delete BMAD planning leftovers such as `_bmad-output/` or an old PRD — those are brownfield evidence for DEFINE, not the method.
+`setup-into-project.sh` creates `METHOD.md` when missing, **copies `SKILL.md` to `ADB.md`** (stamped `METHOD-VERSION`), **replaces leftover `METHOD: BMAD`**, installs slash commands as **copies**, **removes leftover BMAD engine files** (`_bmad/`, `.bmad-core/`, `.bmad-*`, BMAD-named commands/rules/skills, BMAD `core-config.yaml`), and **does not** create `adb/08-OPEN-ISSUES.md` unless you pass `--register`. It does **not** delete BMAD planning leftovers such as `_bmad-output/` or an old PRD — those are brownfield evidence for DEFINE, not the method. If `ADB.md` is older than `SKILL.md`, setup reports `STALE` and does not stamp; `--refresh` updates copy and commands together.
 
-Slash commands (`/adb`, `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`, `/adb-ready`) live in [`commands/`](commands/). They point at `SKILL.md`; they are not a second method.
+Slash commands (`/adb`, `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`, `/adb-ready`) live in [`commands/`](commands/). They point at the project’s `ADB.md`; they are not a second method.
 
 Inside this repository, `.cursor/commands/`, `.claude/commands/` and `.codex/prompts/` are **symlinks** into `commands/`. There is one copy to edit.
 
@@ -64,4 +64,4 @@ Vision, Product Spec and the rest of `adb/01`…`adb/07` are **not** created by 
 
 The full method is in [`SKILL.md`](SKILL.md).
 
-Zum Lesen auf Deutsch: [`ADB-LESEN-DE.html`](ADB-LESEN-DE.html). Agenten folgen nicht dieser Datei — nur `SKILL.md`.
+Zum Lesen auf Deutsch: [`ADB-LESEN-DE.html`](ADB-LESEN-DE.html). Agenten in einem Projekt folgen `ADB.md` — nicht dieser Datei.

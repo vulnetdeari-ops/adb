@@ -5,7 +5,7 @@ description: "ADB issue register and triage. Stable IDs, no fake closure, no pol
 
 # /adb-triage
 
-Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (Issues). Ignore a leftover project `ADB.md`.
+Canonical: this project’s `ADB.md` (Issues). Method repo: `SKILL.md`.
 
 Issues live in `adb/08-OPEN-ISSUES.md`, or in `## Open issues` of `adb/07-STATUS.md` while collapsed. Format: SKILL.md Issues.
 
