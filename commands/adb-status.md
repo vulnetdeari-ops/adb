@@ -8,7 +8,7 @@ description: "Rewrite ADB STATUS and judge the work against completion."
 Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md`. Ignore a leftover project `ADB.md`.
 Reload the `adb/` files that exist. Those files outrank chat.
 
-1. **Rewrite** `adb/07-STATUS.md` header using only: PHASE, NOW, NEXT, BLOCKERS, OPEN, READINESS (SKILL.md 07). Concise overwrite, not a changelog. Preserve `## Open issues` (when collapsed), `## Execution plan`, and `## Readiness` verbatim. Do not invent a READINESS key — only `/adb-ready` writes it.
+1. **Rewrite** `adb/07-STATUS.md` header using only: PHASE, NOW, NEXT, BLOCKERS, OPEN, READINESS (SKILL.md 07). Concise overwrite, not a changelog. Preserve `## Open issues` (when collapsed), `## Execution plan`, and `## Readiness` verbatim. Do not invent a READINESS key — only Review via `/adb-ready` writes it. Lead does not change it.
 2. **Layout** — numbered `adb/` names only; one issue register (08, or STATUS while collapsed — not both). Leftover project `ADB.md` is not the method. Leftover BMAD engine files are not the method (BMAD is retired).
 3. **Drift** — code vs `adb/`. Accidental code is not new product truth.
 4. **CARRIED** — this review counts (SKILL.md Issues).

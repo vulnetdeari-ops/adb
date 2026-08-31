@@ -127,4 +127,15 @@ ROOT CAUSE: Those names were leftover from the old chat UI and orchestra. After 
 PROPOSED CHANGE: Remove Paseo. Remove Lead. Decision rule stays A/B/C + „Entscheide du“. The walker writes READINESS; the session agent does not. Briefs are executable without a worker role.
 STATUS: ADOPTED — 2026-08-31.
 
+---
+
+## L-012 — ADB without Lead contradicted BubbyOS
+
+DATE: 2026-08-31
+PROJECT: ADB method
+SYMPTOM: After L-011, ADB told the reading agent to implement, prove, and commit only if Bubby asked; it allowed spawning a reviewer and loading ADB without `METHOD: ADB`. Global `AGENTS.md` (BubbyOS) says Lead only directs, Code implements and auto-commits after `agy-review` PASS, never spawn, and do not load ADB when `METHOD.md` is missing or `PLAIN`.
+ROOT CAUSE: L-011 removed Paseo’s orchestra name “Lead” and took the BubbyOS session Lead with it. ADB restated git and activation instead of deferring to AGENTS.md.
+PROPOSED CHANGE: Paseo stays gone. BubbyOS Lead/Plan/Code/Review stay. ADB must not contradict AGENTS.md: Lead directs; never spawn; Code commits when the job is done; ADB loads only when `METHOD: ADB`; A/B/C includes scopes.
+STATUS: ADOPTED — 2026-08-31.
+
 

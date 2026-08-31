@@ -2,7 +2,7 @@
 
 **Ask. Decide. Build.**
 
-ADB is a product method for AI coding agents. Bubby sets where the product must land. The agent asks until that is written down, then builds in slices and proves it. It is not an agent framework, a fake company, or a pile of extra process.
+ADB is a product method for AI coding agents. Bubby sets where the product must land. Roles follow global `AGENTS.md`: Lead only directs; Plan, Code and Review do the work. It is not an agent framework, a fake company, or a pile of extra process.
 
 This is not the Android Debug Bridge.
 
@@ -17,7 +17,7 @@ METHOD: ADB
 ```
 
 2. Install slash commands **into that project**, never into the user home.
-3. Tell the agent to follow `SKILL.md` in this repo. Ignore a leftover project `ADB.md`.
+3. Tell the agent to follow `SKILL.md` in this repo when `METHOD.md` contains `METHOD: ADB`. If `METHOD.md` is missing or `PLAIN`, do not load ADB (AGENTS.md). Ignore a leftover project `ADB.md`.
 4. Issue register: for **collapsed** Source of Truth (default for small products), issues live in `adb/07-STATUS.md` under `## Open issues` — setup does **not** create `adb/08-OPEN-ISSUES.md`. Create `08` only when the list outgrows STATUS, or run `./setup-into-project.sh --register`. Never use a root `OPEN-ISSUES.md`.
 
 Preferred: use the Development helpers.
@@ -60,7 +60,7 @@ Vision, Product Spec and the rest of `adb/01`…`adb/07` are **not** created by 
 
 - **Ask** — grill the product, not the user. Research what can be discovered. Offer real choices. `Decide for me` is valid.
 - **Decide** — keep that in `adb/`. Small products may collapse to Vision, Product Spec and Status. Larger products use `adb/01` … `adb/08`. Uncertain findings get registered, not swallowed.
-- **Build** — execute against `adb/`. Prove on a real path (browser, tests, logins). Missing required behavior is fixed or written down, not ignored.
+- **Build** — Code executes against `adb/` (Lead directs). Prove on a real path (browser, tests, logins). Missing required behavior is fixed or written down, not ignored. Git: AGENTS.md (auto-commit after `agy-review` PASS when the job is done; push only when Bubby asks).
 
 The full method is in [`SKILL.md`](SKILL.md).
 

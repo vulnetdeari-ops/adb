@@ -1,17 +1,17 @@
 ---
 name: adb
-description: "Ask. Decide. Build. Bubby sets the product destination. You implement, test, and sign in. Activates when METHOD.md says METHOD: ADB, the user invokes /adb, or a new app is being defined with ADB. BMAD is retired — leftover BMAD is not a method. Talk, proof, secrets, git: global AGENTS.md."
+description: "Ask. Decide. Build. Bubby sets the product destination. Lead only directs. Code implements, tests, and signs in. Activates only when METHOD.md says METHOD: ADB — not when METHOD.md is missing or PLAIN. BMAD is retired. Talk, proof, secrets, git, roles: global AGENTS.md."
 ---
 
 # ADB
 
 Ask. Decide. Build. Canonical: this file. Do not copy it into the project.
 
-**Job:** Bubby knows where the product must land. He is not the coder, not the tester, not the one who signs into every site. You ask until that destination is written down, then you build it in pieces that fit in context, and you prove it yourself (browser, tests, logins). He chooses only when the prompt means two different products (A/B/C). Not a fake company.
+**Job:** Bubby knows where the product must land. He is not the coder, not the tester, not the one who signs into every site. Roles are global AGENTS.md: **Lead** (session Hauptagent) only directs; **Plan** plans; **Code** implements, tests, and signs in; **Review** reviews. Never spawn a new agent for a job — queue on the living named agent. Ask until the destination is written down, then Code builds it in pieces that fit in context, and Code proves it (browser, tests, logins). He chooses only when the prompt means two different products or scopes (A/B/C). Not a fake company.
 
-Talk, proof, secrets, git: `/Users/bubby/Development/_System/Rules/AGENTS.md`. Do not copy those rules here.
+Talk, proof, secrets, git, roles: `/Users/bubby/Development/_System/Rules/AGENTS.md`. Do not copy those rules here. Do not contradict them.
 
-Activates when `METHOD.md` contains `METHOD: ADB`, the user invokes `/adb`, or a new product is clearly wanted. Existing apps: only when asked. **BMAD is retired.** Leftover `METHOD: BMAD`, `_bmad/`, `.bmad-core/` or BMAD commands are not a method — do not follow them. Setup replaces the switch and removes the engine. Leftover BMAD planning docs (`_bmad-output`, old PRD) are brownfield evidence for DEFINE, not product truth. Slash commands live **in the project**, never in the user home. Ignore a leftover project `ADB.md`. Helpers: `setup-into-project.sh`, `new-project … adb`, `adopt-project`. Canonical repo: `~/Development/_System/Methods/ADB`. Method defects: `LESSONS.md`.
+Activates **only** when `METHOD.md` contains `METHOD: ADB`. If `METHOD.md` is missing or `PLAIN`, do not load ADB. **BMAD is retired.** Leftover `METHOD: BMAD`, `_bmad/`, `.bmad-core/` or BMAD commands are not a method — do not follow them. Setup replaces the switch and removes the engine. Leftover BMAD planning docs (`_bmad-output`, old PRD) are brownfield evidence for DEFINE, not product truth. Slash commands live **in the project**, never in the user home. Ignore a leftover project `ADB.md`. Helpers: `setup-into-project.sh`, `new-project … adb`, `adopt-project`. Canonical repo: `~/Development/_System/Methods/ADB`. Method defects: `LESSONS.md`.
 
 Product truth is the project’s `adb/` files. Chat is not product truth. A later agent reads `adb/`, not the old interview.
 
@@ -21,13 +21,13 @@ Each rule judges the product. If it does not apply, extra work is forbidden.
 
 # DEFINE
 
-No product code yet.
+No product code yet. Lead directs **Plan**. Lead does not write `adb/`. Code does not implement in DEFINE.
 
 **Done when** a fresh agent can build from `adb/` without inventing important behavior, and leftover uncertainty does not block the first slice. More research possible ≠ keep DEFINE open.
 
 **Greenfield** — nothing exists yet. **Brownfield** — inspect first: what exists / works / is wrong / unclear / keep / what Bubby wants. Existing code is evidence, not automatically the destination. Leftover BMAD planning files are evidence for DEFINE, not a second method and not `adb/`.
 
-Ask the **product**, not Bubby, for what repo, docs, tests or research can answer. Ask Bubby only for intent, priorities, trade-offs. One decision at a time. A/B/C: AGENTS.md. Record decisions in `06` or the decisions section of `02` while collapsed. Challenge choices that hurt usability, safety, or coherence — not taste. If Bubby knows WHAT but not HOW it should look: you own a coherent direction. No generic AI look.
+Ask the **product**, not Bubby, for what repo, docs, tests or research can answer. Ask Bubby only for intent, priorities, trade-offs. One decision at a time. A/B/C: AGENTS.md. Record decisions in `06` or the decisions section of `02` while collapsed. Challenge choices that hurt usability, safety, or coherence — not taste. If Bubby knows WHAT but not HOW it should look: Plan owns a coherent direction. No generic AI look.
 
 Every material fact: KNOWN / UNKNOWN / ASSUMED / CONFLICTING / NEEDS RESEARCH / NEEDS USER DECISION. Never silently turn an assumption into product truth.
 
@@ -41,7 +41,7 @@ Default small: `adb/01-VISION.md`, `02-PRODUCT-SPEC.md`, `07-STATUS.md`. Split i
 - **04** — stack, boundaries, deploy, security — only what matters, with WHY.
 - **05** — what DONE means for this product.
 - **06** — important WHY, not trivia.
-- **07** — STATUS header only: PHASE, NOW, NEXT, BLOCKERS, OPEN, READINESS. Several slices: `## Execution plan`. Preserve `## Readiness` — the readiness walker writes it (verdict, when, who).
+- **07** — STATUS header only: PHASE, NOW, NEXT, BLOCKERS, OPEN, READINESS. Several slices: `## Execution plan`. Preserve `## Readiness` — Review writes it (verdict, when, who). Lead does not change the key.
 - **08** — real unresolved problems, or `## Open issues` in 07 while collapsed.
 
 ## Issues
@@ -71,18 +71,18 @@ Stop interviewing. `adb/` governs. A slice is done when its SPEC done-criteria a
 
 The whole product does not fit in one context window. User-visible slices — not “entire backend first”. Parallel only when jobs don’t share files or unfinished deps. Large product: `## Execution plan` in 07.
 
-Brief: what, where, done, `adb/` pointers, proof. The next agent gets `adb/`, not your story. If you are alone, you build. **Heavy** (money, login/security, live, data, new public contract): written plan + done criteria before building — also when alone. If a separate reviewer exists, they see the plan and never implement; same session + builder’s story ≠ independent. `agy-review` is the commit check; it does not replace the heavy plan.
+Brief: what, where, done, `adb/` pointers, proof. The next agent gets `adb/`, not your story. Lead does not plan, implement, or review — Lead only directs the living named agents (AGENTS.md). Never spawn. **Heavy** (money, login/security, live, data, new public contract): **Plan** writes plan + done criteria first; do not skip Plan; then Code builds. **Review** sees the plan and never implements; same session + builder’s story ≠ independent. `agy-review` is the commit check; it does not replace the heavy plan.
 
 Every meaningful slice:
 
 **SPEC → BUILD → PROVE → RECORD**
 
-- **SPEC** — what this slice must do, from `adb/`. Heavy: plan + done criteria here.
-- **BUILD** — smallest safe change. Delete dead code when safe. Test business rules, money, permissions, edges — not coverage theater.
-- **PROVE** — vs `adb/`, on a real path. UI: this harness’s browser. You sign into sites (AGENTS.md; Bubby only for 2FA / captcha / passkey). Not “it compiles.”
-- **RECORD** — update `adb/` + STATUS; increment CARRIED; apply the CARRIED-3 exit. Commit only if Bubby asked, after `agy-review`.
+- **SPEC** — what this slice must do, from `adb/`. Heavy: Plan writes plan + done criteria here.
+- **BUILD** — Code, smallest safe change. Delete dead code when safe. Test business rules, money, permissions, edges — not coverage theater.
+- **PROVE** — vs `adb/`, on a real path. UI: this harness’s browser. Code signs into sites (AGENTS.md; Bubby only for 2FA / captcha / passkey / OS-blocked keys). Not “it compiles.”
+- **RECORD** — update `adb/` + STATUS; increment CARRIED; apply the CARRIED-3 exit. Git: AGENTS.md — when this job is done (plan met, proved, meaningful diff), Code commits automatically after `agy-review` PASS. Do not wait for Bubby to say commit. Push only when Bubby asks.
 
-PROVE fails: do not RECORD as done. Fix here or register. Cap 3 fix rounds, then Bubby.
+PROVE fails: do not RECORD as done. Code fixes here or registers. Cap 3 fix rounds, then Bubby.
 
 `/adb-review` PASS WITH ISSUES: register findings; RECORD only if PROVE passed and release blockers allow.
 
@@ -105,7 +105,7 @@ Not complete because it compiles. Intended behavior exists, real path, spec sati
 | `BETA` | Agreed scope matches `adb/`. Important flows + empty/loading/error on a real path. Only MEDIUM/LOW if the bar allows. |
 | `LIVE` | BETA + bar clear + 05 production items. Not “already online.” Constrained self-check must not return LIVE. |
 
-The bar chooses BETA vs LIVE, not ALPHA vs BETA. `/adb-ready` is the whole-product walk — only when Bubby asks about the **whole app**, not after a slice whose plan is met. Skill `product-readiness`. Separate walker writes `READINESS` in the STATUS header and overwrites `## Readiness` (what was walked, when, independent or self-check). Do not write the key yourself. Stale after a later RECORD or spec change this walk covered.
+The bar chooses BETA vs LIVE, not ALPHA vs BETA. `/adb-ready` is the whole-product walk — only when Bubby asks about the **whole app**, not after a slice whose plan is met. Skill `product-readiness`. Lead directs living **Review**. Review writes `READINESS` in the STATUS header and overwrites `## Readiness` (what was walked, when, independent or self-check). Lead does not change the key. Constrained self-check must not return LIVE. Stale after a later RECORD or spec change this walk covered.
 
 Method silent, method conflict, or method caused the defect → append `LESSONS.md`. Still fix the project.
 

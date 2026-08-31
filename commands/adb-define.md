@@ -6,7 +6,7 @@ description: "ADB DEFINE. Grill the product, not the user. Write adb/, then gate
 # /adb-define
 
 Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (DEFINE). Ignore a leftover project `ADB.md`.
-Inherit global `AGENTS.md`. No product implementation in DEFINE.
+Inherit global `AGENTS.md`. Lead directs **Plan**. Lead does not write `adb/`. No product implementation in DEFINE.
 
 1. **Mode** — GREENFIELD or BROWNFIELD, one line. Brownfield: inspect first (SKILL.md DEFINE). Leftover BMAD planning docs are evidence, not destination and not a second method.
 2. **Don’t ask** what repo, docs, tests or research can answer.

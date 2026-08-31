@@ -7,7 +7,7 @@ description: "Ask. Decide. Build. Entry point when the user invokes /adb on an A
 
 Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md`. Ignore a leftover project `ADB.md`.
 
-If `METHOD.md` does not contain `METHOD: ADB`, stop and ask whether to activate ADB. **BMAD is retired:** leftover `METHOD: BMAD` or BMAD folders/commands are not a method — do not follow them. Setup replaces the switch and removes the engine.
+If `METHOD.md` does not contain `METHOD: ADB`, stop. Do not load ADB (AGENTS.md: missing or `PLAIN` → don’t load). Do not ask to activate. **BMAD is retired:** leftover `METHOD: BMAD` or BMAD folders/commands are not a method — do not follow them.
 
 1. No STATUS, or PHASE is DEFINE → `/adb-define`.
 2. User asked about the **whole app** (Alpha / Beta / Live / „ist die ganze App fertig“ / product complete) → `/adb-ready`. Bare „fertig“ after a job whose plan is met is AGENTS.md Talk, not this command.
