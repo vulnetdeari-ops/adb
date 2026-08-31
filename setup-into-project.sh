@@ -113,6 +113,7 @@ strip_stamp() {
 }
 
 STALE=0
+stamp_file="$adb_md"
 if [ -f "$adb_md" ]; then
   _skill_body="$(mktemp)"
   _adb_body="$(mktemp)"
@@ -127,6 +128,7 @@ fi
 if [ $STALE -eq 1 ] && [ $REFRESH -eq 1 ]; then
   if [ $CHECK -eq 1 ]; then
     echo "WOULD REFRESH $adb_md (body differs from SKILL.md)"
+    stamp_file="$SKILL"
   else
     cp "$SKILL" "$adb_md"
     note_changed "ADB.md"
@@ -211,8 +213,8 @@ stamp_adb_md() {
   return 0
 }
 
-if [ -f "$adb_md" ] && [ $STALE -eq 0 ]; then
-  if stamp_adb_md "$adb_md"; then
+if [ -f "$stamp_file" ] && [ $STALE -eq 0 ]; then
+  if stamp_adb_md "$stamp_file"; then
     if [ $CHECK -eq 1 ]; then
       echo "WOULD STAMP $adb_md ($stamp)"
     elif [ $FRESH_COPY -eq 0 ]; then
@@ -325,6 +327,14 @@ list_cmd_link_targets() {
       done | sort || true)
 }
 
+list_cmd_checksums() {
+  (cd "$PROJECT" && find .cursor/commands .claude/commands .codex/prompts -name 'adb*.md' -type f 2>/dev/null | sed 's|^\./||' \
+    | while IFS= read -r rel; do
+        [ -n "$rel" ] || continue
+        printf '%s %s\n' "$rel" "$(cksum "$rel" 2>/dev/null || echo '?')"
+      done | sort || true)
+}
+
 if [ $STALE -eq 1 ]; then
   echo "STALE: skipping slash commands — current commands would cite a method this ADB.md does not have."
   echo "STALE: run with --refresh to update both together."
@@ -333,10 +343,12 @@ elif [ $CHECK -eq 1 ]; then
 else
   before_paths="$(list_cmd_links)"
   before_targets="$(list_cmd_link_targets)"
+  before_checksums="$(list_cmd_checksums)"
   (cd "$PROJECT" && "$INSTALLER" --copy) >/dev/null
   after_paths="$(list_cmd_links)"
   after_targets="$(list_cmd_link_targets)"
-  if [ "$before_paths" != "$after_paths" ] || [ "$before_targets" != "$after_targets" ]; then
+  after_checksums="$(list_cmd_checksums)"
+  if [ "$before_paths" != "$after_paths" ] || [ "$before_targets" != "$after_targets" ] || [ "$before_checksums" != "$after_checksums" ]; then
     printf '%s\n' "$after_paths" | while IFS= read -r rel; do
       [ -n "$rel" ] || continue
       note_changed "$rel"
