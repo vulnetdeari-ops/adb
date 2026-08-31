@@ -1,0 +1,4 @@
+{
+  "name": "ADB",
+  "install": "command -v bash python3 git curl >/dev/null && ./install-commands.sh --check"
+}
