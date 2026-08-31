@@ -5,7 +5,7 @@ description: "ADB independent review. Plan: spec + plan + done criteria. Code: s
 
 # /adb-review
 
-Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (BUILD). Ignore leftover `ADB.md`.
+Canonical: this project’s `ADB.md` (BUILD). Method repo: `SKILL.md`.
 Inherit AGENTS.md. Lead directs living **Review**. Never spawn. Review never implements. Same session + builder’s story ≠ independent. If not independent: STATUS limitation; constrained self-check; don’t call it independent.
 
 **Hand:** plan → spec + plan + done criteria. Code → spec + diff + evidence. Never interview history, builder narrative, or “confirm the builder”.

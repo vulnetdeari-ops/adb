@@ -157,7 +157,17 @@ DATE: 2026-08-31
 PROJECT: ADB method
 SYMPTOM: After aligning with BubbyOS, SKILL.md and every slash command repeated Lead / spawn / git / BMAD. Agents had to wade through factory rules to reach DEFINE / BUILD / COMPLETION. No product rule was added; the same rules were said three times.
 ROOT CAUSE: Alignment copied AGENTS.md into ADB instead of one inherit line plus the product method.
-PROPOSED CHANGE: Inherit AGENTS.md once. Commands stay short pointers at SKILL.md sections. Do not cut product function.
+STATUS: ADOPTED — 2026-08-31.
+
+---
+
+## L-015 — Projects must carry a copy; nobody fetches the method repo
+
+DATE: 2026-08-31
+PROJECT: ADB method
+SYMPTOM: After L-008, setup did not copy `SKILL.md`. Agents were told to follow the method repo. New and existing projects never fetched it, so they kept an old method or none.
+ROOT CAUSE: One canonical file only works if every project can reach that file. These projects do not.
+PROPOSED CHANGE: Setup copies `SKILL.md` to project `ADB.md`, stamps `METHOD-VERSION`, and installs slash commands as copies. Agents follow `ADB.md`. `--refresh` updates copy and commands. STALE if the copy differs and was not refreshed.
 STATUS: ADOPTED — 2026-08-31.
 
 

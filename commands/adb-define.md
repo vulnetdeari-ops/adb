@@ -5,7 +5,7 @@ description: "ADB DEFINE. Grill the product, not the user. Write adb/, then gate
 
 # /adb-define
 
-Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (DEFINE). Ignore leftover `ADB.md`.
+Canonical: this project’s `ADB.md` (DEFINE). Method repo: `SKILL.md`.
 Inherit AGENTS.md. Lead directs **Plan**. No product implementation.
 
 1. **Mode** — GREENFIELD or BROWNFIELD, one line. Brownfield: inspect first. Leftover BMAD planning docs = evidence, not destination.

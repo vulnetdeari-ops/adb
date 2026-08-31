@@ -5,7 +5,7 @@ description: "ADB BUILD one slice. Closes only after PROVE and RECORD."
 
 # /adb-slice
 
-Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (BUILD). Ignore leftover `ADB.md`.
+Canonical: this project’s `ADB.md` (BUILD). Method repo: `SKILL.md`.
 Inherit AGENTS.md. If DEFINE was not approved → `/adb-define`. Lead directs; Code builds and proves.
 
 1. **Plan** — user-visible slices from `adb/`. Not “entire backend first”. Parallel only when jobs don’t share files or unfinished deps.
