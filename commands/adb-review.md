@@ -7,11 +7,11 @@ description: "ADB independent review. Plan: spec + plan + done criteria. Code: s
 
 Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (BUILD). Ignore a leftover project `ADB.md`.
 
-Spawn a **separate** agent. Same session + builder’s story ≠ independent. Reviewer never implements. If none: STATUS limitation; constrained self-check; don’t call it independent.
+Spawn a **separate** agent. Same session + builder’s story ≠ independent. The reviewing agent never implements. If none: STATUS limitation; constrained self-check; don’t call it independent.
 
 **Hand:** plan review → spec + plan + done criteria. Code review → spec + diff + evidence. Never interview history, builder narrative, or “confirm the builder”.
 
-**Plan (heavy, before implementers):** decision-complete? Can a worker execute without inventing scope? Done criteria concrete? Invents work the spec does not require?
+**Plan (heavy, before implementers):** decision-complete? Can the brief be executed without inventing scope? Done criteria concrete? Invents work the spec does not require?
 
 **Code:** vs `adb/`. Green tests ≠ spec. Divergence: A implementation wrong, or B spec changed (update `adb/` first).
 

@@ -77,7 +77,7 @@ STATUS: ADOPTED — 2026-08-26.
 ## L-007 — Chip labels vs A/B/C Decision Questions
 
 DATE: 2026-08-26/27
-PROJECT: ADB method + Paseo Decision Questions
+PROJECT: ADB method
 SYMPTOM: Draft decision UI used Perplexity-style chip labels. Agents and drafts drifted toward long label text instead of single-letter answers. That conflicted with global `AGENTS.md` Decision Questions (A/B/C + „Entscheide du“).
 ROOT CAUSE: A feature sketch taught a discarded interaction. The method and the reading copy already followed A/B/C; the feature note still named “chips” and looked like an open path.
 PROPOSED CHANGE: Keep A/B/C + „Entscheide du“ as the only rule. Mark chips rejected. Rename the feature note so the filename does not teach chips.
@@ -114,6 +114,17 @@ PROJECT: ADB method
 SYMPTOM: Agents still treated BMAD as a peer method: `adopt-project` said “choose ADB when asked”, setup left `METHOD: BMAD` untouched, and leftover `_bmad/` / `.bmad-core/` / BMAD commands could still be followed. Bubby no longer has BMAD.
 ROOT CAUSE: The method was defined against BMAD (“never combine”). After BMAD was retired, that opposition still taught agents that BMAD exists. Setup had no job to replace the switch or remove the engine. Planning leftovers and the engine were not distinguished.
 PROPOSED CHANGE: ADB is the product method. BMAD is retired. Setup replaces `METHOD: BMAD` and removes the engine; planning leftovers stay as brownfield evidence for DEFINE. Commands and the reading copy say BMAD is not a method.
+STATUS: ADOPTED — 2026-08-31.
+
+---
+
+## L-011 — Paseo and Lead were still in the method after they were gone
+
+DATE: 2026-08-31
+PROJECT: ADB method
+SYMPTOM: The method still named Paseo (decision chips, upstream issue) and the Lead role (READINESS key, orchestra). Bubby no longer has Paseo. There is no Lead.
+ROOT CAUSE: Those names were leftover from the old chat UI and orchestra. After both were dropped, the files still taught agents to wait for Paseo rendering or a Lead.
+PROPOSED CHANGE: Remove Paseo. Remove Lead. Decision rule stays A/B/C + „Entscheide du“. The walker writes READINESS; the session agent does not. Briefs are executable without a worker role.
 STATUS: ADOPTED — 2026-08-31.
 
 

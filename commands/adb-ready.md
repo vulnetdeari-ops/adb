@@ -9,7 +9,7 @@ Canonical: `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` (COMPLETION).
 Skill: `/Users/bubby/Development/_System/Rules/skills/product-readiness/SKILL.md`.
 Ignore a leftover project `ADB.md`.
 
-Separate walker. Not per slice. No product-code edits. Lead does not change the READINESS key.
+Separate walker. Not per slice. No product-code edits. Do not write the READINESS key yourself.
 
 **Hand:** `adb/` pointers, `adb/07-STATUS.md`, issue register, project `AGENTS.md` (URLs). Never the builder’s story.
 

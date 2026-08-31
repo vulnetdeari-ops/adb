@@ -1,19 +1,14 @@
-# Feature: clickable decision options in Paseo
+# Feature: decision options
 
 **Status:** REJECTED / verworfen — Chip-Labels verworfen; Regel ist A/B/C (+ „Entscheide du“)
-**Date:** 2026-08-26 (updated 2026-08-27)
+**Date:** 2026-08-26 (updated 2026-08-31)
 
 ## Goal
-Tappable options under agent messages for Decision Questions, so Bubby can click instead of type.
+Tappable or labeled options under agent messages for Decision Questions, so Bubby can click instead of type.
 
 ## Current rule (authoritative)
 **A/B/C or 1/2/3** — the user answers with a single letter or number. The last letter is always „Entscheide du“ / decide-for-me.
 
 Source of truth: global `AGENTS.md` → Decision Questions. ADB `SKILL.md` (DEFINE) and the German reading copy follow it.
 
-Earlier drafts used Perplexity-style label chips. Bubby tested that and rejected it: typing label text is more work than a single letter, and Paseo cannot render real chips yet. Chips are not the rule.
-
-## Upstream
-https://github.com/getpaseo/paseo/issues/3915
-
-If Paseo ever renders clickable options, A/B/C lines are already a clean thing to make clickable — the rule does not need to change for that, only the rendering.
+Earlier drafts used Perplexity-style label chips. Bubby tested that and rejected it: typing label text is more work than a single letter. Chips are not the rule.

@@ -1,6 +1,6 @@
 ---
 name: adb
-description: "Ask. Decide. Build. Bubby sets the product destination. You implement, test, and sign in. Activates when METHOD.md says METHOD: ADB, the user invokes /adb, or a new app is being defined with ADB. BMAD is retired — leftover BMAD is not a method. Talk, proof, secrets, git, workers: global AGENTS.md."
+description: "Ask. Decide. Build. Bubby sets the product destination. You implement, test, and sign in. Activates when METHOD.md says METHOD: ADB, the user invokes /adb, or a new app is being defined with ADB. BMAD is retired — leftover BMAD is not a method. Talk, proof, secrets, git: global AGENTS.md."
 ---
 
 # ADB
@@ -9,7 +9,7 @@ Ask. Decide. Build. Canonical: this file. Do not copy it into the project.
 
 **Job:** Bubby knows where the product must land. He is not the coder, not the tester, not the one who signs into every site. You ask until that destination is written down, then you build it in pieces that fit in context, and you prove it yourself (browser, tests, logins). He chooses only when the prompt means two different products (A/B/C). Not a fake company.
 
-Talk, proof, secrets, git, workers: `/Users/bubby/Development/_System/Rules/AGENTS.md`. Do not copy those rules here.
+Talk, proof, secrets, git: `/Users/bubby/Development/_System/Rules/AGENTS.md`. Do not copy those rules here.
 
 Activates when `METHOD.md` contains `METHOD: ADB`, the user invokes `/adb`, or a new product is clearly wanted. Existing apps: only when asked. **BMAD is retired.** Leftover `METHOD: BMAD`, `_bmad/`, `.bmad-core/` or BMAD commands are not a method — do not follow them. Setup replaces the switch and removes the engine. Leftover BMAD planning docs (`_bmad-output`, old PRD) are brownfield evidence for DEFINE, not product truth. Slash commands live **in the project**, never in the user home. Ignore a leftover project `ADB.md`. Helpers: `setup-into-project.sh`, `new-project … adb`, `adopt-project`. Canonical repo: `~/Development/_System/Methods/ADB`. Method defects: `LESSONS.md`.
 
@@ -105,7 +105,7 @@ Not complete because it compiles. Intended behavior exists, real path, spec sati
 | `BETA` | Agreed scope matches `adb/`. Important flows + empty/loading/error on a real path. Only MEDIUM/LOW if the bar allows. |
 | `LIVE` | BETA + bar clear + 05 production items. Not “already online.” Constrained self-check must not return LIVE. |
 
-The bar chooses BETA vs LIVE, not ALPHA vs BETA. `/adb-ready` is the whole-product walk — only when Bubby asks about the **whole app**, not after a slice whose plan is met. Skill `product-readiness`. Separate walker writes `READINESS` in the STATUS header and overwrites `## Readiness` (what was walked, when, independent or self-check). Lead does not change the key. Stale after a later RECORD or spec change this walk covered.
+The bar chooses BETA vs LIVE, not ALPHA vs BETA. `/adb-ready` is the whole-product walk — only when Bubby asks about the **whole app**, not after a slice whose plan is met. Skill `product-readiness`. Separate walker writes `READINESS` in the STATUS header and overwrites `## Readiness` (what was walked, when, independent or self-check). Do not write the key yourself. Stale after a later RECORD or spec change this walk covered.
 
 Method silent, method conflict, or method caused the defect → append `LESSONS.md`. Still fix the project.
 
