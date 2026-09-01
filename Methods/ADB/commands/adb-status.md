@@ -12,7 +12,7 @@ Reload existing `adb/` files. Those files outrank chat.
 2. **Layout** — numbered `adb/` names only; one issue register (08, or STATUS while collapsed — not both). `ADB.md` is the method copy. BMAD engine files are not the method.
 3. **Drift** — code vs `adb/`. Accidental code is not new product truth.
 4. **CARRIED** — this review counts (SKILL.md Issues).
-5. **Whole product** — COMPLETION is the **app**, not this slice. A finished slice can stand without a READINESS stamp. Do not set next=`/adb-ready` just because a stamp is missing. `/adb-ready` only when Bubby asks about the whole app. ALPHA is never whole-product complete.
+5. **Whole product** — COMPLETION is the **app**, not this slice. A finished slice can stand without a READINESS stamp. Do not set next=`/adb-ready` just because a stamp is missing. `/adb-ready` only when the owner asks about the whole app. ALPHA is never whole-product complete.
 6. **Optional** — method defect → append `LESSONS.md` in the ADB repo. Still fix the project.
 
 Return: phase, now, next, blockers, open count.

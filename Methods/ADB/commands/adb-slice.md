@@ -10,7 +10,7 @@ Inherit AGENTS.md. If DEFINE was not approved → `/adb-define`. Lead directs; C
 
 1. **Plan** — user-visible slices from `adb/`. Not “entire backend first”. Parallel only when jobs don’t share files or unfinished deps.
 2. **Brief** — goal, path, `adb/` pointers, scope, proof. Heavy: Plan writes plan + done criteria before Code. Do not skip Plan.
-3. **Loop** — SPEC → BUILD → PROVE → RECORD. PROVE fail → not done. Fix-round cap 3, then Bubby (not `CARRIED`). Git: AGENTS.md.
-4. **Close** — RECORD + CARRIED. SPEC met → this slice is done; do not invent a next slice. Next only if already in `## Execution plan` or Bubby asks. Else: what’s left in the plan.
+3. **Loop** — SPEC → BUILD → PROVE → RECORD. PROVE fail → not done. Fix-round cap 3, then the owner (not `CARRIED`). Git: AGENTS.md.
+4. **Close** — RECORD + CARRIED. SPEC met → this slice is done; do not invent a next slice. Next only if already in `## Execution plan` or the owner asks. Else: what’s left in the plan.
 
 Accounting or payment: correctness over brevity; no silent schema change.
