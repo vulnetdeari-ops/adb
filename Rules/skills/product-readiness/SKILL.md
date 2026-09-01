@@ -5,7 +5,7 @@ description: "Whole-app Alpha / Beta / Live walk. Only when Bubby asks about the
 
 # product-readiness
 
-Canonical for ADB products: that project’s `ADB.md` COMPLETION, plus this walk. Inherit AGENTS.md. Do not copy AGENTS.md.
+Canonical for ADB products: that project’s `ADB.md` COMPLETION, plus this walk. Inherit the project’s `AGENTS.md`.
 
 Use only when Bubby asks about the **whole app** (Alpha / Beta / Live / „ist die ganze App fertig“). A job that matches its plan can be done while the app could still grow later. Bare „fertig“ after a met plan is Talk in AGENTS.md, not this skill.
 

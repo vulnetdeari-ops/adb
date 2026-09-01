@@ -1,51 +1,36 @@
 # _System
 
-Ein Repo. Zwei Methoden. Clone nach `~/Development/_System`.
+Ein Repo. Zwei Methoden. In jedes **Produktprojekt** kommen **Kopien** — damit Cloud-Agents dieselben Dateien sehen wie auf dem Mac.
 
-**Klein / normal:** `Rules/AGENTS.md`. Du liest `Rules/LESEN-DE.html`. Agenten folgen `AGENTS.md`, nicht der HTML-Datei. Kein ADB.
-
-**Groß:** Im Projekt eine Datei `METHOD.md` mit genau:
-
-```text
-METHOD: ADB
-```
-
-Dann gilt `Methods/ADB` (Ask. Decide. Build.). Du liest `Methods/ADB/ADB-LESEN-DE.html`. Agenten folgen der Projekt-Kopie `ADB.md`.
-
-## Einmal auf den Mac
+**Klein / normal:**
 
 ```bash
-# bestehendes ~/Development/_System umbenennen, dann:
-git clone https://github.com/vulnetdeari-ops/adb.git ~/Development/_System
-cd ~/Development/_System/Rules
-./install-skills.sh
+~/Development/_System/Methods/ADB/setup-into-project.sh --plain /pfad/zur/app
 ```
 
-Große App danach:
+Das legt `AGENTS.md` (Kopie) und `METHOD: PLAIN` an. Du liest `Rules/LESEN-DE.html`. Agenten folgen der `AGENTS.md` **im App-Repo**.
+
+**Groß:**
 
 ```bash
 ~/Development/_System/Methods/ADB/setup-into-project.sh /pfad/zur/app
 ```
 
-`new-project` / `adopt-project` sind Mac-Helfer außerhalb dieses Repos. Fehlen sie: `setup-into-project.sh` reicht für ADB.
+Zusätzlich `METHOD: ADB`, `ADB.md` (Kopie von `SKILL.md`) und `/adb`-Befehle. Du liest `Methods/ADB/ADB-LESEN-DE.html`. Agenten folgen `ADB.md` **im App-Repo**.
 
-## Install
+`--refresh` überschreibt die Kopien aus der Fabrik, wenn du die Methode aktualisieren willst.
+
+## Einmal auf den Mac
 
 ```bash
-# normale Methode in Cursor / Codex / Claude / Gemini
-./Rules/install-skills.sh
-./Rules/install-skills.sh --check
-
-# ADB-Befehle in ein Produktprojekt: setup-into-project.sh (Kopien, nie nach $HOME)
+git clone https://github.com/vulnetdeari-ops/adb.git ~/Development/_System
 ```
+
+Dann Setup in jede App (oben). `install-skills.sh` ist optional (Home-Symlinks auf dem Mac). Die App braucht das nicht.
 
 ## Layout
 
 ```text
-Rules/                 normale Methode (BubbyOS)
-  AGENTS.md            Agenten folgen dieser Datei
-  LESEN-DE.html        nur zum Lesen
-  install-skills.sh
-  skills/
-Methods/ADB/           große Apps, nur mit METHOD: ADB
+Rules/AGENTS.md        Fabrik — Setup kopiert sie ins Projekt
+Methods/ADB/SKILL.md   Fabrik — Setup kopiert sie als ADB.md
 ```
