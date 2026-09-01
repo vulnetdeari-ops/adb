@@ -21,9 +21,11 @@ MainAgent directs. CodeAgent runs `Rules/start-into-project.sh` (factory) and wr
 
 Run this when any of:
 
-- The owner says start / first run / setup / “Bubble OS” / Sprache oder Ton wählen.
-- This folder has no `METHOD.md` and they want an app here (not the method factory).
+- The owner says start / first run / setup / “Bubble OS” / Sprache oder Ton wählen / “AGENTS.md fehlt”.
+- This folder has no `METHOD.md`, no `AGENTS.md`, or no `OWNER.md`, and they want an app here (not the method factory).
 - They want to change language, tone, address, or small↔large (`OWNER.md` already exists: same questions, current values in the options).
+
+`METHOD.md` or `ADB.md` without `AGENTS.md` or without `OWNER.md` is an unfinished first run. Start from Q1. Do **not** call `setup-into-project.sh` instead of asking language.
 
 Do **not** run as a leftover after an ordinary product job.
 
@@ -180,7 +182,7 @@ Code runs (from the method factory clone):
 
 `--why` in the owner’s language when you already write in it; otherwise English is fine — the TRANSLATE step below must put WHY and the human lines into their language.
 
-If the script fails: show the error, do not invent a manual file layout.
+If the script fails: show the error, do not invent a manual file layout. If `$PROJECT/AGENTS.md` is missing after a successful-looking run, Start is **not** done.
 
 If the script prints `TRANSLATE: LESEN.html OWNER.md → …` (no native template for that language; de and en have templates): **Start is not done yet.** Code translates:
 

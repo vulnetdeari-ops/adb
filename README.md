@@ -6,7 +6,7 @@ One repository. Two methods. **Start** asks with offered letters (A/B/C), then c
 
 **First run** (clone this repo, open it, say **Start** or `/start`):
 
-The owner picks **any language** (letters for common ones, or they type the name), address, tone, small or large, risk, and the app folder. They do not invent options. Start writes `METHOD.md`, `AGENTS.md`, `OWNER.md`, `LESEN.html` **in that language**, `START.md`, and `/start`. Large also gets `ADB.md` and `/adb` commands. Deutsch and English use shipped pages; any other language is translated from the English page before Start is done.
+The owner picks **any language** (letters for common ones, or they type the name), address, tone, small or large, risk, and the app folder. They do not invent options. **When the owner is in chat, this interview is the first run.** Do not skip it with `setup-into-project.sh` — that path does not ask language. Start writes `METHOD.md`, `AGENTS.md`, `OWNER.md`, `LESEN.html` **in that language**, `START.md`, and `/start`. Large also gets `ADB.md` and `/adb` commands. Deutsch and English use shipped pages; any other language is translated from the English page before Start is done.
 
 ```bash
 # After the interview the agent runs this. You can run it yourself with the same answers:
@@ -22,7 +22,7 @@ The owner picks **any language** (letters for common ones, or they type the name
 
 `--risk yes` always selects ADB, even if `--method plain`.
 
-**Without the interview** (same copies, no `OWNER.md` / `LESEN.html`):
+**Without the interview** (same copies, **no language question**, no `OWNER.md` / `LESEN.html` — not a finished first run if the owner is in chat):
 
 **Small / plain:**
 

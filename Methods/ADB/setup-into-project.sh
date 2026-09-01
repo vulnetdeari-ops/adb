@@ -131,10 +131,10 @@ stamp_copy() {
     remove_stamp_above_frontmatter "$file" || true
   fi
 
+  # Stamp first: files that start with `# ` (AGENTS.md) used to skip the stamp
+  # because the heading rule ran before NR==1.
   awk -v stamp="$stamp" '
-    BEGIN { fm=0; fm_closed=0; stamp_done=0; past_h1=0 }
-    /^# / { past_h1=1 }
-    past_h1 { print; next }
+    BEGIN { fm=0; fm_closed=0; stamp_done=0 }
     NR==1 && $0=="---" { fm=1; print; next }
     NR==1 && $0 ~ /^METHOD-VERSION:/ { print stamp; stamp_done=1; next }
     NR==1 { print stamp; stamp_done=1; print; next }
@@ -152,9 +152,7 @@ stamp_copy() {
     fm_closed && stamp_done && $0 ~ /^METHOD-VERSION:/ { next }
     { print }
     END {
-      if (!stamp_done && !past_h1) {
-        print stamp
-      }
+      if (!stamp_done) print stamp
     }
   ' "$file" > "$tmp"
 
@@ -444,6 +442,26 @@ if [ $STALE_START -eq 1 ]; then
   echo "STALE: run with --refresh to update START.md and /start together."
 else
   install_start_cmd
+fi
+
+if [ $CHECK -eq 0 ]; then
+  if [ ! -s "$PROJECT/AGENTS.md" ]; then
+    echo "FAIL: AGENTS.md was not written to $PROJECT/AGENTS.md" >&2
+    echo "FAIL: Start is not done. Do not continue without this file." >&2
+    exit 1
+  fi
+  if [ ! -s "$PROJECT/START.md" ]; then
+    echo "FAIL: START.md was not written to $PROJECT/START.md" >&2
+    exit 1
+  fi
+  if [ $PLAIN -eq 0 ] && [ ! -s "$PROJECT/ADB.md" ]; then
+    echo "FAIL: ADB.md was not written to $PROJECT/ADB.md" >&2
+    exit 1
+  fi
+  if [ ! -f "$PROJECT/OWNER.md" ]; then
+    echo "WARN: no OWNER.md — Start was not run; the owner was not asked language." >&2
+    echo "WARN: when the owner is in chat, run Start (Q1 language). Do not treat this setup as a finished first run." >&2
+  fi
 fi
 
 echo "Setup into project: $PROJECT"
