@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Kleine Methode — nur zum Lesen</title>
+<style>
+  body { font-family: -apple-system, Helvetica, Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 24px 80px; color: #111; line-height: 1.5; }
+  .warn { background: #fff3cd; border: 2px solid #c9a227; padding: 14px 16px; margin-bottom: 28px; }
+  .box { background: #f4f4f4; padding: 14px 16px; margin: 16px 0; }
+  h1 { font-size: 26px; }
+  h2 { font-size: 18px; margin-top: 28px; }
+  code { font-size: 13px; background: #eee; padding: 1px 4px; }
+  ul { padding-left: 20px; }
+</style>
+</head>
+<body>
+<div class="warn">
+<strong>NUR ZUM LESEN.</strong> Agenten folgen nicht dieser Datei. Agenten folgen <code>AGENTS.md</code> und <code>OWNER.md</code> in diesem App-Ordner. Sprache, Anrede und Ton stehen in <code>OWNER.md</code>.
+</div>
+
+<h1>Kleine Methode</h1>
+<p>Start hat diese App auf die <strong>kleine</strong> Methode gesetzt. Kein ADB, keine <code>/adb</code>-Befehle. Du sagst, wo das Produkt landen soll. Du bist nicht der Coder, nicht der Tester, nicht der, der sich überall anmeldet.</p>
+<div class="box">
+<strong>Produkt:</strong> {{PRODUCT}}<br>
+<strong>Sprache:</strong> {{LANGUAGE}} · <strong>Anrede:</strong> {{ADDRESS}} · <strong>Ton:</strong> {{TONE}}<br>
+<strong>Warum diese Methode:</strong> {{WHY}}
+</div>
+
+<h2>Was du tust</h2>
+<ul>
+  <li>Ziel sagen: was die App können soll, für wen, was sie nicht ist.</li>
+  <li>Nur entscheiden, wenn zwei <em>verschiedene</em> Produkte oder Umfänge möglich sind: A, B oder „entscheide du“. Nicht bei jeder Kleinigkeit.</li>
+  <li>Nur du: 2FA, Captcha, Passkey, Schlüssel, die das System nicht eingeben darf.</li>
+  <li>Push und Live: nur wenn du das willst. Commit nach erledigtem Auftrag macht das System selbst.</li>
+  <li>Sprache oder Ton ändern: nochmal <code>/start</code> (oder „Start“). Dieselben Buchstaben, nicht neu erfinden.</li>
+</ul>
+
+<h2>Was du nicht tust</h2>
+<ul>
+  <li>Nicht codeen, nicht selbst testen, nicht durch Klick-Touren geschickt werden.</li>
+  <li>Keine Passwörter in den Chat. Kein zweites Methoden-Dokument erfinden.</li>
+  <li>Die Factory (Methoden-Repo) nicht als App behandeln. Täglich die <strong>App</strong> öffnen.</li>
+</ul>
+
+<h2>Was das System tun kann</h2>
+<ul>
+  <li>Bauen, auf dem echten Weg prüfen (Browser, wenn es eine Oberfläche gibt), sich anmelden wo es geht.</li>
+  <li>In deiner Sprache sprechen, mit der Anrede und dem Ton aus <code>OWNER.md</code>.</li>
+  <li>Nach einem erledigten Auftrag committen. Push nur auf deine Bitte.</li>
+  <li>Cloud: dieselben Dateien, sobald sie im App-Repo liegen. Cloud-Agent auf der <strong>App</strong> starten, nicht auf der Factory.</li>
+</ul>
+
+<h2>Dateien in diesem Ordner</h2>
+<ul>
+  <li><code>METHOD.md</code> — <code>METHOD: PLAIN</code></li>
+  <li><code>AGENTS.md</code> — Regeln für Agenten (Kopie)</li>
+  <li><code>OWNER.md</code> — deine Sprache, Anrede, Ton, Ein-Satz-Produkt</li>
+  <li><code>START.md</code> — der Start, zum Wiederholen</li>
+  <li><code>LESEN.html</code> — diese Seite</li>
+</ul>
+<p>Eine übrig gebliebene <code>ADB.md</code> gilt nicht, solange die Methode PLAIN ist.</p>
+
+<h2>Wann ein Auftrag fertig ist</h2>
+<p>Wenn der geschriebene Plan gehalten und geprüft ist — nicht weil es kompiliert. Das System sagt das zuerst. Es erfindet keinen Restauftrag. Ideen nur, wenn du danach fragst.</p>
+
+<h2>Weiter</h2>
+<p>Sag den ersten Auftrag in einem Satz, z. B. was man auf dem Bildschirm tun können soll. Bei Geld, Login, Live oder Daten von anderen: nochmal Start — dann wird oft die <strong>große</strong> Methode nötig.</p>
+<p>Factory-Update: in der Factory <code>git pull</code>, dann in der App Setup mit <code>--refresh</code>. Deine Antworten in <code>OWNER.md</code> bleiben, bis du Start wieder laufen lässt.</p>
+</body>
+</html>

@@ -3,11 +3,14 @@
 #
 # Does, idempotently:
 #   1. Copy Rules/AGENTS.md into the project as AGENTS.md (always) and stamp METHOD-VERSION
-#   2. Unless --plain: METHOD.md = METHOD: ADB; copy SKILL.md as ADB.md; install /adb commands
-#   3. --plain: METHOD.md = METHOD: PLAIN; no ADB.md, no slash commands
-#   4. Remove leftover BMAD engine files (not in --plain skip: still clean)
-#   5. Optionally ensure adb/08-OPEN-ISSUES.md (--register only; ADB mode)
-#   6. --refresh: overwrite AGENTS.md and (unless --plain) ADB.md from factory; reinstall commands
+#   2. Copy Rules/skills/start/SKILL.md as START.md and install /start (always)
+#   3. Unless --plain: METHOD.md = METHOD: ADB; copy SKILL.md as ADB.md; install /adb commands
+#   4. --plain: METHOD.md = METHOD: PLAIN; no ADB.md, no /adb commands
+#   5. Remove leftover BMAD engine files (not in --plain skip: still clean)
+#   6. Optionally ensure adb/08-OPEN-ISSUES.md (--register only; ADB mode)
+#   7. --refresh: overwrite AGENTS.md, START.md and (unless --plain) ADB.md from factory; reinstall commands
+#
+# OWNER.md and LESEN.html are written by Rules/start-into-project.sh, not this script.
 #
 # Usage:
 #   ./setup-into-project.sh /path/to/project
@@ -24,6 +27,8 @@ ADB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SYSTEM_ROOT="$(cd "$ADB_ROOT/../.." && pwd)"
 SKILL="$ADB_ROOT/SKILL.md"
 AGENTS_SRC="$SYSTEM_ROOT/Rules/AGENTS.md"
+START_SKILL="$SYSTEM_ROOT/Rules/skills/start/SKILL.md"
+START_CMD="$SYSTEM_ROOT/Rules/commands/start.md"
 INSTALLER="$ADB_ROOT/install-commands.sh"
 
 CHECK=0
@@ -52,6 +57,8 @@ done
 [ -n "$PROJECT" ] || { echo "usage: $0 [--check] [--refresh] [--register] [--plain] /path/to/project" >&2; exit 2; }
 [ -d "$PROJECT" ] || { echo "not a directory: $PROJECT" >&2; exit 1; }
 [ -f "$AGENTS_SRC" ] || { echo "AGENTS.md missing: $AGENTS_SRC" >&2; exit 1; }
+[ -f "$START_SKILL" ] || { echo "START skill missing: $START_SKILL" >&2; exit 1; }
+[ -f "$START_CMD" ] || { echo "start command missing: $START_CMD" >&2; exit 1; }
 if [ $PLAIN -eq 0 ]; then
   [ -f "$SKILL" ] || { echo "SKILL.md missing: $SKILL" >&2; exit 1; }
   [ -x "$INSTALLER" ] || { echo "install-commands.sh missing or not executable: $INSTALLER" >&2; exit 1; }
@@ -267,6 +274,10 @@ fi
 sync_stamped_copy "$AGENTS_SRC" "$PROJECT/AGENTS.md" "AGENTS.md" "Rules/AGENTS.md"
 STALE_AGENTS=$SYNC_STALE
 
+# --- START.md (copy of the Start skill; /start in every product, plain and ADB) ---
+sync_stamped_copy "$START_SKILL" "$PROJECT/START.md" "START.md" "Rules/skills/start/SKILL.md"
+STALE_START=$SYNC_STALE
+
 STALE_ADB=0
 if [ $PLAIN -eq 0 ]; then
   # --- ADB.md (copy of SKILL.md; the project follows this file) ---
@@ -407,8 +418,37 @@ else
   fi
 fi
 
+# --- /start (every product: copies, so Cloud Agents can re-run Start) ---
+install_start_cmd() {
+  local sub dest
+  for sub in .cursor/commands .claude/commands .codex/prompts; do
+    dest="$PROJECT/$sub/start.md"
+    if [ $CHECK -eq 1 ]; then
+      if [ ! -f "$dest" ] || [ -L "$dest" ] || ! cmp -s "$START_CMD" "$dest" 2>/dev/null; then
+        echo "WOULD CREATE $dest"
+      fi
+      continue
+    fi
+    mkdir -p "$(dirname "$dest")"
+    if [ -f "$dest" ] && [ ! -L "$dest" ] && cmp -s "$START_CMD" "$dest"; then
+      continue
+    fi
+    rm -f "$dest"
+    cp "$START_CMD" "$dest"
+    note_changed "${sub}/start.md"
+  done
+}
+
+if [ $STALE_START -eq 1 ]; then
+  echo "STALE: skipping /start command copy — START.md body differs from the factory skill."
+  echo "STALE: run with --refresh to update START.md and /start together."
+else
+  install_start_cmd
+fi
+
 echo "Setup into project: $PROJECT"
 echo "AGENTS.md copy: $PROJECT/AGENTS.md"
+echo "START.md copy: $PROJECT/START.md"
 if [ $PLAIN -eq 1 ]; then
   echo "Mode: PLAIN (no ADB)"
 else

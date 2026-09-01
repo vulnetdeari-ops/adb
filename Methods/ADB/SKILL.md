@@ -17,7 +17,7 @@ Never stamp a body you did not refresh. If the copy differs from this file (igno
 
 Talk, proof, secrets, git, roles: this project’s `AGENTS.md` (setup copy of `Rules/AGENTS.md`). Do not contradict it. Lead only directs; Plan / Code / Review do the work; never spawn.
 
-Activates **only** when `METHOD.md` contains `METHOD: ADB`. Missing or `PLAIN` → do not load. Follow the project’s `ADB.md`. **BMAD is retired** — do not follow leftover BMAD; setup removes the engine; leftover planning docs are DEFINE evidence, not `adb/`. Slash commands and `AGENTS.md` live **in the project** as copies. Helper: `setup-into-project.sh` (`--plain` for rules only). Method source: `Methods/ADB` in this repository. Method defects: `LESSONS.md`.
+Activates **only** when `METHOD.md` contains `METHOD: ADB`. Missing or `PLAIN` → do not load. Follow the project’s `ADB.md`. **BMAD is retired** — do not follow leftover BMAD; setup removes the engine; leftover planning docs are DEFINE evidence, not `adb/`. Slash commands and `AGENTS.md` live **in the project** as copies. First run: `/start` (`START.md`). Helper: `setup-into-project.sh` (`--plain` for rules only) or `Rules/start-into-project.sh`. Method source: `Methods/ADB` in this repository. Method defects: `LESSONS.md`.
 
 Product truth is `adb/`. Chat is not. A later agent reads `adb/`, not the interview.
 
