@@ -9,7 +9,7 @@ Canonical: this project’s `ADB.md` (COMPLETION). Method repo: `SKILL.md`.
 Follow COMPLETION in `ADB.md`. Factory extra if present: `Rules/skills/product-readiness/SKILL.md`.
 Inherit AGENTS.md.
 
-Lead directs living **Review**. Not per slice. No product-code edits. Only Review writes the READINESS key.
+MainAgent directs living **ReviewAgent**. Not per slice. No product-code edits. Only ReviewAgent writes the READINESS key.
 
 **Hand:** `adb/` pointers, `07-STATUS`, issue register, project `AGENTS.md` (URLs). Never the builder’s story.
 

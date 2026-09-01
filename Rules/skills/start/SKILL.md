@@ -13,7 +13,7 @@ Talk, proof, secrets, git, roles: the project’s `AGENTS.md`. Do not contradict
 
 **Job:** the owner answers a **fixed** list of questions. Every question **offers** letters. They never have to invent an option. After the last answer: write files, say what landed and where to read, then they can build. Do not add questions. Do not skip the listed ones unless already answered in this thread.
 
-Lead directs. Code runs `Rules/start-into-project.sh` (factory) and writes nothing by hand that the script already writes.
+MainAgent directs. CodeAgent runs `Rules/start-into-project.sh` (factory) and writes nothing by hand that the script already writes.
 
 ⸻
 
