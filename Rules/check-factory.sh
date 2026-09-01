@@ -16,6 +16,8 @@ fail() { echo "FAIL: $*" >&2; exit 1; }
 
 head -1 AGENTS.md | grep -qx '# Agent rules' || fail "root AGENTS.md must be the product rules (# Agent rules)"
 grep -q 'MainAgent' AGENTS.md || fail "root AGENTS.md is not the product rules"
+grep -q 'Chips, not A/B/C' AGENTS.md || fail "AGENTS.md must offer chips, not A/B/C"
+grep -q 'Offer \*\*chips\*\*' Rules/skills/start/SKILL.md || fail "Start skill must offer chips"
 grep -q 'This folder is the method factory' AGENTS.md && fail "root AGENTS.md is still the old pointer"
 
 if grep -q 'MainAgent' Rules/AGENTS.md 2>/dev/null; then

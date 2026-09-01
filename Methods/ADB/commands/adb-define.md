@@ -10,7 +10,7 @@ Inherit AGENTS.md. MainAgent directs **PlanAgent**. No product implementation.
 
 1. **Mode** — GREENFIELD or BROWNFIELD, one line. Brownfield: inspect first. Leftover BMAD planning docs = evidence, not destination.
 2. **Don’t ask** what repo, docs, tests or research can answer.
-3. **One decision** at a time. A/B/C: AGENTS.md. Record in `adb/` (collapsed default: `01`, `02`, `07`).
+3. **One decision** at a time. Chips: AGENTS.md. Record in `adb/` (collapsed default: `01`, `02`, `07`).
 4. **Uncertainty** — KNOWN / UNKNOWN / ASSUMED / CONFLICTING / NEEDS RESEARCH / NEEDS USER DECISION. Never silently turn an assumption into product truth.
 5. **Gate** — fresh team can build without inventing important behavior? Leftover uncertainty block the first slice? If yes, only that blockage. Don’t fill unused files.
 6. **Once:** `A) BUILD starten` `B) Noch offene Punkte` `C) Entscheide du`. No BUILD on silence. Don’t restart DEFINE as a whole.

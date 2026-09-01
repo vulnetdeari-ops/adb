@@ -6,11 +6,11 @@ ADB is a product method for AI coding agents. The owner sets where the product m
 
 This is not the Android Debug Bridge.
 
-The method is [`SKILL.md`](SKILL.md). Setup copies it into each project as `ADB.md`, and copies factory `AGENTS.md` as `AGENTS.md`. **Start** (`/start`, `Rules/skills/start/SKILL.md`) chooses PLAIN vs ADB with offered letters and writes `OWNER.md` + `LESEN.html`. Agents in a project follow those copies.
+The method is [`SKILL.md`](SKILL.md). Setup copies it into each project as `ADB.md`, and copies factory `AGENTS.md` as `AGENTS.md`. **Start** (`/start`, `Rules/skills/start/SKILL.md`) chooses PLAIN vs ADB with offered chips and writes `OWNER.md` + `LESEN.html`. Agents in a project follow those copies.
 
 ## Use it in a project
 
-**First run with the owner:** Start (`/start`). It asks language (and the rest) with letters, then writes `AGENTS.md`, `OWNER.md`, `LESEN.html`, `METHOD.md`, and `ADB.md` into the **app**. Do not add `METHOD.md` by hand and skip language.
+**First run with the owner:** Start (`/start`). It asks language (and the rest) with chips, then writes `AGENTS.md`, `OWNER.md`, `LESEN.html`, `METHOD.md`, and `ADB.md` into the **app**. Do not add `METHOD.md` by hand and skip language.
 
 Without the interview (no language question — not a finished first run if the owner is in chat):
 
