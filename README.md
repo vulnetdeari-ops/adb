@@ -1,5 +1,7 @@
 # Method factory
 
+**On GitHub, the full agent rules are not at the top of this page.** Open the folder `Rules`, then `AGENTS.md`. Direct: [Rules/AGENTS.md](Rules/AGENTS.md). The short `AGENTS.md` at the top of this repo only points there. An **app** gets its own `AGENTS.md` only after Start or setup — not by cloning this factory.
+
 One repository. Two methods. **Start** asks with offered letters (A/B/C), then copies files **into each product project** so any harness and any Cloud Agent sees the same rules.
 
 **First run** (clone this repo, open it, say **Start** or `/start`):
@@ -54,7 +56,8 @@ Daily: open the **app** folder. Cloud Agent: the **app** GitHub repo after the c
 ## Layout
 
 ```text
-Rules/AGENTS.md              factory — setup copies into the project
+AGENTS.md                    pointer — GitHub / Cursor land here
+Rules/AGENTS.md              factory rules — setup copies into the app
 Rules/skills/start/SKILL.md  factory — setup copies as START.md
 Rules/start-into-project.sh  writes OWNER.md + LESEN.html, then setup
 Methods/ADB/SKILL.md         factory — setup copies as ADB.md
