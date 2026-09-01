@@ -15,7 +15,7 @@ Never stamp a body you did not refresh. If the copy differs from this file (igno
 
 **Job:** The owner knows where the product must land. They are not the coder, not the tester, not the one who signs into every site. Write that destination in `adb/`. Then CodeAgent builds it in slices that fit in context and proves it (browser, tests, logins). They choose only when the prompt means two different products or scopes (A/B/C). Not a fake company.
 
-Talk, proof, secrets, git, roles: this project’s `AGENTS.md` (setup copy of `Rules/AGENTS.md`). Do not contradict it. MainAgent only directs; PlanAgent / CodeAgent / ReviewAgent do the work; never spawn.
+Talk, proof, secrets, git, roles: this project’s `AGENTS.md` (setup copy of `Rules/AGENTS.md`). Do not contradict it. MainAgent only directs; PlanAgent / CodeAgent / ReviewAgent are subagents and do the work. Do not invent other worker types.
 
 Activates **only** when `METHOD.md` contains `METHOD: ADB`. Missing or `PLAIN` → do not load. Follow the project’s `ADB.md`. **BMAD is retired** — do not follow leftover BMAD; setup removes the engine; leftover planning docs are DEFINE evidence, not `adb/`. Slash commands and `AGENTS.md` live **in the project** as copies. First run: `/start` (`START.md`). Helper: `setup-into-project.sh` (`--plain` for rules only) or `Rules/start-into-project.sh`. Method source: `Methods/ADB` in this repository. Method defects: `LESSONS.md`.
 
@@ -109,7 +109,7 @@ Not complete because it compiles. Intended behavior exists, real path, spec sati
 | `BETA` | Agreed scope matches `adb/`. Important flows + empty/loading/error on a real path. Only MEDIUM/LOW if the bar allows. |
 | `LIVE` | BETA + bar clear + 05 production items. Not “already online.” Constrained self-check must not return LIVE. |
 
-The bar chooses BETA vs LIVE, not ALPHA vs BETA. `/adb-ready` only when the owner asks about the **whole app**, not after a slice whose plan is met. Follow COMPLETION in this file. MainAgent directs living ReviewAgent. ReviewAgent writes `READINESS` and overwrites `## Readiness`. MainAgent does not change the key. Stale after a later RECORD or spec change this walk covered.
+The bar chooses BETA vs LIVE, not ALPHA vs BETA. `/adb-ready` only when the owner asks about the **whole app**, not after a slice whose plan is met. Follow COMPLETION in this file. MainAgent starts ReviewAgent (subagent). ReviewAgent writes `READINESS` and overwrites `## Readiness`. MainAgent does not change the key. Stale after a later RECORD or spec change this walk covered.
 
 Method silent, method conflict, or method caused the defect → append `LESSONS.md`. Still fix the project.
 

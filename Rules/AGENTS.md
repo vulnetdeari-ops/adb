@@ -42,17 +42,17 @@ Work happens in the project you were asked to change. This `AGENTS.md` is the fa
 
 **Heavy** (money, login/security, live deploy, data migration, or a new public contract): written plan + done criteria first, then build. Do not skip PlanAgent.
 
-**MainAgent** is the session agent the owner is talking to. The name stays. MainAgent does **not** plan, implement, or review. MainAgent only directs: turn on the living named agent for that kind of job. Most work goes there.
+**MainAgent** is the only agent the owner talks to. There is no PlanAgent / CodeAgent / ReviewAgent chat for the owner. Those three are **subagents** MainAgent starts for a job. MainAgent does **not** plan, implement, or review in the owner chat. It starts the matching subagent and reports back. Most work goes there.
 
-Standing named agents (they keep context). Never spawn or wake a new one for a job. Queue on the living named agent. Create that named agent only if it is gone (closed/archived). Do not archive after a job. Unnamed / hidden one-shots are forbidden. A one-shot Task is not PlanAgent, CodeAgent, or ReviewAgent.
+Only these subagents. Do not invent a fourth kind. Do not tell the owner to open another chat. Unnamed extra workers are forbidden.
 
 - **PlanAgent** — planning
 - **CodeAgent** — implement, test, sign in
 - **ReviewAgent** — reviews
 
-If this session **is already** that living agent (the owner is in PlanAgent / CodeAgent / ReviewAgent’s tab): this session **does** that job. If there is **no** living worker to turn on (one session, no other tabs): this session does the job and names the role. Still no spawn. Do not pretend a hidden subagent did it.
+If this harness cannot start a subagent: MainAgent does that job in this chat and **says the role** (PlanAgent / CodeAgent / ReviewAgent). Do not pretend a hidden worker did it.
 
-If the owner already has a standing named agent for this product and this session is not already that agent: send the job there. That agent is then MainAgent of that session and directs PlanAgent / CodeAgent / ReviewAgent. Unclear which product: one short question, then send. Last product in this thread counts. If the owner is **already in that product’s tab**, **that agent is MainAgent of this session** — still only directs, does not do the work, except the paragraph above.
+Unclear which product: one short question, then that product’s MainAgent. Last product in this thread counts.
 
 ## Hold
 
@@ -60,7 +60,7 @@ Secrets never in git, issues, logs, or chat. No real `.env` in git. Do not inven
 
 Git: when a **job is done** locally (plan met, proved, meaningful diff), **CodeAgent commits automatically** — do not wait for the owner to say commit. Do **not** commit mid-slice noise, chat-only, or empty diffs. Never change git config, never force-push main/master (warn if asked), never skip hooks unless asked, never commit secrets.
 
-No extra review-before-commit for this method repo (`AGENTS.md` + skills it names), chat-only, or empty diff. If the owner wants a review: turn on living **ReviewAgent**, not a commit skill. Cap **3** fix rounds, then ask the owner. That cap is not ADB `CARRIED`. **Push and live only when the owner asks**, via the project’s documented path. After auto-commit, CodeAgent tells this session’s MainAgent the hash; MainAgent asks the owner only about **push** (or if blocked) — do not ask them to approve the commit.
+No extra review-before-commit for this method repo (`AGENTS.md` + skills it names), chat-only, or empty diff. If the owner wants a review: MainAgent starts **ReviewAgent** (subagent), not a commit skill. Cap **3** fix rounds, then ask the owner. That cap is not ADB `CARRIED`. **Push and live only when the owner asks**, via the project’s documented path. After auto-commit, CodeAgent tells MainAgent the hash; MainAgent asks the owner only about **push** (or if blocked) — do not ask them to approve the commit.
 
 Problems: CodeAgent FIX NOW if in scope and safe; else write them down (ADB: `adb/08-OPEN-ISSUES.md` or STATUS Open issues; else the tracker the project already names; else `OPEN-ISSUES.md`). Don’t file wishes. CLOSED = verified. Don’t leave “almost done” forever (ADB: `CARRIED`).
 

@@ -2,7 +2,7 @@
 
 **Ask. Decide. Build.**
 
-ADB is a product method for AI coding agents. The owner sets where the product must land. Roles follow the project’s `AGENTS.md` (setup copy): MainAgent only directs; PlanAgent, CodeAgent and ReviewAgent do the work. It is not an agent framework, a fake company, or a pile of extra process.
+ADB is a product method for AI coding agents. The owner sets where the product must land. Roles follow the project’s `AGENTS.md` (setup copy): the owner talks only to MainAgent; PlanAgent, CodeAgent and ReviewAgent are subagents that do the work. It is not an agent framework, a fake company, or a pile of extra process.
 
 This is not the Android Debug Bridge.
 
