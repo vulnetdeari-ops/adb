@@ -1,36 +1,37 @@
-# _System
+# Method factory
 
-Ein Repo. Zwei Methoden. In jedes **Produktprojekt** kommen **Kopien** — damit Cloud-Agents dieselben Dateien sehen wie auf dem Mac.
+One repository. Two methods. Setup copies files **into each product project** so any harness and any Cloud Agent sees the same rules.
 
-**Klein / normal:**
-
-```bash
-~/Development/_System/Methods/ADB/setup-into-project.sh --plain /pfad/zur/app
-```
-
-Das legt `AGENTS.md` (Kopie) und `METHOD: PLAIN` an. Du liest `Rules/LESEN-DE.html`. Agenten folgen der `AGENTS.md` **im App-Repo**.
-
-**Groß:**
+**Small / plain:**
 
 ```bash
-~/Development/_System/Methods/ADB/setup-into-project.sh /pfad/zur/app
+./Methods/ADB/setup-into-project.sh --plain /path/to/app
 ```
 
-Zusätzlich `METHOD: ADB`, `ADB.md` (Kopie von `SKILL.md`) und `/adb`-Befehle. Du liest `Methods/ADB/ADB-LESEN-DE.html`. Agenten folgen `ADB.md` **im App-Repo**.
+Writes `AGENTS.md` (copy) and `METHOD: PLAIN`. Read `Rules/LESEN-DE.html`. Agents follow `AGENTS.md` **in the app repo**.
 
-`--refresh` überschreibt die Kopien aus der Fabrik, wenn du die Methode aktualisieren willst.
-
-## Einmal auf den Mac
+**Large / ADB:**
 
 ```bash
-git clone https://github.com/vulnetdeari-ops/adb.git ~/Development/_System
+./Methods/ADB/setup-into-project.sh /path/to/app
 ```
 
-Dann Setup in jede App (oben). `install-skills.sh` ist optional (Home-Symlinks auf dem Mac). Die App braucht das nicht.
+Also writes `METHOD: ADB`, `ADB.md` (copy of `SKILL.md`), and `/adb` commands. Read `Methods/ADB/ADB-LESEN-DE.html`. Agents follow `ADB.md` **in the app repo**.
+
+`--refresh` overwrites the copies from the factory.
+
+## Clone
+
+```bash
+git clone https://github.com/vulnetdeari-ops/adb.git
+cd adb
+```
+
+Then run setup on each app (above). `Rules/install-skills.sh` is optional (home links). Apps do not need it.
 
 ## Layout
 
 ```text
-Rules/AGENTS.md        Fabrik — Setup kopiert sie ins Projekt
-Methods/ADB/SKILL.md   Fabrik — Setup kopiert sie als ADB.md
+Rules/AGENTS.md        factory — setup copies into the project
+Methods/ADB/SKILL.md   factory — setup copies as ADB.md
 ```

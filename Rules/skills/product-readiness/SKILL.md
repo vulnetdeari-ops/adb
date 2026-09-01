@@ -1,13 +1,13 @@
 ---
 name: product-readiness
-description: "Whole-app Alpha / Beta / Live walk. Only when Bubby asks about the whole app — not after a job whose plan is met."
+description: "Whole-app Alpha / Beta / Live walk. Only when the owner asks about the whole app — not after a job whose plan is met."
 ---
 
 # product-readiness
 
 Canonical for ADB products: that project’s `ADB.md` COMPLETION, plus this walk. Inherit the project’s `AGENTS.md`.
 
-Use only when Bubby asks about the **whole app** (Alpha / Beta / Live / „ist die ganze App fertig“). A job that matches its plan can be done while the app could still grow later. Bare „fertig“ after a met plan is Talk in AGENTS.md, not this skill.
+Use only when the owner asks about the **whole app** (Alpha / Beta / Live / “is the whole app done”). A job that matches its plan can be done while the app could still grow later. Bare “done” after a met plan is Talk in AGENTS.md, not this skill.
 
 Lead directs living **Review**. Review never implements. Review writes `READINESS` and overwrites `## Readiness`. Lead does not change the key.
 

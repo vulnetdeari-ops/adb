@@ -2,7 +2,7 @@
 
 **Ask. Decide. Build.**
 
-ADB is a product method for AI coding agents. Bubby sets where the product must land. Roles follow the project’s `AGENTS.md` (setup copy): Lead only directs; Plan, Code and Review do the work. It is not an agent framework, a fake company, or a pile of extra process.
+ADB is a product method for AI coding agents. The owner sets where the product must land. Roles follow the project’s `AGENTS.md` (setup copy): Lead only directs; Plan, Code and Review do the work. It is not an agent framework, a fake company, or a pile of extra process.
 
 This is not the Android Debug Bridge.
 
@@ -20,17 +20,7 @@ METHOD: ADB
 3. Tell the agent to follow the project’s `ADB.md` when `METHOD.md` contains `METHOD: ADB`. If `METHOD.md` is missing or `PLAIN`, do not load ADB (follow `AGENTS.md` only).
 4. Issue register: for **collapsed** Source of Truth (default for small products), issues live in `adb/07-STATUS.md` under `## Open issues` — setup does **not** create `adb/08-OPEN-ISSUES.md`. Create `08` only when the list outgrows STATUS, or run `./setup-into-project.sh --register`. Never use a root `OPEN-ISSUES.md`.
 
-Preferred: use the Development helpers.
-
 ```text
-# new Active project
-new-project my-app adb
-
-# existing repo (from its root)
-adopt-project
-# ADB only — BMAD is retired; if a helper still asks, choose ADB
-
-# or against any project path
 ./setup-into-project.sh /path/to/project              # AGENTS.md + ADB
 ./setup-into-project.sh --plain /path/to/project      # AGENTS.md only
 ./setup-into-project.sh --check /path/to/project
@@ -61,7 +51,7 @@ Vision, Product Spec and the rest of `adb/01`…`adb/07` are **not** created by 
 
 - **Ask** — grill the product, not the user. Research what can be discovered. Offer real choices. `Decide for me` is valid.
 - **Decide** — keep that in `adb/`. Small products may collapse to Vision, Product Spec and Status. Larger products use `adb/01` … `adb/08`. Uncertain findings get registered, not swallowed.
-- **Build** — Code executes against `adb/` (Lead directs). Prove on a real path (browser, tests, logins). Missing required behavior is fixed or written down, not ignored. Git: AGENTS.md (auto-commit when the job is done; push only when Bubby asks).
+- **Build** — Code executes against `adb/` (Lead directs). Prove on a real path (browser, tests, logins). Missing required behavior is fixed or written down, not ignored. Git: AGENTS.md (auto-commit when the job is done; push only when the owner asks).
 
 The full method is in [`SKILL.md`](SKILL.md).
 

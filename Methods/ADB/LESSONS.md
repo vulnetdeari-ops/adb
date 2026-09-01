@@ -67,9 +67,9 @@ STATUS: ADOPTED — installer is project-scoped; P1 forbids home-level installs;
 
 DATE: 2026-08-26
 PROJECT: ADB method + Shared/Scripts
-SYMPTOM: `new-project` / `adopt-project` wrote `METHOD.md` and a bare `ADB.md`, but left no `METHOD-VERSION` stamp, installed no project-local slash commands, and still created a root `OPEN-ISSUES.md` that contradicts P15/P23 and `AGENTS.md`.
-ROOT CAUSE: Setup lived outside the method. The method gained P1A, project-scoped commands and the numbered issue register; the helpers were never updated.
-PROPOSED CHANGE: One `setup-into-project.sh` that stamps, ensures `adb/08-OPEN-ISSUES.md`, and installs commands into the project. Wire it into `new-project` and `adopt-project`. Do not auto-create Vision/Spec — that is DEFINE.
+SYMPTOM: Project helpers wrote `METHOD.md` and a bare `ADB.md`, but left no `METHOD-VERSION` stamp, installed no project-local slash commands, and still created a root `OPEN-ISSUES.md` that contradicts the issue-register rule.
+ROOT CAUSE: Setup lived outside the method. The method gained a version stamp, project-scoped commands and the numbered issue register; the helpers were never updated.
+PROPOSED CHANGE: One `setup-into-project.sh` that stamps and installs commands into the project. Do not auto-create Vision/Spec — that is DEFINE.
 STATUS: ADOPTED — 2026-08-26.
 
 ---
@@ -100,7 +100,7 @@ STATUS: ADOPTED — 2026-08-28.
 
 DATE: 2026-08-28
 PROJECT: ADB method
-SYMPTOM: The method explained phases and files. It did not say in one place: Bubby sets where the product must land; the agent writes that down, builds in slices that fit context, and proves it (browser, tests, logins).
+SYMPTOM: The method explained phases and files. It did not say in one place: the owner sets where the product must land; the agent writes that down, builds in slices that fit context, and proves it (browser, tests, logins).
 ROOT CAUSE: The method was written as numbered process. The reason it exists is a non-programmer owner.
 PROPOSED CHANGE: Open `SKILL.md` with that job. DEFINE / BUILD / COMPLETION in plain language. Commands point at those sections, not at old point numbers.
 STATUS: ADOPTED — 2026-08-28.
@@ -111,42 +111,42 @@ STATUS: ADOPTED — 2026-08-28.
 
 DATE: 2026-08-31
 PROJECT: ADB method
-SYMPTOM: Agents still treated BMAD as a peer method: `adopt-project` said “choose ADB when asked”, setup left `METHOD: BMAD` untouched, and leftover `_bmad/` / `.bmad-core/` / BMAD commands could still be followed. Bubby no longer has BMAD.
+SYMPTOM: Agents still treated BMAD as a peer method: setup left `METHOD: BMAD` untouched, and leftover `_bmad/` / `.bmad-core/` / BMAD commands could still be followed.
 ROOT CAUSE: The method was defined against BMAD (“never combine”). After BMAD was retired, that opposition still taught agents that BMAD exists. Setup had no job to replace the switch or remove the engine. Planning leftovers and the engine were not distinguished.
 PROPOSED CHANGE: ADB is the product method. BMAD is retired. Setup replaces `METHOD: BMAD` and removes the engine; planning leftovers stay as brownfield evidence for DEFINE. Commands and the reading copy say BMAD is not a method.
 STATUS: ADOPTED — 2026-08-31.
 
 ---
 
-## L-011 — Paseo and Lead were still in the method after they were gone
+## L-011 — A dropped chat UI and Lead were still in the method after they were gone
 
 DATE: 2026-08-31
 PROJECT: ADB method
-SYMPTOM: The method still named Paseo (decision chips, upstream issue) and the Lead role (READINESS key, orchestra). Bubby no longer has Paseo. There is no Lead.
-ROOT CAUSE: Those names were leftover from the old chat UI and orchestra. After both were dropped, the files still taught agents to wait for Paseo rendering or a Lead.
-PROPOSED CHANGE: Remove Paseo. Remove Lead. Decision rule stays A/B/C + „Entscheide du“. The walker writes READINESS; the session agent does not. Briefs are executable without a worker role.
+SYMPTOM: The method still named a retired chat UI (decision chips, upstream issue) and treated Lead as an orchestra role for the READINESS key. That UI is gone.
+ROOT CAUSE: Those names were leftover. After they were dropped, the files still taught agents to wait for that UI or a missing orchestra Lead.
+PROPOSED CHANGE: Remove the retired UI name. Decision rule stays A/B/C + decide-for-me. Review writes READINESS. Briefs are executable without a worker role.
 STATUS: ADOPTED — 2026-08-31.
 
 ---
 
-## L-012 — ADB without Lead contradicted BubbyOS
+## L-012 — ADB without Lead contradicted factory AGENTS.md
 
 DATE: 2026-08-31
 PROJECT: ADB method
-SYMPTOM: After L-011, ADB told the reading agent to implement, prove, and commit only if Bubby asked; it allowed spawning a reviewer and loading ADB without `METHOD: ADB`. Global `AGENTS.md` (BubbyOS) says Lead only directs, Code implements and auto-commits when the job is done, never spawn, and do not load ADB when `METHOD.md` is missing or `PLAIN`.
-ROOT CAUSE: L-011 removed Paseo’s orchestra name “Lead” and took the BubbyOS session Lead with it. ADB restated git and activation instead of deferring to AGENTS.md.
-PROPOSED CHANGE: Paseo stays gone. BubbyOS Lead/Plan/Code/Review stay. ADB must not contradict AGENTS.md: Lead directs; never spawn; Code commits when the job is done; ADB loads only when `METHOD: ADB`; A/B/C includes scopes.
+SYMPTOM: After L-011, ADB told the reading agent to implement, prove, and commit only if the owner asked; it allowed spawning a reviewer and loading ADB without `METHOD: ADB`. Factory `AGENTS.md` says Lead only directs, Code implements and auto-commits when the job is done, never spawn, and do not load ADB when `METHOD.md` is missing or `PLAIN`.
+ROOT CAUSE: L-011 dropped an orchestra name “Lead” and took the session Lead with it. ADB restated git and activation instead of deferring to AGENTS.md.
+PROPOSED CHANGE: Lead/Plan/Code/Review stay. ADB must not contradict AGENTS.md: Lead directs; never spawn; Code commits when the job is done; ADB loads only when `METHOD: ADB`; A/B/C includes scopes.
 STATUS: ADOPTED — 2026-08-31.
 
 ---
 
-## L-013 — `agy-review` is gone
+## L-013 — A removed commit-gate skill is gone
 
 DATE: 2026-08-31
 PROJECT: ADB method
-SYMPTOM: ADB still required `agy-review` PASS before auto-commit and treated it as the commit check. That skill no longer exists. Bubby is removing it from AGENTS.md as well.
-ROOT CAUSE: ADB copied a dead skill name from the OS instead of deferring git to AGENTS.md without naming a removed tool.
-PROPOSED CHANGE: Do not mention `agy-review`. `/adb-review` stays (independent product review). Git: Code commits when the job is done (AGENTS.md). CARRIED is not the PROVE 3-round cap.
+SYMPTOM: ADB still required a named review-before-commit skill PASS and treated it as the commit check. That skill no longer exists.
+ROOT CAUSE: ADB copied a dead skill name from the factory instead of deferring git to AGENTS.md without naming a removed tool.
+PROPOSED CHANGE: Do not name removed tools. `/adb-review` stays (independent product review). Git: Code commits when the job is done (AGENTS.md). CARRIED is not the PROVE 3-round cap.
 STATUS: ADOPTED — 2026-08-31.
 
 ---
@@ -155,7 +155,7 @@ STATUS: ADOPTED — 2026-08-31.
 
 DATE: 2026-08-31
 PROJECT: ADB method
-SYMPTOM: After aligning with BubbyOS, SKILL.md and every slash command repeated Lead / spawn / git / BMAD. Agents had to wade through factory rules to reach DEFINE / BUILD / COMPLETION. No product rule was added; the same rules were said three times.
+SYMPTOM: After aligning with factory `AGENTS.md`, SKILL.md and every slash command repeated Lead / spawn / git / BMAD. Agents had to wade through factory rules to reach DEFINE / BUILD / COMPLETION. No product rule was added; the same rules were said three times.
 ROOT CAUSE: Alignment copied AGENTS.md into ADB instead of one inherit line plus the product method.
 STATUS: ADOPTED — 2026-08-31.
 

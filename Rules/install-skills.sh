@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# BubbyOS — point every harness at this repo's AGENTS.md. Do not copy the file.
+# Factory rules — optional home links to this repo's AGENTS.md.
+# Product projects get copies via setup-into-project.sh; they do not need these links.
 #
 # Usage:
 #   ./install-skills.sh          create/update home symlinks
@@ -86,7 +87,7 @@ for entry in "${LINKS[@]}"; do
 
   mkdir -p "$parent"
   if [ -e "$dst" ] && [ ! -L "$dst" ]; then
-    backup="$dst.pre-bubbyos.$(date +%Y%m%d%H%M%S)"
+    backup="$dst.pre-factory.$(date +%Y%m%d%H%M%S)"
     mv "$dst" "$backup"
     echo "existing file kept as $backup"
   fi
