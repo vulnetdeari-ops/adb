@@ -170,4 +170,15 @@ ROOT CAUSE: One canonical file only works if every project can reach that file. 
 PROPOSED CHANGE: Setup copies `SKILL.md` to project `ADB.md`, stamps `METHOD-VERSION`, and installs slash commands as copies. Agents follow `ADB.md`. `--refresh` updates copy and commands. STALE if the copy differs and was not refreshed.
 STATUS: ADOPTED — 2026-08-31.
 
+---
+
+## L-016 — Role names Lead / Plan / Code / Review were unclear
+
+DATE: 2026-09-01
+PROJECT: ADB method
+SYMPTOM: Public clones could not tell who they were talking to. “Lead” sounded like an orchestra boss; “Plan / Code / Review” looked like verbs, not the three living workers. Agents still spawned one-shots or did all work in the chat.
+ROOT CAUSE: The split was already in `AGENTS.md` (direct vs do). The names did not say that.
+PROPOSED CHANGE: Same four roles, clearer names: **MainAgent** (talks to the owner, most work handed off), **PlanAgent**, **CodeAgent**, **ReviewAgent**. Still never spawn. One-shot Tasks are not those three. If this session already is the living worker, or none exists to turn on, this session does the job and names the role.
+STATUS: ADOPTED — 2026-09-01.
+
 

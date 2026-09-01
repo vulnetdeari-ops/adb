@@ -13,9 +13,9 @@ Stamp as first line after YAML frontmatter (never above `---`):
 
 Never stamp a body you did not refresh. If the copy differs from this file (ignore the stamp): STALE. `--refresh` to update, or stay on the older version on purpose.
 
-**Job:** The owner knows where the product must land. They are not the coder, not the tester, not the one who signs into every site. Write that destination in `adb/`. Then Code builds it in slices that fit in context and proves it (browser, tests, logins). They choose only when the prompt means two different products or scopes (A/B/C). Not a fake company.
+**Job:** The owner knows where the product must land. They are not the coder, not the tester, not the one who signs into every site. Write that destination in `adb/`. Then CodeAgent builds it in slices that fit in context and proves it (browser, tests, logins). They choose only when the prompt means two different products or scopes (A/B/C). Not a fake company.
 
-Talk, proof, secrets, git, roles: this project’s `AGENTS.md` (setup copy of `Rules/AGENTS.md`). Do not contradict it. Lead only directs; Plan / Code / Review do the work; never spawn.
+Talk, proof, secrets, git, roles: this project’s `AGENTS.md` (setup copy of `Rules/AGENTS.md`). Do not contradict it. MainAgent only directs; PlanAgent / CodeAgent / ReviewAgent do the work; never spawn.
 
 Activates **only** when `METHOD.md` contains `METHOD: ADB`. Missing or `PLAIN` → do not load. Follow the project’s `ADB.md`. **BMAD is retired** — do not follow leftover BMAD; setup removes the engine; leftover planning docs are DEFINE evidence, not `adb/`. Slash commands and `AGENTS.md` live **in the project** as copies. First run: `/start` (`START.md`). Helper: `setup-into-project.sh` (`--plain` for rules only) or `Rules/start-into-project.sh`. Method source: `Methods/ADB` in this repository. Method defects: `LESSONS.md`.
 
@@ -27,13 +27,13 @@ Each rule judges the product. If it does not apply, extra work is forbidden.
 
 # DEFINE
 
-No product code. Lead directs **Plan**. Code does not implement.
+No product code. MainAgent directs **PlanAgent**. CodeAgent does not implement.
 
 **Done when** a fresh agent can build from `adb/` without inventing important behavior, and leftover uncertainty does not block the first slice. More research possible ≠ keep DEFINE open.
 
 **Greenfield** — nothing exists yet. **Brownfield** — inspect first: exists / works / wrong / unclear / keep / what the owner wants. Existing code is evidence, not automatically the destination.
 
-Ask the **product**, not the owner, for what repo, docs, tests or research can answer. Ask the owner only for intent, priorities, trade-offs. One decision at a time. A/B/C: AGENTS.md. Record in `06`, or in `02` while collapsed. Challenge choices that hurt usability, safety, or coherence — not taste. If the owner knows WHAT but not HOW it should look: Plan owns a coherent direction. No generic AI look.
+Ask the **product**, not the owner, for what repo, docs, tests or research can answer. Ask the owner only for intent, priorities, trade-offs. One decision at a time. A/B/C: AGENTS.md. Record in `06`, or in `02` while collapsed. Challenge choices that hurt usability, safety, or coherence — not taste. If the owner knows WHAT but not HOW it should look: PlanAgent owns a coherent direction. No generic AI look.
 
 Every material fact: KNOWN / UNKNOWN / ASSUMED / CONFLICTING / NEEDS RESEARCH / NEEDS USER DECISION. Never silently turn an assumption into product truth.
 
@@ -47,7 +47,7 @@ Default small: `01-VISION`, `02-PRODUCT-SPEC`, `07-STATUS`. Split 03–06 and 08
 - **04** — stack, boundaries, deploy, security — only what matters, with WHY.
 - **05** — what DONE means for this product.
 - **06** — important WHY, not trivia.
-- **07** — header only: PHASE, NOW, NEXT, BLOCKERS, OPEN, READINESS. Several slices: `## Execution plan`. Preserve `## Readiness` — Review writes it. Lead does not change the key.
+- **07** — header only: PHASE, NOW, NEXT, BLOCKERS, OPEN, READINESS. Several slices: `## Execution plan`. Preserve `## Readiness` — ReviewAgent writes it. MainAgent does not change the key.
 - **08** — real unresolved problems, or `## Open issues` in 07 while collapsed.
 
 ## Issues
@@ -77,16 +77,16 @@ Stop interviewing. `adb/` governs. A slice is done when its SPEC done-criteria a
 
 The whole product does not fit in one context window. User-visible slices — not “entire backend first”. Parallel only when jobs don’t share files or unfinished deps. Large product: `## Execution plan` in 07.
 
-Brief: what, where, done, `adb/` pointers, proof. The next agent gets `adb/`, not your story. **Heavy** (money, login/security, live, data, new public contract): Plan writes plan + done criteria first — do not skip Plan — then Code builds. Review sees the plan and never implements. Same session + builder’s story ≠ independent.
+Brief: what, where, done, `adb/` pointers, proof. The next agent gets `adb/`, not your story. **Heavy** (money, login/security, live, data, new public contract): PlanAgent writes plan + done criteria first — do not skip PlanAgent — then CodeAgent builds. ReviewAgent sees the plan and never implements. Same session + builder’s story ≠ independent.
 
 **SPEC → BUILD → PROVE → RECORD**
 
-- **SPEC** — what this slice must do, from `adb/`. Heavy: Plan’s plan + done criteria here.
-- **BUILD** — Code, smallest safe change. Delete dead code when safe. Test business rules, money, permissions, edges — not coverage theater.
-- **PROVE** — vs `adb/`, on a real path. UI: this harness’s browser. Code signs in (AGENTS.md; the owner only for 2FA / captcha / passkey / OS-blocked keys). Not “it compiles.”
-- **RECORD** — update `adb/` + STATUS; increment CARRIED; apply CARRIED-3. Git: AGENTS.md (job done → Code commits; push only when the owner asks).
+- **SPEC** — what this slice must do, from `adb/`. Heavy: PlanAgent’s plan + done criteria here.
+- **BUILD** — CodeAgent, smallest safe change. Delete dead code when safe. Test business rules, money, permissions, edges — not coverage theater.
+- **PROVE** — vs `adb/`, on a real path. UI: this harness’s browser. CodeAgent signs in (AGENTS.md; the owner only for 2FA / captcha / passkey / OS-blocked keys). Not “it compiles.”
+- **RECORD** — update `adb/` + STATUS; increment CARRIED; apply CARRIED-3. Git: AGENTS.md (job done → CodeAgent commits; push only when the owner asks).
 
-PROVE fails: do not RECORD as done. Code fixes or registers. Cap 3 fix rounds, then the owner.
+PROVE fails: do not RECORD as done. CodeAgent fixes or registers. Cap 3 fix rounds, then the owner.
 
 `/adb-review` PASS WITH ISSUES: register; RECORD only if PROVE passed and release blockers allow.
 
@@ -109,7 +109,7 @@ Not complete because it compiles. Intended behavior exists, real path, spec sati
 | `BETA` | Agreed scope matches `adb/`. Important flows + empty/loading/error on a real path. Only MEDIUM/LOW if the bar allows. |
 | `LIVE` | BETA + bar clear + 05 production items. Not “already online.” Constrained self-check must not return LIVE. |
 
-The bar chooses BETA vs LIVE, not ALPHA vs BETA. `/adb-ready` only when the owner asks about the **whole app**, not after a slice whose plan is met. Follow COMPLETION in this file. Lead directs living Review. Review writes `READINESS` and overwrites `## Readiness`. Lead does not change the key. Stale after a later RECORD or spec change this walk covered.
+The bar chooses BETA vs LIVE, not ALPHA vs BETA. `/adb-ready` only when the owner asks about the **whole app**, not after a slice whose plan is met. Follow COMPLETION in this file. MainAgent directs living ReviewAgent. ReviewAgent writes `READINESS` and overwrites `## Readiness`. MainAgent does not change the key. Stale after a later RECORD or spec change this walk covered.
 
 Method silent, method conflict, or method caused the defect → append `LESSONS.md`. Still fix the project.
 

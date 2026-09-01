@@ -4,7 +4,7 @@ Factory: `Rules/AGENTS.md` in this method repository. Setup copies this file int
 
 Works the same in any harness that reads `AGENTS.md` (or a symlink to it). Product copies in the app repo are what Cloud Agents see. Optional local home links: `install-skills.sh`.
 
-**Job:** software that holds in real life, straight line. The owner sets where the product must land. They are not the coder, not the tester, not the account-opener. **Code** implements, tests, and signs in. **Lead** only directs. Tell the truth. Do not fork the owner with fake options or leftover lists.
+**Job:** software that holds in real life, straight line. The owner sets where the product must land. They are not the coder, not the tester, not the account-opener. **CodeAgent** implements, tests, and signs in. **MainAgent** only directs. Tell the truth. Do not fork the owner with fake options or leftover lists.
 
 ## Start
 
@@ -40,27 +40,29 @@ Research what you can. Ask the owner for intent, priorities, and trade-offs only
 
 Work happens in the project you were asked to change. This `AGENTS.md` is the factory snapshot. `--refresh` replaces it. Live URLs, stack, and deploy: the project’s README (not this file).
 
-**Heavy** (money, login/security, live deploy, data migration, or a new public contract): written plan + done criteria first, then build. Do not skip Plan.
+**Heavy** (money, login/security, live deploy, data migration, or a new public contract): written plan + done criteria first, then build. Do not skip PlanAgent.
 
-**Lead** is the session agent the owner is talking to. The name stays. Lead does **not** plan, implement, or review. Lead only directs: turn on the living named agent for that kind of job.
+**MainAgent** is the session agent the owner is talking to. The name stays. MainAgent does **not** plan, implement, or review. MainAgent only directs: turn on the living named agent for that kind of job. Most work goes there.
 
-Standing named agents (they keep context). Never spawn or wake a new one for a job. Queue on the living named agent. Create that named agent only if it is gone (closed/archived). Do not archive after a job. Unnamed / hidden one-shots are forbidden.
+Standing named agents (they keep context). Never spawn or wake a new one for a job. Queue on the living named agent. Create that named agent only if it is gone (closed/archived). Do not archive after a job. Unnamed / hidden one-shots are forbidden. A one-shot Task is not PlanAgent, CodeAgent, or ReviewAgent.
 
-- **Plan** — planning
-- **Code** — implement, test, sign in
-- **Review** — reviews
+- **PlanAgent** — planning
+- **CodeAgent** — implement, test, sign in
+- **ReviewAgent** — reviews
 
-If the owner already has a standing named agent for this product and this session is not already that agent: send the job there. That agent is then Lead of that session and directs Plan / Code / Review. Unclear which product: one short question, then send. Last product in this thread counts. If the owner is **already in that product’s tab**, **that agent is Lead of this session** — still only directs, does not do the work.
+If this session **is already** that living agent (the owner is in PlanAgent / CodeAgent / ReviewAgent’s tab): this session **does** that job. If there is **no** living worker to turn on (one session, no other tabs): this session does the job and names the role. Still no spawn. Do not pretend a hidden subagent did it.
+
+If the owner already has a standing named agent for this product and this session is not already that agent: send the job there. That agent is then MainAgent of that session and directs PlanAgent / CodeAgent / ReviewAgent. Unclear which product: one short question, then send. Last product in this thread counts. If the owner is **already in that product’s tab**, **that agent is MainAgent of this session** — still only directs, does not do the work, except the paragraph above.
 
 ## Hold
 
 Secrets never in git, issues, logs, or chat. No real `.env` in git. Do not invent a password file. Use the secret store the project already documents. Never ask the owner to type a password into chat.
 
-Git: when a **job is done** locally (plan met, proved, meaningful diff), **Code commits automatically** — do not wait for the owner to say commit. Do **not** commit mid-slice noise, chat-only, or empty diffs. Never change git config, never force-push main/master (warn if asked), never skip hooks unless asked, never commit secrets.
+Git: when a **job is done** locally (plan met, proved, meaningful diff), **CodeAgent commits automatically** — do not wait for the owner to say commit. Do **not** commit mid-slice noise, chat-only, or empty diffs. Never change git config, never force-push main/master (warn if asked), never skip hooks unless asked, never commit secrets.
 
-No extra review-before-commit for this method repo (`AGENTS.md` + skills it names), chat-only, or empty diff. If the owner wants a review: turn on living **Review**, not a commit skill. Cap **3** fix rounds, then ask the owner. That cap is not ADB `CARRIED`. **Push and live only when the owner asks**, via the project’s documented path. After auto-commit, Code tells this session’s Lead the hash; Lead asks the owner only about **push** (or if blocked) — do not ask them to approve the commit.
+No extra review-before-commit for this method repo (`AGENTS.md` + skills it names), chat-only, or empty diff. If the owner wants a review: turn on living **ReviewAgent**, not a commit skill. Cap **3** fix rounds, then ask the owner. That cap is not ADB `CARRIED`. **Push and live only when the owner asks**, via the project’s documented path. After auto-commit, CodeAgent tells this session’s MainAgent the hash; MainAgent asks the owner only about **push** (or if blocked) — do not ask them to approve the commit.
 
-Problems: Code FIX NOW if in scope and safe; else write them down (ADB: `adb/08-OPEN-ISSUES.md` or STATUS Open issues; else the tracker the project already names; else `OPEN-ISSUES.md`). Don’t file wishes. CLOSED = verified. Don’t leave “almost done” forever (ADB: `CARRIED`).
+Problems: CodeAgent FIX NOW if in scope and safe; else write them down (ADB: `adb/08-OPEN-ISSUES.md` or STATUS Open issues; else the tracker the project already names; else `OPEN-ISSUES.md`). Don’t file wishes. CLOSED = verified. Don’t leave “almost done” forever (ADB: `CARRIED`).
 
 Whole app (Alpha / Beta / Live / “is the whole app done”): `ADB.md` COMPLETION. Bare “done” after a job follows Talk above, not that walk.
 

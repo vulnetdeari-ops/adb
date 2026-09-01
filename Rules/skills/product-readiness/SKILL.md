@@ -9,7 +9,7 @@ Canonical for ADB products: that project’s `ADB.md` COMPLETION, plus this walk
 
 Use only when the owner asks about the **whole app** (Alpha / Beta / Live / “is the whole app done”). A job that matches its plan can be done while the app could still grow later. Bare “done” after a met plan is Talk in AGENTS.md, not this skill.
 
-Lead directs living **Review**. Review never implements. Review writes `READINESS` and overwrites `## Readiness`. Lead does not change the key.
+MainAgent directs living **ReviewAgent**. ReviewAgent never implements. ReviewAgent writes `READINESS` and overwrites `## Readiness`. MainAgent does not change the key.
 
 Walk the current product on a real path (browser if UI). Proof: what you tested, how, what happened. Constrained self-check must not return `LIVE`.
 

@@ -6,7 +6,7 @@ description: "ADB DEFINE. Grill the product, not the user. Write adb/, then gate
 # /adb-define
 
 Canonical: this project’s `ADB.md` (DEFINE). Method repo: `SKILL.md`.
-Inherit AGENTS.md. Lead directs **Plan**. No product implementation.
+Inherit AGENTS.md. MainAgent directs **PlanAgent**. No product implementation.
 
 1. **Mode** — GREENFIELD or BROWNFIELD, one line. Brownfield: inspect first. Leftover BMAD planning docs = evidence, not destination.
 2. **Don’t ask** what repo, docs, tests or research can answer.
