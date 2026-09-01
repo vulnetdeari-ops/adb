@@ -70,7 +70,7 @@ done
 
 is_factory() {
   local p="$1"
-  [ -f "$p/Rules/AGENTS.md" ] && [ -f "$p/Methods/ADB/SKILL.md" ]
+  [ -f "$p/AGENTS.md" ] && [ -f "$p/Methods/ADB/SKILL.md" ] && [ -f "$p/Rules/start-into-project.sh" ]
 }
 
 if [ -e "$PROJECT" ]; then

@@ -29,7 +29,7 @@ Run this when any of:
 
 Do **not** run as a leftover after an ordinary product job.
 
-If this workspace **is** the method factory (`Rules/AGENTS.md` and `Methods/ADB/SKILL.md` both present): the app path must be **another** folder. Never write a product `METHOD.md` into the factory.
+If this workspace **is** the method factory (`AGENTS.md` at repo root, `Methods/ADB/SKILL.md`, and `Rules/start-into-project.sh`): the app path must be **another** folder. Never write a product `METHOD.md` into the factory.
 
 ⸻
 
