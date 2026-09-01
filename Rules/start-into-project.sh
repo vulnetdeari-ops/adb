@@ -303,21 +303,15 @@ fi
 
 PROJECT="$(cd "$PROJECT" && pwd -P)"
 
-if [ $LESEN_ONLY -eq 0 ]; then
-  setup_args=()
-  [ $CHECK -eq 1 ] && setup_args+=(--check)
-  [ $REFRESH -eq 1 ] && setup_args+=(--refresh)
-  [ "$METHOD" = "plain" ] && setup_args+=(--plain)
-  setup_args+=("$PROJECT")
-  "$SETUP" "${setup_args[@]}"
-fi
-
 OWNER="$PROJECT/OWNER.md"
 LESEN="$PROJECT/LESEN.html"
 
 if [ $CHECK -eq 1 ]; then
   echo "WOULD WRITE $OWNER"
   echo "WOULD WRITE $LESEN (from $(basename "$TEMPLATE"))"
+  if [ $LESEN_ONLY -eq 0 ]; then
+    echo "WOULD RUN setup into $PROJECT (METHOD: $METHOD)"
+  fi
   if [ $NEEDS_TRANSLATE -eq 1 ]; then
     echo "TRANSLATE: LESEN.html OWNER.md → $LANGUAGE_NAME ($LANGUAGE)"
   fi
@@ -325,13 +319,25 @@ if [ $CHECK -eq 1 ]; then
   exit 0
 fi
 
-tmp_owner="$(mktemp)"
-write_owner "$tmp_owner"
-if [ ! -f "$OWNER" ] || ! cmp -s "$tmp_owner" "$OWNER"; then
-  mv "$tmp_owner" "$OWNER"
-  note_changed "OWNER.md"
-else
-  rm -f "$tmp_owner"
+# OWNER.md first so setup does not warn that Start skipped language.
+if [ $LESEN_ONLY -eq 0 ] || [ ! -f "$OWNER" ]; then
+  tmp_owner="$(mktemp)"
+  write_owner "$tmp_owner"
+  if [ ! -f "$OWNER" ] || ! cmp -s "$tmp_owner" "$OWNER"; then
+    mv "$tmp_owner" "$OWNER"
+    note_changed "OWNER.md"
+  else
+    rm -f "$tmp_owner"
+  fi
+fi
+
+if [ $LESEN_ONLY -eq 0 ]; then
+  setup_args=()
+  [ $REFRESH -eq 1 ] && setup_args+=(--refresh)
+  [ "$METHOD" = "plain" ] && setup_args+=(--plain)
+  setup_args+=("$PROJECT")
+  "$SETUP" "${setup_args[@]}"
+  [ -s "$PROJECT/AGENTS.md" ] || { echo "FAIL: setup did not write AGENTS.md in $PROJECT" >&2; exit 1; }
 fi
 
 tmp_lesen="$(mktemp)"

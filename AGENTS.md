@@ -1,14 +1,9 @@
 # This folder is the method factory
 
-Not a product app. Cursor and GitHub look here for `AGENTS.md`. The living product rules are **[Rules/AGENTS.md](Rules/AGENTS.md)** — follow that file.
+Not a product app. The living product rules are **[Rules/AGENTS.md](Rules/AGENTS.md)** — follow that file here.
 
 Never run Start against this folder. Never write `METHOD.md`, `OWNER.md`, or `LESEN.html` here.
 
-To put the method into an app:
+When the owner is in chat and an **app** is missing `AGENTS.md`, that is Start — **ask Q1 (language)**. Do not run `setup-into-project.sh` as a substitute. Do not treat this factory file as the app’s `AGENTS.md`.
 
-```bash
-./Methods/ADB/setup-into-project.sh --plain /path/to/app   # small
-./Methods/ADB/setup-into-project.sh /path/to/app            # large (ADB)
-```
-
-Setup copies `Rules/AGENTS.md` into the **app** as `AGENTS.md`. Until that runs, an app such as PinnwandTest has no `AGENTS.md`. `--refresh` copies from this clone; it does not fetch GitHub by itself. `git pull` here first.
+Start (`/start`, `Rules/skills/start/SKILL.md`) writes `AGENTS.md` into the app after the owner answers. The script it calls is `Rules/start-into-project.sh`.

@@ -10,15 +10,9 @@ The method is [`SKILL.md`](SKILL.md). Setup copies it into each project as `ADB.
 
 ## Use it in a project
 
-1. Add a `METHOD.md` that contains exactly:
+**First run with the owner:** Start (`/start`). It asks language (and the rest) with letters, then writes `AGENTS.md`, `OWNER.md`, `LESEN.html`, `METHOD.md`, and `ADB.md` into the **app**. Do not add `METHOD.md` by hand and skip language.
 
-```text
-METHOD: ADB
-```
-
-2. Install slash commands **into that project** as copies, never into the user home.
-3. Tell the agent to follow the project’s `ADB.md` when `METHOD.md` contains `METHOD: ADB`. If `METHOD.md` is missing or `PLAIN`, do not load ADB (follow `AGENTS.md` only).
-4. Issue register: for **collapsed** Source of Truth (default for small products), issues live in `adb/07-STATUS.md` under `## Open issues` — setup does **not** create `adb/08-OPEN-ISSUES.md`. Create `08` only when the list outgrows STATUS, or run `./setup-into-project.sh --register`. Never use a root `OPEN-ISSUES.md`.
+Without the interview (no language question — not a finished first run if the owner is in chat):
 
 ```text
 ./Rules/start-into-project.sh --project /path/to/project --language de --address du --tone direct --method adb --risk none --product "..."

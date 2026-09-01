@@ -8,7 +8,13 @@ Works the same in any harness that reads `AGENTS.md` (or a symlink to it). Produ
 
 ## Start
 
-No `METHOD.md`, or the owner says start / first run / language / tone: follow this project’s `START.md` (setup copy of `Rules/skills/start/SKILL.md`). Factory with no `START.md` yet: `Rules/skills/start/SKILL.md`. Offer the listed letters. Language may be **any** — letters for common ones, or they type the name. Do not invent extra questions or extra options. After answers, run `Rules/start-into-project.sh` — do not write `METHOD.md` / `OWNER.md` / `LESEN.html` by hand. If the script prints `TRANSLATE:`, rewrite `LESEN.html` and the human lines in `OWNER.md` into that language before calling Start done. Never run Start against the method factory folder.
+Run Start when any of: no `METHOD.md`; no `AGENTS.md`; no `OWNER.md`; the owner says start / first run / language / tone / “AGENTS.md fehlt”.
+
+When the owner is in this chat, **ask Q1 (language) with the letters**. Do not run `setup-into-project.sh` as a substitute — that path does not ask language and does not write `OWNER.md` / `LESEN.html`. Do not add a factory file as a stand-in for the app’s `AGENTS.md`.
+
+Follow this project’s `START.md` (setup copy of `Rules/skills/start/SKILL.md`). Factory with no `START.md` yet: `Rules/skills/start/SKILL.md`. Offer the listed letters. Language may be **any** — letters for common ones, or they type the name. Do not invent extra questions or extra options. After answers, run `Rules/start-into-project.sh` — do not write `METHOD.md` / `OWNER.md` / `LESEN.html` by hand. If `AGENTS.md` is still missing in the app after the script, Start failed — show the error, do not invent the file. If the script prints `TRANSLATE:`, rewrite `LESEN.html` and the human lines in `OWNER.md` into that language before calling Start done. Never run Start against the method factory folder.
+
+This workspace is the factory and the missing `AGENTS.md` is in **another** app: open that app or pass its path to Start. The factory `AGENTS.md` (if any) is not the app copy.
 
 Humans read `LESEN.html` in the app (language they picked). Agents do not follow the HTML.
 
