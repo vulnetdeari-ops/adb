@@ -1,0 +1,95 @@
+# tag<TAB>display name<TAB>comma-separated aliases (lowercase, no accents needed)
+# Used by Start to map a typed language to a tag. Unknown names become tag und + the typed name.
+de	Deutsch	deutsch,german,aleman,alemán,tedesco,allemand,duits,niemiecki,német
+en	English	english,englisch,inglese,inglés,ingles,anglais,engels,angielski
+sq	Shqip	shqip,shqipe,albanian,albanisch,albanais,albanese,albanés,albanianisch
+it	Italiano	italiano,italian,italienisch,italien,italiana,italiani
+fr	Français	français,francais,french,französisch,franzosisch,francese,francés,frances
+es	Español	español,espanol,spanish,spanisch,spagnolo,espagnol,castellano,castellán
+pt	Português	português,portugues,portuguese,portugiesisch,portoghese,portugués
+pt-BR	Português (Brasil)	brazilian portuguese,português brasileiro,portugues brasileiro,brasilianisches portugiesisch,pt-br,ptbr
+nl	Nederlands	nederlands,dutch,niederländisch,niederlandisch,olandese,néerlandais,holandés,hollands
+pl	Polski	polski,polish,polnisch,polacco,polonais,polaco
+tr	Türkçe	türkçe,turkce,turkish,türkisch,turkisch,turco,turc
+ar	العربية	arabic,arabisch,arabe,arabo,árabe,العربية,arabiyya
+zh	中文	chinese,chinesisch,chinois,cinese,chino,zhongwen,中文,汉语,漢語
+zh-Hans	简体中文	simplified chinese,vereinfachtes chinesisch,简体,简体中文
+zh-Hant	繁體中文	traditional chinese,traditionelles chinesisch,繁體,繁体,繁體中文
+ja	日本語	japanese,japanisch,japonais,giapponese,japonés,日本語,nihongo
+ko	한국어	korean,koreanisch,coréen,coreano,한국어,hangul
+ru	Русский	russian,russisch,russe,russo,ruso,русский
+uk	Українська	ukrainian,ukrainisch,ukrainien,ucraino,ucraniano,українська,ukrainisch
+cs	Čeština	czech,tschechisch,tchèque,ceco,checo,čeština,cestina
+sk	Slovenčina	slovak,slowakisch,slovaque,slovacco,eslovaco,slovenčina,slovencina
+hu	Magyar	hungarian,ungarisch,hongrois,ungherese,húngaro,magyar
+ro	Română	romanian,rumänisch,rumanisch,roumain,rumeno,rumano,română,romana
+el	Ελληνικά	greek,griechisch,grec,greco,griego,ελληνικά,ellinika
+sv	Svenska	swedish,schwedisch,suédois,svedese,sueco,svenska
+da	Dansk	danish,dänisch,danisch,danois,danese,danés,dansk
+fi	Suomi	finnish,finnisch,finnois,finlandese,finés,suomi,suomea
+no	Norsk	norwegian,norwegisch,norvégien,norvegese,noruego,norsk
+nb	Norsk bokmål	bokmål,bokmal,norwegian bokmal
+nn	Nynorsk	nynorsk,norwegian nynorsk
+hr	Hrvatski	croatian,kroatisch,croate,croato,croata,hrvatski
+sr	Srpski	serbian,serbisch,serbe,serbo,serbio,srpski,српски
+bs	Bosanski	bosnian,bosnisch,bosniaque,bosniaco,bosnio,bosanski
+sl	Slovenščina	slovenian,slowenisch,slovène,sloveno,esloveno,slovenščina,slovenscina
+mk	Македонски	macedonian,mazedonisch,macédonien,macedone,macedonio,македонски
+bg	Български	bulgarian,bulgarisch,bulgare,bulgaro,búlgaro,български
+lt	Lietuvių	lithuanian,litauisch,lituanien,lituano,lietuvių,lietuviu
+lv	Latviešu	latvian,lettisch,letton,lettone,letón,latviešu,latviesu
+et	Eesti	estonian,estnisch,estonien,estone,estonio,eesti
+ga	Gaeilge	irish,irisch,irlandais,irlandese,irlandés,gaeilge,gaelic
+cy	Cymraeg	welsh,walisisch,gallois,gallese,galés,cymraeg
+is	Íslenska	icelandic,isländisch,islandsch,islandais,islandese,islandés,íslenska,islenska
+mt	Malti	maltese,maltesisch,maltais,maltese,maltés,malti
+lb	Lëtzebuergesch	luxembourgish,luxemburgisch,luxembourgeois,lussemburghese,lëtzebuergesch
+ca	Català	catalan,katalanisch,catalán,catalano,català
+eu	Euskara	basque,baskisch,basque,basco,vasco,euskara,euskera
+gl	Galego	galician,galicisch,galicien,galego,gallego
+he	עברית	hebrew,hebräisch,hebraisch,hébreu,ebraico,hebreo,עברית,ivrit
+fa	فارسی	persian,farsi,persisch,persan,persiano,persa,فارسی
+ur	اردو	urdu,urdú,اردو
+hi	हिन्दी	hindi,hindi,हिन्दी,हिंदी
+bn	বাংলা	bengali,bengalisch,bengalí,বাংলা,bangla
+ta	தமிழ்	tamil,tamoul,tamil,தமிழ்
+te	తెలుగు	telugu,télougou,తెలుగు
+ml	മലയാളം	malayalam,malayâlam,മലയാളം
+kn	ಕನ್ನಡ	kannada,canarese,ಕನ್ನಡ
+mr	मराठी	marathi,maráthi,मराठी
+gu	ગુજરાતી	gujarati,goudjrati,ગુજરાતી
+pa	ਪੰਜਾਬੀ	punjabi,panjabi,pandschabi,ਪੰਜਾਬੀ,پنجابی
+th	ไทย	thai,thaï,tailandese,tailandés,ไทย
+vi	Tiếng Việt	vietnamese,vietnamesisch,vietnamien,vietnamita,tiếng việt,tieng viet
+id	Bahasa Indonesia	indonesian,indonesisch,indonésien,indonesiano,bahasa indonesia,indonesia
+ms	Bahasa Melayu	malay,malaiisch,malais,malese,malayo,bahasa melayu,melayu
+fil	Filipino	filipino,tagalog,philippinisch
+sw	Kiswahili	swahili,suaheli,swahili,kiswahili
+am	አማርኛ	amharic,amharisch,amharique,amarico,አማርኛ
+ha	Hausa	hausa,haoussa
+yo	Yorùbá	yoruba,yoruba,yorùbá
+ig	Igbo	igbo
+zu	isiZulu	zulu,isizulu
+af	Afrikaans	afrikaans
+ka	ქართული	georgian,georgisch,géorgien,georgiano,ქართული
+hy	Հայերեն	armenian,armenisch,arménien,armeno,armenio,հայերեն
+az	Azərbaycan	azerbaijani,aserbaidschanisch,azerbaïdjanais,azərbaycan,azerbaijani
+kk	Қазақ	kazakh,kasachisch,kazakh,kazako,қазақ
+uz	Oʻzbek	uzbek,usbekisch,ouzbek,uzbeco,oʻzbek,uzbek
+mn	Монгол	mongolian,mongolisch,mongol,монгол
+ne	नेपाली	nepali,nepalesisch,népalais,nepalese,नेपाली
+si	සිංහල	sinhala,singhalesisch,cingalés,සිංහල
+my	မြန်မာ	burmese,birmanisch,birman,birmano,မြန်မာ,myanmar
+km	ខ្មែរ	khmer,kambodschanisch,khmer,camboyano,ខ្មែរ
+lo	ລາວ	lao,laotisch,laotien,lao,ລາວ
+ky	Кыргызча	kyrgyz,kirgisisch,kirghize,kyrgyz,кыргызча
+tg	Тоҷикӣ	tajik,tadschikisch,tadjik,tajiko,тоҷикӣ
+tk	Türkmen	turkmen,turkmenisch,turkmène,turkmeno
+ps	پښتو	pashto,paschtu,pachto,pashto,پښتو
+ku	Kurdî	kurdish,kurdisch,kurde,curdo,kurdo,kurdî,kurdi
+ckb	سۆرانی	sorani,kurdish sorani,سۆرانی
+yi	ייִדיש	yiddish,jiddisch,yiddish,ייִדיש
+la	Latina	latin,latein,latin,latino,latina
+eo	Esperanto	esperanto
+gd	Gàidhlig	scottish gaelic,gälisch,gaélique écossais,gàidhlig,scots gaelic
+be	Беларуская	belarusian,weißrussisch,biélorusse,bielorusso,bielorruso,беларуская

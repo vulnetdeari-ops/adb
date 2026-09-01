@@ -4,18 +4,18 @@ One repository. Two methods. **Start** asks with offered letters (A/B/C), then c
 
 **First run** (clone this repo, open it, say **Start** or `/start`):
 
-The owner picks language, address, tone, small or large, risk, and the app folder. They do not invent options. Start writes `METHOD.md`, `AGENTS.md`, `OWNER.md`, `LESEN.html` (in the chosen language), `START.md`, and `/start`. Large also gets `ADB.md` and `/adb` commands.
+The owner picks **any language** (letters for common ones, or they type the name), address, tone, small or large, risk, and the app folder. They do not invent options. Start writes `METHOD.md`, `AGENTS.md`, `OWNER.md`, `LESEN.html` **in that language**, `START.md`, and `/start`. Large also gets `ADB.md` and `/adb` commands. Deutsch and English use shipped pages; any other language is translated from the English page before Start is done.
 
 ```bash
 # After the interview the agent runs this. You can run it yourself with the same answers:
 ./Rules/start-into-project.sh \
   --project /path/to/app \
-  --language de \
+  --language it \
   --address du \
   --tone direct \
   --method plain \
   --risk none \
-  --product "Produkt in diesem Ordner"
+  --product "Prodotto in questa cartella"
 ```
 
 `--risk yes` always selects ADB, even if `--method plain`.
