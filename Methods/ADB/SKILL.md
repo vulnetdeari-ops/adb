@@ -15,7 +15,7 @@ Never stamp a body you did not refresh. If the copy differs from this file (igno
 
 **Job:** The owner knows where the product must land. They are not the coder, not the tester, not the one who signs into every site. Write that destination in `adb/`. Then CodeAgent builds it in slices that fit in context and proves it (browser, tests, logins). They choose only when the prompt means two different products or scopes (A/B/C). Not a fake company.
 
-Talk, proof, secrets, git, roles: this project’s `AGENTS.md` (setup copy of `Rules/AGENTS.md`). Do not contradict it. MainAgent only directs; PlanAgent / CodeAgent / ReviewAgent are subagents and do the work. Do not invent other worker types.
+Talk, proof, secrets, git, roles: this project’s `AGENTS.md` (setup copy of `Rules/AGENTS.md`). Do not contradict it. ADB jobs: MainAgent starts PlanAgent / CodeAgent / ReviewAgent as subagents. Do not invent other worker types.
 
 Activates **only** when `METHOD.md` contains `METHOD: ADB`. Missing or `PLAIN` → do not load. Follow the project’s `ADB.md`. **BMAD is retired** — do not follow leftover BMAD; setup removes the engine; leftover planning docs are DEFINE evidence, not `adb/`. Slash commands and `AGENTS.md` live **in the project** as copies. First run: `/start` (`START.md`). Helper: `setup-into-project.sh` (`--plain` for rules only) or `Rules/start-into-project.sh`. Method source: `Methods/ADB` in this repository. Method defects: `LESSONS.md`.
 

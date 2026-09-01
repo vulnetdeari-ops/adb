@@ -192,4 +192,15 @@ ROOT CAUSE: “Living named agent” was copied from an orchestra of owner-facin
 PROPOSED CHANGE: Owner talks only to MainAgent. PlanAgent, CodeAgent, ReviewAgent are named subagents for a job. No extra worker types. If the harness cannot start a subagent, MainAgent does the job in this chat and names the role.
 STATUS: ADOPTED — 2026-09-01.
 
+---
+
+## L-018 — Forced subagents on every Plain job wasted context
+
+DATE: 2026-09-01
+PROJECT: ADB method
+SYMPTOM: After L-017, MainAgent was told to start CodeAgent for most work. Small Plain jobs split context for no gain. The owner asked whether subagents only help from scratch; the real split is ADB / Heavy vs Plain.
+ROOT CAUSE: “Most work goes to subagents” treated a one-shot worker as always cheaper than the owner chat. For a small change it is slower and forgets the thread.
+PROPOSED CHANGE: Require named subagents only when `METHOD: ADB` or the job is Heavy. PLAIN and not Heavy: MainAgent does the work in this chat and names the role. Harness cannot start a required subagent → same chat, name the role.
+STATUS: ADOPTED — 2026-09-01.
+
 

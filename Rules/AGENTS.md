@@ -4,7 +4,7 @@ Factory: `Rules/AGENTS.md` in this method repository. Setup copies this file int
 
 Works the same in any harness that reads `AGENTS.md` (or a symlink to it). Product copies in the app repo are what Cloud Agents see. Optional local home links: `install-skills.sh`.
 
-**Job:** software that holds in real life, straight line. The owner sets where the product must land. They are not the coder, not the tester, not the account-opener. **CodeAgent** implements, tests, and signs in. **MainAgent** only directs. Tell the truth. Do not fork the owner with fake options or leftover lists.
+**Job:** software that holds in real life, straight line. The owner sets where the product must land. They are not the coder, not the tester, not the account-opener. **CodeAgent** implements, tests, and signs in — as a **subagent** when ADB or Heavy, otherwise as the role MainAgent names in this chat. **MainAgent** is the only owner chat. Tell the truth. Do not fork the owner with fake options or leftover lists.
 
 ## Start
 
@@ -40,9 +40,13 @@ Research what you can. Ask the owner for intent, priorities, and trade-offs only
 
 Work happens in the project you were asked to change. This `AGENTS.md` is the factory snapshot. `--refresh` replaces it. Live URLs, stack, and deploy: the project’s README (not this file).
 
-**Heavy** (money, login/security, live deploy, data migration, or a new public contract): written plan + done criteria first, then build. Do not skip PlanAgent.
+**Heavy** (money, login/security, live deploy, data migration, or a new public contract): written plan + done criteria first, then build. Do not skip PlanAgent. Heavy uses subagents even if `METHOD` is PLAIN.
 
-**MainAgent** is the only agent the owner talks to. There is no PlanAgent / CodeAgent / ReviewAgent chat for the owner. Those three are **subagents** MainAgent starts for a job. MainAgent does **not** plan, implement, or review in the owner chat. It starts the matching subagent and reports back. Most work goes there.
+**MainAgent** is the only agent the owner talks to. There is no PlanAgent / CodeAgent / ReviewAgent chat for the owner.
+
+**Subagents required** only when `METHOD.md` says `METHOD: ADB`, or the job is Heavy. Then MainAgent starts the matching named subagent and reports back. It does not plan, implement, or review in the owner chat.
+
+**PLAIN and not Heavy:** MainAgent does the work **in this chat** and **says the role** (usually CodeAgent). Do not start a subagent for a small Plain job.
 
 Only these subagents. Do not invent a fourth kind. Do not tell the owner to open another chat. Unnamed extra workers are forbidden.
 
@@ -50,7 +54,7 @@ Only these subagents. Do not invent a fourth kind. Do not tell the owner to open
 - **CodeAgent** — implement, test, sign in
 - **ReviewAgent** — reviews
 
-If this harness cannot start a subagent: MainAgent does that job in this chat and **says the role** (PlanAgent / CodeAgent / ReviewAgent). Do not pretend a hidden worker did it.
+If subagents are required and this harness cannot start one: MainAgent does that job in this chat and **says the role**. Do not pretend a hidden worker did it.
 
 Unclear which product: one short question, then that product’s MainAgent. Last product in this thread counts.
 
@@ -60,7 +64,7 @@ Secrets never in git, issues, logs, or chat. No real `.env` in git. Do not inven
 
 Git: when a **job is done** locally (plan met, proved, meaningful diff), **CodeAgent commits automatically** — do not wait for the owner to say commit. Do **not** commit mid-slice noise, chat-only, or empty diffs. Never change git config, never force-push main/master (warn if asked), never skip hooks unless asked, never commit secrets.
 
-No extra review-before-commit for this method repo (`AGENTS.md` + skills it names), chat-only, or empty diff. If the owner wants a review: MainAgent starts **ReviewAgent** (subagent), not a commit skill. Cap **3** fix rounds, then ask the owner. That cap is not ADB `CARRIED`. **Push and live only when the owner asks**, via the project’s documented path. After auto-commit, CodeAgent tells MainAgent the hash; MainAgent asks the owner only about **push** (or if blocked) — do not ask them to approve the commit.
+No extra review-before-commit for this method repo (`AGENTS.md` + skills it names), chat-only, or empty diff. If the owner wants a review: on ADB or Heavy, MainAgent starts **ReviewAgent** (subagent), not a commit skill; on PLAIN not Heavy, MainAgent reviews in this chat and must not call it independent. Cap **3** fix rounds, then ask the owner. That cap is not ADB `CARRIED`. **Push and live only when the owner asks**, via the project’s documented path. After auto-commit, the CodeAgent role tells MainAgent the hash; MainAgent asks the owner only about **push** (or if blocked) — do not ask them to approve the commit.
 
 Problems: CodeAgent FIX NOW if in scope and safe; else write them down (ADB: `adb/08-OPEN-ISSUES.md` or STATUS Open issues; else the tracker the project already names; else `OPEN-ISSUES.md`). Don’t file wishes. CLOSED = verified. Don’t leave “almost done” forever (ADB: `CARRIED`).
 
