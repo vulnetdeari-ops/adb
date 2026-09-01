@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Large method (ADB) — reading only</title>
+<style>
+  body { font-family: -apple-system, Helvetica, Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 24px 80px; color: #111; line-height: 1.5; }
+  .warn { background: #fff3cd; border: 2px solid #c9a227; padding: 14px 16px; margin-bottom: 28px; }
+  .box { background: #f4f4f4; padding: 14px 16px; margin: 16px 0; }
+  h1 { font-size: 26px; }
+  h2 { font-size: 18px; margin-top: 28px; }
+  code { font-size: 13px; background: #eee; padding: 1px 4px; }
+  ul { padding-left: 20px; }
+</style>
+</head>
+<body>
+<div class="warn">
+<strong>READING ONLY.</strong> Agents do not follow this file. In this app they follow <code>ADB.md</code>, <code>AGENTS.md</code>, and <code>OWNER.md</code> (copies). Language, address, and tone: <code>OWNER.md</code>.
+</div>
+
+<h1>Large method — Ask. Decide. Build.</h1>
+<p>Start set this app to <strong>ADB</strong>. You know where the product must land. You are not the coder, not the tester, not the one who signs into every site. The agent you talk to (Lead) only directs. Plan writes the destination into files. Code builds in slices and proves it.</p>
+<div class="box">
+<strong>Product:</strong> {{PRODUCT}}<br>
+<strong>Language:</strong> {{LANGUAGE}} · <strong>Address:</strong> {{ADDRESS}} · <strong>Tone:</strong> {{TONE}}<br>
+<strong>Why this method:</strong> {{WHY}}
+</div>
+
+<h2>What you do</h2>
+<ul>
+  <li>Intent, priority, trade-offs. Not repo trivia the system can read.</li>
+  <li>Choose only when two different products or scopes are possible: A, B, or “decide for me”.</li>
+  <li>Only you: 2FA, captcha, passkey, blocked keys.</li>
+  <li>Push and live only if you ask. After a finished slice the system commits.</li>
+  <li>Language or tone: <code>/start</code> again. Same letters.</li>
+</ul>
+
+<h2>What you do not do</h2>
+<ul>
+  <li>Do not code, no click tour, no passwords in chat.</li>
+  <li>No second method (no BMAD, no extra process).</li>
+  <li>The factory is not the app. Cloud Agent on the <strong>app repo</strong> after the copies are committed.</li>
+</ul>
+
+<h2>What the system can do</h2>
+<ul>
+  <li><strong>DEFINE</strong> — no product code yet. Ask and write <code>adb/</code> until a fresh agent can build from the files. Then: start BUILD?</li>
+  <li><strong>BUILD</strong> — one slice as <code>adb/</code> requires, prove on a real path, update files.</li>
+  <li>Speak your language. Sign in, browser-check, commit.</li>
+  <li>Do not leave open issues “almost done” forever.</li>
+</ul>
+
+<h2>Commands (in this app)</h2>
+<ul>
+  <li><code>/start</code> — language, tone, small/large again</li>
+  <li><code>/adb</code> — entry: DEFINE, status, slice, …</li>
+  <li><code>/adb-define</code> — write the destination into files</li>
+  <li><code>/adb-slice</code> — build and prove one slice</li>
+  <li><code>/adb-status</code> — status</li>
+  <li><code>/adb-review</code> — review</li>
+  <li><code>/adb-triage</code> — open issues</li>
+  <li><code>/adb-ready</code> — only when you mean the <strong>whole app</strong> (Alpha / Beta / Live)</li>
+</ul>
+<p>You can say the same in one sentence without the slash command.</p>
+
+<h2>Files</h2>
+<ul>
+  <li><code>METHOD.md</code> — <code>METHOD: ADB</code></li>
+  <li><code>AGENTS.md</code>, <code>ADB.md</code>, <code>START.md</code>, <code>OWNER.md</code>, <code>LESEN.html</code></li>
+  <li><code>adb/</code> — written in DEFINE (vision, spec, status, …), not at Start</li>
+</ul>
+
+<h2>Small files, large product</h2>
+<p>Start does not create vision and spec. That is DEFINE. Default start: <code>01</code>, <code>02</code>, <code>07</code>. Split further only when merged files would hide truth.</p>
+
+<h2>When something is done</h2>
+<p><strong>A job / a slice:</strong> plan met and proved. Compiling does not count. No invented leftover.</p>
+<p><strong>Whole app:</strong> only if you mean that. ALPHA = core path works, gaps are listed — never “product complete”. BETA = agreed scope including empty/error. LIVE = that plus the quality bar, not “already online”. Command: <code>/adb-ready</code>.</p>
+
+<h2>What you can do next</h2>
+<p>If <code>adb/</code> is missing: say “start DEFINE” or <code>/adb-define</code>. If DEFINE is already there: the next slice, or status.</p>
+<p>Factory update: <code>git pull</code> in the factory, setup <code>--refresh</code> in the app. <code>OWNER.md</code> stays until the next Start. <code>adb/</code> is your product, not the factory.</p>
+</body>
+</html>

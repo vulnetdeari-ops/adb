@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>Normale Methode — nur zum Lesen</title>
+<title>Methode — nur zum Lesen</title>
 <style>
   body { font-family: -apple-system, Helvetica, Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 24px 80px; color: #111; line-height: 1.45; }
   .warn { background: #fff3cd; border: 2px solid #c9a227; padding: 14px 16px; margin-bottom: 28px; }
@@ -13,20 +13,23 @@
 </head>
 <body>
 <div class="warn">
-<strong>NUR ZUM LESEN.</strong> Agenten folgen nicht dieser Datei. Agenten folgen der <code>AGENTS.md</code> <em>im App-Ordner</em> (Kopie). Quelle zum Kopieren:<br>
-<code>Rules/AGENTS.md</code> in diesem Methoden-Repo.<br>
-Setup: <code>setup-into-project.sh --plain</code> (klein) oder ohne <code>--plain</code> (groß, plus ADB).
+<strong>NUR ZUM LESEN.</strong> Agenten folgen nicht dieser Datei. Das ist die Factory-Vorschau. Nach <strong>Start</strong> liegt die Lese-Seite in der App: <code>LESEN.html</code>, in der Sprache, die du gewählt hast. Agenten folgen <code>AGENTS.md</code>, <code>OWNER.md</code> und ggf. <code>ADB.md</code> <em>im App-Ordner</em>.
 </div>
 
-<h1>Normale Methode</h1>
-<p>Du sagst, wo das Produkt landen soll. Du bist nicht der Coder, nicht der Tester, nicht der, der sich überall anmeldet. Der, mit dem du sprichst (Lead), steuert nur. Code baut, prüft und meldet sich an.</p>
-<p><strong>Kleine App:</strong> nur diese Methode. Setup mit <code>--plain</code>. Im Projekt: <code>METHOD: PLAIN</code> und eine frische <code>AGENTS.md</code>.</p>
-<p><strong>Große App:</strong> Setup ohne <code>--plain</code>. Dann <code>METHOD: ADB</code>, plus <code>ADB.md</code>. Lese-Seite: <code>Methods/ADB/ADB-LESEN-DE.html</code>.</p>
+<h1>Methode starten</h1>
+<p>Dieses Repo ist die Factory, nicht die App. Sag <strong>Start</strong> oder <code>/start</code>. Jede Frage bietet Buchstaben (A, B, …, zuletzt „entscheide du“). Du musst keine Optionen erfinden. Danach legt das System die Dateien in <em>deinen App-Ordner</em> und schreibt dort <code>LESEN.html</code>.</p>
+<p><strong>Klein:</strong> nur die normale Methode — du sagst das Ziel, Code baut und prüft.</p>
+<p><strong>Groß:</strong> dieselbe Sprache plus ADB (erst in Dateien klären, dann Scheiben). Lese-Vorschau: <code>Methods/ADB/ADB-LESEN-DE.html</code>.</p>
+<p>Geld, Login, Live oder Daten von anderen → große Methode, auch wenn du „klein“ gesagt hast.</p>
 
-<h2>Sprechen</h2>
-<p>In der Sprache des Besitzers. Eine Sache, die zählt. Wenn zwei verschiedene Produkte oder Umfänge möglich sind: A, B oder entscheide du. Nach der Arbeit: der Auftrag ist fertig, wenn der Plan gehalten und geprüft ist — nicht weil es kompiliert.</p>
+<h2>Was du tust</h2>
+<p>Ziel sagen. Nur entscheiden, wenn zwei verschiedene Produkte möglich sind. 2FA nur du. Täglich die <strong>App</strong> öffnen, nicht diese Factory. Cloud: App-Repo, nachdem die Kopien committet sind.</p>
 
-<h2>Wahrheit</h2>
-<p>Wenn es im echten Leben nicht geht, sagen. Verhalten steht in Dateien, nicht im Chat. Prüfen auf dem echten Weg. Dich nicht durch Klick-Touren schicken.</p>
+<h2>Was du nicht tust</h2>
+<p>Nicht codeen, nicht Klick-Tour, keine Passwörter in den Chat.</p>
+
+<h2>Ohne Start (Terminal)</h2>
+<p>Klein: <code>./Methods/ADB/setup-into-project.sh --plain /pfad/zur/app</code></p>
+<p>Groß: dasselbe ohne <code>--plain</code>. Ohne Start fehlen <code>OWNER.md</code> und die sprachrichtige <code>LESEN.html</code> — nachholen mit <code>/start</code>.</p>
 </body>
 </html>

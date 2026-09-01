@@ -1,0 +1,198 @@
+---
+name: start
+description: "First-run (and re-run) of this method. Offers A/B/C answers, then writes METHOD, copies, OWNER.md and LESEN.html into the app. Use when the owner says start, first run, or there is no METHOD.md."
+---
+
+# Start
+
+Canonical: `Rules/skills/start/SKILL.md` in the method factory. Setup copies this file into each product as `START.md`. Follow **that copy** when it exists.
+
+Not ADB. Not a second method. Start only **chooses** PLAIN or ADB and lays down files.
+
+Talk, proof, secrets, git, roles: the project’s `AGENTS.md`. Do not contradict it.
+
+**Job:** the owner answers a **fixed** list of questions. Every question **offers** letters. They never have to invent an option. After the last answer: write files, say what landed and where to read, then they can build. Do not add questions. Do not skip the listed ones unless already answered in this thread.
+
+Lead directs. Code runs `Rules/start-into-project.sh` (factory) and writes nothing by hand that the script already writes.
+
+⸻
+
+## When
+
+Run this when any of:
+
+- The owner says start / first run / setup / “Bubble OS” / Sprache oder Ton wählen.
+- This folder has no `METHOD.md` and they want an app here (not the method factory).
+- They want to change language, tone, address, or small↔large (`OWNER.md` already exists: same questions, current values in the options).
+
+Do **not** run as a leftover after an ordinary product job.
+
+If this workspace **is** the method factory (`Rules/AGENTS.md` and `Methods/ADB/SKILL.md` both present): the app path must be **another** folder. Never write a product `METHOD.md` into the factory.
+
+⸻
+
+## How to ask
+
+One question at a time. Show the letters. Last letter is always **decide for me**.
+
+Wait for a pick (or an already-clear answer in this thread). Then the next question.
+
+Ask **Q1 in the language they already used**. After Q1, ask the rest in the chosen language (decide-for-me → the language they used).
+
+Do not rephrase options into new products. Do not add chips. Do not ask stack, colors, hosting, or “any more questions?”.
+
+The only typed values allowed (not options):
+
+- A folder path, if they pick “I will type the path”.
+- One product sentence, if they pick “I will type one sentence”.
+
+If they type something that maps to a letter, take it. If unclear: show the **same** letters again, once.
+
+⸻
+
+## Questions (fixed)
+
+### Q1 — Language
+
+DE: **Welche Sprache?**
+EN: **Which language?**
+
+- **A** Deutsch
+- **B** English
+- **C** Entscheide du / Decide for me → language of this thread (German → `de`, else `en`)
+
+Store `LANGUAGE=de|en`.
+
+### Q2 — Address
+
+DE: **Wie sollen wir dich ansprechen?**
+EN: **How should we address you?**
+
+- **A** Du, locker / Informal “you”
+- **B** Sie, förmlich / Formal
+- **C** Nur Vorname, direkt / First name only, direct
+- **D** Entscheide du / Decide for me → `du` if LANGUAGE=de, informal you if en
+
+Store `ADDRESS=du|sie|name`.
+
+### Q3 — Tone
+
+DE: **Welchen Ton?**
+EN: **Which tone?**
+
+- **A** Direkt — eine Sache, die zählt / Direct — one thing that matters
+- **B** Ruhig — etwas mehr Erklärung / Calm — a bit more explanation
+- **C** Knapp — fast keine Extra-Sätze / Short — almost no extra sentences
+- **D** Entscheide du / Decide for me → `direct`
+
+Store `TONE=direct|calm|short`.
+
+### Q4 — Small or large
+
+DE: **Was willst du bauen?**
+EN: **What are you building?**
+
+- **A** Klein — eine App, keine Konten, kein Geld → later `PLAIN` unless Q5 says yes
+- **B** Groß — echtes Produkt, mehrere Teile → `ADB`
+- **C** Entscheide du / Decide for me → wait for Q5, then: Q5 yes → `ADB`, else `PLAIN`
+
+Store `SIZE=small|large|decide`.
+
+### Q5 — Risk
+
+DE: **Geht es um Geld, Login, eine Live-Seite oder Daten von anderen?**
+EN: **Money, login, a live site, or other people’s data?**
+
+- **A** Nein / No
+- **B** Ja, mindestens eines / Yes, at least one
+- **C** Weiß nicht — entscheide du / Don’t know — decide for me → treat as **B** if SIZE=large, else **A**
+
+Store `RISK=none|yes`.
+
+**Method (script also enforces this):**
+
+- `RISK=yes` → always `METHOD=adb` (even if they picked small). WHY must say that.
+- `SIZE=large` and `RISK=none` → `METHOD=adb`
+- `SIZE=small` and `RISK=none` → `METHOD=plain`
+- `SIZE=decide` and `RISK=none` → `METHOD=plain`
+- `SIZE=decide` and `RISK=yes` → `METHOD=adb`
+
+### Q6 — Where
+
+DE: **Wohin die Dateien?**
+EN: **Where should the files go?**
+
+If the current folder **is** the method factory, **do not offer A** (this folder). Offer:
+
+- **A** Ich tippe den Pfad zur App / I will type the app path
+- **B** Entscheide du / Decide for me → not allowed on the factory; show A again and say the factory is not an app
+
+If the current folder is **not** the factory:
+
+- **A** Dieser Ordner / This folder
+- **B** Ich tippe einen anderen Pfad / I will type another path
+- **C** Entscheide du / Decide for me → this folder
+
+If they type a path that does not exist: create it (the script mkdir). Do not send them to the terminal.
+
+Store `PROJECT` as an absolute path.
+
+### Q7 — Product sentence
+
+DE: **Worum geht’s — in einem Satz?** (nicht erfinden müssen)
+EN: **What is it, in one sentence?** (they do not have to invent)
+
+- **A** Ich tippe einen Satz / I will type one sentence → wait for that sentence
+- **B** Noch kein Satz — nimm „Produkt in diesem Ordner“ / No sentence — use “Product in this folder”
+- **C** Entscheide du / Decide for me → same as B
+
+Store `PRODUCT` text. DE default: `Produkt in diesem Ordner`. EN default: `Product in this folder`.
+
+⸻
+
+## After the last answer
+
+Do not ask anything else.
+
+Code runs (from the method factory clone):
+
+```bash
+./Rules/start-into-project.sh \
+  --project "$PROJECT" \
+  --language de|en \
+  --address du|sie|name \
+  --tone direct|calm|short \
+  --method plain|adb \
+  --risk none|yes \
+  --product "..." \
+  --why "..."
+```
+
+`--why` in the owner’s language, one line, e.g. why ADB despite “small”.
+
+If the script fails: show the error, do not invent a manual file layout.
+
+Then tell the owner, in their language:
+
+1. **Which method** and **why** (one line).
+2. **Which files** landed (names, not a tour).
+3. Open **`LESEN.html` in the app folder** — that page says what they do, what the system can do, and how to go on.
+4. Daily: open the **app** folder in this harness, not the factory. Cloud Agent: the **app** GitHub repo after those copies are committed.
+
+Then they can give the first product job. Start does not invent that job.
+
+Re-run: same seven questions. The script overwrites `OWNER.md` and `LESEN.html`. Switching small→large or large→small is allowed; the script calls setup. `--refresh` on setup still updates `AGENTS.md` / `ADB.md` / `START.md` from the factory; it does not invent new owner answers.
+
+⸻
+
+## Decide-for-me (do not improvise)
+
+| Question | Decide-for-me |
+|---|---|
+| Q1 | Thread language: German → `de`, else `en` |
+| Q2 | `du` if `de`, else informal you (`du` stored) |
+| Q3 | `direct` |
+| Q4 | Let Q5 choose |
+| Q5 | `yes` if Q4 was large, else `none` |
+| Q6 | This folder if it is not the factory; else they must type a path |
+| Q7 | Default sentence in the chosen language |

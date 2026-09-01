@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Große Methode (ADB) — nur zum Lesen</title>
+<style>
+  body { font-family: -apple-system, Helvetica, Arial, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 24px 80px; color: #111; line-height: 1.5; }
+  .warn { background: #fff3cd; border: 2px solid #c9a227; padding: 14px 16px; margin-bottom: 28px; }
+  .box { background: #f4f4f4; padding: 14px 16px; margin: 16px 0; }
+  h1 { font-size: 26px; }
+  h2 { font-size: 18px; margin-top: 28px; }
+  code { font-size: 13px; background: #eee; padding: 1px 4px; }
+  ul { padding-left: 20px; }
+</style>
+</head>
+<body>
+<div class="warn">
+<strong>NUR ZUM LESEN.</strong> Agenten folgen nicht dieser Datei. In dieser App gelten <code>ADB.md</code>, <code>AGENTS.md</code> und <code>OWNER.md</code> (Kopien). Sprache, Anrede und Ton: <code>OWNER.md</code>.
+</div>
+
+<h1>Große Methode — Ask. Decide. Build.</h1>
+<p>Start hat diese App auf <strong>ADB</strong> gesetzt. Du weißt, wo das Produkt landen soll. Du bist nicht der Coder, nicht der Tester, nicht der, der sich überall anmeldet. Der, mit dem du sprichst (Lead), steuert nur. Plan schreibt das Ziel in Dateien. Code baut in Scheiben und prüft selbst.</p>
+<div class="box">
+<strong>Produkt:</strong> {{PRODUCT}}<br>
+<strong>Sprache:</strong> {{LANGUAGE}} · <strong>Anrede:</strong> {{ADDRESS}} · <strong>Ton:</strong> {{TONE}}<br>
+<strong>Warum diese Methode:</strong> {{WHY}}
+</div>
+
+<h2>Was du tust</h2>
+<ul>
+  <li>Absicht, Priorität, Abwägung sagen. Nicht Repo-Technik erfinden, die das System nachlesen kann.</li>
+  <li>Nur entscheiden, wenn zwei verschiedene Produkte oder Umfänge möglich sind: A, B oder „entscheide du“.</li>
+  <li>Nur du: 2FA, Captcha, Passkey, blockierte Schlüssel.</li>
+  <li>Push und Live nur auf deine Bitte. Nach einem erledigten Stück commitet das System.</li>
+  <li>Sprache oder Ton: nochmal <code>/start</code>. Dieselben Buchstaben.</li>
+</ul>
+
+<h2>Was du nicht tust</h2>
+<ul>
+  <li>Nicht codeen, nicht Klick-Tour, keine Passwörter in den Chat.</li>
+  <li>Keine zweite Methode (kein BMAD, kein Extra-Prozess).</li>
+  <li>Die Factory ist nicht die App. Cloud-Agent auf dem <strong>App-Repo</strong>, nachdem die Kopien committet sind.</li>
+</ul>
+
+<h2>Was das System tun kann</h2>
+<ul>
+  <li><strong>DEFINE</strong> — noch kein Produkt-Code. Fragen und in <code>adb/</code> schreiben, bis ein frischer Agent daraus bauen kann. Dann: BUILD starten?</li>
+  <li><strong>BUILD</strong> — eine Scheibe laut <code>adb/</code> bauen, auf dem echten Weg prüfen, Dateien nachziehen.</li>
+  <li>In deiner Sprache sprechen. Sich anmelden, Browser prüfen, committen.</li>
+  <li>Offene Probleme nicht ewig „fast fertig“ lassen.</li>
+</ul>
+
+<h2>Befehle (in dieser App)</h2>
+<ul>
+  <li><code>/start</code> — Sprache, Ton, klein/groß nochmal</li>
+  <li><code>/adb</code> — Einstieg: DEFINE, Status, Scheibe, …</li>
+  <li><code>/adb-define</code> — Ziel in Dateien schreiben</li>
+  <li><code>/adb-slice</code> — eine Scheibe bauen und prüfen</li>
+  <li><code>/adb-status</code> — Stand</li>
+  <li><code>/adb-review</code> — Review</li>
+  <li><code>/adb-triage</code> — offene Probleme</li>
+  <li><code>/adb-ready</code> — nur wenn du die <strong>ganze App</strong> meinst (Alpha / Beta / Live)</li>
+</ul>
+<p>Du kannst dasselbe auch in einem Satz sagen, ohne den Befehl.</p>
+
+<h2>Dateien</h2>
+<ul>
+  <li><code>METHOD.md</code> — <code>METHOD: ADB</code></li>
+  <li><code>AGENTS.md</code>, <code>ADB.md</code>, <code>START.md</code>, <code>OWNER.md</code>, <code>LESEN.html</code></li>
+  <li><code>adb/</code> — entsteht in DEFINE (Vision, Spec, Status, …), nicht beim Start</li>
+</ul>
+
+<h2>Klein in den Dateien, groß als Produkt</h2>
+<p>Start legt nicht Vision und Spec an. Das ist DEFINE. Klein starten: <code>01</code>, <code>02</code>, <code>07</code>. Weiter splitten nur, wenn sonst Wahrheit verloren geht.</p>
+
+<h2>Wann etwas fertig ist</h2>
+<p><strong>Ein Auftrag / eine Scheibe:</strong> Plan gehalten und geprüft. Kompiliert zählt nicht. Kein erfundener Rest.</p>
+<p><strong>Ganze App:</strong> nur wenn du das meinst. ALPHA = Kernweg geht, Lücken stehen da — nie „Produkt fertig“. BETA = vereinbarter Umfang inkl. leer/Fehler. LIVE = das plus die Qualitätslatte, nicht „steht schon online“. Befehl: <code>/adb-ready</code>.</p>
+
+<h2>Weiter</h2>
+<p>Wenn <code>adb/</code> noch fehlt: sag „DEFINE starten“ oder <code>/adb-define</code>. Wenn DEFINE schon da ist: die nächste Scheibe, oder Status.</p>
+<p>Factory-Update: Factory <code>git pull</code>, in der App Setup <code>--refresh</code>. <code>OWNER.md</code> bleibt bis zum nächsten Start. <code>adb/</code> ist dein Produkt, nicht die Factory.</p>
+</body>
+</html>

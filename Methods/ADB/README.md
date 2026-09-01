@@ -6,7 +6,7 @@ ADB is a product method for AI coding agents. The owner sets where the product m
 
 This is not the Android Debug Bridge.
 
-The method is [`SKILL.md`](SKILL.md). Setup copies it into each project as `ADB.md`, and copies `Rules/AGENTS.md` as `AGENTS.md`. Agents in a project follow those copies.
+The method is [`SKILL.md`](SKILL.md). Setup copies it into each project as `ADB.md`, and copies `Rules/AGENTS.md` as `AGENTS.md`. **Start** (`/start`, `Rules/skills/start/SKILL.md`) chooses PLAIN vs ADB with offered letters and writes `OWNER.md` + `LESEN.html`. Agents in a project follow those copies.
 
 ## Use it in a project
 
@@ -21,8 +21,9 @@ METHOD: ADB
 4. Issue register: for **collapsed** Source of Truth (default for small products), issues live in `adb/07-STATUS.md` under `## Open issues` — setup does **not** create `adb/08-OPEN-ISSUES.md`. Create `08` only when the list outgrows STATUS, or run `./setup-into-project.sh --register`. Never use a root `OPEN-ISSUES.md`.
 
 ```text
-./setup-into-project.sh /path/to/project              # AGENTS.md + ADB
-./setup-into-project.sh --plain /path/to/project      # AGENTS.md only
+./Rules/start-into-project.sh --project /path/to/project --language de --address du --tone direct --method adb --risk none --product "..."
+./setup-into-project.sh /path/to/project              # AGENTS.md + START.md + ADB
+./setup-into-project.sh --plain /path/to/project      # AGENTS.md + START.md only
 ./setup-into-project.sh --check /path/to/project
 ./setup-into-project.sh --refresh /path/to/project    # overwrite copies from factory
 ./setup-into-project.sh --register /path/to/project   # optional: create adb/08-OPEN-ISSUES.md

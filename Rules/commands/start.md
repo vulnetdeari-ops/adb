@@ -1,0 +1,12 @@
+---
+name: start
+description: "First-run of this method: offered A/B/C answers, then files and LESEN.html in the app. Follow START.md or Rules/skills/start/SKILL.md."
+---
+
+# /start
+
+If `START.md` exists in this project, follow it.
+
+Else follow `Rules/skills/start/SKILL.md` in this method factory.
+
+If neither file exists: say Start is not installed. Do not invent a second method. Point at the method factory: `Rules/start-into-project.sh` after clone.
