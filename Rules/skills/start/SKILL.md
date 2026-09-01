@@ -43,6 +43,7 @@ Do not rephrase options into new products. Do not add chips. Do not ask stack, c
 
 The only typed values allowed (not options):
 
+- A language name, if they pick “I will type the language” (any language: Italiano, Shqip, 日本語, …).
 - A folder path, if they pick “I will type the path”.
 - One product sentence, if they pick “I will type one sentence”.
 
@@ -54,14 +55,22 @@ If they type something that maps to a letter, take it. If unclear: show the **sa
 
 ### Q1 — Language
 
+Any language. Offer letters so they do not invent a list. Last letter is decide-for-me.
+
 DE: **Welche Sprache?**
 EN: **Which language?**
+(After this pick, ask Q2–Q7 in that language — same letters and meanings, translated labels.)
 
 - **A** Deutsch
 - **B** English
-- **C** Entscheide du / Decide for me → language of this thread (German → `de`, else `en`)
+- **C** Shqip
+- **D** Italiano
+- **E** Français
+- **F** Español
+- **G** Ich tippe die Sprache / I will type the language → wait for one name (Italiano, 日本語, Polski, …). Not a programming quiz. Map with `Rules/templates/resolve-language.py` (from the factory) or the same names in `Rules/templates/language-tags.txt`. Unknown name → tag `und` and keep their words as `LANGUAGE-NAME`.
+- **H** Entscheide du / Decide for me → language of this thread, mapped the same way (German → `de`, English → `en`, Italian → `it`, …). If you cannot tell: `en`.
 
-Store `LANGUAGE=de|en`.
+Store `LANGUAGE` as the tag (`de`, `it`, `sq`, `ja`, `pt-BR`, `und`, …) and `LANGUAGE-NAME` as the display name (Deutsch, Italiano, 日本語, …).
 
 ### Q2 — Address
 
@@ -71,7 +80,7 @@ EN: **How should we address you?**
 - **A** Du, locker / Informal “you”
 - **B** Sie, förmlich / Formal
 - **C** Nur Vorname, direkt / First name only, direct
-- **D** Entscheide du / Decide for me → `du` if LANGUAGE=de, informal you if en
+- **D** Entscheide du / Decide for me → `du` if LANGUAGE is `de`, else informal (`du` stored)
 
 Store `ADDRESS=du|sie|name`.
 
@@ -146,7 +155,7 @@ EN: **What is it, in one sentence?** (they do not have to invent)
 - **B** Noch kein Satz — nimm „Produkt in diesem Ordner“ / No sentence — use “Product in this folder”
 - **C** Entscheide du / Decide for me → same as B
 
-Store `PRODUCT` text. DE default: `Produkt in diesem Ordner`. EN default: `Product in this folder`.
+Store `PRODUCT` text. Default (B / decide-for-me): that sentence **in the chosen language** (DE: `Produkt in diesem Ordner`. EN: `Product in this folder`. Any other: translate that EN default; do not invent a product).
 
 ⸻
 
@@ -159,7 +168,8 @@ Code runs (from the method factory clone):
 ```bash
 ./Rules/start-into-project.sh \
   --project "$PROJECT" \
-  --language de|en \
+  --language "$LANGUAGE" \
+  --language-name "$LANGUAGE_NAME" \
   --address du|sie|name \
   --tone direct|calm|short \
   --method plain|adb \
@@ -168,11 +178,16 @@ Code runs (from the method factory clone):
   --why "..."
 ```
 
-`--why` in the owner’s language, one line, e.g. why ADB despite “small”.
+`--why` in the owner’s language when you already write in it; otherwise English is fine — the TRANSLATE step below must put WHY and the human lines into their language.
 
 If the script fails: show the error, do not invent a manual file layout.
 
-Then tell the owner, in their language:
+If the script prints `TRANSLATE: LESEN.html OWNER.md → …` (no native template for that language; de and en have templates): **Start is not done yet.** Code translates:
+
+1. `LESEN.html` — every visible heading and paragraph into `LANGUAGE-NAME`. Keep HTML structure. Keep `<code>` text, slash commands, and file names (`AGENTS.md`, `OWNER.md`, `/start`, `/adb`, …) untranslated. Set `<html lang="{LANGUAGE}">`. Remove the `TRANSLATE-TO` comment.
+2. `OWNER.md` — keep the `LANGUAGE:` / `ADDRESS:` / … keys in English. Translate `WHY` and the human sentences. Set `TRANSLATE: no`. `LANGUAGE-NAME` stays their name.
+
+Do not add or drop method rules while translating. Then tell the owner, in their language:
 
 1. **Which method** and **why** (one line).
 2. **Which files** landed (names, not a tour).
@@ -189,7 +204,7 @@ Re-run: same seven questions. The script overwrites `OWNER.md` and `LESEN.html`.
 
 | Question | Decide-for-me |
 |---|---|
-| Q1 | Thread language: German → `de`, else `en` |
+| Q1 | Thread language via the same map (Deutsch→`de`, Italiano→`it`, …). Unclear → `en` |
 | Q2 | `du` if `de`, else informal you (`du` stored) |
 | Q3 | `direct` |
 | Q4 | Let Q5 choose |

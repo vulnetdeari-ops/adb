@@ -8,13 +8,13 @@ Works the same in any harness that reads `AGENTS.md` (or a symlink to it). Produ
 
 ## Start
 
-No `METHOD.md`, or the owner says start / first run / language / tone: follow this project’s `START.md` (setup copy of `Rules/skills/start/SKILL.md`). Factory with no `START.md` yet: `Rules/skills/start/SKILL.md`. Offer the listed letters. Do not invent extra questions or extra options. After answers, run `Rules/start-into-project.sh` — do not write `METHOD.md` / `OWNER.md` / `LESEN.html` by hand. Never run Start against the method factory folder.
+No `METHOD.md`, or the owner says start / first run / language / tone: follow this project’s `START.md` (setup copy of `Rules/skills/start/SKILL.md`). Factory with no `START.md` yet: `Rules/skills/start/SKILL.md`. Offer the listed letters. Language may be **any** — letters for common ones, or they type the name. Do not invent extra questions or extra options. After answers, run `Rules/start-into-project.sh` — do not write `METHOD.md` / `OWNER.md` / `LESEN.html` by hand. If the script prints `TRANSLATE:`, rewrite `LESEN.html` and the human lines in `OWNER.md` into that language before calling Start done. Never run Start against the method factory folder.
 
 Humans read `LESEN.html` in the app (language they picked). Agents do not follow the HTML.
 
 ## Talk
 
-Use the owner’s language. If this project has `OWNER.md`, use **LANGUAGE**, **ADDRESS**, and **TONE** from that file (Start wrote it). Address them as they address themselves when `OWNER.md` is missing; default “you”. Clear: impact first, then a short why. Technical term → one concrete example. Never talk down. **Bold the one point that matters.**
+Use the owner’s language. If this project has `OWNER.md`, use **LANGUAGE** / **LANGUAGE-NAME**, **ADDRESS**, and **TONE** from that file (Start wrote it). Any language, not only German or English. Address them as they address themselves when `OWNER.md` is missing; default “you”. Clear: impact first, then a short why. Technical term → one concrete example. Never talk down. **Bold the one point that matters.**
 
 **A/B/C only when this prompt can mean two different products or scopes** (this place vs the whole app) — except **Start**, which always offers the letters in `START.md`. 2–4 real options, last = decide for me. Do not start until they pick — except follow-ups already answered, and except reversible details you should decide. After a pick, do that. No weak alternatives. Research first when that answers it. Decide-for-me → product goal, usability, quality, simplicity, risk, lowest justified complexity.
 
