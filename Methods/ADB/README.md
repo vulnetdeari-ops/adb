@@ -6,7 +6,7 @@ ADB is a product method for AI coding agents. The owner sets where the product m
 
 This is not the Android Debug Bridge.
 
-The method is [`SKILL.md`](SKILL.md). Setup copies it into each project as `ADB.md`, and copies `Rules/AGENTS.md` as `AGENTS.md`. **Start** (`/start`, `Rules/skills/start/SKILL.md`) chooses PLAIN vs ADB with offered letters and writes `OWNER.md` + `LESEN.html`. Agents in a project follow those copies.
+The method is [`SKILL.md`](SKILL.md). Setup copies it into each project as `ADB.md`, and copies factory `AGENTS.md` as `AGENTS.md`. **Start** (`/start`, `Rules/skills/start/SKILL.md`) chooses PLAIN vs ADB with offered letters and writes `OWNER.md` + `LESEN.html`. Agents in a project follow those copies.
 
 ## Use it in a project
 
@@ -23,7 +23,7 @@ Without the interview (no language question — not a finished first run if the 
 ./setup-into-project.sh --register /path/to/project   # optional: create adb/08-OPEN-ISSUES.md
 ```
 
-`setup-into-project.sh` copies `Rules/AGENTS.md` to project `AGENTS.md` (stamped `METHOD-VERSION`). Without `--plain` it also creates `METHOD.md` when missing, **copies `SKILL.md` to `ADB.md`**, **replaces leftover `METHOD: BMAD`**, installs slash commands as **copies**, **removes leftover BMAD engine files** (`_bmad/`, `.bmad-core/`, `.bmad-*`, BMAD-named commands/rules/skills, BMAD `core-config.yaml`), and **does not** create `adb/08-OPEN-ISSUES.md` unless you pass `--register`. `--plain` writes `METHOD: PLAIN` and skips ADB. It does **not** delete BMAD planning leftovers such as `_bmad-output/` or an old PRD — those are brownfield evidence for DEFINE, not the method. If a copy is older than the factory file, setup reports `STALE` and does not stamp; `--refresh` updates copies (and commands, when ADB).
+`setup-into-project.sh` copies factory `AGENTS.md` to project `AGENTS.md` (stamped `METHOD-VERSION`). Without `--plain` it also creates `METHOD.md` when missing, **copies `SKILL.md` to `ADB.md`**, **replaces leftover `METHOD: BMAD`**, installs slash commands as **copies**, **removes leftover BMAD engine files** (`_bmad/`, `.bmad-core/`, `.bmad-*`, BMAD-named commands/rules/skills, BMAD `core-config.yaml`), and **does not** create `adb/08-OPEN-ISSUES.md` unless you pass `--register`. `--plain` writes `METHOD: PLAIN` and skips ADB. It does **not** delete BMAD planning leftovers such as `_bmad-output/` or an old PRD — those are brownfield evidence for DEFINE, not the method. If a copy is older than the factory file, setup reports `STALE` and does not stamp; `--refresh` updates copies (and commands, when ADB).
 
 Slash commands (`/adb`, `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`, `/adb-ready`) live in [`commands/`](commands/). They point at the project’s `ADB.md`; they are not a second method.
 

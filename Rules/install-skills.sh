@@ -12,7 +12,7 @@
 set -euo pipefail
 
 RULES_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SRC="$RULES_ROOT/AGENTS.md"
+SRC="$(cd "$RULES_ROOT/.." && pwd)/AGENTS.md"
 
 CHECK=0
 ACTION="install"
@@ -102,4 +102,4 @@ if [ $CHECK -eq 1 ]; then
   [ $changed -eq 0 ] && echo "up to date, nothing to do" || echo "$changed change(s) pending — re-run without --check"
   exit 0
 fi
-echo "done. $changed change(s). Edit Rules/AGENTS.md; harnesses follow the symlink."
+echo "done. $changed change(s). Edit AGENTS.md at the factory root; harnesses follow the symlink."

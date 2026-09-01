@@ -17,8 +17,8 @@
 </div>
 
 <h1>Methode starten</h1>
-<p>Dieses Repo ist die Factory, nicht die App. Auf GitHub liegt die volle <code>AGENTS.md</code> <em>nicht</em> oben in der Dateiliste — öffne den Ordner <code>Rules</code>, dann <code>AGENTS.md</code>. Die kurze <code>AGENTS.md</code> ganz oben zeigt nur dorthin. In einer App (z.&nbsp;B. PinnwandTest) gibt es <code>AGENTS.md</code> erst nach <strong>Start</strong> oder Setup, nicht durchs Klonen dieser Factory.</p>
-<p>Sag <strong>Start</strong> oder <code>/start</code>. Jede Frage bietet Buchstaben (A, B, …, zuletzt „entscheide du“). Sprache: Deutsch, English, Shqip, Italiano, Français, Español — oder du tippst <em>jede</em> andere. Du musst keine Optionen erfinden. Danach legt das System die Dateien in <em>deinen App-Ordner</em> und schreibt dort <code>LESEN.html</code> in genau dieser Sprache.</p>
+<p>Dieses Repo ist die Factory, nicht die App. Oben liegt <code>AGENTS.md</code> — das sind die Agenten-Regeln. Sag <strong>Start</strong> oder <code>/start</code>: erst die Sprache, dann landet eine <em>Kopie</em> in deinem App-Ordner, zusammen mit <code>OWNER.md</code> und <code>LESEN.html</code> in genau dieser Sprache. Die Factory selbst bleibt ohne App-Dateien.</p>
+<p>Jede Frage bietet Buchstaben (A, B, …, zuletzt „entscheide du“). Sprache: Deutsch, English, Shqip, Italiano, Français, Español — oder du tippst <em>jede</em> andere. Du musst keine Optionen erfinden.</p>
 <p><strong>Klein:</strong> nur die normale Methode — du sagst das Ziel, redest mit <strong>MainAgent</strong>, der in diesem Chat baut und prüft. Subagenten nur bei Geld/Login/Live oder bei der großen Methode.</p>
 <p><strong>Groß:</strong> dieselbe Sprache plus ADB (erst in Dateien klären, dann Scheiben). Lese-Vorschau: <code>Methods/ADB/ADB-LESEN-DE.html</code>.</p>
 <p>Geld, Login, Live oder Daten von anderen → große Methode, auch wenn du „klein“ gesagt hast.</p>
@@ -30,7 +30,7 @@
 <p>Nicht codeen, nicht Klick-Tour, keine Passwörter in den Chat.</p>
 
 <h2>Ohne Start (Terminal)</h2>
-<p>Klein: <code>./Methods/ADB/setup-into-project.sh --plain /pfad/zur/app</code></p>
+<p>Klein: nicht nötig, wenn du Start im Chat machst. Terminal nur ohne Interview: <code>./Methods/ADB/setup-into-project.sh --plain /pfad/zur/app</code> — dann fehlen Sprache, <code>OWNER.md</code> und <code>LESEN.html</code>.</p>
 <p>Groß: dasselbe ohne <code>--plain</code>. Ohne Start fehlen <code>OWNER.md</code> und die sprachrichtige <code>LESEN.html</code> — nachholen mit <code>/start</code>.</p>
 </body>
 </html>

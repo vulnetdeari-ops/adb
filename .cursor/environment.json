@@ -1,4 +1,4 @@
 {
-  "name": "_System",
-  "install": "command -v bash >/dev/null && command -v python3 >/dev/null && command -v git >/dev/null && test -f Rules/AGENTS.md && test -f Methods/ADB/SKILL.md && (cd Methods/ADB && ./install-commands.sh --check)"
+  "name": "method-factory",
+  "install": "command -v bash >/dev/null && command -v python3 >/dev/null && command -v git >/dev/null && ./Rules/check-factory.sh && (cd Methods/ADB && ./install-commands.sh --check)"
 }

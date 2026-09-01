@@ -2,7 +2,7 @@
 # Copy factory files into a product project so Cloud Agents see them without the Mac.
 #
 # Does, idempotently:
-#   1. Copy Rules/AGENTS.md into the project as AGENTS.md (always) and stamp METHOD-VERSION
+#   1. Copy factory AGENTS.md into the project as AGENTS.md (always) and stamp METHOD-VERSION
 #   2. Copy Rules/skills/start/SKILL.md as START.md and install /start (always)
 #   3. Unless --plain: METHOD.md = METHOD: ADB; copy SKILL.md as ADB.md; install /adb commands
 #   4. --plain: METHOD.md = METHOD: PLAIN; no ADB.md, no /adb commands
@@ -26,7 +26,7 @@ set -euo pipefail
 ADB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SYSTEM_ROOT="$(cd "$ADB_ROOT/../.." && pwd)"
 SKILL="$ADB_ROOT/SKILL.md"
-AGENTS_SRC="$SYSTEM_ROOT/Rules/AGENTS.md"
+AGENTS_SRC="$SYSTEM_ROOT/AGENTS.md"
 START_SKILL="$SYSTEM_ROOT/Rules/skills/start/SKILL.md"
 START_CMD="$SYSTEM_ROOT/Rules/commands/start.md"
 INSTALLER="$ADB_ROOT/install-commands.sh"
@@ -57,6 +57,7 @@ done
 [ -n "$PROJECT" ] || { echo "usage: $0 [--check] [--refresh] [--register] [--plain] /path/to/project" >&2; exit 2; }
 [ -d "$PROJECT" ] || { echo "not a directory: $PROJECT" >&2; exit 1; }
 [ -f "$AGENTS_SRC" ] || { echo "AGENTS.md missing: $AGENTS_SRC" >&2; exit 1; }
+grep -q 'MainAgent' "$AGENTS_SRC" || { echo "AGENTS.md source is not the product rules: $AGENTS_SRC" >&2; exit 1; }
 [ -f "$START_SKILL" ] || { echo "START skill missing: $START_SKILL" >&2; exit 1; }
 [ -f "$START_CMD" ] || { echo "start command missing: $START_CMD" >&2; exit 1; }
 if [ $PLAIN -eq 0 ]; then
@@ -66,7 +67,7 @@ fi
 
 PROJECT="$(cd "$PROJECT" && pwd -P)"
 sha="$(git -C "$SYSTEM_ROOT" rev-parse --short HEAD 2>/dev/null || echo unknown)"
-if ! git -C "$SYSTEM_ROOT" diff HEAD --quiet -- Methods/ADB/SKILL.md Rules/AGENTS.md 2>/dev/null; then
+if ! git -C "$SYSTEM_ROOT" diff HEAD --quiet -- Methods/ADB/SKILL.md AGENTS.md 2>/dev/null; then
   sha="${sha}-dirty"
 fi
 day="$(date +%Y-%m-%d)"
@@ -268,8 +269,8 @@ else
   fi
 fi
 
-# --- AGENTS.md (copy of Rules/AGENTS.md; every product follows this file) ---
-sync_stamped_copy "$AGENTS_SRC" "$PROJECT/AGENTS.md" "AGENTS.md" "Rules/AGENTS.md"
+# --- AGENTS.md (copy of factory AGENTS.md; every product follows this file) ---
+sync_stamped_copy "$AGENTS_SRC" "$PROJECT/AGENTS.md" "AGENTS.md" "AGENTS.md"
 STALE_AGENTS=$SYNC_STALE
 
 # --- START.md (copy of the Start skill; /start in every product, plain and ADB) ---
