@@ -7,7 +7,7 @@ description: "First-run (and re-run) of this method. Offers chip answers, then w
 
 Canonical: `Rules/skills/start/SKILL.md` in the method factory. Setup copies this file into each product as `START.md`. Follow **that copy** when it exists.
 
-Not ADB. Not a second method. Start only **chooses** PLAIN or ADB and lays down files.
+Not ADB itself. Start only **chooses** PLAIN or ADB and lays down files.
 
 Talk, proof, secrets, git, roles: the project’s `AGENTS.md`. Do not contradict it.
 
@@ -21,7 +21,7 @@ MainAgent directs. CodeAgent runs `Rules/start-into-project.sh` (factory) and wr
 
 Run this when any of:
 
-- The owner says start / first run / setup / “Bubble OS” / Sprache oder Ton wählen / “AGENTS.md fehlt”.
+- The owner says start / first run / setup / Sprache oder Ton wählen / “AGENTS.md fehlt”.
 - This folder has no `METHOD.md`, no `AGENTS.md`, or no `OWNER.md`, and they want an app here (not the method factory).
 - They want to change language, tone, address, or small↔large (`OWNER.md` already exists: same questions, current values in the options).
 

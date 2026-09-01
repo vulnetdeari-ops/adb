@@ -6,7 +6,7 @@
 #   2. Copy Rules/skills/start/SKILL.md as START.md and install /start (always)
 #   3. Unless --plain: METHOD.md = METHOD: ADB; copy SKILL.md as ADB.md; install /adb commands
 #   4. --plain: METHOD.md = METHOD: PLAIN; no ADB.md, no /adb commands
-#   5. Remove leftover BMAD engine files (not in --plain skip: still clean)
+#   5. Remove stray engine folders that are not this method
 #   6. Optionally ensure adb/08-OPEN-ISSUES.md (--register only; ADB mode)
 #   7. --refresh: overwrite AGENTS.md, START.md and (unless --plain) ADB.md from factory; reinstall commands
 #
@@ -231,41 +231,46 @@ sync_stamped_copy() {
 
 # --- METHOD.md ---
 method_md="$PROJECT/METHOD.md"
+write_method_line() {
+  printf '%s\n' "$1" > "$method_md"
+  note_changed "METHOD.md"
+}
+
 if [ $PLAIN -eq 1 ]; then
   if [ ! -f "$method_md" ]; then
     if [ $CHECK -eq 1 ]; then
       echo "WOULD CREATE $method_md (METHOD: PLAIN)"
     else
-      printf '%s\n' 'METHOD: PLAIN' > "$method_md"
-      note_changed "METHOD.md"
+      write_method_line 'METHOD: PLAIN'
     fi
-  elif grep -qiE '^METHOD:[[:space:]]*BMAD[[:space:]]*$' "$method_md" 2>/dev/null; then
+  elif grep -qx 'METHOD: PLAIN' "$method_md" 2>/dev/null; then
+    :
+  elif grep -qx 'METHOD: ADB' "$method_md" 2>/dev/null; then
+    echo "WARN: $method_md is METHOD: ADB — not overwriting with PLAIN." >&2
+  else
     if [ $CHECK -eq 1 ]; then
-      echo "WOULD REPLACE leftover METHOD: BMAD → METHOD: PLAIN in $method_md"
+      echo "WOULD WRITE METHOD: PLAIN in $method_md"
     else
-      printf '%s\n' 'METHOD: PLAIN' > "$method_md"
-      note_changed "METHOD.md"
+      write_method_line 'METHOD: PLAIN'
     fi
-  elif ! grep -qx 'METHOD: PLAIN' "$method_md" 2>/dev/null; then
-    echo "WARN: $method_md exists but does not contain METHOD: PLAIN — not overwriting." >&2
   fi
 else
   if [ ! -f "$method_md" ]; then
     if [ $CHECK -eq 1 ]; then
       echo "WOULD CREATE $method_md (METHOD: ADB)"
     else
-      printf '%s\n' 'METHOD: ADB' > "$method_md"
-      note_changed "METHOD.md"
+      write_method_line 'METHOD: ADB'
     fi
-  elif grep -qiE '^METHOD:[[:space:]]*BMAD[[:space:]]*$' "$method_md" 2>/dev/null; then
+  elif grep -qx 'METHOD: ADB' "$method_md" 2>/dev/null; then
+    :
+  elif grep -qx 'METHOD: PLAIN' "$method_md" 2>/dev/null; then
+    echo "WARN: $method_md is METHOD: PLAIN — not overwriting with ADB." >&2
+  else
     if [ $CHECK -eq 1 ]; then
-      echo "WOULD REPLACE leftover METHOD: BMAD → METHOD: ADB in $method_md"
+      echo "WOULD WRITE METHOD: ADB in $method_md"
     else
-      printf '%s\n' 'METHOD: ADB' > "$method_md"
-      note_changed "METHOD.md"
+      write_method_line 'METHOD: ADB'
     fi
-  elif ! grep -qx 'METHOD: ADB' "$method_md" 2>/dev/null; then
-    echo "WARN: $method_md exists but does not contain METHOD: ADB — not overwriting." >&2
   fi
 fi
 
@@ -284,38 +289,38 @@ if [ $PLAIN -eq 0 ]; then
   STALE_ADB=$SYNC_STALE
 fi
 
-# --- Leftover BMAD engine (retired). Planning docs stay as brownfield evidence. ---
-remove_bmad_path() {
+# --- Stray engine folders that are not this method. Product docs stay. ---
+remove_stray_path() {
   local rel="$1"
   local path="$PROJECT/$rel"
   if [ ! -e "$path" ] && [ ! -L "$path" ]; then
     return 0
   fi
   if [ $CHECK -eq 1 ]; then
-    echo "WOULD REMOVE leftover BMAD $path"
+    echo "WOULD REMOVE leftover $path"
     return 0
   fi
   rm -rf "$path"
   note_changed "$rel"
 }
 
-is_bmad_core_config() {
+is_stray_core_config() {
   local f="$1"
   [ -f "$f" ] || return 1
   grep -qiE 'bmad-core|markdownExploder|prdFile|bmad_version|bmad-method|_bmad/' "$f"
 }
 
 for rel in _bmad .bmad bmad-agent bmad.config.yaml bmad-config.yaml bmad.config.js; do
-  remove_bmad_path "$rel"
+  remove_stray_path "$rel"
 done
 
 shopt -s nullglob
 for path in "$PROJECT"/.bmad-*; do
-  remove_bmad_path "${path#"$PROJECT"/}"
+  remove_stray_path "${path#"$PROJECT"/}"
 done
 shopt -u nullglob
 
-bmad_harness_roots=(
+harness_cmd_roots=(
   ".cursor/commands"
   ".claude/commands"
   ".codex/prompts"
@@ -324,15 +329,15 @@ bmad_harness_roots=(
   ".claude/skills"
   ".codex/skills"
 )
-for root in "${bmad_harness_roots[@]}"; do
+for root in "${harness_cmd_roots[@]}"; do
   [ -d "$PROJECT/$root" ] || continue
   while IFS= read -r -d '' path; do
-    remove_bmad_path "${path#"$PROJECT"/}"
+    remove_stray_path "${path#"$PROJECT"/}"
   done < <(find "$PROJECT/$root" -maxdepth 1 \( -iname '*bmad*' \) -print0)
 done
 
-if is_bmad_core_config "$PROJECT/core-config.yaml"; then
-  remove_bmad_path "core-config.yaml"
+if is_stray_core_config "$PROJECT/core-config.yaml"; then
+  remove_stray_path "core-config.yaml"
 fi
 
 # --- Issue register (optional, ADB mode) ---

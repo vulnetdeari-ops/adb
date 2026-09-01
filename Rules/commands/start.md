@@ -9,4 +9,4 @@ If `START.md` exists in this project, follow it.
 
 Else follow `Rules/skills/start/SKILL.md` in this method factory.
 
-If neither file exists: say Start is not installed. Do not invent a second method. Point at the method factory: `Rules/start-into-project.sh` after clone.
+If neither file exists: say Start is not installed. Point at the method factory: `Rules/start-into-project.sh` after clone.

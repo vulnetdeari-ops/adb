@@ -23,9 +23,9 @@ Without the interview (no language question — not a finished first run if the 
 ./setup-into-project.sh --register /path/to/project   # optional: create adb/08-OPEN-ISSUES.md
 ```
 
-`setup-into-project.sh` copies factory `AGENTS.md` to project `AGENTS.md` (stamped `METHOD-VERSION`). Without `--plain` it also creates `METHOD.md` when missing, **copies `SKILL.md` to `ADB.md`**, **replaces leftover `METHOD: BMAD`**, installs slash commands as **copies**, **removes leftover BMAD engine files** (`_bmad/`, `.bmad-core/`, `.bmad-*`, BMAD-named commands/rules/skills, BMAD `core-config.yaml`), and **does not** create `adb/08-OPEN-ISSUES.md` unless you pass `--register`. `--plain` writes `METHOD: PLAIN` and skips ADB. It does **not** delete BMAD planning leftovers such as `_bmad-output/` or an old PRD — those are brownfield evidence for DEFINE, not the method. If a copy is older than the factory file, setup reports `STALE` and does not stamp; `--refresh` updates copies (and commands, when ADB).
+`setup-into-project.sh` copies factory `AGENTS.md` to project `AGENTS.md` (stamped `METHOD-VERSION`). Without `--plain` it also creates `METHOD.md` when missing, **copies `SKILL.md` to `ADB.md`**, installs slash commands as **copies**, and **does not** create `adb/08-OPEN-ISSUES.md` unless you pass `--register`. `--plain` writes `METHOD: PLAIN` and skips ADB. Existing product docs stay for DEFINE. If a copy is older than the factory file, setup reports `STALE` and does not stamp; `--refresh` updates copies (and commands, when ADB).
 
-Slash commands (`/adb`, `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`, `/adb-ready`) live in [`commands/`](commands/). They point at the project’s `ADB.md`; they are not a second method.
+Slash commands (`/adb`, `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`, `/adb-ready`) live in [`commands/`](commands/). They point at the project’s `ADB.md`.
 
 Inside this repository, `.cursor/commands/`, `.claude/commands/` and `.codex/prompts/` are **symlinks** into `commands/`. There is one copy to edit.
 
@@ -36,7 +36,7 @@ Inside this repository, `.cursor/commands/`, `.claude/commands/` and `.codex/pro
 ./install-commands.sh --remove-global # delete leftover home-level installs
 ```
 
-Do not load another product method on top of ADB. **BMAD is retired.** Do not follow leftover BMAD agents, commands, or `_bmad/` files. Ignore a leftover `METHOD: BMAD` — setup replaces it with `METHOD: ADB`.
+Follow only this app’s `ADB.md` and `AGENTS.md`.
 
 Defects in the method itself, found by real projects, go in [`LESSONS.md`](LESSONS.md). Ordinary project issues do not.
 
