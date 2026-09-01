@@ -1,6 +1,6 @@
 # Agent rules
 
-Factory: `Rules/AGENTS.md` in this method repository. Setup copies this file into every product project as `AGENTS.md` and stamps `METHOD-VERSION`. Follow **this project’s copy**. `--refresh` overwrites it from the factory.
+Factory: `Rules/AGENTS.md` in this method repository (GitHub repo root has a short `AGENTS.md` that only points here). Setup copies **this** file into every product project as `AGENTS.md` and stamps `METHOD-VERSION`. Follow **this project’s copy**. `--refresh` overwrites it from the factory.
 
 Works the same in any harness that reads `AGENTS.md` (or a symlink to it). Product copies in the app repo are what Cloud Agents see. Optional local home links: `install-skills.sh`.
 
