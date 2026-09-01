@@ -81,7 +81,7 @@ PROJECT: ADB method
 SYMPTOM: Draft decision UI used Perplexity-style chip labels. Agents and drafts drifted toward long label text instead of single-letter answers. That conflicted with global `AGENTS.md` Decision Questions (A/B/C + „Entscheide du“).
 ROOT CAUSE: A feature sketch taught a discarded interaction. The method and the reading copy already followed A/B/C; the feature note still named “chips” and looked like an open path.
 PROPOSED CHANGE: Keep A/B/C + „Entscheide du“ as the only rule. Mark chips rejected. Rename the feature note so the filename does not teach chips.
-STATUS: ADOPTED — A/B/C + Entscheide du; chips verworfen; `FEATURE-decision-options.md`, 2026-08-27.
+STATUS: SUPERSEDED — 2026-09-01 by L-019: owner wants chips; keep labels short. Long Perplexity-style chip sentences stay forbidden.
 
 ---
 
@@ -202,5 +202,16 @@ SYMPTOM: After L-017, MainAgent was told to start CodeAgent for most work. Small
 ROOT CAUSE: “Most work goes to subagents” treated a one-shot worker as always cheaper than the owner chat. For a small change it is slower and forgets the thread.
 PROPOSED CHANGE: Require named subagents only when `METHOD: ADB` or the job is Heavy. PLAIN and not Heavy: MainAgent does the work in this chat and names the role. Harness cannot start a required subagent → same chat, name the role.
 STATUS: ADOPTED — 2026-09-01.
+
+---
+
+## L-019 — Owner wants chips, not A/B/C
+
+DATE: 2026-09-01
+PROJECT: ADB method
+SYMPTOM: Start and Decision Questions asked A/B/C. The owner does not want to type letters. They asked for chips.
+ROOT CAUSE: L-007 rejected chips because long label text was worse than a letter. That banned the click UI instead of banning only long labels.
+PROPOSED CHANGE: Short chips (1–4 words), last = decide-for-me. Native picker when the harness has one (Cursor `AskQuestion`). No letters in the prompt. Typed A/B/C still maps. Long chip sentences stay forbidden.
+STATUS: ADOPTED — 2026-09-01. `FEATURE-decision-options.md`, `AGENTS.md`, `START.md`.
 
 

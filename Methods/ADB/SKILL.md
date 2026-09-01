@@ -13,7 +13,7 @@ Stamp as first line after YAML frontmatter (never above `---`):
 
 Never stamp a body you did not refresh. If the copy differs from this file (ignore the stamp): STALE. `--refresh` to update, or stay on the older version on purpose.
 
-**Job:** The owner knows where the product must land. They are not the coder, not the tester, not the one who signs into every site. Write that destination in `adb/`. Then CodeAgent builds it in slices that fit in context and proves it (browser, tests, logins). They choose only when the prompt means two different products or scopes (A/B/C). Not a fake company.
+**Job:** The owner knows where the product must land. They are not the coder, not the tester, not the one who signs into every site. Write that destination in `adb/`. Then CodeAgent builds it in slices that fit in context and proves it (browser, tests, logins). They choose only when the prompt means two different products or scopes (chips). Not a fake company.
 
 Talk, proof, secrets, git, roles: this project’s `AGENTS.md` (setup copy of factory `AGENTS.md`). Do not contradict it. ADB jobs: MainAgent starts PlanAgent / CodeAgent / ReviewAgent as subagents. Do not invent other worker types.
 
@@ -33,7 +33,7 @@ No product code. MainAgent directs **PlanAgent**. CodeAgent does not implement.
 
 **Greenfield** — nothing exists yet. **Brownfield** — inspect first: exists / works / wrong / unclear / keep / what the owner wants. Existing code is evidence, not automatically the destination.
 
-Ask the **product**, not the owner, for what repo, docs, tests or research can answer. Ask the owner only for intent, priorities, trade-offs. One decision at a time. A/B/C: AGENTS.md. Record in `06`, or in `02` while collapsed. Challenge choices that hurt usability, safety, or coherence — not taste. If the owner knows WHAT but not HOW it should look: PlanAgent owns a coherent direction. No generic AI look.
+Ask the **product**, not the owner, for what repo, docs, tests or research can answer. Ask the owner only for intent, priorities, trade-offs. One decision at a time. Chips: AGENTS.md. Record in `06`, or in `02` while collapsed. Challenge choices that hurt usability, safety, or coherence — not taste. If the owner knows WHAT but not HOW it should look: PlanAgent owns a coherent direction. No generic AI look.
 
 Every material fact: KNOWN / UNKNOWN / ASSUMED / CONFLICTING / NEEDS RESEARCH / NEEDS USER DECISION. Never silently turn an assumption into product truth.
 

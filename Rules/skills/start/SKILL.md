@@ -1,6 +1,6 @@
 ---
 name: start
-description: "First-run (and re-run) of this method. Offers A/B/C answers, then writes METHOD, copies, OWNER.md and LESEN.html into the app. Use when the owner says start, first run, or there is no METHOD.md."
+description: "First-run (and re-run) of this method. Offers chip answers, then writes METHOD, copies, OWNER.md and LESEN.html into the app. Use when the owner says start, first run, or there is no METHOD.md."
 ---
 
 # Start
@@ -11,7 +11,7 @@ Not ADB. Not a second method. Start only **chooses** PLAIN or ADB and lays down 
 
 Talk, proof, secrets, git, roles: the project’s `AGENTS.md`. Do not contradict it.
 
-**Job:** the owner answers a **fixed** list of questions. Every question **offers** letters. They never have to invent an option. After the last answer: write files, say what landed and where to read, then they can build. Do not add questions. Do not skip the listed ones unless already answered in this thread.
+**Job:** the owner answers a **fixed** list of questions. Every question **offers chips**. They never have to invent an option. After the last answer: write files, say what landed and where to read, then they can build. Do not add questions. Do not skip the listed ones unless already answered in this thread.
 
 MainAgent directs. CodeAgent runs `Rules/start-into-project.sh` (factory) and writes nothing by hand that the script already writes.
 
@@ -35,21 +35,25 @@ If this workspace **is** the method factory (`AGENTS.md` at repo root, `Methods/
 
 ## How to ask
 
-One question at a time. Show the letters. Last letter is always **decide for me**.
+One question at a time. Offer **chips**, not A/B/C. Last chip is always **Entscheide du** / Decide for me. Chip text: 1–4 words.
 
-Wait for a pick (or an already-clear answer in this thread). Then the next question.
+If this harness has a native multiple-choice tool that renders clickable chips (Cursor: `AskQuestion`): call it with **one** question and the chips below as `options` (`id` = the store key or a short slug, `label` = the chip). Do not also print letters.
 
-Ask **Q1 in the language they already used**. After Q1, ask the rest in the chosen language (decide-for-me → the language they used).
+If that tool is missing: print the question, then one row of the same labels in backticks. No A, B, C.
 
-Do not rephrase options into new products. Do not add chips. Do not ask stack, colors, hosting, or “any more questions?”.
+Wait for a pick (click, chip label, or — if they still type a letter — map in listed order). Then the next question.
 
-The only typed values allowed (not options):
+Ask **Q1 in the language they already used**. After Q1, ask the rest in the chosen language (decide-for-me → the language they used). Use that language’s chip labels.
 
-- A language name, if they pick “I will type the language” (any language: Italiano, Shqip, 日本語, …).
-- A folder path, if they pick “I will type the path”.
-- One product sentence, if they pick “I will type one sentence”.
+Do not rephrase options into new products. Do not ask stack, colors, hosting, or “any more questions?”.
 
-If they type something that maps to a letter, take it. If unclear: show the **same** letters again, once.
+The only typed values allowed (not chips):
+
+- A language name, if they pick “Ich tippe die Sprache” / “I will type the language” (any language: Italiano, Shqip, 日本語, …).
+- A folder path, if they pick the type-the-path chip.
+- One product sentence, if they pick the type-a-sentence chip.
+
+If unclear: show the **same chips** again, once.
 
 ⸻
 
@@ -57,20 +61,22 @@ If they type something that maps to a letter, take it. If unclear: show the **sa
 
 ### Q1 — Language
 
-Any language. Offer letters so they do not invent a list. Last letter is decide-for-me.
+Any language. Offer chips so they do not invent a list. Last chip is decide-for-me.
 
 DE: **Welche Sprache?**
 EN: **Which language?**
-(After this pick, ask Q2–Q7 in that language — same letters and meanings, translated labels.)
+(After this pick, ask Q2–Q7 in that language — same chips and meanings, translated labels.)
 
-- **A** Deutsch
-- **B** English
-- **C** Shqip
-- **D** Italiano
-- **E** Français
-- **F** Español
-- **G** Ich tippe die Sprache / I will type the language → wait for one name (Italiano, 日本語, Polski, …). Not a programming quiz. Map with `Rules/templates/resolve-language.py` (from the factory) or the same names in `Rules/templates/language-tags.txt`. Unknown name → tag `und` and keep their words as `LANGUAGE-NAME`.
-- **H** Entscheide du / Decide for me → language of this thread, mapped the same way (German → `de`, English → `en`, Italian → `it`, …). If you cannot tell: `en`.
+Chips:
+
+- `Deutsch` → `de`
+- `English` → `en`
+- `Shqip` → `sq`
+- `Italiano` → `it`
+- `Français` → `fr`
+- `Español` → `es`
+- `Ich tippe die Sprache` / `I will type the language` → wait for one name (Italiano, 日本語, Polski, …). Not a programming quiz. Map with `Rules/templates/resolve-language.py` (from the factory) or the same names in `Rules/templates/language-tags.txt`. Unknown name → tag `und` and keep their words as `LANGUAGE-NAME`.
+- `Entscheide du` / `Decide for me` → language of this thread, mapped the same way (German → `de`, English → `en`, Italian → `it`, …). If you cannot tell: `en`.
 
 Store `LANGUAGE` as the tag (`de`, `it`, `sq`, `ja`, `pt-BR`, `und`, …) and `LANGUAGE-NAME` as the display name (Deutsch, Italiano, 日本語, …).
 
@@ -79,10 +85,12 @@ Store `LANGUAGE` as the tag (`de`, `it`, `sq`, `ja`, `pt-BR`, `und`, …) and `L
 DE: **Wie sollen wir dich ansprechen?**
 EN: **How should we address you?**
 
-- **A** Du, locker / Informal “you”
-- **B** Sie, förmlich / Formal
-- **C** Nur Vorname, direkt / First name only, direct
-- **D** Entscheide du / Decide for me → `du` if LANGUAGE is `de`, else informal (`du` stored)
+Chips:
+
+- `Du` / `Informal you` → `du`
+- `Sie` / `Formal` → `sie`
+- `Vorname` / `First name` → `name`
+- `Entscheide du` / `Decide for me` → `du` if LANGUAGE is `de`, else informal (`du` stored)
 
 Store `ADDRESS=du|sie|name`.
 
@@ -91,10 +99,12 @@ Store `ADDRESS=du|sie|name`.
 DE: **Welchen Ton?**
 EN: **Which tone?**
 
-- **A** Direkt — eine Sache, die zählt / Direct — one thing that matters
-- **B** Ruhig — etwas mehr Erklärung / Calm — a bit more explanation
-- **C** Knapp — fast keine Extra-Sätze / Short — almost no extra sentences
-- **D** Entscheide du / Decide for me → `direct`
+Chips:
+
+- `Direkt` / `Direct` → `direct`
+- `Ruhig` / `Calm` → `calm`
+- `Knapp` / `Short` → `short`
+- `Entscheide du` / `Decide for me` → `direct`
 
 Store `TONE=direct|calm|short`.
 
@@ -103,9 +113,11 @@ Store `TONE=direct|calm|short`.
 DE: **Was willst du bauen?**
 EN: **What are you building?**
 
-- **A** Klein — eine App, keine Konten, kein Geld → later `PLAIN` unless Q5 says yes
-- **B** Groß — echtes Produkt, mehrere Teile → `ADB`
-- **C** Entscheide du / Decide for me → wait for Q5, then: Q5 yes → `ADB`, else `PLAIN`
+Chips:
+
+- `Klein` / `Small` → later `PLAIN` unless Q5 says yes (`SIZE=small`)
+- `Groß` / `Large` → `ADB` (`SIZE=large`)
+- `Entscheide du` / `Decide for me` → wait for Q5, then: Q5 yes → `ADB`, else `PLAIN` (`SIZE=decide`)
 
 Store `SIZE=small|large|decide`.
 
@@ -114,9 +126,11 @@ Store `SIZE=small|large|decide`.
 DE: **Geht es um Geld, Login, eine Live-Seite oder Daten von anderen?**
 EN: **Money, login, a live site, or other people’s data?**
 
-- **A** Nein / No
-- **B** Ja, mindestens eines / Yes, at least one
-- **C** Weiß nicht — entscheide du / Don’t know — decide for me → treat as **B** if SIZE=large, else **A**
+Chips:
+
+- `Nein` / `No` → `none`
+- `Ja` / `Yes` → `yes`
+- `Entscheide du` / `Decide for me` → treat as `yes` if SIZE=large, else `none`
 
 Store `RISK=none|yes`.
 
@@ -133,16 +147,16 @@ Store `RISK=none|yes`.
 DE: **Wohin die Dateien?**
 EN: **Where should the files go?**
 
-If the current folder **is** the method factory, **do not offer A** (this folder). Offer:
+If the current folder **is** the method factory, **do not offer This folder**. Offer:
 
-- **A** Ich tippe den Pfad zur App / I will type the app path
-- **B** Entscheide du / Decide for me → not allowed on the factory; show A again and say the factory is not an app
+- `Ich tippe den Pfad` / `I will type the path`
+- `Entscheide du` / `Decide for me` → not allowed on the factory; show the path chip again and say the factory is not an app
 
 If the current folder is **not** the factory:
 
-- **A** Dieser Ordner / This folder
-- **B** Ich tippe einen anderen Pfad / I will type another path
-- **C** Entscheide du / Decide for me → this folder
+- `Dieser Ordner` / `This folder`
+- `Anderer Pfad` / `Another path`
+- `Entscheide du` / `Decide for me` → this folder
 
 If they type a path that does not exist: create it (the script mkdir). Do not send them to the terminal.
 
@@ -153,11 +167,13 @@ Store `PROJECT` as an absolute path.
 DE: **Worum geht’s — in einem Satz?** (nicht erfinden müssen)
 EN: **What is it, in one sentence?** (they do not have to invent)
 
-- **A** Ich tippe einen Satz / I will type one sentence → wait for that sentence
-- **B** Noch kein Satz — nimm „Produkt in diesem Ordner“ / No sentence — use “Product in this folder”
-- **C** Entscheide du / Decide for me → same as B
+Chips:
 
-Store `PRODUCT` text. Default (B / decide-for-me): that sentence **in the chosen language** (DE: `Produkt in diesem Ordner`. EN: `Product in this folder`. Any other: translate that EN default; do not invent a product).
+- `Ich tippe einen Satz` / `I will type one sentence` → wait for that sentence
+- `Noch kein Satz` / `No sentence` → use “Product in this folder”
+- `Entscheide du` / `Decide for me` → same as no sentence
+
+Store `PRODUCT` text. Default (no sentence / decide-for-me): that sentence **in the chosen language** (DE: `Produkt in diesem Ordner`. EN: `Product in this folder`. Any other: translate that EN default; do not invent a product).
 
 ⸻
 

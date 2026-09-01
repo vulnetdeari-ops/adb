@@ -1,6 +1,6 @@
 ---
 name: start
-description: "First-run of this method: offered letters (any language), then files and LESEN.html in the app. Follow START.md or Rules/skills/start/SKILL.md."
+description: "First-run of this method: offered chips (any language), then files and LESEN.html in the app. Follow START.md or Rules/skills/start/SKILL.md."
 ---
 
 # /start
