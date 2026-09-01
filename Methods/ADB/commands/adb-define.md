@@ -13,6 +13,6 @@ Inherit AGENTS.md. MainAgent directs **PlanAgent**. No product implementation.
 3. **One decision** at a time. Chips: AGENTS.md. Record in `adb/` (collapsed default: `01`, `02`, `07`).
 4. **Uncertainty** — KNOWN / UNKNOWN / ASSUMED / CONFLICTING / NEEDS RESEARCH / NEEDS USER DECISION. Never silently turn an assumption into product truth.
 5. **Gate** — fresh team can build without inventing important behavior? Leftover uncertainty block the first slice? If yes, only that blockage. Don’t fill unused files.
-6. **Once:** `A) BUILD starten` `B) Noch offene Punkte` `C) Entscheide du`. No BUILD on silence. Don’t restart DEFINE as a whole.
+6. **Once:** chips `BUILD starten` `Noch offene Punkte` `Entscheide du`. No BUILD on silence. Don’t restart DEFINE as a whole.
 
 Forbidden: extra files, agents or reviews to tick a point; secrets in git or `adb/`.

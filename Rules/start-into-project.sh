@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Apply Start answers into a product project. Does not interview.
-# The Start skill offers letters; this script only writes files.
+# The Start skill offers chips; this script only writes files.
 #
 # --language is any language: tag (it, sq, pt-BR, ja) or a name (Italiano, Shqip,
 # 日本語). Native LESEN templates exist for de and en. Any other language gets

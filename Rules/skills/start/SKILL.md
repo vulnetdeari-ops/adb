@@ -49,7 +49,7 @@ Do not rephrase options into new products. Do not ask stack, colors, hosting, or
 
 The only typed values allowed (not chips):
 
-- A language name, if they pick “Ich tippe die Sprache” / “I will type the language” (any language: Italiano, Shqip, 日本語, …).
+- A language name, if they pick “Ich tippe die Sprache” / “Type language” (any language: Italiano, Shqip, 日本語, …).
 - A folder path, if they pick the type-the-path chip.
 - One product sentence, if they pick the type-a-sentence chip.
 
@@ -75,7 +75,7 @@ Chips:
 - `Italiano` → `it`
 - `Français` → `fr`
 - `Español` → `es`
-- `Ich tippe die Sprache` / `I will type the language` → wait for one name (Italiano, 日本語, Polski, …). Not a programming quiz. Map with `Rules/templates/resolve-language.py` (from the factory) or the same names in `Rules/templates/language-tags.txt`. Unknown name → tag `und` and keep their words as `LANGUAGE-NAME`.
+- `Ich tippe die Sprache` / `Type language` → wait for one name (Italiano, 日本語, Polski, …). Not a programming quiz. Map with `Rules/templates/resolve-language.py` (from the factory) or the same names in `Rules/templates/language-tags.txt`. Unknown name → tag `und` and keep their words as `LANGUAGE-NAME`.
 - `Entscheide du` / `Decide for me` → language of this thread, mapped the same way (German → `de`, English → `en`, Italian → `it`, …). If you cannot tell: `en`.
 
 Store `LANGUAGE` as the tag (`de`, `it`, `sq`, `ja`, `pt-BR`, `und`, …) and `LANGUAGE-NAME` as the display name (Deutsch, Italiano, 日本語, …).
@@ -149,7 +149,7 @@ EN: **Where should the files go?**
 
 If the current folder **is** the method factory, **do not offer This folder**. Offer:
 
-- `Ich tippe den Pfad` / `I will type the path`
+- `Ich tippe den Pfad` / `Type a path`
 - `Entscheide du` / `Decide for me` → not allowed on the factory; show the path chip again and say the factory is not an app
 
 If the current folder is **not** the factory:
@@ -169,7 +169,7 @@ EN: **What is it, in one sentence?** (they do not have to invent)
 
 Chips:
 
-- `Ich tippe einen Satz` / `I will type one sentence` → wait for that sentence
+- `Ich tippe einen Satz` / `Type a sentence` → wait for that sentence
 - `Noch kein Satz` / `No sentence` → use “Product in this folder”
 - `Entscheide du` / `Decide for me` → same as no sentence
 
