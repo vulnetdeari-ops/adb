@@ -181,4 +181,15 @@ ROOT CAUSE: The split was already in `AGENTS.md` (direct vs do). The names did n
 PROPOSED CHANGE: Same four roles, clearer names: **MainAgent** (talks to the owner, most work handed off), **PlanAgent**, **CodeAgent**, **ReviewAgent**. Still never spawn. One-shot Tasks are not those three. If this session already is the living worker, or none exists to turn on, this session does the job and names the role.
 STATUS: ADOPTED — 2026-09-01.
 
+---
+
+## L-017 — CodeAgent is a subagent, not an owner chat
+
+DATE: 2026-09-01
+PROJECT: ADB method
+SYMPTOM: After L-016 the rules still talked about PlanAgent/CodeAgent/ReviewAgent **tabs**. The owner does not have those chats. CodeAgent is a subagent MainAgent starts. The “open the other card / one session” exception made the method unreadable.
+ROOT CAUSE: “Living named agent” was copied from an orchestra of owner-facing chats. This method has one owner chat: MainAgent.
+PROPOSED CHANGE: Owner talks only to MainAgent. PlanAgent, CodeAgent, ReviewAgent are named subagents for a job. No extra worker types. If the harness cannot start a subagent, MainAgent does the job in this chat and names the role.
+STATUS: ADOPTED — 2026-09-01.
+
 

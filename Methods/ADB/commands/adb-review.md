@@ -6,7 +6,7 @@ description: "ADB independent review. Plan: spec + plan + done criteria. Code: s
 # /adb-review
 
 Canonical: this project’s `ADB.md` (BUILD). Method repo: `SKILL.md`.
-Inherit AGENTS.md. MainAgent directs living **ReviewAgent**. Never spawn. ReviewAgent never implements. Same session + builder’s story ≠ independent. If not independent: STATUS limitation; constrained self-check; don’t call it independent.
+Inherit AGENTS.md. MainAgent starts **ReviewAgent** (subagent). Do not invent other worker types. ReviewAgent never implements. Same MainAgent + builder’s story ≠ independent. If not independent: STATUS limitation; constrained self-check; don’t call it independent.
 
 **Hand:** plan → spec + plan + done criteria. Code → spec + diff + evidence. Never interview history, builder narrative, or “confirm the builder”.
 
