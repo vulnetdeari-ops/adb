@@ -1,13 +1,13 @@
 ---
-description: Globale Agent-Regeln für alle Harnesses. Nicht kopieren — andere Pfade sind Symlinks auf diese Datei.
+description: Globale Agent-Regeln. Setup kopiert diese Datei in jedes Produktprojekt als AGENTS.md. Agenten folgen der Kopie im Projekt.
 alwaysApply: true
 ---
 
 # BubbyOS
 
-Canonical: `/Users/bubby/Development/_System/Rules/AGENTS.md`. Do not copy. Home harnesses symlink here (`new-project` still snapshots into a new repo).
+Factory: `/Users/bubby/Development/_System/Rules/AGENTS.md`. Setup copies this file into every product project as `AGENTS.md` and stamps `METHOD-VERSION`. Follow **this project’s copy**. `--refresh` overwrites it from the factory. Do not paste into Cursor User Rules.
 
-This is the **only always-on** global rule source — the same code context in every harness. Skills named below are optional extras (whole-app ready), not required to write the code. Do not paste these rules into Cursor User Rules or other home files.
+Skills named below are optional extras (whole-app ready), not required to write the code. Home harnesses may still symlink the factory file (`install-skills.sh`); Cloud Agents see only the copy in the repo.
 
 **Job:** software that holds in real life, straight line. Bubby sets where the product must land. He is not the coder, not the tester, not the account-opener. **Code** implements, tests, and signs in. **Lead** only directs. Tell the truth. Do not fork him with fake options or leftover lists.
 
@@ -27,7 +27,7 @@ Whole-product Alpha / Beta / Live: only when Bubby asks about the **whole app** 
 
 If it doesn’t work in real life, say so.
 
-Product behavior lives in files, not chat. If `METHOD.md` says `METHOD: ADB`, read `/Users/bubby/Development/_System/Methods/ADB/SKILL.md` before DEFINE or BUILD. If `METHOD.md` is missing or `PLAIN`, don’t load ADB. Don’t add a second method. Ignore a leftover project `ADB.md`.
+Product behavior lives in files, not chat. If `METHOD.md` says `METHOD: ADB`, read this project’s `ADB.md` before DEFINE or BUILD (setup copy of `SKILL.md`). If `METHOD.md` is missing or `PLAIN`, don’t load ADB. Don’t add a second method. Ignore a leftover `ADB.md` when METHOD is not ADB.
 
 Proof: what you tested, how, what happened. UI → this harness’s browser. `playwright-cli` only if that browser is missing or broken after a real try. Never send Bubby on a click tour. Admin UIs: skill `admin-portals`. Bubby only for 2FA, captcha, passkey, OS-blocked keys.
 
@@ -37,7 +37,7 @@ Research what you can. Ask Bubby for intent, priorities, and trade-offs only.
 
 ## Work
 
-Work happens in the project you were asked to change. Live URLs, stack, and deploy live in **that project’s** `AGENTS.md` (do not copy this file there).
+Work happens in the project you were asked to change. This `AGENTS.md` is the BubbyOS snapshot. `--refresh` replaces it. Live URLs, stack, and deploy: the project’s README (not this file).
 
 **Heavy** (money, login/security, live deploy, data migration, or a new public contract): written plan + done criteria first, then build. Do not skip Plan.
 
