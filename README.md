@@ -1,67 +1,51 @@
-# ADB
+# _System
 
-**Ask. Decide. Build.**
+Ein Repo. Zwei Methoden. Clone nach `~/Development/_System`.
 
-ADB is a product method for AI coding agents. Bubby sets where the product must land. Roles follow global `AGENTS.md`: Lead only directs; Plan, Code and Review do the work. It is not an agent framework, a fake company, or a pile of extra process.
+**Klein / normal:** `Rules/AGENTS.md`. Du liest `Rules/LESEN-DE.html`. Agenten folgen `AGENTS.md`, nicht der HTML-Datei. Kein ADB.
 
-This is not the Android Debug Bridge.
-
-The method is [`SKILL.md`](SKILL.md). Setup copies it into each project as `ADB.md`. Agents in a project follow that copy.
-
-## Use it in a project
-
-1. Add a `METHOD.md` that contains exactly:
+**Groß:** Im Projekt eine Datei `METHOD.md` mit genau:
 
 ```text
 METHOD: ADB
 ```
 
-2. Install slash commands **into that project** as copies, never into the user home.
-3. Tell the agent to follow the project’s `ADB.md` when `METHOD.md` contains `METHOD: ADB`. If `METHOD.md` is missing or `PLAIN`, do not load ADB (AGENTS.md).
-4. Issue register: for **collapsed** Source of Truth (default for small products), issues live in `adb/07-STATUS.md` under `## Open issues` — setup does **not** create `adb/08-OPEN-ISSUES.md`. Create `08` only when the list outgrows STATUS, or run `./setup-into-project.sh --register`. Never use a root `OPEN-ISSUES.md`.
+Dann gilt `Methods/ADB` (Ask. Decide. Build.). Du liest `Methods/ADB/ADB-LESEN-DE.html`. Agenten folgen der Projekt-Kopie `ADB.md`.
 
-Preferred: use the Development helpers.
+## Einmal auf den Mac
 
-```text
-# new Active project
-new-project my-app adb
-
-# existing repo (from its root)
-adopt-project
-# ADB only — BMAD is retired; if a helper still asks, choose ADB
-
-# or only the ADB pieces, against any project path
-./setup-into-project.sh /path/to/project
-./setup-into-project.sh --check /path/to/project
-./setup-into-project.sh --refresh /path/to/project   # overwrite ADB.md from SKILL.md; reinstall commands
-./setup-into-project.sh --register /path/to/project  # optional: create adb/08-OPEN-ISSUES.md
+```bash
+# bestehendes ~/Development/_System umbenennen, dann:
+git clone https://github.com/vulnetdeari-ops/adb.git ~/Development/_System
+cd ~/Development/_System/Rules
+./install-skills.sh
 ```
 
-`setup-into-project.sh` creates `METHOD.md` when missing, **copies `SKILL.md` to `ADB.md`** (stamped `METHOD-VERSION`), **replaces leftover `METHOD: BMAD`**, installs slash commands as **copies**, **removes leftover BMAD engine files** (`_bmad/`, `.bmad-core/`, `.bmad-*`, BMAD-named commands/rules/skills, BMAD `core-config.yaml`), and **does not** create `adb/08-OPEN-ISSUES.md` unless you pass `--register`. It does **not** delete BMAD planning leftovers such as `_bmad-output/` or an old PRD — those are brownfield evidence for DEFINE, not the method. If `ADB.md` is older than `SKILL.md`, setup reports `STALE` and does not stamp; `--refresh` updates copy and commands together.
+Große App danach:
 
-Slash commands (`/adb`, `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`, `/adb-ready`) live in [`commands/`](commands/). They point at the project’s `ADB.md`; they are not a second method.
-
-Inside this repository, `.cursor/commands/`, `.claude/commands/` and `.codex/prompts/` are **symlinks** into `commands/`. There is one copy to edit.
-
-```text
-./install-commands.sh                 # install into the current directory
-./install-commands.sh --check         # report only
-./install-commands.sh --remove        # remove from the current directory
-./install-commands.sh --remove-global # delete leftover home-level installs
+```bash
+~/Development/_System/Methods/ADB/setup-into-project.sh /pfad/zur/app
 ```
 
-Do not load another product method on top of ADB. **BMAD is retired.** Do not follow leftover BMAD agents, commands, or `_bmad/` files. Ignore a leftover `METHOD: BMAD` — setup replaces it with `METHOD: ADB`.
+`new-project` / `adopt-project` sind Mac-Helfer außerhalb dieses Repos. Fehlen sie: `setup-into-project.sh` reicht für ADB.
 
-Defects in the method itself, found by real projects, go in [`LESSONS.md`](LESSONS.md). Ordinary project issues do not.
+## Install
 
-Vision, Product Spec and the rest of `adb/01`…`adb/07` are **not** created by setup. They are written in DEFINE. The issue register starts in `adb/07-STATUS.md` for collapsed products; split to `adb/08-OPEN-ISSUES.md` when the list needs its own file.
+```bash
+# normale Methode in Cursor / Codex / Claude / Gemini
+./Rules/install-skills.sh
+./Rules/install-skills.sh --check
 
-## What it does
+# ADB-Befehle in ein Produktprojekt: setup-into-project.sh (Kopien, nie nach $HOME)
+```
 
-- **Ask** — grill the product, not the user. Research what can be discovered. Offer real choices. `Decide for me` is valid.
-- **Decide** — keep that in `adb/`. Small products may collapse to Vision, Product Spec and Status. Larger products use `adb/01` … `adb/08`. Uncertain findings get registered, not swallowed.
-- **Build** — Code executes against `adb/` (Lead directs). Prove on a real path (browser, tests, logins). Missing required behavior is fixed or written down, not ignored. Git: AGENTS.md (auto-commit when the job is done; push only when Bubby asks).
+## Layout
 
-The full method is in [`SKILL.md`](SKILL.md).
-
-Zum Lesen auf Deutsch: [`ADB-LESEN-DE.html`](ADB-LESEN-DE.html). Agenten in einem Projekt folgen `ADB.md` — nicht dieser Datei.
+```text
+Rules/                 normale Methode (BubbyOS)
+  AGENTS.md            Agenten folgen dieser Datei
+  LESEN-DE.html        nur zum Lesen
+  install-skills.sh
+  skills/
+Methods/ADB/           große Apps, nur mit METHOD: ADB
+```
