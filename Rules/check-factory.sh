@@ -18,6 +18,9 @@ head -1 AGENTS.md | grep -qx '# Agent rules' || fail "root AGENTS.md must be the
 grep -q 'MainAgent' AGENTS.md || fail "root AGENTS.md is not the product rules"
 grep -q 'Chips, not A/B/C' AGENTS.md || fail "AGENTS.md must offer chips, not A/B/C"
 grep -q 'Offer \*\*chips\*\*' Rules/skills/start/SKILL.md || fail "Start skill must offer chips"
+if grep -rniE '\bbmad\b' --include='*.md' --include='*.html' .; then
+  fail "method text still names a former method"
+fi
 grep -q 'This folder is the method factory' AGENTS.md && fail "root AGENTS.md is still the old pointer"
 
 if grep -q 'MainAgent' Rules/AGENTS.md 2>/dev/null; then
@@ -54,6 +57,9 @@ head -1 "$APP/AGENTS.md" | grep -q '^METHOD-VERSION:' || fail "app AGENTS.md sta
 grep -q 'MainAgent' "$APP/AGENTS.md" || fail "app AGENTS.md is not the product rules"
 grep -q '^LANGUAGE: de' "$APP/OWNER.md" || fail "OWNER.md language was not stored"
 grep -qx 'METHOD: ADB' "$APP/METHOD.md" || fail "METHOD.md is not ADB"
+if grep -qiE '\bbmad\b' "$APP/LESEN.html" "$APP/AGENTS.md" "$APP/ADB.md" "$APP/START.md"; then
+  fail "app copies still name a former method"
+fi
 
 rm -rf "$APP"
 echo "OK: factory can Start; app gets AGENTS.md"

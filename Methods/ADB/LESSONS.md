@@ -107,13 +107,13 @@ STATUS: ADOPTED — 2026-08-28.
 
 ---
 
-## L-010 — Dual-method framing kept BMAD alive after it was gone
+## L-010 — Naming another product method kept it in play
 
 DATE: 2026-08-31
 PROJECT: ADB method
-SYMPTOM: Agents still treated BMAD as a peer method: setup left `METHOD: BMAD` untouched, and leftover `_bmad/` / `.bmad-core/` / BMAD commands could still be followed.
-ROOT CAUSE: The method was defined against BMAD (“never combine”). After BMAD was retired, that opposition still taught agents that BMAD exists. Setup had no job to replace the switch or remove the engine. Planning leftovers and the engine were not distinguished.
-PROPOSED CHANGE: ADB is the product method. BMAD is retired. Setup replaces `METHOD: BMAD` and removes the engine; planning leftovers stay as brownfield evidence for DEFINE. Commands and the reading copy say BMAD is not a method.
+SYMPTOM: Agents treated a name in the files as a peer method and followed leftover folders and commands.
+ROOT CAUSE: The method was defined against that name. Naming it taught agents it still exists.
+PROPOSED CHANGE: Write only this method. Setup writes `METHOD: PLAIN` or `METHOD: ADB`. Existing product docs stay as brownfield evidence for DEFINE.
 STATUS: ADOPTED — 2026-08-31.
 
 ---
@@ -155,7 +155,7 @@ STATUS: ADOPTED — 2026-08-31.
 
 DATE: 2026-08-31
 PROJECT: ADB method
-SYMPTOM: After aligning with factory `AGENTS.md`, SKILL.md and every slash command repeated Lead / spawn / git / BMAD. Agents had to wade through factory rules to reach DEFINE / BUILD / COMPLETION. No product rule was added; the same rules were said three times.
+SYMPTOM: After aligning with factory `AGENTS.md`, SKILL.md and every slash command repeated Lead / spawn / git / extra process names. Agents had to wade through factory rules to reach DEFINE / BUILD / COMPLETION. No product rule was added; the same rules were said three times.
 ROOT CAUSE: Alignment copied AGENTS.md into ADB instead of one inherit line plus the product method.
 STATUS: ADOPTED — 2026-08-31.
 
@@ -213,5 +213,16 @@ SYMPTOM: Start and Decision Questions asked A/B/C. The owner does not want to ty
 ROOT CAUSE: L-007 rejected chips because long label text was worse than a letter. That banned the click UI instead of banning only long labels.
 PROPOSED CHANGE: Short chips (1–4 words), last = decide-for-me. Native picker when the harness has one (Cursor `AskQuestion`). No letters in the prompt. Typed A/B/C still maps. Long chip sentences stay forbidden.
 STATUS: ADOPTED — 2026-09-01. `FEATURE-decision-options.md`, `AGENTS.md`, `START.md`.
+
+---
+
+## L-020 — Do not name other product methods
+
+DATE: 2026-09-01
+PROJECT: ADB method
+SYMPTOM: Reading copies and agent files named methods that are not this one, including that they were gone. The owner was confused about what we mean.
+ROOT CAUSE: Contrast against a former name teaches that name.
+PROPOSED CHANGE: Write only PLAIN and ADB. Do not mention other product methods, and do not say they used to exist.
+STATUS: ADOPTED — 2026-09-01.
 
 

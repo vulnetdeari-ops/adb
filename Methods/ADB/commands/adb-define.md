@@ -8,7 +8,7 @@ description: "ADB DEFINE. Grill the product, not the user. Write adb/, then gate
 Canonical: this project’s `ADB.md` (DEFINE). Method repo: `SKILL.md`.
 Inherit AGENTS.md. MainAgent directs **PlanAgent**. No product implementation.
 
-1. **Mode** — GREENFIELD or BROWNFIELD, one line. Brownfield: inspect first. Leftover BMAD planning docs = evidence, not destination.
+1. **Mode** — GREENFIELD or BROWNFIELD, one line. Brownfield: inspect first. Existing planning docs are evidence, not destination.
 2. **Don’t ask** what repo, docs, tests or research can answer.
 3. **One decision** at a time. Chips: AGENTS.md. Record in `adb/` (collapsed default: `01`, `02`, `07`).
 4. **Uncertainty** — KNOWN / UNKNOWN / ASSUMED / CONFLICTING / NEEDS RESEARCH / NEEDS USER DECISION. Never silently turn an assumption into product truth.

@@ -36,7 +36,7 @@ Whole-product Alpha / Beta / Live: only when the owner asks about the **whole ap
 
 If it doesn’t work in real life, say so.
 
-Product behavior lives in files, not chat. If `METHOD.md` says `METHOD: ADB`, read this project’s `ADB.md` before DEFINE or BUILD (setup copy of `SKILL.md`). If `METHOD.md` is missing or `PLAIN`, don’t load ADB. Don’t add a second method. Ignore a leftover `ADB.md` when METHOD is not ADB.
+Product behavior lives in files, not chat. If `METHOD.md` says `METHOD: ADB`, read this project’s `ADB.md` before DEFINE or BUILD (setup copy of `SKILL.md`). If `METHOD.md` is missing or `PLAIN`, don’t load ADB. Follow this app’s method files only. Ignore `ADB.md` when METHOD is not ADB.
 
 Proof: what you tested, how, what happened. UI → this harness’s browser. A CLI browser tool only if that browser is missing or broken after a real try. Never send the owner on a click tour. The owner only for 2FA, captcha, passkey, OS-blocked keys.
 
