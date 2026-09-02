@@ -225,4 +225,15 @@ ROOT CAUSE: Contrast against a former name teaches that name.
 PROPOSED CHANGE: Write only PLAIN and ADB. Do not mention other product methods, and do not say they used to exist.
 STATUS: ADOPTED — 2026-09-01.
 
+---
+
+## L-021 — METHOD.md did not follow a PLAIN↔ADB switch
+
+DATE: 2026-09-02
+PROJECT: ADB method
+SYMPTOM: Re-Start small↔large (or `risk=yes` forcing ADB) updated `OWNER.md` / `LESEN.html` and could install or skip `ADB.md`, while `METHOD.md` stayed on the old line. `--plain` left `ADB.md` and `/adb` commands in place. Agents then loaded the wrong method, or none.
+ROOT CAUSE: Setup refused to overwrite `METHOD.md` when it already said PLAIN or ADB. The WARN was meant to protect a silent setup, but Start's chosen method is the flags it already passes. Cleanup on PLAIN was never implemented.
+PROPOSED CHANGE: Flags are the method. Setup writes `METHOD.md` to match. `--plain` removes `ADB.md` and `/adb` commands; product `adb/` stays. `check-factory.sh` proves PLAIN, `risk=yes`, and both flips.
+STATUS: ADOPTED — 2026-09-02.
+
 
