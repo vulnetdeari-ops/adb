@@ -4,8 +4,11 @@
 # Does, idempotently:
 #   1. Copy factory AGENTS.md into the project as AGENTS.md (always) and stamp METHOD-VERSION
 #   2. Copy Rules/skills/start/SKILL.md as START.md and install /start (always)
-#   3. Unless --plain: METHOD.md = METHOD: ADB; copy SKILL.md as ADB.md; install /adb commands
-#   4. --plain: METHOD.md = METHOD: PLAIN; no ADB.md, no /adb commands
+#   3. Unless --plain: METHOD.md = METHOD: ADB (writes even if the file currently
+#      says PLAIN — Start small↔large and risk=yes); copy SKILL.md as ADB.md;
+#      install /adb commands
+#   4. --plain: METHOD.md = METHOD: PLAIN (writes even if the file currently says
+#      ADB); remove ADB.md and /adb commands. Product adb/ docs stay.
 #   5. Remove stray engine folders that are not this method
 #   6. Optionally ensure adb/08-OPEN-ISSUES.md (--register only; ADB mode)
 #   7. --refresh: overwrite AGENTS.md, START.md and (unless --plain) ADB.md from factory; reinstall commands
@@ -230,6 +233,8 @@ sync_stamped_copy() {
 }
 
 # --- METHOD.md ---
+# Flags are the requested method. Start (and risk=yes) pass them after the
+# interview. setup-without-interview still does not write OWNER.md / LESEN.html.
 method_md="$PROJECT/METHOD.md"
 write_method_line() {
   printf '%s\n' "$1" > "$method_md"
@@ -237,41 +242,57 @@ write_method_line() {
 }
 
 if [ $PLAIN -eq 1 ]; then
-  if [ ! -f "$method_md" ]; then
-    if [ $CHECK -eq 1 ]; then
-      echo "WOULD CREATE $method_md (METHOD: PLAIN)"
-    else
-      write_method_line 'METHOD: PLAIN'
-    fi
-  elif grep -qx 'METHOD: PLAIN' "$method_md" 2>/dev/null; then
-    :
-  elif grep -qx 'METHOD: ADB' "$method_md" 2>/dev/null; then
-    echo "WARN: $method_md is METHOD: ADB — not overwriting with PLAIN." >&2
-  else
-    if [ $CHECK -eq 1 ]; then
-      echo "WOULD WRITE METHOD: PLAIN in $method_md"
-    else
-      write_method_line 'METHOD: PLAIN'
-    fi
-  fi
+  desired_method='METHOD: PLAIN'
 else
-  if [ ! -f "$method_md" ]; then
-    if [ $CHECK -eq 1 ]; then
-      echo "WOULD CREATE $method_md (METHOD: ADB)"
-    else
-      write_method_line 'METHOD: ADB'
-    fi
-  elif grep -qx 'METHOD: ADB' "$method_md" 2>/dev/null; then
-    :
-  elif grep -qx 'METHOD: PLAIN' "$method_md" 2>/dev/null; then
-    echo "WARN: $method_md is METHOD: PLAIN — not overwriting with ADB." >&2
+  desired_method='METHOD: ADB'
+fi
+
+if [ ! -f "$method_md" ]; then
+  if [ $CHECK -eq 1 ]; then
+    echo "WOULD CREATE $method_md ($desired_method)"
   else
+    write_method_line "$desired_method"
+  fi
+elif grep -qx "$desired_method" "$method_md" 2>/dev/null; then
+  :
+else
+  if [ $CHECK -eq 1 ]; then
+    echo "WOULD WRITE $desired_method in $method_md"
+  else
+    write_method_line "$desired_method"
+  fi
+fi
+
+# ADB.md and /adb commands are method copies. Product adb/ (vision, spec, …) stays.
+remove_adb_method_artifacts() {
+  local path rel
+  if [ -e "$PROJECT/ADB.md" ] || [ -L "$PROJECT/ADB.md" ]; then
     if [ $CHECK -eq 1 ]; then
-      echo "WOULD WRITE METHOD: ADB in $method_md"
+      echo "WOULD REMOVE leftover $PROJECT/ADB.md"
     else
-      write_method_line 'METHOD: ADB'
+      rm -f "$PROJECT/ADB.md"
+      note_changed "ADB.md"
     fi
   fi
+  local sub
+  for sub in .cursor/commands .claude/commands .codex/prompts; do
+    [ -d "$PROJECT/$sub" ] || continue
+    shopt -s nullglob
+    for path in "$PROJECT/$sub"/adb.md "$PROJECT/$sub"/adb-*.md "$PROJECT/$sub"/adb-*.md.pre-adb.*; do
+      rel="${path#"$PROJECT"/}"
+      if [ $CHECK -eq 1 ]; then
+        echo "WOULD REMOVE leftover $path"
+      else
+        rm -f "$path"
+        note_changed "$rel"
+      fi
+    done
+    shopt -u nullglob
+  done
+}
+
+if [ $PLAIN -eq 1 ]; then
+  remove_adb_method_artifacts
 fi
 
 # --- AGENTS.md (copy of factory AGENTS.md; every product follows this file) ---

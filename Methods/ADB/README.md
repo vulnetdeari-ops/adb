@@ -23,7 +23,7 @@ Without the interview (no language question — not a finished first run if the 
 ./setup-into-project.sh --register /path/to/project   # optional: create adb/08-OPEN-ISSUES.md
 ```
 
-`setup-into-project.sh` copies factory `AGENTS.md` to project `AGENTS.md` (stamped `METHOD-VERSION`). Without `--plain` it also creates `METHOD.md` when missing, **copies `SKILL.md` to `ADB.md`**, installs slash commands as **copies**, and **does not** create `adb/08-OPEN-ISSUES.md` unless you pass `--register`. `--plain` writes `METHOD: PLAIN` and skips ADB. Existing product docs stay for DEFINE. If a copy is older than the factory file, setup reports `STALE` and does not stamp; `--refresh` updates copies (and commands, when ADB).
+`setup-into-project.sh` copies factory `AGENTS.md` to project `AGENTS.md` (stamped `METHOD-VERSION`). The flags are the method: without `--plain` it writes `METHOD: ADB` (including when the file currently says PLAIN), **copies `SKILL.md` to `ADB.md`**, and installs slash commands as **copies**. `--plain` writes `METHOD: PLAIN` (including when the file currently says ADB) and **removes** `ADB.md` and `/adb` commands. Product `adb/` docs stay. It **does not** create `adb/08-OPEN-ISSUES.md` unless you pass `--register`. Start still writes `OWNER.md` / `LESEN.html`; setup without the interview does not. If a copy is older than the factory file, setup reports `STALE` and does not stamp; `--refresh` updates copies (and commands, when ADB).
 
 Slash commands (`/adb`, `/adb-define`, `/adb-slice`, `/adb-review`, `/adb-status`, `/adb-triage`, `/adb-ready`) live in [`commands/`](commands/). They point at the project’s `ADB.md`.
 

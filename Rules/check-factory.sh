@@ -47,28 +47,97 @@ fi
 grep -qi 'factory' "$ERR" || { cat "$ERR" >&2; rm -f "$ERR"; fail "Start refusal did not mention factory"; }
 rm -f "$ERR"
 
-APP="$(mktemp -d)"
-Rules/start-into-project.sh \
-  --project "$APP" \
-  --language de \
-  --address du \
-  --tone direct \
-  --method adb \
-  --risk none \
-  --product "Factory check" >/dev/null
+has_adb_commands() {
+  local root="$1" f
+  for f in \
+    "$root/.cursor/commands"/adb.md \
+    "$root/.cursor/commands"/adb-*.md \
+    "$root/.claude/commands"/adb.md \
+    "$root/.claude/commands"/adb-*.md \
+    "$root/.codex/prompts"/adb.md \
+    "$root/.codex/prompts"/adb-*.md
+  do
+    [ -e "$f" ] && return 0
+  done
+  return 1
+}
 
-[ -s "$APP/AGENTS.md" ] || fail "Start did not write AGENTS.md"
+assert_adb_app() {
+  local root="$1" why="$2"
+  [ -s "$root/AGENTS.md" ] || fail "$why: AGENTS.md missing"
+  [ -s "$root/START.md" ] || fail "$why: START.md missing"
+  [ -s "$root/ADB.md" ] || fail "$why: ADB.md missing"
+  grep -qx 'METHOD: ADB' "$root/METHOD.md" || fail "$why: METHOD.md is not ADB"
+  has_adb_commands "$root" || fail "$why: /adb commands missing"
+  [ -f "$root/.cursor/commands/start.md" ] || fail "$why: /start command missing"
+}
+
+assert_plain_app() {
+  local root="$1" why="$2"
+  [ -s "$root/AGENTS.md" ] || fail "$why: AGENTS.md missing"
+  [ -s "$root/START.md" ] || fail "$why: START.md missing"
+  grep -qx 'METHOD: PLAIN' "$root/METHOD.md" || fail "$why: METHOD.md is not PLAIN"
+  [ ! -e "$root/ADB.md" ] || fail "$why: leftover ADB.md"
+  if has_adb_commands "$root"; then
+    fail "$why: leftover /adb commands"
+  fi
+  [ -f "$root/.cursor/commands/start.md" ] || fail "$why: /start command missing"
+}
+
+start_into() {
+  local root="$1" method="$2" risk="$3"
+  Rules/start-into-project.sh \
+    --project "$root" \
+    --language de \
+    --address du \
+    --tone direct \
+    --method "$method" \
+    --risk "$risk" \
+    --product "Factory check" >/dev/null
+}
+
+APP="$(mktemp -d)"
+PLAIN_APP="$(mktemp -d)"
+SETUP_PLAIN="$(mktemp -d)"
+RISK_APP="$(mktemp -d)"
+trap 'rm -rf "$APP" "$PLAIN_APP" "$SETUP_PLAIN" "$RISK_APP"' EXIT
+
+start_into "$APP" adb none
+assert_adb_app "$APP" "Start ADB"
+mkdir -p "$APP/adb"
+printf '%s\n' '# Vision' > "$APP/adb/01-VISION.md"
 [ -s "$APP/OWNER.md" ] || fail "Start did not write OWNER.md"
 [ -s "$APP/LESEN.html" ] || fail "Start did not write LESEN.html"
-[ -s "$APP/ADB.md" ] || fail "Start did not write ADB.md"
 grep -q '^METHOD-VERSION:' "$APP/AGENTS.md" || fail "app AGENTS.md has no METHOD-VERSION"
 head -1 "$APP/AGENTS.md" | grep -q '^METHOD-VERSION:' || fail "app AGENTS.md stamp is not first line"
 grep -q 'MainAgent' "$APP/AGENTS.md" || fail "app AGENTS.md is not the product rules"
 grep -q '^LANGUAGE: de' "$APP/OWNER.md" || fail "OWNER.md language was not stored"
-grep -qx 'METHOD: ADB' "$APP/METHOD.md" || fail "METHOD.md is not ADB"
 if grep -qiE '\bbmad\b' "$APP/LESEN.html" "$APP/AGENTS.md" "$APP/ADB.md" "$APP/START.md"; then
   fail "app copies still name a former method"
 fi
 
-rm -rf "$APP"
-echo "OK: factory can Start; app gets AGENTS.md"
+start_into "$PLAIN_APP" plain none
+assert_plain_app "$PLAIN_APP" "Start PLAIN"
+[ -s "$PLAIN_APP/OWNER.md" ] || fail "PLAIN Start did not write OWNER.md"
+grep -q '^METHOD: PLAIN' "$PLAIN_APP/OWNER.md" || fail "PLAIN OWNER.md METHOD is not PLAIN"
+
+Methods/ADB/setup-into-project.sh --plain "$SETUP_PLAIN" >/dev/null
+assert_plain_app "$SETUP_PLAIN" "setup --plain"
+[ ! -f "$SETUP_PLAIN/OWNER.md" ] || fail "setup-without-interview wrote OWNER.md"
+
+start_into "$APP" plain none
+assert_plain_app "$APP" "Start flip to PLAIN"
+[ -f "$APP/adb/01-VISION.md" ] || fail "PLAIN cleanup deleted product adb/"
+
+start_into "$APP" adb none
+assert_adb_app "$APP" "Start flip to ADB"
+
+start_into "$RISK_APP" plain yes
+assert_adb_app "$RISK_APP" "risk=yes from PLAIN"
+grep -q '^METHOD: ADB' "$RISK_APP/OWNER.md" || fail "risk=yes OWNER.md METHOD is not ADB"
+
+Methods/ADB/setup-into-project.sh --plain "$APP" >/dev/null
+assert_plain_app "$APP" "setup --plain after ADB"
+[ -f "$APP/adb/01-VISION.md" ] || fail "setup --plain deleted product adb/"
+
+echo "OK: factory can Start; PLAIN, risk=yes, and METHOD flips match"
