@@ -232,8 +232,8 @@ STATUS: ADOPTED — 2026-09-01.
 DATE: 2026-09-02
 PROJECT: ADB method
 SYMPTOM: Re-Start small↔large (or `risk=yes` forcing ADB) updated `OWNER.md` / `LESEN.html` and could install or skip `ADB.md`, while `METHOD.md` stayed on the old line. `--plain` left `ADB.md` and `/adb` commands in place. Agents then loaded the wrong method, or none.
-ROOT CAUSE: Setup refused to overwrite `METHOD.md` when it already said PLAIN or ADB. The WARN was meant to protect a silent setup, but Start's chosen method is the flags it already passes. Cleanup on PLAIN was never implemented.
-PROPOSED CHANGE: Flags are the method. Setup writes `METHOD.md` to match. `--plain` removes `ADB.md` and `/adb` commands; product `adb/` stays. `check-factory.sh` proves PLAIN, `risk=yes`, and both flips.
+ROOT CAUSE: Setup refused to overwrite `METHOD.md` when it already said PLAIN or ADB, so Start could not switch. Cleanup on PLAIN was never implemented. Honoring flags on every setup call then let `--refresh` invent a switch and desync `OWNER.md` / `LESEN.html`.
+PROPOSED CHANGE: Start is the switch (`--switch`). Setup writes `METHOD.md` from flags only on first layout or `--switch`. `--plain` then removes `ADB.md` and `/adb` commands; product `adb/` stays. `--refresh` without Start does not flip. `check-factory.sh` proves PLAIN, `risk=yes`, both Start flips, and that setup/refresh without Start keep the existing method.
 STATUS: ADOPTED — 2026-09-02.
 
 

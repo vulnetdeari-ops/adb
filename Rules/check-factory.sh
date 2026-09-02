@@ -70,6 +70,12 @@ assert_adb_app() {
   grep -qx 'METHOD: ADB' "$root/METHOD.md" || fail "$why: METHOD.md is not ADB"
   has_adb_commands "$root" || fail "$why: /adb commands missing"
   [ -f "$root/.cursor/commands/start.md" ] || fail "$why: /start command missing"
+  if [ -f "$root/OWNER.md" ]; then
+    grep -q '^METHOD: ADB' "$root/OWNER.md" || fail "$why: OWNER.md METHOD is not ADB"
+  fi
+  if [ -f "$root/LESEN.html" ]; then
+    grep -q 'Große Methode' "$root/LESEN.html" || fail "$why: LESEN.html is not ADB"
+  fi
 }
 
 assert_plain_app() {
@@ -82,6 +88,12 @@ assert_plain_app() {
     fail "$why: leftover /adb commands"
   fi
   [ -f "$root/.cursor/commands/start.md" ] || fail "$why: /start command missing"
+  if [ -f "$root/OWNER.md" ]; then
+    grep -q '^METHOD: PLAIN' "$root/OWNER.md" || fail "$why: OWNER.md METHOD is not PLAIN"
+  fi
+  if [ -f "$root/LESEN.html" ]; then
+    grep -q 'Kleine Methode' "$root/LESEN.html" || fail "$why: LESEN.html is not PLAIN"
+  fi
 }
 
 start_into() {
@@ -136,8 +148,15 @@ start_into "$RISK_APP" plain yes
 assert_adb_app "$RISK_APP" "risk=yes from PLAIN"
 grep -q '^METHOD: ADB' "$RISK_APP/OWNER.md" || fail "risk=yes OWNER.md METHOD is not ADB"
 
-Methods/ADB/setup-into-project.sh --plain "$APP" >/dev/null
-assert_plain_app "$APP" "setup --plain after ADB"
-[ -f "$APP/adb/01-VISION.md" ] || fail "setup --plain deleted product adb/"
+NO_SWITCH="$(mktemp)"
+Methods/ADB/setup-into-project.sh --plain "$APP" >/dev/null 2>"$NO_SWITCH"
+assert_adb_app "$APP" "setup --plain without Start stays ADB"
+grep -qi 'not switching' "$NO_SWITCH" || fail "setup --plain on ADB without Start should warn"
+[ -f "$APP/adb/01-VISION.md" ] || fail "setup --plain without Start deleted product adb/"
+
+Methods/ADB/setup-into-project.sh --refresh "$PLAIN_APP" >/dev/null 2>"$NO_SWITCH"
+assert_plain_app "$PLAIN_APP" "--refresh without --plain stays PLAIN"
+grep -qi 'not switching' "$NO_SWITCH" || fail "--refresh on PLAIN without Start should warn"
+rm -f "$NO_SWITCH"
 
 echo "OK: factory can Start; PLAIN, risk=yes, and METHOD flips match"

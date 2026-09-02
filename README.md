@@ -42,7 +42,7 @@ Writes `AGENTS.md` (copy of this repo’s `AGENTS.md`), `START.md`, `/start`, an
 
 Also writes `METHOD: ADB`, `ADB.md` (copy of `SKILL.md`), and `/adb` commands. Factory preview: `Methods/ADB/ADB-LESEN-DE.html`.
 
-`--refresh` overwrites the method copies from the factory (`AGENTS.md`, `ADB.md`, `START.md`). It does not invent new owner answers. Re-run `/start` to change language, tone, or small↔large — that writes `METHOD.md` to the chosen method (`risk=yes` forces ADB) and PLAIN removes leftover `ADB.md` / `/adb` commands. `./Rules/start-into-project.sh --lesen-only --project /path/to/app` rebuilds `LESEN.html` from `OWNER.md`.
+`--refresh` overwrites the method copies from the factory (`AGENTS.md`, `ADB.md`, `START.md`). It does not invent new owner answers and does not switch PLAIN↔ADB. Re-run `/start` to change language, tone, or small↔large — Start passes `--switch` so `METHOD.md` matches (`risk=yes` forces ADB) and PLAIN removes leftover `ADB.md` / `/adb` commands. `./Rules/start-into-project.sh --lesen-only --project /path/to/app` rebuilds `LESEN.html` from `OWNER.md`.
 
 ## Clone
 
