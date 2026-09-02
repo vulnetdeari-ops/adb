@@ -4,14 +4,14 @@
 # Does, idempotently:
 #   1. Copy factory AGENTS.md into the project as AGENTS.md (always) and stamp METHOD-VERSION
 #   2. Copy Rules/skills/start/SKILL.md as START.md and install /start (always)
-#   3. Unless --plain: METHOD.md = METHOD: ADB (writes even if the file currently
-#      says PLAIN — Start small↔large and risk=yes); copy SKILL.md as ADB.md;
-#      install /adb commands
-#   4. --plain: METHOD.md = METHOD: PLAIN (writes even if the file currently says
-#      ADB); remove ADB.md and /adb commands. Product adb/ docs stay.
+#   3. Unless --plain: METHOD.md = METHOD: ADB; copy SKILL.md as ADB.md;
+#      install /adb commands. Writes a new METHOD.md. Does not switch an
+#      existing PLAIN/ADB line unless --switch (Start small↔large / risk=yes).
+#   4. --plain: METHOD.md = METHOD: PLAIN; remove ADB.md and /adb commands.
+#      Product adb/ docs stay. Existing ADB line: same rule as (3) — need --switch.
 #   5. Remove stray engine folders that are not this method
 #   6. Optionally ensure adb/08-OPEN-ISSUES.md (--register only; ADB mode)
-#   7. --refresh: overwrite AGENTS.md, START.md and (unless --plain) ADB.md from factory; reinstall commands
+#   7. --refresh: overwrite AGENTS.md, START.md and (unless PLAIN) ADB.md from factory; reinstall commands
 #
 # OWNER.md and LESEN.html are written by Rules/start-into-project.sh, not this script.
 #
@@ -21,6 +21,7 @@
 #   ./setup-into-project.sh --check /path/to/project
 #   ./setup-into-project.sh --refresh /path/to/project
 #   ./setup-into-project.sh --register /path/to/project
+#   ./setup-into-project.sh --switch --plain /path/to/project   # Start only: flip method
 #
 # Exit 0 on success. Prints changed paths, one per line, prefixed with CHANGED:
 
@@ -38,6 +39,7 @@ CHECK=0
 REFRESH=0
 REGISTER=0
 PLAIN=0
+SWITCH=0
 PROJECT=""
 
 for arg in "$@"; do
@@ -46,6 +48,7 @@ for arg in "$@"; do
     --refresh) REFRESH=1 ;;
     --register) REGISTER=1 ;;
     --plain) PLAIN=1 ;;
+    --switch) SWITCH=1 ;;
     -*) echo "unknown argument: $arg" >&2; exit 2 ;;
     *)
       if [ -n "$PROJECT" ]; then
@@ -57,16 +60,12 @@ for arg in "$@"; do
   esac
 done
 
-[ -n "$PROJECT" ] || { echo "usage: $0 [--check] [--refresh] [--register] [--plain] /path/to/project" >&2; exit 2; }
+[ -n "$PROJECT" ] || { echo "usage: $0 [--check] [--refresh] [--register] [--plain] [--switch] /path/to/project" >&2; exit 2; }
 [ -d "$PROJECT" ] || { echo "not a directory: $PROJECT" >&2; exit 1; }
 [ -f "$AGENTS_SRC" ] || { echo "AGENTS.md missing: $AGENTS_SRC" >&2; exit 1; }
 grep -q 'MainAgent' "$AGENTS_SRC" || { echo "AGENTS.md source is not the product rules: $AGENTS_SRC" >&2; exit 1; }
 [ -f "$START_SKILL" ] || { echo "START skill missing: $START_SKILL" >&2; exit 1; }
 [ -f "$START_CMD" ] || { echo "start command missing: $START_CMD" >&2; exit 1; }
-if [ $PLAIN -eq 0 ]; then
-  [ -f "$SKILL" ] || { echo "SKILL.md missing: $SKILL" >&2; exit 1; }
-  [ -x "$INSTALLER" ] || { echo "install-commands.sh missing or not executable: $INSTALLER" >&2; exit 1; }
-fi
 
 PROJECT="$(cd "$PROJECT" && pwd -P)"
 sha="$(git -C "$SYSTEM_ROOT" rev-parse --short HEAD 2>/dev/null || echo unknown)"
@@ -233,8 +232,9 @@ sync_stamped_copy() {
 }
 
 # --- METHOD.md ---
-# Flags are the requested method. Start (and risk=yes) pass them after the
-# interview. setup-without-interview still does not write OWNER.md / LESEN.html.
+# Flags are the requested method on first write. An existing PLAIN/ADB line
+# changes only with --switch (Start). setup-without-interview does not write
+# OWNER.md / LESEN.html and does not invent a method switch.
 method_md="$PROJECT/METHOD.md"
 write_method_line() {
   printf '%s\n' "$1" > "$method_md"
@@ -247,20 +247,45 @@ else
   desired_method='METHOD: ADB'
 fi
 
-if [ ! -f "$method_md" ]; then
-  if [ $CHECK -eq 1 ]; then
-    echo "WOULD CREATE $method_md ($desired_method)"
-  else
-    write_method_line "$desired_method"
+existing_method=""
+if [ -f "$method_md" ]; then
+  if grep -qx 'METHOD: PLAIN' "$method_md" 2>/dev/null; then
+    existing_method='METHOD: PLAIN'
+  elif grep -qx 'METHOD: ADB' "$method_md" 2>/dev/null; then
+    existing_method='METHOD: ADB'
   fi
-elif grep -qx "$desired_method" "$method_md" 2>/dev/null; then
-  :
+fi
+
+if [ $SWITCH -eq 1 ] || [ -z "$existing_method" ]; then
+  if [ ! -f "$method_md" ]; then
+    if [ $CHECK -eq 1 ]; then
+      echo "WOULD CREATE $method_md ($desired_method)"
+    else
+      write_method_line "$desired_method"
+    fi
+  elif grep -qx "$desired_method" "$method_md" 2>/dev/null; then
+    :
+  else
+    if [ $CHECK -eq 1 ]; then
+      echo "WOULD WRITE $desired_method in $method_md"
+    else
+      write_method_line "$desired_method"
+    fi
+  fi
 else
-  if [ $CHECK -eq 1 ]; then
-    echo "WOULD WRITE $desired_method in $method_md"
-  else
-    write_method_line "$desired_method"
+  if [ "$existing_method" != "$desired_method" ]; then
+    echo "WARN: $method_md is $existing_method — not switching to ${desired_method#METHOD: }. Re-run Start to switch." >&2
   fi
+  if [ "$existing_method" = 'METHOD: PLAIN' ]; then
+    PLAIN=1
+  else
+    PLAIN=0
+  fi
+fi
+
+if [ $PLAIN -eq 0 ]; then
+  [ -f "$SKILL" ] || { echo "SKILL.md missing: $SKILL" >&2; exit 1; }
+  [ -x "$INSTALLER" ] || { echo "install-commands.sh missing or not executable: $INSTALLER" >&2; exit 1; }
 fi
 
 # ADB.md and /adb commands are method copies. Product adb/ (vision, spec, …) stays.

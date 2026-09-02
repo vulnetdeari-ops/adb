@@ -214,7 +214,7 @@ Do not add or drop method rules while translating. Then tell the owner, in their
 
 Then they can give the first product job. Start does not invent that job.
 
-Re-run: same seven questions. The script overwrites `OWNER.md` and `LESEN.html`. Switching small→large or large→small is allowed; setup writes `METHOD.md` to match and (on PLAIN) removes `ADB.md` and `/adb` commands. `risk=yes` forces ADB the same way. `--refresh` on setup still updates `AGENTS.md` / `ADB.md` / `START.md` from the factory; it does not invent new owner answers.
+Re-run: same seven questions. The script overwrites `OWNER.md` and `LESEN.html`. Switching small→large or large→small is allowed; Start passes `--switch` so setup writes `METHOD.md` to match and (on PLAIN) removes `ADB.md` and `/adb` commands. `risk=yes` forces ADB the same way. `--refresh` on setup still updates `AGENTS.md` / `ADB.md` / `START.md` from the factory; it does not invent new owner answers and does not switch the method.
 
 ⸻
 

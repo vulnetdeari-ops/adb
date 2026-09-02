@@ -335,6 +335,7 @@ if [ $LESEN_ONLY -eq 0 ]; then
   setup_args=()
   [ $REFRESH -eq 1 ] && setup_args+=(--refresh)
   [ "$METHOD" = "plain" ] && setup_args+=(--plain)
+  setup_args+=(--switch)
   setup_args+=("$PROJECT")
   "$SETUP" "${setup_args[@]}"
   [ -s "$PROJECT/AGENTS.md" ] || { echo "FAIL: setup did not write AGENTS.md in $PROJECT" >&2; exit 1; }
