@@ -159,4 +159,46 @@ assert_plain_app "$PLAIN_APP" "--refresh without --plain stays PLAIN"
 grep -qi 'not switching' "$NO_SWITCH" || fail "--refresh on PLAIN without Start should warn"
 rm -f "$NO_SWITCH"
 
-echo "OK: factory can Start; PLAIN, risk=yes, and METHOD flips match"
+# --- Git hooks: secrets blocked at commit, main blocked at push ---
+HOOK_APP="$(mktemp -d)"
+HOOK_REMOTE="$(mktemp -d)"
+trap 'rm -rf "$APP" "$PLAIN_APP" "$SETUP_PLAIN" "$RISK_APP" "$HOOK_APP" "$HOOK_REMOTE"' EXIT
+git init -q -b main "$HOOK_APP"
+git -C "$HOOK_APP" config user.email factory@check
+git -C "$HOOK_APP" config user.name factory
+git init -q --bare -b main "$HOOK_REMOTE"
+git -C "$HOOK_APP" remote add origin "$HOOK_REMOTE"
+Methods/ADB/setup-into-project.sh --plain "$HOOK_APP" >/dev/null
+[ -x "$HOOK_APP/.git/hooks/pre-commit" ] || fail "setup did not install pre-commit hook"
+[ -x "$HOOK_APP/.git/hooks/pre-push" ] || fail "setup did not install pre-push hook"
+
+printf 'harmless\n' > "$HOOK_APP/README.md"
+git -C "$HOOK_APP" add README.md
+git -C "$HOOK_APP" commit -q -m "harmless" || fail "pre-commit blocked a harmless commit"
+
+printf 'DB_PASSWORD=real-secret-value-123\n' > "$HOOK_APP/.env"
+git -C "$HOOK_APP" add -f .env
+if git -C "$HOOK_APP" commit -q -m "leak" 2>/dev/null; then
+  fail "pre-commit did not block a staged .env"
+fi
+git -C "$HOOK_APP" reset -q HEAD .env; rm -f "$HOOK_APP/.env"
+
+printf 'key = "AKIAABCDEFGHIJKLMNOP"\n' > "$HOOK_APP/config.py"
+git -C "$HOOK_APP" add config.py
+if git -C "$HOOK_APP" commit -q -m "leak2" 2>/dev/null; then
+  fail "pre-commit did not block an AWS key in content"
+fi
+git -C "$HOOK_APP" reset -q HEAD config.py; rm -f "$HOOK_APP/config.py"
+
+printf 'DB_PASSWORD=changeme-example\n' > "$HOOK_APP/.env.example"
+git -C "$HOOK_APP" add .env.example
+git -C "$HOOK_APP" commit -q -m "example" || fail "pre-commit blocked .env.example"
+
+if git -C "$HOOK_APP" push -q origin main 2>/dev/null; then
+  fail "pre-push did not block main"
+fi
+git -C "$HOOK_APP" checkout -q -b feature
+git -C "$HOOK_APP" push -q origin feature 2>/dev/null || fail "pre-push blocked a feature branch"
+ALLOW_MAIN_PUSH=1 git -C "$HOOK_APP" push -q origin main 2>/dev/null || fail "ALLOW_MAIN_PUSH=1 did not allow main"
+
+echo "OK: factory can Start; PLAIN, risk=yes, and METHOD flips match; hooks block secrets and main"

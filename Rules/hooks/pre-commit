@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# Method hook (installed by setup-into-project.sh). Blocks commits that carry secrets.
+# No bypass flag on purpose. False alarm: tell the owner, do not use --no-verify.
+set -u
+
+staged="$(git diff --cached --name-only --diff-filter=ACM)"
+[ -n "$staged" ] || exit 0
+
+bad=0
+
+# 1. Files that are secrets by name.
+while IFS= read -r f; do
+  [ -n "$f" ] || continue
+  base="$(basename "$f")"
+  case "$base" in
+    .env|.env.local|.env.production|.env.development|.env.staging) ;;
+    *.pem|*.key|*.p12|*.pfx|id_rsa|id_ed25519|id_ecdsa|.clasprc.json|.npmrc|.netrc|.htpasswd|service-account*.json|*credentials*.json|*secret*.json) ;;
+    *) continue ;;
+  esac
+  case "$base" in
+    *.example|*.sample|*.template|*.dist) continue ;;
+  esac
+  echo "BLOCKED: secret file staged: $f" >&2
+  bad=1
+done <<< "$staged"
+
+# 2. Secret-looking content in the staged diff (added lines only).
+patterns='AKIA[0-9A-Z]{16}|ASIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----|ghp_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{22,}|gho_[A-Za-z0-9]{36}|sk-[A-Za-z0-9_-]{20,}|sk-ant-[A-Za-z0-9_-]{20,}|xox[baprs]-[A-Za-z0-9-]{10,}|AIza[0-9A-Za-z_-]{35}|ya29\.[0-9A-Za-z_-]{20,}|SG\.[A-Za-z0-9_-]{22}\.[A-Za-z0-9_-]{43}|glpat-[A-Za-z0-9_-]{20}|eyJ[A-Za-z0-9_-]{30,}\.eyJ[A-Za-z0-9_-]{30,}\.[A-Za-z0-9_-]{20,}'
+
+hits="$(git diff --cached --unified=0 --no-color -- . \
+  | grep -E '^\+' | grep -Ev '^\+\+\+' \
+  | grep -E "$patterns" \
+  | grep -Eiv 'example|sample|placeholder|changeme|your[-_ ]|xxxx|dummy|redacted' || true)"
+if [ -n "$hits" ]; then
+  echo "BLOCKED: secret-looking value in staged changes:" >&2
+  printf '%s\n' "$hits" | cut -c1-120 | sed 's/^/  /' >&2
+  bad=1
+fi
+
+# 3. Assignments like password=..., api_key: "..." with a real-looking value.
+assign="$(git diff --cached --unified=0 --no-color -- . \
+  | grep -E '^\+' | grep -Ev '^\+\+\+' \
+  | grep -Ei '(password|passwd|secret|api[_-]?key|access[_-]?token|auth[_-]?token|client[_-]?secret)["'"'"']?[[:space:]]*[:=][[:space:]]*["'"'"'][^"'"'"']{8,}["'"'"']' \
+  | grep -Eiv 'example|sample|placeholder|changeme|your[-_ ]|xxxx|dummy|redacted|\$\{|\$[A-Z_]|getenv|process\.env|os\.environ|<[^>]+>' || true)"
+if [ -n "$assign" ]; then
+  echo "BLOCKED: hard-coded credential in staged changes:" >&2
+  printf '%s\n' "$assign" | cut -c1-120 | sed 's/^/  /' >&2
+  bad=1
+fi
+
+if [ $bad -eq 1 ]; then
+  echo "Secrets never go into git. Move the value to the project's secret store and stage again." >&2
+  exit 1
+fi
+exit 0

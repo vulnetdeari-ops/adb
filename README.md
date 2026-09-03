@@ -44,6 +44,10 @@ Also writes `METHOD: ADB`, `ADB.md` (copy of `SKILL.md`), and `/adb` commands. F
 
 `--refresh` overwrites the method copies from the factory (`AGENTS.md`, `ADB.md`, `START.md`). It does not invent new owner answers and does not switch PLAIN↔ADB. Re-run `/start` to change language, tone, or small↔large — Start passes `--switch` so `METHOD.md` matches (`risk=yes` forces ADB) and PLAIN removes leftover `ADB.md` / `/adb` commands. `./Rules/start-into-project.sh --lesen-only --project /path/to/app` rebuilds `LESEN.html` from `OWNER.md`.
 
+## Change cadence
+
+The method changes only in this factory, after the owner approves. Collect changes; refresh product projects (`setup-into-project.sh --refresh`) at most once a month, unless a defect blocks real work. Every change gets a `LESSONS.md` entry. Hard rules go into `Rules/hooks/` (git hooks setup installs), not into more prose.
+
 ## Clone
 
 ```bash

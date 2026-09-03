@@ -496,6 +496,47 @@ else
   install_start_cmd
 fi
 
+# --- Git hooks (hard rules: no secrets in commits, no push to main without the owner) ---
+HOOKS_SRC="$SYSTEM_ROOT/Rules/hooks"
+install_hooks() {
+  local hooks_dir name src dest
+  hooks_dir="$(git -C "$PROJECT" rev-parse --git-path hooks 2>/dev/null || true)"
+  if [ -z "$hooks_dir" ]; then
+    if [ $CHECK -eq 1 ]; then echo "NOTE: not a git repository — method hooks not installed."; fi
+    return 0
+  fi
+  case "$hooks_dir" in
+    /*) ;;
+    [A-Za-z]:/*) ;;
+    *) hooks_dir="$PROJECT/$hooks_dir" ;;
+  esac
+  for name in pre-commit pre-push; do
+    src="$HOOKS_SRC/$name"
+    [ -f "$src" ] || continue
+    dest="$hooks_dir/$name"
+    if [ -f "$dest" ] && cmp -s "$src" "$dest"; then
+      continue
+    fi
+    if [ -f "$dest" ] && ! grep -q '^# Method hook' "$dest"; then
+      if [ $CHECK -eq 1 ]; then
+        echo "WOULD BACK UP foreign hook $dest to $dest.pre-method"
+      else
+        mv "$dest" "$dest.pre-method"
+        echo "WARN: existing $name hook moved to $dest.pre-method — merge it by hand if it matters." >&2
+      fi
+    fi
+    if [ $CHECK -eq 1 ]; then
+      echo "WOULD INSTALL $dest"
+      continue
+    fi
+    mkdir -p "$hooks_dir"
+    cp "$src" "$dest"
+    chmod +x "$dest"
+    note_changed "git hook $name"
+  done
+}
+install_hooks
+
 if [ $CHECK -eq 0 ]; then
   if [ ! -s "$PROJECT/AGENTS.md" ]; then
     echo "FAIL: AGENTS.md was not written to $PROJECT/AGENTS.md" >&2

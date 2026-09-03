@@ -247,3 +247,14 @@ ROOT CAUSE: L-019 banned letters in the prompt so agents never showed A/B/C when
 PROPOSED CHANGE: Chips when the harness has a native clickable picker; otherwise lettered A/B/C with the same short labels. Never both at once. Click, label, or letter all count.
 STATUS: ADOPTED — 2026-09-03. `AGENTS.md` Talk, Start skill, `FEATURE-decision-options.md`, LESEN templates.
 
+
+---
+
+## L-023 — Daily rule files carried setup mechanics; hard rules were only prose
+
+DATE: 2026-09-03
+PROJECT: ADB method
+SYMPTOM: `AGENTS.md` (84 lines) spent about a quarter on Start triggers, factory notes, harness home links, and the chips-vs-letters history. `ADB.md` opened with stamp and STALE mechanics. Agents read that every session and it protects nothing. Rules that must never fail (secrets in git, push to main without the owner) were sentences an agent could forget. The method changed 22 times in 8 days; several lessons reversed each other, and every change meant a refresh in every project.
+ROOT CAUSE: One file served three readers: the daily agent, the setup script, and the first-run. Guarantees were written as advice. No cadence for method changes.
+PROPOSED CHANGE: `AGENTS.md` keeps only what prevents mistakes in daily work (Talk, Truth, Work, Hold); Start lives in `START.md`, mechanics in the scripts. `ADB.md` drops stamp/STALE text. Two git hooks installed by setup: pre-commit blocks secrets, pre-push blocks main unless `ALLOW_MAIN_PUSH=1`. Owner conduct rules that had lived in a harness system prompt (mirror before acting, do it or offer it, ask before delete/deploy/money/live data, landing by squash, no local memory) move into `AGENTS.md`. Method changes are collected and refreshed into projects at most monthly unless a defect blocks work.
+STATUS: ADOPTED — 2026-09-03.

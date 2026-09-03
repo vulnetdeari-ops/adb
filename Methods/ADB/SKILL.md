@@ -5,19 +5,13 @@ description: "Ask. Decide. Build. Setup copies this file into each project as AD
 
 # ADB
 
-Ask. Decide. Build. Canonical: this file. Setup copies it into every project as `ADB.md`. Follow that copy. `--refresh` updates it.
-
-Stamp as first line after YAML frontmatter (never above `---`):
-
-    METHOD-VERSION: <short git sha of this repo> <date>
-
-Never stamp a body you did not refresh. If the copy differs from this file (ignore the stamp): STALE. `--refresh` to update, or stay on the older version on purpose.
+Ask. Decide. Build. Canonical: this file. Setup copies it into every project as `ADB.md`, stamps `METHOD-VERSION`, and `--refresh` keeps it current. Follow that copy; never hand-edit it.
 
 **Job:** The owner knows where the product must land. They are not the coder, not the tester, not the one who signs into every site. Write that destination in `adb/`. Then CodeAgent builds it in slices that fit in context and proves it (browser, tests, logins). They choose only when the prompt means two different products or scopes (chips when clickable, else A/B/C). Not a fake company.
 
-Talk, proof, secrets, git, roles: this project’s `AGENTS.md` (setup copy of factory `AGENTS.md`). Do not contradict it. ADB jobs: MainAgent starts PlanAgent / CodeAgent / ReviewAgent as subagents. Do not invent other worker types.
+Talk, proof, secrets, git, roles: this project’s `AGENTS.md`. Do not contradict it. ADB jobs: MainAgent starts PlanAgent / CodeAgent / ReviewAgent as subagents. Do not invent other worker types.
 
-Activates **only** when `METHOD.md` contains `METHOD: ADB`. Missing or `PLAIN` → do not load. Follow the project’s `ADB.md`. Existing product docs in the app are DEFINE evidence, not `adb/`. Slash commands and `AGENTS.md` live **in the project** as copies. First run: `/start` (`START.md`). Helper: `setup-into-project.sh` (`--plain` for rules only) or `Rules/start-into-project.sh`. Method source: `Methods/ADB` in this repository. Method defects: `LESSONS.md`.
+Activates **only** when `METHOD.md` contains `METHOD: ADB`. Missing or `PLAIN` → do not load. Existing product docs in the app are DEFINE evidence, not `adb/`. Method defects: `LESSONS.md` in the factory.
 
 Product truth is `adb/`. Chat is not. A later agent reads `adb/`, not the interview.
 
