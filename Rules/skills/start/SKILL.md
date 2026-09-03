@@ -11,7 +11,7 @@ Not ADB itself. Start only **chooses** PLAIN or ADB and lays down files.
 
 Talk, proof, secrets, git, roles: the project’s `AGENTS.md`. Do not contradict it.
 
-**Job:** the owner answers a **fixed** list of questions. Every question **offers chips**. They never have to invent an option. After the last answer: write files, say what landed and where to read, then they can build. Do not add questions. Do not skip the listed ones unless already answered in this thread.
+**Job:** the owner answers a **fixed** list of questions. Every question offers options (**chips** when clickable, else A/B/C). They never have to invent an option. After the last answer: write files, say what landed and where to read, then they can build. Do not add questions. Do not skip the listed ones unless already answered in this thread.
 
 MainAgent directs. CodeAgent runs `Rules/start-into-project.sh` (factory) and writes nothing by hand that the script already writes.
 
@@ -35,25 +35,25 @@ If this workspace **is** the method factory (`AGENTS.md` at repo root, `Methods/
 
 ## How to ask
 
-One question at a time. Offer **chips**, not A/B/C. Last chip is always **Entscheide du** / Decide for me. Chip text: 1–4 words.
+One question at a time. Offer **chips** when clickable, else A/B/C. Last option is always **Entscheide du** / Decide for me. Label text: 1–4 words.
 
-If this harness has a native multiple-choice tool that renders clickable chips (Cursor: `AskQuestion`): call it with **one** question and the chips below as `options` (`id` = the store key or a short slug, `label` = the chip). Do not also print letters.
+If this harness has a native multiple-choice tool that renders clickable chips (Cursor: `AskQuestion`): call it with **one** question and the options below as `options` (`id` = the store key or a short slug, `label` = the chip). Do **not** also print A/B/C.
 
-If that tool is missing: print the question, then one row of the same labels in backticks. No A, B, C.
+If that tool is missing: print the question, then lettered options (`A` `B` `C` …) with the same short labels. Last letter = decide-for-me.
 
-Wait for a pick (click, chip label, or — if they still type a letter — map in listed order). Then the next question.
+Wait for a pick (click, matching label, or letter — map letters in listed order). Then the next question.
 
-Ask **Q1 in the language they already used**. After Q1, ask the rest in the chosen language (decide-for-me → the language they used). Use that language’s chip labels.
+Ask **Q1 in the language they already used**. After Q1, ask the rest in the chosen language (decide-for-me → the language they used). Use that language’s option labels.
 
 Do not rephrase options into new products. Do not ask stack, colors, hosting, or “any more questions?”.
 
-The only typed values allowed (not chips):
+The only typed values allowed beyond picking an option:
 
 - A language name, if they pick “Ich tippe die Sprache” / “Type language” (any language: Italiano, Shqip, 日本語, …).
-- A folder path, if they pick the type-the-path chip.
-- One product sentence, if they pick the type-a-sentence chip.
+- A folder path, if they pick the type-the-path option.
+- One product sentence, if they pick the type-a-sentence option.
 
-If unclear: show the **same chips** again, once.
+If unclear: show the **same options** again, once.
 
 ⸻
 

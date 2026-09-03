@@ -212,7 +212,7 @@ PROJECT: ADB method
 SYMPTOM: Start and Decision Questions asked A/B/C. The owner does not want to type letters. They asked for chips.
 ROOT CAUSE: L-007 rejected chips because long label text was worse than a letter. That banned the click UI instead of banning only long labels.
 PROPOSED CHANGE: Short chips (1–4 words), last = decide-for-me. Native picker when the harness has one (Cursor `AskQuestion`). No letters in the prompt. Typed A/B/C still maps. Long chip sentences stay forbidden.
-STATUS: ADOPTED — 2026-09-01. `FEATURE-decision-options.md`, `AGENTS.md`, `START.md`.
+STATUS: ADOPTED — 2026-09-01. SUPERSEDED in part by L-022 (A/B/C when chips are not clickable). `FEATURE-decision-options.md`, `AGENTS.md`, `START.md`.
 
 ---
 
@@ -236,4 +236,14 @@ ROOT CAUSE: Setup refused to overwrite `METHOD.md` when it already said PLAIN or
 PROPOSED CHANGE: Start is the switch (`--switch`). Setup writes `METHOD.md` from flags only on first layout or `--switch`. `--plain` then removes `ADB.md` and `/adb` commands; product `adb/` stays. `--refresh` without Start does not flip. `check-factory.sh` proves PLAIN, `risk=yes`, both Start flips, and that setup/refresh without Start keep the existing method.
 STATUS: ADOPTED — 2026-09-02.
 
+---
+
+## L-022 — A/B/C when chips are not clickable
+
+DATE: 2026-09-03
+PROJECT: ADB method
+SYMPTOM: Short chip labels in backticks (or a missing native picker) are not clickable in every harness. The owner could not reliably answer Start and Decision Questions without inventing a format.
+ROOT CAUSE: L-019 banned letters in the prompt so agents never showed A/B/C when `AskQuestion` was absent. Backtick rows do not equal a click UI.
+PROPOSED CHANGE: Chips when the harness has a native clickable picker; otherwise lettered A/B/C with the same short labels. Never both at once. Click, label, or letter all count.
+STATUS: ADOPTED — 2026-09-03. `AGENTS.md` Talk, Start skill, `FEATURE-decision-options.md`, LESEN templates.
 

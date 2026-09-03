@@ -1,12 +1,12 @@
 # Method factory
 
-One repository. Two methods. **Start** asks with offered chips, then copies files **into each product project**.
+One repository. Two methods. **Start** asks with offered options (chips when clickable, else A/B/C), then copies files **into each product project**.
 
 This folder is the factory, not an app. The file `AGENTS.md` at the top of this repo is the living agent rules. After Start, the **app** gets its own copy. Daily work happens in the app.
 
 **First run** (clone this repo, open it, say **Start** or `/start`):
 
-The owner picks **any language** (chips for common ones, or they type the name), address, tone, small or large, risk, and the **app folder**. They do not invent options. **When the owner is in chat, this interview is the first run.** Do not skip it with `setup-into-project.sh` — that path does not ask language.
+The owner picks **any language** (chips or A/B/C for common ones, or they type the name), address, tone, small or large, risk, and the **app folder**. They do not invent options. **When the owner is in chat, this interview is the first run.** Do not skip it with `setup-into-project.sh` — that path does not ask language.
 
 Start writes into the **app**: `METHOD.md`, `AGENTS.md`, `OWNER.md`, `LESEN.html` in that language, `START.md`, and `/start`. Large also gets `ADB.md` and `/adb` commands. Deutsch and English use shipped pages; any other language is translated from the English page before Start is done.
 
