@@ -258,3 +258,14 @@ SYMPTOM: `AGENTS.md` (84 lines) spent about a quarter on Start triggers, factory
 ROOT CAUSE: One file served three readers: the daily agent, the setup script, and the first-run. Guarantees were written as advice. No cadence for method changes.
 PROPOSED CHANGE: `AGENTS.md` keeps only what prevents mistakes in daily work (Talk, Truth, Work, Hold); Start lives in `START.md`, mechanics in the scripts. `ADB.md` drops stamp/STALE text. Two git hooks installed by setup: pre-commit blocks secrets, pre-push blocks main unless `ALLOW_MAIN_PUSH=1`. Owner conduct rules that had lived in a harness system prompt (mirror before acting, do it or offer it, ask before delete/deploy/money/live data, landing by squash, no local memory) move into `AGENTS.md`. Method changes are collected and refreshed into projects at most monthly unless a defect blocks work.
 STATUS: ADOPTED — 2026-09-03.
+
+---
+
+## L-024 — ADB.md repeated AGENTS.md; tests and README were not mandatory
+
+DATE: 2026-09-04
+PROJECT: ADB method
+SYMPTOM: Checked against the copies that land in a product (test project via Start): `ADB.md` restated Heavy, roles, chips, the 2FA exception, the fix-round cap, git and "don't interrupt for reversible details" — all already in `AGENTS.md`. Two files, one rule, drift risk on every edit. `AGENTS.md` never required running the project's tests or reading the README first, although the measured value of an agent rules file lies in concrete project facts (commands, boundaries) and a check the agent can run.
+ROOT CAUSE: ADB was written to stand alone, then AGENTS.md absorbed the shared rules without ADB dropping them. Test discipline was habit, not rule.
+PROPOSED CHANGE: `AGENTS.md` (every project): "Read first" line for README, OWNER.md, METHOD.md; tests before start and before every commit, red = no commit. `ADB.md` (large only): keeps DEFINE / Source of truth / Issues / BUILD loop / COMPLETION and points at `AGENTS.md` for everything shared. Factory and Start notes reduced to one sentence each.
+STATUS: ADOPTED — 2026-09-04. Landed copies: AGENTS.md 713 words, ADB.md 985 words.
