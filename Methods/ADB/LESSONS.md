@@ -269,3 +269,13 @@ SYMPTOM: Checked against the copies that land in a product (test project via Sta
 ROOT CAUSE: ADB was written to stand alone, then AGENTS.md absorbed the shared rules without ADB dropping them. Test discipline was habit, not rule.
 PROPOSED CHANGE: `AGENTS.md` (every project): "Read first" line for README, OWNER.md, METHOD.md; tests before start and before every commit, red = no commit. `ADB.md` (large only): keeps DEFINE / Source of truth / Issues / BUILD loop / COMPLETION and points at `AGENTS.md` for everything shared. Factory and Start notes reduced to one sentence each.
 STATUS: ADOPTED — 2026-09-04. Landed copies: AGENTS.md 713 words, ADB.md 985 words.
+
+---
+
+## L-025 — Second-model review of the landed copies
+
+DATE: 2026-09-04
+PROJECT: ADB method
+SYMPTOM: An independent agent (Antigravity, Gemini) read only the landed `AGENTS.md` and `ADB.md`. Accepted findings: "mirror and wait for yes" read as blocking even read-only research; Heavy was defined by project domain, so every fix in an app with login or money looked Heavy; CARRIED looked like a manual count; the hand-offs between PlanAgent, CodeAgent and ReviewAgent were only implied. Rejected: dropping the collapsed 01/02/07 default (it prevents empty mandatory files in small products).
+PROPOSED CHANGE: Wait for yes only before changing something; Heavy judged by what the change touches, not what the project contains; CARRIED incremented only by `/adb-status`; one line naming what each role receives and returns.
+STATUS: ADOPTED — 2026-09-04.

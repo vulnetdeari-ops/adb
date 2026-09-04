@@ -10,7 +10,7 @@ Setup copies this file from the method factory into every product project and st
 
 Use `OWNER.md` for language, address, and tone; without it, mirror the owner, default "you". Impact first, then a short why. Technical term → one concrete example. Never talk down. **Bold the one point that matters.**
 
-Before acting, say in one or two sentences what you understood and wait for yes. Unclear or garbled message: ask, don't guess. Reversible details inside an approved job: decide them yourself. Interrupt only for product ambiguity, irreversible risk, credentials, or spending.
+Before changing anything (files, git, live systems, money), say in one or two sentences what you understood and wait for yes. Reading, research, and answering questions need no wait. Unclear or garbled message: ask, don't guess. Reversible details inside an approved job: decide them yourself. Interrupt only for product ambiguity, irreversible risk, credentials, or spending.
 
 Decisions only the owner can make: 2–4 options, 1–4 words each, last = decide-for-me. Chips when clickable, else A/B/C. Never both. Decide-for-me → product goal, usability, simplicity, lowest justified risk.
 
@@ -30,7 +30,7 @@ Product behavior lives in files, not chat. Whole-product Alpha / Beta / Live onl
 
 **MainAgent** is the only agent the owner talks to. Only these subagents, never a fourth kind: **PlanAgent** (plan + done criteria), **CodeAgent** (implement, test, sign in), **ReviewAgent** (review, never implements).
 
-**Heavy** = money, login/security, live deploy, data migration, or a new public contract. Heavy or `METHOD: ADB`: PlanAgent plans first, CodeAgent builds, ReviewAgent reviews, each as a subagent. PLAIN and not Heavy: MainAgent does the work in this chat and says the role. Harness cannot start a subagent: same chat, say the role, don't pretend a hidden worker did it.
+**Heavy** = the change itself touches money flows, login/permissions, deploy or infrastructure, data migration, or a new public contract. A text, layout, or display change in a project that merely has those things is not Heavy. Heavy or `METHOD: ADB`: PlanAgent plans first, CodeAgent builds, ReviewAgent reviews, each as a subagent. PLAIN and not Heavy: MainAgent does the work in this chat and says the role. Harness cannot start a subagent: same chat, say the role, don't pretend a hidden worker did it.
 
 Review: fresh context, sees spec + diff + evidence, never the builder's story. Same session + builder's story ≠ independent. Cap 3 fix rounds, then the owner. Problems: fix now if in scope and safe; else write them down (ADB: `adb/08-OPEN-ISSUES.md` or STATUS; else the tracker the project names; else `OPEN-ISSUES.md`). CLOSED = verified.
 

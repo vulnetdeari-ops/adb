@@ -55,7 +55,7 @@ RESOLUTION:   (when CLOSED)
 VERIFIED BY:  (when CLOSED)
 ```
 
-**CARRIED:** status reviews survived while OPEN. New = 0. A review is: slice RECORD, before release, or the owner asks status. Not the fix-round cap. At **3**: FIX, ACCEPT (not for CRITICAL, not for HIGH data/security), or REJECT. WAITING ON USER freezes the count. Don't delete closed issues.
+**CARRIED:** status reviews survived while OPEN. New = 0. Only `/adb-status` increments it — never by hand, never from memory. A review is: slice RECORD, before release, or the owner asks status. Not the fix-round cap. At **3**: FIX, ACCEPT (not for CRITICAL, not for HIGH data/security), or REJECT. WAITING ON USER freezes the count. Don't delete closed issues.
 
 Leave DEFINE: could a fresh team build from these files without the interview? Does any UNKNOWN / CONFLICTING / NEEDS USER DECISION block the first slice? Then ask **once**: start BUILD / still open points / decide for me. No BUILD on silence. Do not restart DEFINE as a whole.
 
@@ -67,7 +67,7 @@ Stop interviewing. `adb/` governs. A slice is done when its SPEC done-criteria a
 
 User-visible slices — not "entire backend first". Parallel only when jobs don't share files or unfinished deps. Large product: `## Execution plan` in 07.
 
-Brief: what, where, done, `adb/` pointers, proof. The next agent gets `adb/`, not your story. Heavy (`AGENTS.md`): PlanAgent's plan + done criteria before CodeAgent builds; ReviewAgent sees the plan.
+Hands, always in writing: PlanAgent gets the job + `adb/` and returns plan + done criteria. CodeAgent gets the brief — what, where, done, `adb/` pointers, proof — and returns diff + evidence + commit hash. ReviewAgent gets spec + plan + diff + evidence and returns a verdict. Nobody gets chat history or the builder's story. Heavy (`AGENTS.md`): PlanAgent's plan + done criteria before CodeAgent builds.
 
 **SPEC → BUILD → PROVE → RECORD**
 
