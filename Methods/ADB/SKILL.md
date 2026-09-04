@@ -67,14 +67,14 @@ Stop interviewing. `adb/` governs. A slice is done when its SPEC done-criteria a
 
 User-visible slices — not "entire backend first". Parallel only when jobs don't share files or unfinished deps. Large product: `## Execution plan` in 07.
 
-Hands, always in writing: PlanAgent gets the job + `adb/` and returns plan + done criteria. CodeAgent gets the brief — what, where, done, `adb/` pointers, proof — and returns diff + evidence + commit hash. ReviewAgent gets spec + plan + diff + evidence and returns a verdict. Nobody gets chat history or the builder's story. Heavy (`AGENTS.md`): PlanAgent's plan + done criteria before CodeAgent builds.
+Hands, always in writing: PlanAgent gets the job + `adb/` and returns plan + done criteria. CodeAgent gets the brief — what, where, done, `adb/` pointers, proof — and returns diff + evidence + commit hash. ReviewAgent gets spec + plan + diff + evidence and returns a verdict. A hand is written down even when a role runs in this same chat (`AGENTS.md` fallback); no hand relies on chat history or the builder's story. Heavy (`AGENTS.md`): PlanAgent's plan + done criteria before CodeAgent builds.
 
 **SPEC → BUILD → PROVE → RECORD**
 
 - **SPEC** — what this slice must do, from `adb/`. Heavy: PlanAgent's plan + done criteria here.
 - **BUILD** — CodeAgent, smallest safe change. Delete dead code when safe.
 - **PROVE** — vs `adb/`, on a real path (`AGENTS.md` Truth).
-- **RECORD** — update `adb/` + STATUS; increment CARRIED; apply CARRIED-3. Then commit (`AGENTS.md` Hold).
+- **RECORD** — update `adb/` + STATUS, then run `/adb-status` (it increments CARRIED and applies CARRIED-3). Then commit (`AGENTS.md` Hold).
 
 PROVE fails: do not RECORD as done. CodeAgent fixes or registers; fix-round cap in `AGENTS.md`.
 

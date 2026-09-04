@@ -279,3 +279,14 @@ PROJECT: ADB method
 SYMPTOM: An independent agent (Antigravity, Gemini) read only the landed `AGENTS.md` and `ADB.md`. Accepted findings: "mirror and wait for yes" read as blocking even read-only research; Heavy was defined by project domain, so every fix in an app with login or money looked Heavy; CARRIED looked like a manual count; the hand-offs between PlanAgent, CodeAgent and ReviewAgent were only implied. Rejected: dropping the collapsed 01/02/07 default (it prevents empty mandatory files in small products).
 PROPOSED CHANGE: Wait for yes only before changing something; Heavy judged by what the change touches, not what the project contains; CARRIED incremented only by `/adb-status`; one line naming what each role receives and returns.
 STATUS: ADOPTED — 2026-09-04.
+
+---
+
+## L-026 — Two contradictions introduced by L-025, caught by the second-model re-read
+
+DATE: 2026-09-04
+PROJECT: ADB method
+SYMPTOM: After L-025, `ADB.md` said "Only /adb-status increments CARRIED" in Issues and "increment CARRIED" in RECORD. It also said "Nobody gets chat history" while `AGENTS.md` allows a role to run in the same chat when the harness cannot start a subagent.
+ROOT CAUSE: A rule was tightened in one place without re-reading the other places that state the same step.
+PROPOSED CHANGE: RECORD runs `/adb-status` instead of counting; hands are written down even when a role runs in the same chat, and no hand relies on chat history.
+STATUS: ADOPTED — 2026-09-04.
