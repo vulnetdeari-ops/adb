@@ -312,3 +312,36 @@ SYMPTOM: Five agents worked in the same checkout. Each was told to commit only i
 ROOT CAUSE: `git add <file>` scopes what *you* stage, but the index is shared across everyone working in that tree. A later `git commit` without a path argument commits **everything staged**, including what another agent staged seconds earlier. The rule "never `git add -A`" reads like sufficient protection and is not.
 PROPOSED CHANGE: With more than one agent in one working tree, commit with an explicit path list — `git commit -- <paths>` — which ignores the shared index. Name up front who commits the shared files (registration, navigation, spec), so the last one to finish does not book everyone else's work under their name. If the harness supports it, give each parallel builder its own worktree instead.
 STATUS: PROPOSED — 2026-09-05.
+
+---
+
+## L-029 — Green checks that checked nothing
+
+DATE: 2026-09-05
+PROJECT: BuchWeb (UI rebuild)
+SYMPTOM: Eight checks reported green and proved nothing, each of them rule-compliant ("tests green", "evidence delivered"): a test environment that never had the login screen it claimed to test; a reconciliation that confirmed a lost amount as "matches" because both sides had become 0; "eight benches green" over a self-chosen set (there were 13, one red); a check command that never ran, whose error message was read as the answer — an hour later a branch was gone.
+ROOT CAUSE: `AGENTS.md` Truth said "Green tests ≠ spec satisfied" — true, abstract, and nothing an agent can act on. Nothing required a check to have been seen failing. A check that cannot go red is a report with a green label.
+PROPOSED CHANGE: The counter-proof, one sentence in Truth: a check counts only once you have seen it fail on exactly what it promises — undo the fix or break the code on purpose, that one assurance goes red, nothing else. Applied the same day, it caught three of the agent's own mistakes before review saw them.
+STATUS: ADOPTED — 2026-09-05, `AGENTS.md` Truth.
+
+---
+
+## L-030 — An enforcer that doesn't know the exception enforces the rule against it
+
+DATE: 2026-09-05
+PROJECT: BuchWeb
+SYMPTOM: "origin keeps only main" was enforced by a scheduled cron workflow. It deleted the temporary exception branch `vorschau`. The exception lived only in the docs and in the pushed branch; a `schedule` run always takes the workflow file from the default branch, which had never heard of it.
+ROOT CAUSE: The rule was right. The exception was recorded where humans read, not where the enforcer reads. `AGENTS.md` Hold said "leave no branches behind" and nothing about how to keep one on purpose.
+PROPOSED CHANGE: One sentence in Hold: an exception is told to every enforcer of that rule (hook, workflow, cron), or the enforcer is switched off with date and re-enable condition on record.
+STATUS: ADOPTED — 2026-09-05, `AGENTS.md` Hold.
+
+---
+
+## L-031 — Two projects shared a key by name and nobody kept the list
+
+DATE: 2026-09-05
+PROJECT: BuchWeb + BuchScript (shared Google Sheet)
+SYMPTOM: BuchWeb wrote `NOTIFY_PREISERHOEHUNG_PUSH`, BuchScript read `NOTIFY_PREISSCHWANKUNG_PUSH`. Each side correct on its own, every test green; the switch had been silently dead for months. Its default was "on", so a broken switch looked exactly like a working one. Found only by laying two lists side by side — which nobody had done, because there is no code there.
+ROOT CAUSE: The harness-level rule for all agents, "report schema changes to Chef", covers changes, not the existing inventory (that sentence is not in the factory `AGENTS.md`). No rule said where a shared list lives or that both sides test against it.
+PROPOSED CHANGE: One sentence in Hold: keys or names shared with another project — exactly one place keeps the list, both sides test against it. The list itself is project work (BuchScript keeps it as `scripts/test-push-schluessel.js`), not factory.
+STATUS: ADOPTED — 2026-09-05, `AGENTS.md` Hold.

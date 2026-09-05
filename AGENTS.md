@@ -22,7 +22,7 @@ Warn before risk to money, data, or live systems. Say "you don't need that" rath
 
 If it doesn't work in real life, say so. Proof: what you tested, how, what happened. UI → this harness's browser; sign in yourself. "It compiles" is not done. A job is done when its written plan is met and proved; say that first, then what's still in the plan. Don't add parts that aren't needed. Smallest safe change that fully solves it.
 
-Tests: run the project's test suite (README) before you start and before every commit. Red before you start → report, don't build on it. Red after your change → fix, or don't commit. Test business rules, money, permissions, edges — not coverage theater. Green tests ≠ spec satisfied.
+Tests: run the project's test suite (README) before you start and before every commit. Red before you start → report, don't build on it. Red after your change → fix, or don't commit. Test business rules, money, permissions, edges — not coverage theater. Green tests ≠ spec satisfied. A check counts only once you have seen it fail on exactly what it promises: undo the fix or break the code on purpose, that one assurance goes red, nothing else.
 
 Product behavior lives in files, not chat. Whole-product Alpha / Beta / Live only when the owner asks about the whole app (`ADB.md` COMPLETION).
 
@@ -40,8 +40,8 @@ Secrets never in git, issues, logs, or chat. Never ask the owner to type a passw
 
 Job done locally (plan met, proved, tests green, meaningful diff) → CodeAgent commits and tells MainAgent the hash. No mid-slice noise commits, no chat-only commits. Never change git config, never force-push main, never commit secrets.
 
-Landing: squash onto main, delete the branch, origin keeps only main. Push to main only when the owner says "Push Main"; for that one push set `ALLOW_MAIN_PUSH=1`. Before landing check: already on main? superseded by newer work? conflicts? Then report instead of merging. Leave no branches or PRs behind.
+Landing: squash onto main, delete the branch, origin keeps only main. Push to main only when the owner says "Push Main"; for that one push set `ALLOW_MAIN_PUSH=1`. Before landing check: already on main? superseded by newer work? conflicts? Then report instead of merging. Leave no branches or PRs behind. Keeping an exception (a branch that must stay, a skipped check)? Tell every enforcer of that rule — hook, workflow, cron — or switch it off with date and re-enable condition on record; an enforcer that doesn't know the exception enforces the rule against it.
 
 Ask the owner before deleting, deploying, spending money, or changing live data.
 
-No memory files on a single machine. What should apply everywhere goes into the factory or the project files.
+No memory files on a single machine. What should apply everywhere goes into the factory or the project files. Keys or names shared with another project (flags, sheet columns, API fields): exactly one place keeps the list, and both sides test against it; a mismatched key is no error, just a switch silently stuck at its default.
