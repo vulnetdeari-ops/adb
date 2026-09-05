@@ -290,3 +290,25 @@ SYMPTOM: After L-025, `ADB.md` said "Only /adb-status increments CARRIED" in Iss
 ROOT CAUSE: A rule was tightened in one place without re-reading the other places that state the same step.
 PROPOSED CHANGE: RECORD runs `/adb-status` instead of counting; hands are written down even when a role runs in the same chat, and no hand relies on chat history.
 STATUS: ADOPTED — 2026-09-04.
+
+---
+
+## L-027 — A shared component library sent five agents to build the same things five times
+
+DATE: 2026-09-05
+PROJECT: BuchWeb (UI rebuild, round 3)
+SYMPTOM: Round 2 built a component library and one view on it (the home screen), then round 3 ran five CodeAgents in parallel, each on a different screen, all against that library. Every one of the five hit the same holes and had to work around them inside its own files: the form components emit `<button>` and no `name=` fields, so `FormData` reads nothing and no settings form can save; `knopf()` cannot be `type="submit"`; `leiste()` — the navigation bar every screen except home needs — does not exist in `parts.js` at all; `blatt()`, the shell for a scrolling sub-view, is missing; a view cannot close its own sheet because the close button is wired to the menu sheet. Three groups reported the form problem independently. The same widget now sits in the repo up to five times — exactly the duplication a shared library exists to prevent.
+ROOT CAUSE: The library was proven against **one** screen, and that screen happened to need none of the missing pieces: the home screen has no form, no navigation bar, and no sub-view. "It works for the showcase page" was mistaken for "it is ready".
+PROPOSED CHANGE: Before a shared library is handed to parallel builders, prove it against **at least two structurally different screens — one list and one form** — not only against the showcase. The proof is that the second screen needs no component built outside the library. Alternatively, run the first two screens sequentially and only then fan out.
+STATUS: PROPOSED — 2026-09-05.
+
+---
+
+## L-028 — Parallel agents in one working tree share the git index, not just the files
+
+DATE: 2026-09-05
+PROJECT: BuchWeb (UI rebuild, round 3)
+SYMPTOM: Five agents worked in the same checkout. Each was told to commit only its own files by name and never `git add -A`. They followed it — and it still went wrong twice: one group's `git commit` picked up another group's already-staged files, and MainAgent's own commit of a single documentation file carried five foreign source files with it. One group ended up with no commit of its own; HEAD was briefly broken because `shell.js` imported a file not yet committed.
+ROOT CAUSE: `git add <file>` scopes what *you* stage, but the index is shared across everyone working in that tree. A later `git commit` without a path argument commits **everything staged**, including what another agent staged seconds earlier. The rule "never `git add -A`" reads like sufficient protection and is not.
+PROPOSED CHANGE: With more than one agent in one working tree, commit with an explicit path list — `git commit -- <paths>` — which ignores the shared index. Name up front who commits the shared files (registration, navigation, spec), so the last one to finish does not book everyone else's work under their name. If the harness supports it, give each parallel builder its own worktree instead.
+STATUS: PROPOSED — 2026-09-05.
